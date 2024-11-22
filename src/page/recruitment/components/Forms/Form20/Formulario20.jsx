@@ -191,7 +191,7 @@ export default function Formulario20({
                 send to the shipping company.
               </Text>{" "}
               <Text style={[{ fontSize: "8px", paddingBottom: 5 }]}>
-                2 signed copies: 1 for the filling agency; 1 for employee.
+                2 signed copies: 1 for the filling agency; 1 for the employee.
               </Text>
             </View>
           </View>

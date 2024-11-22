@@ -59,7 +59,7 @@ export default function Employer({ resp }) {
                 <View
                   style={[styles.cell, { height: "10px", paddingBottom: 5 }]}
                 >
-                  <Text style={styles.text}>Employer</Text>
+                  <Text style={styles.text}>Employer {index + 1}</Text>
                 </View>
                 <View
                   style={[styles.cell, { height: "10px", paddingBottom: 5 }]}

@@ -46,11 +46,8 @@ export default function Firma({ interview, profile, interviewData }) {
 
   // Buscar la firma según la coincidencia entre interviewId y uid
   const firmaEntrevistador =
-    interviewers.some((interviewer) => {
-      if (interviewer.uid === interviewId) {
-        return interviewData.signature?.url || null;
-      }
-    }) || null;
+    interviewers.find((interviewer) => interviewer.id === interviewId)
+      ?.signature?.url || null;
 
   return (
     <>

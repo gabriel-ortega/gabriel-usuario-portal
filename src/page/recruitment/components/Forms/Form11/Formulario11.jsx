@@ -89,8 +89,12 @@ export default function Formulario11({
   // Obtener el entrevistador
 
   const nameInterview = interview.interviewer.name;
+  const interviewId = interview?.interviewer?.id || "";
+  const interviewers = interviewData || [];
+  const firma =
+    interviewers.find((interviewer) => interviewer.id === interviewId)
+      ?.signature?.url || null;
 
-  const firma = data?.signature?.url || null;
   return (
     <>
       <Page size="LETTER" style={styles.page}>

@@ -76,8 +76,8 @@ export default function Formulario7({
             text1="INTERVIEW EVALUATION FOR NEW APPLICANT"
             text2="1st Interview"
             code="F-PMSSA-07"
-            revision="05"
-            date="Dec.06th, 2023"
+            revision="06"
+            date="Aug. 02nd, 2024"
           />
         </View>
         <View style={styles.section}>
@@ -150,8 +150,8 @@ export default function Formulario7({
             text1="INTERVIEW EVALUATION FOR NEW APPLICANT"
             text2="1st Interview"
             code="F-PMSSA-07"
-            revision="05"
-            date="Dec.06th, 2023"
+            revision="06"
+            date="Aug. 02nd, 2024"
           />
         </View>
         <View style={styles.section}>
@@ -205,8 +205,8 @@ export default function Formulario7({
             text1="INTERVIEW EVALUATION FOR NEW APPLICANT"
             text2="1st Interview"
             code="F-PMSSA-07"
-            revision="05"
-            date="Dec.06th, 2023"
+            revision="06"
+            date="Aug. 02nd, 2024"
           />
         </View>
         <View style={styles.section}>

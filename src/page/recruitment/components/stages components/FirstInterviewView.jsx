@@ -192,14 +192,14 @@ export const FirstInterviewView = () => {
                 {currentInterview?.status}
               </Badge>
             </div>
-            <div className="flex flex-row gap-2 ">
+            {/* <div className="flex flex-row gap-2 ">
               <div className="font-light text-sm flex flex-row items-center justify-start gap-2">
                 Created On: {currentInterview.createdOn}
               </div>
               <div className="font-light text-sm flex flex-row items-center justify-start gap-2">
                 Modified On: {currentInterview.modifiedOn}
               </div>
-            </div>
+            </div> */}
           </div>
         }
         disableButtonConfirm={true}

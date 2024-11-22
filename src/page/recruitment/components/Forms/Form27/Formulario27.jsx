@@ -84,8 +84,8 @@ export default function Formulario27({
               text1="HIRED CREW MEMBER CHECKLIST"
               text2=""
               code="F-PMSSA-27"
-              revision="02"
-              date="Dec 28th, 2022"
+              revision="03"
+              date="Oct 28th, 2024"
             />
           </View>
           <View style={styles.section}>
