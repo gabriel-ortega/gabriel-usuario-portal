@@ -1,0 +1,86 @@
+[
+    {
+        "Id": "1",
+        "DocumentName": "Seaman's Book (National)"
+    },
+    {
+        "Id": "2",
+        "DocumentName": "Passport"
+    },
+    {
+        "Id": "3",
+        "DocumentName": "US Visa C1-D"
+    },
+    {
+        "Id": "4",
+        "DocumentName": "B1/ B2"
+    },
+    {
+        "Id": "5",
+        "DocumentName": "MCV"
+    },
+    {
+        "Id": "6",
+        "DocumentName": "Flag Certificates"
+    },
+    {
+        "Id": "7",
+        "DocumentName": "Flag Seamanbook"
+    },
+    {
+        "Id": "8",
+        "DocumentName": "Portugal Endorsment"
+    },
+    {
+        "Id": "9",
+        "DocumentName": "Belgium Endorsment"
+    },
+    {
+        "Id": "10",
+        "DocumentName": "Cyprus Endorsment"
+    },
+    {
+        "Id": "11",
+        "DocumentName": "Malta Endorsment"
+    },
+    {
+        "Id": "12",
+        "DocumentName": "Seaman's Book (Cadet)"
+    },
+    {
+        "Id": "13",
+        "DocumentName": "GMDSS Seamanbook PANAMA"
+    },
+    {
+        "Id": "14",
+        "DocumentName": "COC by Position"
+    },
+    {
+        "Id": "15",
+        "DocumentName": "COC II/4"
+    },
+    {
+        "Id": "16",
+        "DocumentName": "COC II/5"
+    },
+    {
+        "Id": "17",
+        "DocumentName": "COC III/4"
+    },
+    {
+        "Id": "18",
+        "DocumentName": "COC III/5"
+    },
+    {
+        "Id": "19",
+        "DocumentName": "COC VI/1"
+    },
+    {
+        "Id": "20",
+        "DocumentName": "COC VI/6-2"
+    },
+    {
+        "Id": "21",
+        "DocumentName": "GMDSS COC PANAMA"
+    }
+]

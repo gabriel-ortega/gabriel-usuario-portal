@@ -1,0 +1,277 @@
+[
+    {
+        "Id": "1",
+        "curse_name": "Proficiency in Personal Survival Techniques. IMO 1.19",
+        "IMO": "1.19"
+    },
+    {
+        "Id": "2",
+        "curse_name": "Fire Prevention and Firefighting IMO 1.20",
+        "IMO": "1.20"
+    },
+    {
+        "Id": "3",
+        "curse_name": "Elementary First Aid IMO  1.13",
+        "IMO": "1.13"
+    },
+    {
+        "Id": "4",
+        "curse_name": "Personal Safety and Social Responsibilities IMO 1.21",
+        "IMO": "1.21"
+    },
+    {
+        "Id": "5",
+        "curse_name": "Security Awareness Training for all seafarers IMO 3.27",
+        "IMO": "3.27"
+    },
+    {
+        "Id": "6",
+        "curse_name": "Security Awareness Training for  Seafarers with Designated Security Duties. IMO 3.26",
+        "IMO": "3.26"
+    },
+    {
+        "Id": "7",
+        "curse_name": "Medical Care IMO 1.15",
+        "IMO": "1.15"
+    },
+    {
+        "Id": "8",
+        "curse_name": "Ship's Cook",
+        "IMO": ""
+    },
+    {
+        "Id": "9",
+        "curse_name": "Basic Training for Oil and Chemical cargo tanker Operations. IMO 1.01",
+        "IMO": "1.01"
+    },
+    {
+        "Id": "10",
+        "curse_name": "SAFETY TRAINING FOR PERSONNEL PROVIDING DIRECT SERVICE TO PASSENGERS IN PASSENGER SPACES. IMO 1.44",
+        "IMO": "1.44"
+    },
+    {
+        "Id": "11",
+        "curse_name": "Passenger Ship Crowd Management Training IMO 1.41",
+        "IMO": "1.41"
+    },
+    {
+        "Id": "12",
+        "curse_name": "Leadership and Teamwork. IMO 1.39",
+        "IMO": "1.39"
+    },
+    {
+        "Id": "13",
+        "curse_name": "Advanced Training in Fire Fighting IMO 2.03",
+        "IMO": "2.03"
+    },
+    {
+        "Id": "14",
+        "curse_name": "Able Seafarer - Engine. IMO 7.16",
+        "IMO": "7.16"
+    },
+    {
+        "Id": "15",
+        "curse_name": "Able Seafarer - Deck. IMO 7.10",
+        "IMO": "7.10"
+    },
+    {
+        "Id": "16",
+        "curse_name": "Ratings Forming Part of a Navigational Watch",
+        "IMO": ""
+    },
+    {
+        "Id": "17",
+        "curse_name": "Ratings Forming Part of an Engineering Watch IMO 7.09",
+        "IMO": "7.09"
+    },
+    {
+        "Id": "18",
+        "curse_name": "Company Security Officer IMO 3.20",
+        "IMO": "3.20"
+    },
+    {
+        "Id": "19",
+        "curse_name": "Ship Security Officer. IMO 3.19",
+        "IMO": "3.19"
+    },
+    {
+        "Id": "20",
+        "curse_name": "Port Facility Security Officer. IMO 3.21",
+        "IMO": "3.21"
+    },
+    {
+        "Id": "21",
+        "curse_name": "Medical First Aid IMO 1.14",
+        "IMO": "1.14"
+    },
+    {
+        "Id": "22",
+        "curse_name": "Marine Environmental Awareness IMO 1.38",
+        "IMO": "1.38"
+    },
+    {
+        "Id": "23",
+        "curse_name": "Proficiency in Fast Rescue Boats IMO 1.24",
+        "IMO": "1.24"
+    },
+    {
+        "Id": "24",
+        "curse_name": "Proficiency in Survival Craft and Rescue Boats other than Fast Rescue Boats. IMO 1.23",
+        "IMO": "1.23"
+    },
+    {
+        "Id": "25",
+        "curse_name": "Passenger ship Crisis Management Training IMO 1.42",
+        "IMO": "1.42"
+    },
+    {
+        "Id": "26",
+        "curse_name": "Passenger Safety, Cargo Safety and Hull Integrity Training IMO 1.29",
+        "IMO": "1.29"
+    },
+    {
+        "Id": "27",
+        "curse_name": "Dangerous, hazardous and Harmful cargoes. IMO 1.10",
+        "IMO": "1.10"
+    },
+    {
+        "Id": "28",
+        "curse_name": "Operational use of Electronical Chart display and information Systems (ECDIS) IMO 1.27",
+        "IMO": "1.27"
+    },
+    {
+        "Id": "29",
+        "curse_name": "GENERAL OPERATOR'S CERTIFICATE FOR THE GLOBAL MARITIME DISTRESS AND SAFETY SYSTEM. (GMDS) IMO 1.25",
+        "IMO": "1.25"
+    },
+    {
+        "Id": "30",
+        "curse_name": "High Voltaje Installations",
+        "IMO": ""
+    },
+    {
+        "Id": "31",
+        "curse_name": "Radar Navigation, Radar Plotting and use of ARPA IMO 1.07",
+        "IMO": "1.07"
+    },
+    {
+        "Id": "32",
+        "curse_name": "Energy Efficient operation of Ships. IMO 4.05",
+        "IMO": "4.05"
+    },
+    {
+        "Id": "33",
+        "curse_name": "Advanced Training in Oil Tanker Cargo Operations IMO 1.02",
+        "IMO": "1.02"
+    },
+    {
+        "Id": "34",
+        "curse_name": "Advanced Training in Chemical Tanker Cargo Operations IMO 1.03",
+        "IMO": "1.03"
+    },
+    {
+        "Id": "35",
+        "curse_name": "RADAR, ARPA, BRIDGE TEAMWORK AND SEARCH AND RESCUE (MANAGEMENT LEVEL) IMO 1.08",
+        "IMO": "1.08"
+    },
+    {
+        "Id": "36",
+        "curse_name": "Use of leadership in Managerial Skills IMO 1.40",
+        "IMO": "1.40"
+    },
+    {
+        "Id": "37",
+        "curse_name": "Brigde Resource Management",
+        "IMO": ""
+    },
+    {
+        "Id": "38",
+        "curse_name": "Basic training for Liquified Gas tanker cargo Operations IMO 1.04",
+        "IMO": "1.04"
+    },
+    {
+        "Id": "39",
+        "curse_name": "Advanced Training for Liquified Gas tanker cargo Operations IMO 1.05",
+        "IMO": "1.05"
+    },
+    {
+        "Id": "40",
+        "curse_name": "Assessment, Examination and certification of Seafarers IMO 3.12",
+        "IMO": "3.12"
+    },
+    {
+        "Id": "41",
+        "curse_name": "Onboard Assessment IMO 1.30",
+        "IMO": "1.30"
+    },
+    {
+        "Id": "42",
+        "curse_name": "Basic Training for Ship operating in Polar Waters IMO 7.11",
+        "IMO": "7.11"
+    },
+    {
+        "Id": "43",
+        "curse_name": "Advanced Training for Ship Operating in Polar Waters IMO 7.12",
+        "IMO": "7.12"
+    },
+    {
+        "Id": "44",
+        "curse_name": "Basic Training on ship Subject to IGF Code IMO 7.13",
+        "IMO": "7.13"
+    },
+    {
+        "Id": "45",
+        "curse_name": "Advanced Training on Ship Subject IGF Code IMO 7.14",
+        "IMO": "7.14"
+    },
+    {
+        "Id": "46",
+        "curse_name": "Electro technical Ratings IMO 7.15",
+        "IMO": "7.15"
+    },
+    {
+        "Id": "47",
+        "curse_name": "Upgrading Course for Master & Chief Mate IMO 7.01",
+        "IMO": "7.01"
+    },
+    {
+        "Id": "48",
+        "curse_name": "Upgrading Course for Chief Engineer & Second Engineer IMO 7.02",
+        "IMO": "7.02"
+    },
+    {
+        "Id": "49",
+        "curse_name": "Electro technical officer IMO 7.08",
+        "IMO": "7.08"
+    },
+    {
+        "Id": "50",
+        "curse_name": "Basic Safety Maritime Traning Course (BST)",
+        "IMO": ""
+    },
+    {
+        "Id": "51",
+        "curse_name": "Engine Resources Management",
+        "IMO": ""
+    },
+    {
+        "Id": "52",
+        "curse_name": "Engine Room Simulator IMO 2.07",
+        "IMO": ""
+    },
+    {
+        "Id": "53",
+        "curse_name": "Officer in Charge of a Engineering Watch IMO 7.04",
+        "IMO": ""
+    },
+    {
+        "Id": "54",
+        "curse_name": "Officer in Charge of a Navigational Watch IMO 7.03",
+        "IMO": ""
+    },
+    {
+        "Id": "55",
+        "curse_name": "Ship Simulator and Bridge Teamwork IMO 1.22",
+        "IMO": ""
+    }
+]

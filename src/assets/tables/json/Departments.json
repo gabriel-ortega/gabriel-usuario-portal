@@ -1,0 +1,102 @@
+[
+    {
+        "Id": "2",
+        "DepartmentName": "Entertainment and cruise programs Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "3",
+        "DepartmentName": "Galley Cleaning Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "4",
+        "DepartmentName": "Guest Relations Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "5",
+        "DepartmentName": "Human Resources Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "6",
+        "DepartmentName": "Shore Excursion Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "7",
+        "DepartmentName": "Financial Operations Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "8",
+        "DepartmentName": "Information Technology Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "9",
+        "DepartmentName": "Inventory Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "10",
+        "DepartmentName": "Medical Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "11",
+        "DepartmentName": "Beverage Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "12",
+        "DepartmentName": "Casino Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "13",
+        "DepartmentName": "Deck Department",
+        "TypeOfVessel": "{1,2}"
+    },
+    {
+        "Id": "14",
+        "DepartmentName": "Security Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "15",
+        "DepartmentName": "Facilities Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "16",
+        "DepartmentName": "Galley Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "17",
+        "DepartmentName": "Food service Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "18",
+        "DepartmentName": "Housekeeping Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "19",
+        "DepartmentName": "Engine Department",
+        "TypeOfVessel": "{1,2}"
+    },
+    {
+        "Id": "20",
+        "DepartmentName": "Marine technician Department",
+        "TypeOfVessel": "{1}"
+    },
+    {
+        "Id": "21",
+        "DepartmentName": "Other Services and Personal care departments",
+        "TypeOfVessel": "{1}"
+    }
+]

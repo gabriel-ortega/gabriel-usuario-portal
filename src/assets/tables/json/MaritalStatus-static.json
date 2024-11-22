@@ -1,0 +1,30 @@
+[
+    {
+        "Id": "1",
+        "CivilStatusName": "Single"
+    },
+    {
+        "Id": "2",
+        "CivilStatusName": "Married"
+    },
+    {
+        "Id": "3",
+        "CivilStatusName": "Divorced"
+    },
+    {
+        "Id": "4",
+        "CivilStatusName": "Separated"
+    },
+    {
+        "Id": "5",
+        "CivilStatusName": "Free Union"
+    },
+    {
+        "Id": "6",
+        "CivilStatusName": "Widowed"
+    },
+    {
+        "Id": "7",
+        "CivilStatusName": "N/A"
+    }
+]

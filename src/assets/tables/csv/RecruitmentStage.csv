@@ -1,0 +1,26 @@
+StageName,Id
+Application,1
+First Interview,2
+Second Interview,3
+GAP POOL,4
+Hiring Process,5
+Embarkation Process,6
+Retired in Evaluation,7
+Retired in First Interview,8
+Retired in Second Interview,9
+Retired in Application,10
+Denied in Application,11
+Country Not Admitted,12
+Evaluation,13
+Denied in First Interview,14
+Denied in Second Interview,15
+Retired in GAP Pool,16
+Transfer Denied,17
+Denied in Evaluation,18
+On Board,19
+Vacation,20
+Medical Leave,21
+Mind Change / Vacation Anomaly,22
+Refused - Own Request / Active Retired,23
+Contract Revoked,24
+Unavailable,25

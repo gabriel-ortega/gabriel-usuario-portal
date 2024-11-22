@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "1",
+    "ApplicationSourceName": "WhatsApp"
+  },
+  {
+    "Id": "2",
+    "ApplicationSourceName": "E-mail"
+  },
+  {
+    "Id": "3",
+    "ApplicationSourceName": "Instagram"
+  },
+  {
+    "Id": "4",
+    "ApplicationSourceName": "Facebook"
+  },
+  {
+    "Id": "5",
+    "ApplicationSourceName": "Other"
+  },
+  {
+    "Id": "6",
+    "ApplicationSourceName": "Mitradel"
+  }
+]

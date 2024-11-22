@@ -1,0 +1,500 @@
+[
+    {
+        "Id": "1",
+        "Distrito": "Bocas Del Toro",
+        "Provincia": "Bocas Del Toro",
+        "Provincia.Id": "1"
+    },
+    {
+        "Id": "2",
+        "Distrito": "Changuinola",
+        "Provincia": "Bocas Del Toro",
+        "Provincia.Id": "1"
+    },
+    {
+        "Id": "3",
+        "Distrito": "Chiriquí Grande",
+        "Provincia": "Bocas Del Toro",
+        "Provincia.Id": "1"
+    },
+    {
+        "Id": "4",
+        "Distrito": "Almirante",
+        "Provincia": "Bocas Del Toro",
+        "Provincia.Id": "1"
+    },
+    {
+        "Id": "5",
+        "Distrito": "Aguadulce",
+        "Provincia": "Coclé",
+        "Provincia.Id": "2"
+    },
+    {
+        "Id": "6",
+        "Distrito": "Antón",
+        "Provincia": "Coclé",
+        "Provincia.Id": "2"
+    },
+    {
+        "Id": "7",
+        "Distrito": "La Pintada",
+        "Provincia": "Coclé",
+        "Provincia.Id": "2"
+    },
+    {
+        "Id": "8",
+        "Distrito": "Natá",
+        "Provincia": "Coclé",
+        "Provincia.Id": "2"
+    },
+    {
+        "Id": "9",
+        "Distrito": "Ola",
+        "Provincia": "Coclé",
+        "Provincia.Id": "2"
+    },
+    {
+        "Id": "10",
+        "Distrito": "Penonomé",
+        "Provincia": "Coclé",
+        "Provincia.Id": "2"
+    },
+    {
+        "Id": "11",
+        "Distrito": "Colón",
+        "Provincia": "Colón",
+        "Provincia.Id": "3"
+    },
+    {
+        "Id": "12",
+        "Distrito": "Chagres",
+        "Provincia": "Colón",
+        "Provincia.Id": "3"
+    },
+    {
+        "Id": "13",
+        "Distrito": "Donoso",
+        "Provincia": "Colón",
+        "Provincia.Id": "3"
+    },
+    {
+        "Id": "14",
+        "Distrito": "Portobelo",
+        "Provincia": "Colón",
+        "Provincia.Id": "3"
+    },
+    {
+        "Id": "15",
+        "Distrito": "Santa Isabel",
+        "Provincia": "Colón",
+        "Provincia.Id": "3"
+    },
+    {
+        "Id": "16",
+        "Distrito": "Omar Torrijos Herrera",
+        "Provincia": "Colón",
+        "Provincia.Id": "3"
+    },
+    {
+        "Id": "17",
+        "Distrito": "Coclesito",
+        "Provincia": "Colón",
+        "Provincia.Id": "3"
+    },
+    {
+        "Id": "18",
+        "Distrito": "Alanje",
+        "Provincia": "Chiriquí",
+        "Provincia.Id": "4"
+    },
+    {
+        "Id": "19",
+        "Distrito": "Barú",
+        "Provincia": "Chiriquí",
+        "Provincia.Id": "4"
+    },
+    {
+        "Id": "20",
+        "Distrito": "Boquerón",
+        "Provincia": "Chiriquí",
+        "Provincia.Id": "4"
+    },
+    {
+        "Id": "21",
+        "Distrito": "Boquete",
+        "Provincia": "Chiriquí",
+        "Provincia.Id": "4"
+    },
+    {
+        "Id": "22",
+        "Distrito": "Bugaba",
+        "Provincia": "Chiriquí",
+        "Provincia.Id": "4"
+    },
+    {
+        "Id": "23",
+        "Distrito": "David",
+        "Provincia": "Chiriquí",
+        "Provincia.Id": "4"
+    },
+    {
+        "Id": "24",
+        "Distrito": "Dolega",
+        "Provincia": "Chiriquí",
+        "Provincia.Id": "4"
+    },
+    {
+        "Id": "25",
+        "Distrito": "Gualaca",
+        "Provincia": "Chiriquí",
+        "Provincia.Id": "4"
+    },
+    {
+        "Id": "26",
+        "Distrito": "Remedios",
+        "Provincia": "Chiriquí",
+        "Provincia.Id": "4"
+    },
+    {
+        "Id": "27",
+        "Distrito": "Renacimiento",
+        "Provincia": "Chiriquí",
+        "Provincia.Id": "4"
+    },
+    {
+        "Id": "28",
+        "Distrito": "San Félix",
+        "Provincia": "Chiriquí",
+        "Provincia.Id": "4"
+    },
+    {
+        "Id": "29",
+        "Distrito": "Tierras Altas",
+        "Provincia": "Chiriquí",
+        "Provincia.Id": "4"
+    },
+    {
+        "Id": "30",
+        "Distrito": "San Lorenzo",
+        "Provincia": "Chiriquí",
+        "Provincia.Id": "4"
+    },
+    {
+        "Id": "31",
+        "Distrito": "Tolé",
+        "Provincia": "Chiriquí",
+        "Provincia.Id": "4"
+    },
+    {
+        "Id": "32",
+        "Distrito": "Chepigana",
+        "Provincia": "Darien",
+        "Provincia.Id": "5"
+    },
+    {
+        "Id": "33",
+        "Distrito": "Pinogana",
+        "Provincia": "Darien",
+        "Provincia.Id": "5"
+    },
+    {
+        "Id": "34",
+        "Distrito": "Santa Fe",
+        "Provincia": "Darien",
+        "Provincia.Id": "5"
+    },
+    {
+        "Id": "35",
+        "Distrito": "Chitré",
+        "Provincia": "Herrera",
+        "Provincia.Id": "6"
+    },
+    {
+        "Id": "36",
+        "Distrito": "Las Minas",
+        "Provincia": "Herrera",
+        "Provincia.Id": "6"
+    },
+    {
+        "Id": "37",
+        "Distrito": "Los Pozos",
+        "Provincia": "Herrera",
+        "Provincia.Id": "6"
+    },
+    {
+        "Id": "38",
+        "Distrito": "Ocú",
+        "Provincia": "Herrera",
+        "Provincia.Id": "6"
+    },
+    {
+        "Id": "39",
+        "Distrito": "Parita",
+        "Provincia": "Herrera",
+        "Provincia.Id": "6"
+    },
+    {
+        "Id": "40",
+        "Distrito": "Santa María",
+        "Provincia": "Herrera",
+        "Provincia.Id": "6"
+    },
+    {
+        "Id": "41",
+        "Distrito": "Pesé",
+        "Provincia": "Herrera",
+        "Provincia.Id": "6"
+    },
+    {
+        "Id": "42",
+        "Distrito": "Guararé",
+        "Provincia": "Los Santos",
+        "Provincia.Id": "7"
+    },
+    {
+        "Id": "43",
+        "Distrito": "Las Tablas",
+        "Provincia": "Los Santos",
+        "Provincia.Id": "7"
+    },
+    {
+        "Id": "44",
+        "Distrito": "Los Santos",
+        "Provincia": "Los Santos",
+        "Provincia.Id": "7"
+    },
+    {
+        "Id": "45",
+        "Distrito": "Macaracas",
+        "Provincia": "Los Santos",
+        "Provincia.Id": "7"
+    },
+    {
+        "Id": "46",
+        "Distrito": "Pedasí",
+        "Provincia": "Los Santos",
+        "Provincia.Id": "7"
+    },
+    {
+        "Id": "47",
+        "Distrito": "Pocrí",
+        "Provincia": "Los Santos",
+        "Provincia.Id": "7"
+    },
+    {
+        "Id": "48",
+        "Distrito": "Tonosí",
+        "Provincia": "Los Santos",
+        "Provincia.Id": "7"
+    },
+    {
+        "Id": "49",
+        "Distrito": "Balboa",
+        "Provincia": "Panama",
+        "Provincia.Id": "8"
+    },
+    {
+        "Id": "50",
+        "Distrito": "Chimán",
+        "Provincia": "Panama",
+        "Provincia.Id": "8"
+    },
+    {
+        "Id": "51",
+        "Distrito": "Chepo",
+        "Provincia": "Panama",
+        "Provincia.Id": "8"
+    },
+    {
+        "Id": "52",
+        "Distrito": "Taboga",
+        "Provincia": "Panama",
+        "Provincia.Id": "8"
+    },
+    {
+        "Id": "53",
+        "Distrito": "Panamá",
+        "Provincia": "Panama",
+        "Provincia.Id": "8"
+    },
+    {
+        "Id": "54",
+        "Distrito": "San Miguelito",
+        "Provincia": "Panama",
+        "Provincia.Id": "8"
+    },
+    {
+        "Id": "55",
+        "Distrito": "Arraiján",
+        "Provincia": "Panama Oeste",
+        "Provincia.Id": "9"
+    },
+    {
+        "Id": "56",
+        "Distrito": "Capira",
+        "Provincia": "Panama Oeste",
+        "Provincia.Id": "9"
+    },
+    {
+        "Id": "57",
+        "Distrito": "Chame",
+        "Provincia": "Panama Oeste",
+        "Provincia.Id": "9"
+    },
+    {
+        "Id": "58",
+        "Distrito": "San Carlos",
+        "Provincia": "Panama Oeste",
+        "Provincia.Id": "9"
+    },
+    {
+        "Id": "59",
+        "Distrito": "La Chorrera",
+        "Provincia": "Panama Oeste",
+        "Provincia.Id": "9"
+    },
+    {
+        "Id": "60",
+        "Distrito": "Atalaya",
+        "Provincia": "Veraguas",
+        "Provincia.Id": "10"
+    },
+    {
+        "Id": "61",
+        "Distrito": "Calobre",
+        "Provincia": "Veraguas",
+        "Provincia.Id": "10"
+    },
+    {
+        "Id": "62",
+        "Distrito": "Cañazas",
+        "Provincia": "Veraguas",
+        "Provincia.Id": "10"
+    },
+    {
+        "Id": "63",
+        "Distrito": "La Mesa",
+        "Provincia": "Veraguas",
+        "Provincia.Id": "10"
+    },
+    {
+        "Id": "64",
+        "Distrito": "Las Palmas",
+        "Provincia": "Veraguas",
+        "Provincia.Id": "10"
+    },
+    {
+        "Id": "65",
+        "Distrito": "Mariato",
+        "Provincia": "Veraguas",
+        "Provincia.Id": "10"
+    },
+    {
+        "Id": "66",
+        "Distrito": "Montijo",
+        "Provincia": "Veraguas",
+        "Provincia.Id": "10"
+    },
+    {
+        "Id": "67",
+        "Distrito": "Río De Jesús",
+        "Provincia": "Veraguas",
+        "Provincia.Id": "10"
+    },
+    {
+        "Id": "68",
+        "Distrito": "San Francisco",
+        "Provincia": "Veraguas",
+        "Provincia.Id": "10"
+    },
+    {
+        "Id": "69",
+        "Distrito": "Santa Fé",
+        "Provincia": "Veraguas",
+        "Provincia.Id": "10"
+    },
+    {
+        "Id": "70",
+        "Distrito": "Santiago",
+        "Provincia": "Veraguas",
+        "Provincia.Id": "10"
+    },
+    {
+        "Id": "71",
+        "Distrito": "Soná",
+        "Provincia": "Veraguas",
+        "Provincia.Id": "10"
+    },
+    {
+        "Id": "72",
+        "Distrito": "Besiko",
+        "Provincia": "Comarca Ngäbe Buglé",
+        "Provincia.Id": "11"
+    },
+    {
+        "Id": "73",
+        "Distrito": "Jirondai",
+        "Provincia": "Comarca Ngäbe Buglé",
+        "Provincia.Id": "11"
+    },
+    {
+        "Id": "74",
+        "Distrito": "Kankintú",
+        "Provincia": "Comarca Ngäbe Buglé",
+        "Provincia.Id": "11"
+    },
+    {
+        "Id": "75",
+        "Distrito": "Kusapín",
+        "Provincia": "Comarca Ngäbe Buglé",
+        "Provincia.Id": "11"
+    },
+    {
+        "Id": "76",
+        "Distrito": "Mironó",
+        "Provincia": "Comarca Ngäbe Buglé",
+        "Provincia.Id": "11"
+    },
+    {
+        "Id": "77",
+        "Distrito": "Muná",
+        "Provincia": "Comarca Ngäbe Buglé",
+        "Provincia.Id": "11"
+    },
+    {
+        "Id": "78",
+        "Distrito": "Nole Duima",
+        "Provincia": "Comarca Ngäbe Buglé",
+        "Provincia.Id": "11"
+    },
+    {
+        "Id": "79",
+        "Distrito": "Ñurún",
+        "Provincia": "Comarca Ngäbe Buglé",
+        "Provincia.Id": "11"
+    },
+    {
+        "Id": "80",
+        "Distrito": "Santa Catalina O Calovébora",
+        "Provincia": "Comarca Ngäbe Buglé",
+        "Provincia.Id": "11"
+    },
+    {
+        "Id": "81",
+        "Distrito": "Cémaco",
+        "Provincia": "Comarca Emberá Wounaan",
+        "Provincia.Id": "12"
+    },
+    {
+        "Id": "82",
+        "Distrito": "Sambú",
+        "Provincia": "Comarca Emberá Wounaan",
+        "Provincia.Id": "12"
+    },
+    {
+        "Id": "83",
+        "Distrito": "N.A",
+        "Provincia": "Comarca Guna Yala",
+        "Provincia.Id": "13"
+    }
+]

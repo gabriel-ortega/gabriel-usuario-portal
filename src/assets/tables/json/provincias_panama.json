@@ -1,0 +1,62 @@
+[
+    {
+        "Id": "1",
+        "Provincia": "Bocas Del Toro"
+    },
+    {
+        "Id": "2",
+        "Provincia": "Coclé"
+    },
+    {
+        "Id": "3",
+        "Provincia": "Colón"
+    },
+    {
+        "Id": "4",
+        "Provincia": "Chiriquí"
+    },
+    {
+        "Id": "5",
+        "Provincia": "Darien"
+    },
+    {
+        "Id": "6",
+        "Provincia": "Herrera"
+    },
+    {
+        "Id": "7",
+        "Provincia": "Los Santos"
+    },
+    {
+        "Id": "8",
+        "Provincia": "Panama"
+    },
+    {
+        "Id": "9",
+        "Provincia": "Panama Oeste"
+    },
+    {
+        "Id": "10",
+        "Provincia": "Veraguas"
+    },
+    {
+        "Id": "11",
+        "Provincia": "Comarca Ngäbe Buglé"
+    },
+    {
+        "Id": "12",
+        "Provincia": "Comarca Emberá Wounaan"
+    },
+    {
+        "Id": "13",
+        "Provincia": "Comarca Guna Yala"
+    },
+    {
+        "Id": "14",
+        "Provincia": "Comarca Guna De Madugandi"
+    },
+    {
+        "Id": "15",
+        "Provincia": "Comarca Guna De Wargandi"
+    }
+]

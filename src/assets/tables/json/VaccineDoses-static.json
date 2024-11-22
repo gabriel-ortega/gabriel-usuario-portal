@@ -1,0 +1,22 @@
+[
+    {
+        "Id": "1",
+        "Dose": "First Dose"
+    },
+    {
+        "Id": "2",
+        "Dose": "Second Dose"
+    },
+    {
+        "Id": "3",
+        "Dose": "Booster Dose"
+    },
+    {
+        "Id": "4",
+        "Dose": "Other Dose"
+    },
+    {
+        "Id": "5",
+        "Dose": "Yellow Fever"
+    }
+]

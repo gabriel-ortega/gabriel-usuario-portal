@@ -1,0 +1,7 @@
+[
+  { "Id": 1, "statusName": "Pending Review" },
+  { "Id": 2, "statusName": "Pending Correction" },
+  { "Id": 3, "statusName": "Approved" },
+  { "Id": 4, "statusName": "Denied" },
+  { "Id": 5, "statusName": "In Evaluation" }
+]

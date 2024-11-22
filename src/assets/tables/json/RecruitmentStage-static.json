@@ -1,0 +1,110 @@
+[
+  {
+    "StageName": "Pre-Application",
+    "Id": 1
+  },
+  {
+    "StageName": "First Interview",
+    "Id": 2
+  },
+  {
+    "StageName": "Second Interview",
+    "Id": 3
+  },
+  {
+    "StageName": "GAP POOL",
+    "Id": 4
+  },
+  {
+    "StageName": "Hiring Process",
+    "Id": 5
+  },
+  {
+    "StageName": "Embarkation Process",
+    "Id": 6
+  },
+  {
+    "StageName": "Retired in Evaluation",
+    "Id": 7
+  },
+  {
+    "StageName": "Retired in First Interview",
+    "Id": 8
+  },
+  {
+    "StageName": "Retired in Second Interview",
+    "Id": 9
+  },
+  {
+    "StageName": "Retired in Application",
+    "Id": 10
+  },
+  {
+    "StageName": "Denied in Application",
+    "Id": 11
+  },
+  {
+    "StageName": "Country Not Admitted",
+    "Id": 12
+  },
+  {
+    "StageName": "Application",
+    "Id": 13
+  },
+  {
+    "StageName": "Denied in First Interview",
+    "Id": 14
+  },
+  {
+    "StageName": "Denied in Second Interview",
+    "Id": 15
+  },
+  {
+    "StageName": "Retired in GAP Pool",
+    "Id": 16
+  },
+  {
+    "StageName": "Transfer Denied",
+    "Id": 17
+  },
+  {
+    "StageName": "Denied in Evaluation",
+    "Id": 18
+  },
+  {
+    "StageName": "On Board",
+    "Id": 19
+  },
+  {
+    "StageName": "Vacation",
+    "Id": 20
+  },
+  {
+    "StageName": "Medical Leave",
+    "Id": 21
+  },
+  {
+    "StageName": "Mind Change / Vacation Anomaly",
+    "Id": 22
+  },
+  {
+    "StageName": "Refused - Own Request / Active Retired",
+    "Id": 23
+  },
+  {
+    "StageName": "Contract Revoked",
+    "Id": 24
+  },
+  {
+    "StageName": "Unavailable",
+    "Id": 25
+  },
+  {
+    "StageName": "Rejected in Hiring Process",
+    "Id": 26
+  },
+  {
+    "StageName": "Retired in Hiring Process",
+    "Id": 27
+  }
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "Id": "1",
+        "Brand": "Pfizer"
+    },
+    {
+        "Id": "2",
+        "Brand": "Aztrazeneca"
+    },
+    {
+        "Id": "3",
+        "Brand": "Moderna"
+    },
+    {
+        "Id": "4",
+        "Brand": "Sinovac"
+    },
+    {
+        "Id": "5",
+        "Brand": "Janssen"
+    },
+    {
+        "Id": "6",
+        "Brand": "Abdala"
+    },
+    {
+        "Id": "7",
+        "Brand": "Sinopharm"
+    },
+    {
+        "Id": "8",
+        "Brand": "Sputnik"
+    },
+    {
+        "Id": "9",
+        "Brand": "Bivalent"
+    }
+]

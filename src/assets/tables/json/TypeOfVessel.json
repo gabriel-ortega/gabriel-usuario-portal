@@ -1,0 +1,82 @@
+[
+    {
+        "Id": "1",
+        "vessel_name": "Bulk Carriers"
+    },
+    {
+        "Id": "2",
+        "vessel_name": "General Cargo Vessels"
+    },
+    {
+        "Id": "3",
+        "vessel_name": "Container Vessels"
+    },
+    {
+        "Id": "4",
+        "vessel_name": "Reefer Vessels"
+    },
+    {
+        "Id": "5",
+        "vessel_name": "Ro-Ro Vessels"
+    },
+    {
+        "Id": "6",
+        "vessel_name": "Crude Carriers"
+    },
+    {
+        "Id": "7",
+        "vessel_name": "Product Carriers"
+    },
+    {
+        "Id": "8",
+        "vessel_name": "Chemical Carriers"
+    },
+    {
+        "Id": "9",
+        "vessel_name": "Liquefied Gas Carriers"
+    },
+    {
+        "Id": "10",
+        "vessel_name": "Passenger Vessels"
+    },
+    {
+        "Id": "11",
+        "vessel_name": "Livestock Carriers"
+    },
+    {
+        "Id": "12",
+        "vessel_name": "Heavy-lift/Project Cargo Vessels"
+    },
+    {
+        "Id": "13",
+        "vessel_name": "Tugs"
+    },
+    {
+        "Id": "14",
+        "vessel_name": "Others"
+    },
+    {
+        "Id": "15",
+        "vessel_name": "Oil Tanker"
+    },
+    {
+        "Id": "16",
+        "vessel_name": "Landing Craft"
+    },
+    {
+        "Id": "17",
+        "vessel_name": "High Speed Craft"
+    },
+    {
+        "Id": "18",
+        "vessel_name": "Offshore Supply"
+    },
+    {
+        "Id": "19",
+        "vessel_name": "Fishing Vessel"
+    },
+    {
+        "Id": "20",
+        "vessel_name": "Car Carrier"
+    }
+]

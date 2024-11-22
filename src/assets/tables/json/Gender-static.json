@@ -1,0 +1,20 @@
+[
+    {
+        "Id": "1",
+        "GenderName": "Male",
+        "GenderShort": "M",
+        "GenderSpanish": "Masculino"
+    },
+    {
+        "Id": "2",
+        "GenderName": "Female",
+        "GenderShort": "F",
+        "GenderSpanish": "Femenino"
+    },
+    {
+        "Id": "3",
+        "GenderName": "Other",
+        "GenderShort": "?",
+        "GenderSpanish": "Otros"
+    }
+]

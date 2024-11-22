@@ -1,0 +1,4076 @@
+[
+    {
+        "Id": "1",
+        "Corregimiento": "Bocas del Toro cabecera",
+        "Distrito": "Bocas Del Toro",
+        "Distrito.Id": "1"
+    },
+    {
+        "Id": "2",
+        "Corregimiento": "Bastimentos",
+        "Distrito": "Bocas Del Toro",
+        "Distrito.Id": "1"
+    },
+    {
+        "Id": "3",
+        "Corregimiento": "Punta Laurel",
+        "Distrito": "Bocas Del Toro",
+        "Distrito.Id": "1"
+    },
+    {
+        "Id": "4",
+        "Corregimiento": "Cauchero",
+        "Distrito": "Bocas Del Toro",
+        "Distrito.Id": "1"
+    },
+    {
+        "Id": "5",
+        "Corregimiento": "Tierra Oscura",
+        "Distrito": "Bocas Del Toro",
+        "Distrito.Id": "1"
+    },
+    {
+        "Id": "6",
+        "Corregimiento": "Changuinola cabecera",
+        "Distrito": "Changuinola",
+        "Distrito.Id": "2"
+    },
+    {
+        "Id": "7",
+        "Corregimiento": "Guabito",
+        "Distrito": "Changuinola",
+        "Distrito.Id": "2"
+    },
+    {
+        "Id": "8",
+        "Corregimiento": "El Teribe",
+        "Distrito": "Changuinola",
+        "Distrito.Id": "2"
+    },
+    {
+        "Id": "9",
+        "Corregimiento": "El Empalme",
+        "Distrito": "Changuinola",
+        "Distrito.Id": "2"
+    },
+    {
+        "Id": "10",
+        "Corregimiento": "Las Tablas",
+        "Distrito": "Changuinola",
+        "Distrito.Id": "2"
+    },
+    {
+        "Id": "11",
+        "Corregimiento": "Las Delicias",
+        "Distrito": "Changuinola",
+        "Distrito.Id": "2"
+    },
+    {
+        "Id": "12",
+        "Corregimiento": "Cochigró",
+        "Distrito": "Changuinola",
+        "Distrito.Id": "2"
+    },
+    {
+        "Id": "13",
+        "Corregimiento": "La Gloria",
+        "Distrito": "Changuinola",
+        "Distrito.Id": "2"
+    },
+    {
+        "Id": "14",
+        "Corregimiento": "Barriada 4 de abril",
+        "Distrito": "Changuinola",
+        "Distrito.Id": "2"
+    },
+    {
+        "Id": "15",
+        "Corregimiento": "Finca 30",
+        "Distrito": "Changuinola",
+        "Distrito.Id": "2"
+    },
+    {
+        "Id": "16",
+        "Corregimiento": "Finca 6",
+        "Distrito": "Changuinola",
+        "Distrito.Id": "2"
+    },
+    {
+        "Id": "17",
+        "Corregimiento": "Finca 60",
+        "Distrito": "Changuinola",
+        "Distrito.Id": "2"
+    },
+    {
+        "Id": "18",
+        "Corregimiento": "El Silencio",
+        "Distrito": "Changuinola",
+        "Distrito.Id": "2"
+    },
+    {
+        "Id": "19",
+        "Corregimiento": "Chiriquí Grande cabecera",
+        "Distrito": "Chiriquí Grande",
+        "Distrito.Id": "3"
+    },
+    {
+        "Id": "20",
+        "Corregimiento": "Punta Róbalo",
+        "Distrito": "Chiriquí Grande",
+        "Distrito.Id": "3"
+    },
+    {
+        "Id": "21",
+        "Corregimiento": "Miramar",
+        "Distrito": "Chiriquí Grande",
+        "Distrito.Id": "3"
+    },
+    {
+        "Id": "22",
+        "Corregimiento": "Punta Peña",
+        "Distrito": "Chiriquí Grande",
+        "Distrito.Id": "3"
+    },
+    {
+        "Id": "23",
+        "Corregimiento": "Rambala",
+        "Distrito": "Chiriquí Grande",
+        "Distrito.Id": "3"
+    },
+    {
+        "Id": "24",
+        "Corregimiento": "Bajo Cedro",
+        "Distrito": "Chiriquí Grande",
+        "Distrito.Id": "3"
+    },
+    {
+        "Id": "25",
+        "Corregimiento": "Almirante cabecera",
+        "Distrito": "Almirante",
+        "Distrito.Id": "4"
+    },
+    {
+        "Id": "26",
+        "Corregimiento": "Valle de agua arriba",
+        "Distrito": "Almirante",
+        "Distrito.Id": "4"
+    },
+    {
+        "Id": "27",
+        "Corregimiento": "Valle del Risco",
+        "Distrito": "Almirante",
+        "Distrito.Id": "4"
+    },
+    {
+        "Id": "28",
+        "Corregimiento": "Nance de Riscó",
+        "Distrito": "Almirante",
+        "Distrito.Id": "4"
+    },
+    {
+        "Id": "29",
+        "Corregimiento": "Barrio Francés",
+        "Distrito": "Almirante",
+        "Distrito.Id": "4"
+    },
+    {
+        "Id": "30",
+        "Corregimiento": "Barriada Guaymí",
+        "Distrito": "Almirante",
+        "Distrito.Id": "4"
+    },
+    {
+        "Id": "31",
+        "Corregimiento": "Aguadulce (Cab)",
+        "Distrito": "Aguadulce",
+        "Distrito.Id": "5"
+    },
+    {
+        "Id": "32",
+        "Corregimiento": "El Cristo",
+        "Distrito": "Aguadulce",
+        "Distrito.Id": "5"
+    },
+    {
+        "Id": "33",
+        "Corregimiento": "El Roble",
+        "Distrito": "Aguadulce",
+        "Distrito.Id": "5"
+    },
+    {
+        "Id": "34",
+        "Corregimiento": "Pocrí",
+        "Distrito": "Aguadulce",
+        "Distrito.Id": "5"
+    },
+    {
+        "Id": "35",
+        "Corregimiento": "Barrios Unidos",
+        "Distrito": "Aguadulce",
+        "Distrito.Id": "5"
+    },
+    {
+        "Id": "36",
+        "Corregimiento": "Pueblos Unidos",
+        "Distrito": "Aguadulce",
+        "Distrito.Id": "5"
+    },
+    {
+        "Id": "37",
+        "Corregimiento": "Virgen del Carmen",
+        "Distrito": "Aguadulce",
+        "Distrito.Id": "5"
+    },
+    {
+        "Id": "38",
+        "Corregimiento": "El Hato de San Juan de Dios",
+        "Distrito": "Aguadulce",
+        "Distrito.Id": "5"
+    },
+    {
+        "Id": "39",
+        "Corregimiento": "Antón (Cab)",
+        "Distrito": "Antón",
+        "Distrito.Id": "6"
+    },
+    {
+        "Id": "40",
+        "Corregimiento": "Cabuya",
+        "Distrito": "Antón",
+        "Distrito.Id": "6"
+    },
+    {
+        "Id": "41",
+        "Corregimiento": "El Chirú",
+        "Distrito": "Antón",
+        "Distrito.Id": "6"
+    },
+    {
+        "Id": "42",
+        "Corregimiento": "El Retiro",
+        "Distrito": "Antón",
+        "Distrito.Id": "6"
+    },
+    {
+        "Id": "43",
+        "Corregimiento": "El Valle",
+        "Distrito": "Antón",
+        "Distrito.Id": "6"
+    },
+    {
+        "Id": "44",
+        "Corregimiento": "Juan Díaz",
+        "Distrito": "Antón",
+        "Distrito.Id": "6"
+    },
+    {
+        "Id": "45",
+        "Corregimiento": "Río Hato",
+        "Distrito": "Antón",
+        "Distrito.Id": "6"
+    },
+    {
+        "Id": "46",
+        "Corregimiento": "San Juan de Dios",
+        "Distrito": "Antón",
+        "Distrito.Id": "6"
+    },
+    {
+        "Id": "47",
+        "Corregimiento": "Santa Rita",
+        "Distrito": "Antón",
+        "Distrito.Id": "6"
+    },
+    {
+        "Id": "48",
+        "Corregimiento": "Caballero",
+        "Distrito": "Antón",
+        "Distrito.Id": "6"
+    },
+    {
+        "Id": "49",
+        "Corregimiento": "La Pintada (Cab)",
+        "Distrito": "La Pintada",
+        "Distrito.Id": "7"
+    },
+    {
+        "Id": "50",
+        "Corregimiento": "El Harino",
+        "Distrito": "La Pintada",
+        "Distrito.Id": "7"
+    },
+    {
+        "Id": "51",
+        "Corregimiento": "El Potrero",
+        "Distrito": "La Pintada",
+        "Distrito.Id": "7"
+    },
+    {
+        "Id": "52",
+        "Corregimiento": "Llano Grande",
+        "Distrito": "La Pintada",
+        "Distrito.Id": "7"
+    },
+    {
+        "Id": "53",
+        "Corregimiento": "Piedras Gordas",
+        "Distrito": "La Pintada",
+        "Distrito.Id": "7"
+    },
+    {
+        "Id": "54",
+        "Corregimiento": "Las Lomas",
+        "Distrito": "La Pintada",
+        "Distrito.Id": "7"
+    },
+    {
+        "Id": "55",
+        "Corregimiento": "Llano Norte",
+        "Distrito": "La Pintada",
+        "Distrito.Id": "7"
+    },
+    {
+        "Id": "56",
+        "Corregimiento": "Natá (Cab)",
+        "Distrito": "Natá",
+        "Distrito.Id": "8"
+    },
+    {
+        "Id": "57",
+        "Corregimiento": "Capellanía",
+        "Distrito": "Natá",
+        "Distrito.Id": "8"
+    },
+    {
+        "Id": "58",
+        "Corregimiento": "El Caño",
+        "Distrito": "Natá",
+        "Distrito.Id": "8"
+    },
+    {
+        "Id": "59",
+        "Corregimiento": "Guzmán",
+        "Distrito": "Natá",
+        "Distrito.Id": "8"
+    },
+    {
+        "Id": "60",
+        "Corregimiento": "Las Huacas",
+        "Distrito": "Natá",
+        "Distrito.Id": "8"
+    },
+    {
+        "Id": "61",
+        "Corregimiento": "Toza",
+        "Distrito": "Natá",
+        "Distrito.Id": "8"
+    },
+    {
+        "Id": "62",
+        "Corregimiento": "Villarreal",
+        "Distrito": "Natá",
+        "Distrito.Id": "8"
+    },
+    {
+        "Id": "63",
+        "Corregimiento": "Olá (Cab)",
+        "Distrito": "Ola",
+        "Distrito.Id": "9"
+    },
+    {
+        "Id": "64",
+        "Corregimiento": "El Copé",
+        "Distrito": "Ola",
+        "Distrito.Id": "9"
+    },
+    {
+        "Id": "65",
+        "Corregimiento": "El Palmar",
+        "Distrito": "Ola",
+        "Distrito.Id": "9"
+    },
+    {
+        "Id": "66",
+        "Corregimiento": "El Picacho",
+        "Distrito": "Ola",
+        "Distrito.Id": "9"
+    },
+    {
+        "Id": "67",
+        "Corregimiento": "La Pava",
+        "Distrito": "Ola",
+        "Distrito.Id": "9"
+    },
+    {
+        "Id": "68",
+        "Corregimiento": "Penonomé (Cab)",
+        "Distrito": "Penonomé",
+        "Distrito.Id": "10"
+    },
+    {
+        "Id": "69",
+        "Corregimiento": "Cañaveral",
+        "Distrito": "Penonomé",
+        "Distrito.Id": "10"
+    },
+    {
+        "Id": "70",
+        "Corregimiento": "Coclé",
+        "Distrito": "Penonomé",
+        "Distrito.Id": "10"
+    },
+    {
+        "Id": "71",
+        "Corregimiento": "Chiguirí Arriba",
+        "Distrito": "Penonomé",
+        "Distrito.Id": "10"
+    },
+    {
+        "Id": "72",
+        "Corregimiento": "El Coco",
+        "Distrito": "Penonomé",
+        "Distrito.Id": "10"
+    },
+    {
+        "Id": "73",
+        "Corregimiento": "Pajonal",
+        "Distrito": "Penonomé",
+        "Distrito.Id": "10"
+    },
+    {
+        "Id": "74",
+        "Corregimiento": "Río Grande",
+        "Distrito": "Penonomé",
+        "Distrito.Id": "10"
+    },
+    {
+        "Id": "75",
+        "Corregimiento": "Río Indio",
+        "Distrito": "Penonomé",
+        "Distrito.Id": "10"
+    },
+    {
+        "Id": "76",
+        "Corregimiento": "Toabré",
+        "Distrito": "Penonomé",
+        "Distrito.Id": "10"
+    },
+    {
+        "Id": "77",
+        "Corregimiento": "Tulú",
+        "Distrito": "Penonomé",
+        "Distrito.Id": "10"
+    },
+    {
+        "Id": "78",
+        "Corregimiento": "Barrio Norte",
+        "Distrito": "Colón",
+        "Distrito.Id": "11"
+    },
+    {
+        "Id": "79",
+        "Corregimiento": "Barrio Sur",
+        "Distrito": "Colón",
+        "Distrito.Id": "11"
+    },
+    {
+        "Id": "80",
+        "Corregimiento": "Buena Vista",
+        "Distrito": "Colón",
+        "Distrito.Id": "11"
+    },
+    {
+        "Id": "81",
+        "Corregimiento": "Cativá",
+        "Distrito": "Colón",
+        "Distrito.Id": "11"
+    },
+    {
+        "Id": "82",
+        "Corregimiento": "Ciricito",
+        "Distrito": "Colón",
+        "Distrito.Id": "11"
+    },
+    {
+        "Id": "83",
+        "Corregimiento": "Cristóbal",
+        "Distrito": "Colón",
+        "Distrito.Id": "11"
+    },
+    {
+        "Id": "84",
+        "Corregimiento": "Escobal",
+        "Distrito": "Colón",
+        "Distrito.Id": "11"
+    },
+    {
+        "Id": "85",
+        "Corregimiento": "Limón",
+        "Distrito": "Colón",
+        "Distrito.Id": "11"
+    },
+    {
+        "Id": "86",
+        "Corregimiento": "Nueva Providencia",
+        "Distrito": "Colón",
+        "Distrito.Id": "11"
+    },
+    {
+        "Id": "87",
+        "Corregimiento": "Puerto Pilón",
+        "Distrito": "Colón",
+        "Distrito.Id": "11"
+    },
+    {
+        "Id": "88",
+        "Corregimiento": "Sabanitas",
+        "Distrito": "Colón",
+        "Distrito.Id": "11"
+    },
+    {
+        "Id": "89",
+        "Corregimiento": "Salamanca",
+        "Distrito": "Colón",
+        "Distrito.Id": "11"
+    },
+    {
+        "Id": "90",
+        "Corregimiento": "San Juan",
+        "Distrito": "Colón",
+        "Distrito.Id": "11"
+    },
+    {
+        "Id": "91",
+        "Corregimiento": "Santa Rosa",
+        "Distrito": "Colón",
+        "Distrito.Id": "11"
+    },
+    {
+        "Id": "92",
+        "Corregimiento": "Cristóbal Este",
+        "Distrito": "Colón",
+        "Distrito.Id": "11"
+    },
+    {
+        "Id": "93",
+        "Corregimiento": "Nuevo Chagres (Cab)",
+        "Distrito": "Chagres",
+        "Distrito.Id": "12"
+    },
+    {
+        "Id": "94",
+        "Corregimiento": "Achiote",
+        "Distrito": "Chagres",
+        "Distrito.Id": "12"
+    },
+    {
+        "Id": "95",
+        "Corregimiento": "Guabo",
+        "Distrito": "Chagres",
+        "Distrito.Id": "12"
+    },
+    {
+        "Id": "96",
+        "Corregimiento": "La Encantada",
+        "Distrito": "Chagres",
+        "Distrito.Id": "12"
+    },
+    {
+        "Id": "97",
+        "Corregimiento": "Palmas Bellas",
+        "Distrito": "Chagres",
+        "Distrito.Id": "12"
+    },
+    {
+        "Id": "98",
+        "Corregimiento": "Piña",
+        "Distrito": "Chagres",
+        "Distrito.Id": "12"
+    },
+    {
+        "Id": "99",
+        "Corregimiento": "Salud",
+        "Distrito": "Chagres",
+        "Distrito.Id": "12"
+    },
+    {
+        "Id": "100",
+        "Corregimiento": "Miguel de la Borda (Cab)",
+        "Distrito": "Donoso",
+        "Distrito.Id": "13"
+    },
+    {
+        "Id": "101",
+        "Corregimiento": "Coclé del Norte",
+        "Distrito": "Donoso",
+        "Distrito.Id": "13"
+    },
+    {
+        "Id": "102",
+        "Corregimiento": "El Guásimo",
+        "Distrito": "Donoso",
+        "Distrito.Id": "13"
+    },
+    {
+        "Id": "103",
+        "Corregimiento": "Gobea",
+        "Distrito": "Donoso",
+        "Distrito.Id": "13"
+    },
+    {
+        "Id": "104",
+        "Corregimiento": "Río Indio",
+        "Distrito": "Donoso",
+        "Distrito.Id": "13"
+    },
+    {
+        "Id": "105",
+        "Corregimiento": "Portobelo (Cab)",
+        "Distrito": "Portobelo",
+        "Distrito.Id": "14"
+    },
+    {
+        "Id": "106",
+        "Corregimiento": "Cacique",
+        "Distrito": "Portobelo",
+        "Distrito.Id": "14"
+    },
+    {
+        "Id": "107",
+        "Corregimiento": "Garrote",
+        "Distrito": "Portobelo",
+        "Distrito.Id": "14"
+    },
+    {
+        "Id": "108",
+        "Corregimiento": "Isla Grande",
+        "Distrito": "Portobelo",
+        "Distrito.Id": "14"
+    },
+    {
+        "Id": "109",
+        "Corregimiento": "María Chiquita",
+        "Distrito": "Portobelo",
+        "Distrito.Id": "14"
+    },
+    {
+        "Id": "110",
+        "Corregimiento": "Palenque (cab)",
+        "Distrito": "Santa Isabel",
+        "Distrito.Id": "15"
+    },
+    {
+        "Id": "111",
+        "Corregimiento": "Cuango",
+        "Distrito": "Santa Isabel",
+        "Distrito.Id": "15"
+    },
+    {
+        "Id": "112",
+        "Corregimiento": "Miramar",
+        "Distrito": "Santa Isabel",
+        "Distrito.Id": "15"
+    },
+    {
+        "Id": "113",
+        "Corregimiento": "Nombre de Dios",
+        "Distrito": "Santa Isabel",
+        "Distrito.Id": "15"
+    },
+    {
+        "Id": "114",
+        "Corregimiento": "Palmira",
+        "Distrito": "Santa Isabel",
+        "Distrito.Id": "15"
+    },
+    {
+        "Id": "115",
+        "Corregimiento": "Playa Chiquita",
+        "Distrito": "Santa Isabel",
+        "Distrito.Id": "15"
+    },
+    {
+        "Id": "116",
+        "Corregimiento": "Santa Isabel",
+        "Distrito": "Santa Isabel",
+        "Distrito.Id": "15"
+    },
+    {
+        "Id": "117",
+        "Corregimiento": "Viento Frío",
+        "Distrito": "Santa Isabel",
+        "Distrito.Id": "15"
+    },
+    {
+        "Id": "118",
+        "Corregimiento": "San José del General",
+        "Distrito": "Coclesito",
+        "Distrito.Id": "17"
+    },
+    {
+        "Id": "119",
+        "Corregimiento": "San Juan de Turbe",
+        "Distrito": "Coclesito",
+        "Distrito.Id": "17"
+    },
+    {
+        "Id": "120",
+        "Corregimiento": "Nueva Esperanza",
+        "Distrito": "Coclesito",
+        "Distrito.Id": "17"
+    },
+    {
+        "Id": "121",
+        "Corregimiento": "Alanje (cab)",
+        "Distrito": "Alanje",
+        "Distrito.Id": "18"
+    },
+    {
+        "Id": "122",
+        "Corregimiento": "Divalá",
+        "Distrito": "Alanje",
+        "Distrito.Id": "18"
+    },
+    {
+        "Id": "123",
+        "Corregimiento": "El Tejar",
+        "Distrito": "Alanje",
+        "Distrito.Id": "18"
+    },
+    {
+        "Id": "124",
+        "Corregimiento": "Guarumal",
+        "Distrito": "Alanje",
+        "Distrito.Id": "18"
+    },
+    {
+        "Id": "125",
+        "Corregimiento": "Palo Grande",
+        "Distrito": "Alanje",
+        "Distrito.Id": "18"
+    },
+    {
+        "Id": "126",
+        "Corregimiento": "Querévalo",
+        "Distrito": "Alanje",
+        "Distrito.Id": "18"
+    },
+    {
+        "Id": "127",
+        "Corregimiento": "Santo Tomás",
+        "Distrito": "Alanje",
+        "Distrito.Id": "18"
+    },
+    {
+        "Id": "128",
+        "Corregimiento": "Canta Gallo",
+        "Distrito": "Alanje",
+        "Distrito.Id": "18"
+    },
+    {
+        "Id": "129",
+        "Corregimiento": "Nuevo México",
+        "Distrito": "Alanje",
+        "Distrito.Id": "18"
+    },
+    {
+        "Id": "130",
+        "Corregimiento": "Puerto Armuelles (cab)",
+        "Distrito": "Barú",
+        "Distrito.Id": "19"
+    },
+    {
+        "Id": "131",
+        "Corregimiento": "Limones",
+        "Distrito": "Barú",
+        "Distrito.Id": "19"
+    },
+    {
+        "Id": "132",
+        "Corregimiento": "Progreso",
+        "Distrito": "Barú",
+        "Distrito.Id": "19"
+    },
+    {
+        "Id": "133",
+        "Corregimiento": "Baco",
+        "Distrito": "Barú",
+        "Distrito.Id": "19"
+    },
+    {
+        "Id": "134",
+        "Corregimiento": "Rodolfo Aguilar Delgado",
+        "Distrito": "Barú",
+        "Distrito.Id": "19"
+    },
+    {
+        "Id": "135",
+        "Corregimiento": "Boquerón (cab)",
+        "Distrito": "Boquerón",
+        "Distrito.Id": "20"
+    },
+    {
+        "Id": "136",
+        "Corregimiento": "Bágala",
+        "Distrito": "Boquerón",
+        "Distrito.Id": "20"
+    },
+    {
+        "Id": "137",
+        "Corregimiento": "Cordillera",
+        "Distrito": "Boquerón",
+        "Distrito.Id": "20"
+    },
+    {
+        "Id": "138",
+        "Corregimiento": "Guabal",
+        "Distrito": "Boquerón",
+        "Distrito.Id": "20"
+    },
+    {
+        "Id": "139",
+        "Corregimiento": "Guayabal",
+        "Distrito": "Boquerón",
+        "Distrito.Id": "20"
+    },
+    {
+        "Id": "140",
+        "Corregimiento": "Paraíso",
+        "Distrito": "Boquerón",
+        "Distrito.Id": "20"
+    },
+    {
+        "Id": "141",
+        "Corregimiento": "Pedregal",
+        "Distrito": "Boquerón",
+        "Distrito.Id": "20"
+    },
+    {
+        "Id": "142",
+        "Corregimiento": "Tijeras",
+        "Distrito": "Boquerón",
+        "Distrito.Id": "20"
+    },
+    {
+        "Id": "143",
+        "Corregimiento": "Bajo Boquete (cab)",
+        "Distrito": "Boquete",
+        "Distrito.Id": "21"
+    },
+    {
+        "Id": "144",
+        "Corregimiento": "Caldera",
+        "Distrito": "Boquete",
+        "Distrito.Id": "21"
+    },
+    {
+        "Id": "145",
+        "Corregimiento": "Palmira",
+        "Distrito": "Boquete",
+        "Distrito.Id": "21"
+    },
+    {
+        "Id": "146",
+        "Corregimiento": "Alto Boquete",
+        "Distrito": "Boquete",
+        "Distrito.Id": "21"
+    },
+    {
+        "Id": "147",
+        "Corregimiento": " Jaramillo",
+        "Distrito": "Boquete",
+        "Distrito.Id": "21"
+    },
+    {
+        "Id": "148",
+        "Corregimiento": "Los Naranjos",
+        "Distrito": "Boquete",
+        "Distrito.Id": "21"
+    },
+    {
+        "Id": "149",
+        "Corregimiento": "La Concepción (cab)",
+        "Distrito": "Bugaba",
+        "Distrito.Id": "22"
+    },
+    {
+        "Id": "150",
+        "Corregimiento": "Aserrío de Gariché",
+        "Distrito": "Bugaba",
+        "Distrito.Id": "22"
+    },
+    {
+        "Id": "151",
+        "Corregimiento": "El Bongo",
+        "Distrito": "Bugaba",
+        "Distrito.Id": "22"
+    },
+    {
+        "Id": "152",
+        "Corregimiento": "Bugaba",
+        "Distrito": "Bugaba",
+        "Distrito.Id": "22"
+    },
+    {
+        "Id": "153",
+        "Corregimiento": "Gómez",
+        "Distrito": "Bugaba",
+        "Distrito.Id": "22"
+    },
+    {
+        "Id": "154",
+        "Corregimiento": " La Estrella",
+        "Distrito": "Bugaba",
+        "Distrito.Id": "22"
+    },
+    {
+        "Id": "155",
+        "Corregimiento": "San Andrés",
+        "Distrito": "Bugaba",
+        "Distrito.Id": "22"
+    },
+    {
+        "Id": "156",
+        "Corregimiento": "Santa Marta",
+        "Distrito": "Bugaba",
+        "Distrito.Id": "22"
+    },
+    {
+        "Id": "157",
+        "Corregimiento": "Santa Rosa",
+        "Distrito": "Bugaba",
+        "Distrito.Id": "22"
+    },
+    {
+        "Id": "158",
+        "Corregimiento": "Santo Domingo",
+        "Distrito": "Bugaba",
+        "Distrito.Id": "22"
+    },
+    {
+        "Id": "159",
+        "Corregimiento": "Sortová",
+        "Distrito": "Bugaba",
+        "Distrito.Id": "22"
+    },
+    {
+        "Id": "160",
+        "Corregimiento": "Solano",
+        "Distrito": "Bugaba",
+        "Distrito.Id": "22"
+    },
+    {
+        "Id": "161",
+        "Corregimiento": "San Isidro",
+        "Distrito": "Bugaba",
+        "Distrito.Id": "22"
+    },
+    {
+        "Id": "162",
+        "Corregimiento": "David (cab)",
+        "Distrito": "David",
+        "Distrito.Id": "23"
+    },
+    {
+        "Id": "163",
+        "Corregimiento": "Bijagual",
+        "Distrito": "David",
+        "Distrito.Id": "23"
+    },
+    {
+        "Id": "164",
+        "Corregimiento": "Cochea",
+        "Distrito": "David",
+        "Distrito.Id": "23"
+    },
+    {
+        "Id": "165",
+        "Corregimiento": "Chiriquí",
+        "Distrito": "David",
+        "Distrito.Id": "23"
+    },
+    {
+        "Id": "166",
+        "Corregimiento": "Guacá",
+        "Distrito": "David",
+        "Distrito.Id": "23"
+    },
+    {
+        "Id": "167",
+        "Corregimiento": "Las Lomas",
+        "Distrito": "David",
+        "Distrito.Id": "23"
+    },
+    {
+        "Id": "168",
+        "Corregimiento": "Pedregal",
+        "Distrito": "David",
+        "Distrito.Id": "23"
+    },
+    {
+        "Id": "169",
+        "Corregimiento": "San Carlos",
+        "Distrito": "David",
+        "Distrito.Id": "23"
+    },
+    {
+        "Id": "170",
+        "Corregimiento": "San Pablo Nuevo",
+        "Distrito": "David",
+        "Distrito.Id": "23"
+    },
+    {
+        "Id": "171",
+        "Corregimiento": "San Pablo Viejo",
+        "Distrito": "David",
+        "Distrito.Id": "23"
+    },
+    {
+        "Id": "172",
+        "Corregimiento": "David Este",
+        "Distrito": "David",
+        "Distrito.Id": "23"
+    },
+    {
+        "Id": "173",
+        "Corregimiento": "David Sur",
+        "Distrito": "David",
+        "Distrito.Id": "23"
+    },
+    {
+        "Id": "174",
+        "Corregimiento": "Dolega (cab)",
+        "Distrito": "Dolega",
+        "Distrito.Id": "24"
+    },
+    {
+        "Id": "175",
+        "Corregimiento": "Dos Ríos",
+        "Distrito": "Dolega",
+        "Distrito.Id": "24"
+    },
+    {
+        "Id": "176",
+        "Corregimiento": "Los Anastacios ",
+        "Distrito": "Dolega",
+        "Distrito.Id": "24"
+    },
+    {
+        "Id": "177",
+        "Corregimiento": "Potrerillos",
+        "Distrito": "Dolega",
+        "Distrito.Id": "24"
+    },
+    {
+        "Id": "178",
+        "Corregimiento": "Potrerillos Abajo",
+        "Distrito": "Dolega",
+        "Distrito.Id": "24"
+    },
+    {
+        "Id": "179",
+        "Corregimiento": "Rovira",
+        "Distrito": "Dolega",
+        "Distrito.Id": "24"
+    },
+    {
+        "Id": "180",
+        "Corregimiento": "Tinajas",
+        "Distrito": "Dolega",
+        "Distrito.Id": "24"
+    },
+    {
+        "Id": "181",
+        "Corregimiento": "Los Algarrobos",
+        "Distrito": "Dolega",
+        "Distrito.Id": "24"
+    },
+    {
+        "Id": "182",
+        "Corregimiento": "Gualaca (cab)",
+        "Distrito": "Gualaca",
+        "Distrito.Id": "25"
+    },
+    {
+        "Id": "183",
+        "Corregimiento": "Hornito",
+        "Distrito": "Gualaca",
+        "Distrito.Id": "25"
+    },
+    {
+        "Id": "184",
+        "Corregimiento": "Los Angeles",
+        "Distrito": "Gualaca",
+        "Distrito.Id": "25"
+    },
+    {
+        "Id": "185",
+        "Corregimiento": "Paja de Sombrero",
+        "Distrito": "Gualaca",
+        "Distrito.Id": "25"
+    },
+    {
+        "Id": "186",
+        "Corregimiento": "Rincón",
+        "Distrito": "Gualaca",
+        "Distrito.Id": "25"
+    },
+    {
+        "Id": "187",
+        "Corregimiento": "Remedios (cab)",
+        "Distrito": "Remedios",
+        "Distrito.Id": "26"
+    },
+    {
+        "Id": "188",
+        "Corregimiento": " El Nancito",
+        "Distrito": "Remedios",
+        "Distrito.Id": "26"
+    },
+    {
+        "Id": "189",
+        "Corregimiento": "El Porvenir",
+        "Distrito": "Remedios",
+        "Distrito.Id": "26"
+    },
+    {
+        "Id": "190",
+        "Corregimiento": "El Puerto",
+        "Distrito": "Remedios",
+        "Distrito.Id": "26"
+    },
+    {
+        "Id": "191",
+        "Corregimiento": "Santa Lucía",
+        "Distrito": "Remedios",
+        "Distrito.Id": "26"
+    },
+    {
+        "Id": "192",
+        "Corregimiento": "Río Sereno (cab)",
+        "Distrito": "Renacimiento",
+        "Distrito.Id": "27"
+    },
+    {
+        "Id": "193",
+        "Corregimiento": "Breñón",
+        "Distrito": "Renacimiento",
+        "Distrito.Id": "27"
+    },
+    {
+        "Id": "194",
+        "Corregimiento": "Cañas Gordas",
+        "Distrito": "Renacimiento",
+        "Distrito.Id": "27"
+    },
+    {
+        "Id": "195",
+        "Corregimiento": "Monte Lirio",
+        "Distrito": "Renacimiento",
+        "Distrito.Id": "27"
+    },
+    {
+        "Id": "196",
+        "Corregimiento": "Plaza de Caisán",
+        "Distrito": "Renacimiento",
+        "Distrito.Id": "27"
+    },
+    {
+        "Id": "197",
+        "Corregimiento": "Santa Cruz",
+        "Distrito": "Renacimiento",
+        "Distrito.Id": "27"
+    },
+    {
+        "Id": "198",
+        "Corregimiento": "Santa Clara",
+        "Distrito": "Renacimiento",
+        "Distrito.Id": "27"
+    },
+    {
+        "Id": "199",
+        "Corregimiento": "Dominical",
+        "Distrito": "Renacimiento",
+        "Distrito.Id": "27"
+    },
+    {
+        "Id": "200",
+        "Corregimiento": "Las Lajas (Cab)",
+        "Distrito": "San Félix",
+        "Distrito.Id": "28"
+    },
+    {
+        "Id": "201",
+        "Corregimiento": "Juay",
+        "Distrito": "San Félix",
+        "Distrito.Id": "28"
+    },
+    {
+        "Id": "202",
+        "Corregimiento": "San Félix",
+        "Distrito": "San Félix",
+        "Distrito.Id": "28"
+    },
+    {
+        "Id": "203",
+        "Corregimiento": "Lajas Adentro",
+        "Distrito": "San Félix",
+        "Distrito.Id": "28"
+    },
+    {
+        "Id": "204",
+        "Corregimiento": "Santa Cruz",
+        "Distrito": "San Félix",
+        "Distrito.Id": "28"
+    },
+    {
+        "Id": "205",
+        "Corregimiento": "Cuesta de piedra",
+        "Distrito": "Tierras Altas",
+        "Distrito.Id": "29"
+    },
+    {
+        "Id": "206",
+        "Corregimiento": "Paso Ancho",
+        "Distrito": "Tierras Altas",
+        "Distrito.Id": "29"
+    },
+    {
+        "Id": "207",
+        "Corregimiento": "Nueva California",
+        "Distrito": "Tierras Altas",
+        "Distrito.Id": "29"
+    },
+    {
+        "Id": "208",
+        "Corregimiento": "Volcán",
+        "Distrito": "Tierras Altas",
+        "Distrito.Id": "29"
+    },
+    {
+        "Id": "209",
+        "Corregimiento": "Cerro Punta",
+        "Distrito": "Tierras Altas",
+        "Distrito.Id": "29"
+    },
+    {
+        "Id": "210",
+        "Corregimiento": "Horconcitos (cab)",
+        "Distrito": "San Lorenzo",
+        "Distrito.Id": "30"
+    },
+    {
+        "Id": "211",
+        "Corregimiento": "Boca Chica",
+        "Distrito": "San Lorenzo",
+        "Distrito.Id": "30"
+    },
+    {
+        "Id": "212",
+        "Corregimiento": "Boca Del Monte",
+        "Distrito": "San Lorenzo",
+        "Distrito.Id": "30"
+    },
+    {
+        "Id": "213",
+        "Corregimiento": "San Juan",
+        "Distrito": "San Lorenzo",
+        "Distrito.Id": "30"
+    },
+    {
+        "Id": "214",
+        "Corregimiento": "San Lorenzo",
+        "Distrito": "San Lorenzo",
+        "Distrito.Id": "30"
+    },
+    {
+        "Id": "215",
+        "Corregimiento": "Tolé (cab)",
+        "Distrito": "Tolé",
+        "Distrito.Id": "31"
+    },
+    {
+        "Id": "216",
+        "Corregimiento": "Cerro Viejo",
+        "Distrito": "Tolé",
+        "Distrito.Id": "31"
+    },
+    {
+        "Id": "217",
+        "Corregimiento": "Lajas de Tolé",
+        "Distrito": "Tolé",
+        "Distrito.Id": "31"
+    },
+    {
+        "Id": "218",
+        "Corregimiento": "Potrero de Caña",
+        "Distrito": "Tolé",
+        "Distrito.Id": "31"
+    },
+    {
+        "Id": "219",
+        "Corregimiento": "Quebrada de Piedra",
+        "Distrito": "Tolé",
+        "Distrito.Id": "31"
+    },
+    {
+        "Id": "220",
+        "Corregimiento": "Bella Vista",
+        "Distrito": "Tolé",
+        "Distrito.Id": "31"
+    },
+    {
+        "Id": "221",
+        "Corregimiento": "El Cristo",
+        "Distrito": "Tolé",
+        "Distrito.Id": "31"
+    },
+    {
+        "Id": "222",
+        "Corregimiento": "Justo Fidel Palacios",
+        "Distrito": "Tolé",
+        "Distrito.Id": "31"
+    },
+    {
+        "Id": "223",
+        "Corregimiento": "Veladero",
+        "Distrito": "Tolé",
+        "Distrito.Id": "31"
+    },
+    {
+        "Id": "224",
+        "Corregimiento": "La Palma (cab)",
+        "Distrito": "Chepigana",
+        "Distrito.Id": "32"
+    },
+    {
+        "Id": "225",
+        "Corregimiento": "Camogantí",
+        "Distrito": "Chepigana",
+        "Distrito.Id": "32"
+    },
+    {
+        "Id": "226",
+        "Corregimiento": "Chepigana",
+        "Distrito": "Chepigana",
+        "Distrito.Id": "32"
+    },
+    {
+        "Id": "227",
+        "Corregimiento": "Garachiné",
+        "Distrito": "Chepigana",
+        "Distrito.Id": "32"
+    },
+    {
+        "Id": "228",
+        "Corregimiento": "Jaqué",
+        "Distrito": "Chepigana",
+        "Distrito.Id": "32"
+    },
+    {
+        "Id": "229",
+        "Corregimiento": "Puerto Piña",
+        "Distrito": "Chepigana",
+        "Distrito.Id": "32"
+    },
+    {
+        "Id": "230",
+        "Corregimiento": "Sambú",
+        "Distrito": "Chepigana",
+        "Distrito.Id": "32"
+    },
+    {
+        "Id": "231",
+        "Corregimiento": "Setegantí",
+        "Distrito": "Chepigana",
+        "Distrito.Id": "32"
+    },
+    {
+        "Id": "232",
+        "Corregimiento": "Taimatí",
+        "Distrito": "Chepigana",
+        "Distrito.Id": "32"
+    },
+    {
+        "Id": "233",
+        "Corregimiento": "Tucutí",
+        "Distrito": "Chepigana",
+        "Distrito.Id": "32"
+    },
+    {
+        "Id": "234",
+        "Corregimiento": "El Real S.M. (cab)",
+        "Distrito": "Pinogana",
+        "Distrito.Id": "33"
+    },
+    {
+        "Id": "235",
+        "Corregimiento": "Boca de Cupe",
+        "Distrito": "Pinogana",
+        "Distrito.Id": "33"
+    },
+    {
+        "Id": "236",
+        "Corregimiento": "Paya",
+        "Distrito": "Pinogana",
+        "Distrito.Id": "33"
+    },
+    {
+        "Id": "237",
+        "Corregimiento": "Pinogana",
+        "Distrito": "Pinogana",
+        "Distrito.Id": "33"
+    },
+    {
+        "Id": "238",
+        "Corregimiento": "2Púcuro",
+        "Distrito": "Pinogana",
+        "Distrito.Id": "33"
+    },
+    {
+        "Id": "239",
+        "Corregimiento": "Yape",
+        "Distrito": "Pinogana",
+        "Distrito.Id": "33"
+    },
+    {
+        "Id": "240",
+        "Corregimiento": "Yaviza",
+        "Distrito": "Pinogana",
+        "Distrito.Id": "33"
+    },
+    {
+        "Id": "241",
+        "Corregimiento": "Metetí",
+        "Distrito": "Pinogana",
+        "Distrito.Id": "33"
+    },
+    {
+        "Id": "242",
+        "Corregimiento": "Río Congo",
+        "Distrito": "Santa Fe",
+        "Distrito.Id": "34"
+    },
+    {
+        "Id": "243",
+        "Corregimiento": "Río Iglesias",
+        "Distrito": "Santa Fe",
+        "Distrito.Id": "34"
+    },
+    {
+        "Id": "244",
+        "Corregimiento": "Agua Fría",
+        "Distrito": "Santa Fe",
+        "Distrito.Id": "34"
+    },
+    {
+        "Id": "245",
+        "Corregimiento": "Cucunatí",
+        "Distrito": "Santa Fe",
+        "Distrito.Id": "34"
+    },
+    {
+        "Id": "246",
+        "Corregimiento": "Río Congo Arriba",
+        "Distrito": "Santa Fe",
+        "Distrito.Id": "34"
+    },
+    {
+        "Id": "247",
+        "Corregimiento": "Santa Fé",
+        "Distrito": "Santa Fe",
+        "Distrito.Id": "34"
+    },
+    {
+        "Id": "248",
+        "Corregimiento": "Zapallal",
+        "Distrito": "Santa Fe",
+        "Distrito.Id": "34"
+    },
+    {
+        "Id": "249",
+        "Corregimiento": "Chitré (cab)",
+        "Distrito": "Chitré",
+        "Distrito.Id": "35"
+    },
+    {
+        "Id": "250",
+        "Corregimiento": "La Arena",
+        "Distrito": "Chitré",
+        "Distrito.Id": "35"
+    },
+    {
+        "Id": "251",
+        "Corregimiento": "Monagrillo",
+        "Distrito": "Chitré",
+        "Distrito.Id": "35"
+    },
+    {
+        "Id": "252",
+        "Corregimiento": "San Juan Bautista",
+        "Distrito": "Chitré",
+        "Distrito.Id": "35"
+    },
+    {
+        "Id": "253",
+        "Corregimiento": "Llano Bonito",
+        "Distrito": "Chitré",
+        "Distrito.Id": "35"
+    },
+    {
+        "Id": "254",
+        "Corregimiento": "Las Minas (Cab)",
+        "Distrito": "Las Minas",
+        "Distrito.Id": "36"
+    },
+    {
+        "Id": "255",
+        "Corregimiento": "Chepo",
+        "Distrito": "Las Minas",
+        "Distrito.Id": "36"
+    },
+    {
+        "Id": "256",
+        "Corregimiento": "Chumical",
+        "Distrito": "Las Minas",
+        "Distrito.Id": "36"
+    },
+    {
+        "Id": "257",
+        "Corregimiento": "El Toro",
+        "Distrito": "Las Minas",
+        "Distrito.Id": "36"
+    },
+    {
+        "Id": "258",
+        "Corregimiento": "Leones",
+        "Distrito": "Las Minas",
+        "Distrito.Id": "36"
+    },
+    {
+        "Id": "259",
+        "Corregimiento": "Quebrada Del Rosario",
+        "Distrito": "Las Minas",
+        "Distrito.Id": "36"
+    },
+    {
+        "Id": "260",
+        "Corregimiento": "El Ciprián",
+        "Distrito": "Las Minas",
+        "Distrito.Id": "36"
+    },
+    {
+        "Id": "261",
+        "Corregimiento": "Los Pozos (CAB)",
+        "Distrito": "Los Pozos",
+        "Distrito.Id": "37"
+    },
+    {
+        "Id": "262",
+        "Corregimiento": "Capurí",
+        "Distrito": "Los Pozos",
+        "Distrito.Id": "37"
+    },
+    {
+        "Id": "263",
+        "Corregimiento": "El Calabacito",
+        "Distrito": "Los Pozos",
+        "Distrito.Id": "37"
+    },
+    {
+        "Id": "264",
+        "Corregimiento": "El Cedro",
+        "Distrito": "Los Pozos",
+        "Distrito.Id": "37"
+    },
+    {
+        "Id": "265",
+        "Corregimiento": "La Arena",
+        "Distrito": "Los Pozos",
+        "Distrito.Id": "37"
+    },
+    {
+        "Id": "266",
+        "Corregimiento": "La Pitaloza",
+        "Distrito": "Los Pozos",
+        "Distrito.Id": "37"
+    },
+    {
+        "Id": "267",
+        "Corregimiento": "Los Cerritos",
+        "Distrito": "Los Pozos",
+        "Distrito.Id": "37"
+    },
+    {
+        "Id": "268",
+        "Corregimiento": "Los Cerros de Paja",
+        "Distrito": "Los Pozos",
+        "Distrito.Id": "37"
+    },
+    {
+        "Id": "269",
+        "Corregimiento": "Las Llanas",
+        "Distrito": "Los Pozos",
+        "Distrito.Id": "37"
+    },
+    {
+        "Id": "270",
+        "Corregimiento": "Ocú (cab)",
+        "Distrito": "Ocú",
+        "Distrito.Id": "38"
+    },
+    {
+        "Id": "271",
+        "Corregimiento": "Cerro Largo",
+        "Distrito": "Ocú",
+        "Distrito.Id": "38"
+    },
+    {
+        "Id": "272",
+        "Corregimiento": "Los Llanos",
+        "Distrito": "Ocú",
+        "Distrito.Id": "38"
+    },
+    {
+        "Id": "273",
+        "Corregimiento": "Llano Grande",
+        "Distrito": "Ocú",
+        "Distrito.Id": "38"
+    },
+    {
+        "Id": "274",
+        "Corregimiento": "Peñas Chatas",
+        "Distrito": "Ocú",
+        "Distrito.Id": "38"
+    },
+    {
+        "Id": "275",
+        "Corregimiento": "El Tijera",
+        "Distrito": "Ocú",
+        "Distrito.Id": "38"
+    },
+    {
+        "Id": "276",
+        "Corregimiento": "Menchaca",
+        "Distrito": "Ocú",
+        "Distrito.Id": "38"
+    },
+    {
+        "Id": "277",
+        "Corregimiento": "Entradero del Castillo",
+        "Distrito": "Ocú",
+        "Distrito.Id": "38"
+    },
+    {
+        "Id": "278",
+        "Corregimiento": "Parita (cab)",
+        "Distrito": "Parita",
+        "Distrito.Id": "39"
+    },
+    {
+        "Id": "279",
+        "Corregimiento": "Cabuya",
+        "Distrito": "Parita",
+        "Distrito.Id": "39"
+    },
+    {
+        "Id": "280",
+        "Corregimiento": "Los Castillos",
+        "Distrito": "Parita",
+        "Distrito.Id": "39"
+    },
+    {
+        "Id": "281",
+        "Corregimiento": "Llano De la Cruz",
+        "Distrito": "Parita",
+        "Distrito.Id": "39"
+    },
+    {
+        "Id": "282",
+        "Corregimiento": "París",
+        "Distrito": "Parita",
+        "Distrito.Id": "39"
+    },
+    {
+        "Id": "283",
+        "Corregimiento": "Portobelillo",
+        "Distrito": "Parita",
+        "Distrito.Id": "39"
+    },
+    {
+        "Id": "284",
+        "Corregimiento": "Potuga",
+        "Distrito": "Parita",
+        "Distrito.Id": "39"
+    },
+    {
+        "Id": "285",
+        "Corregimiento": "Santa María (cab)",
+        "Distrito": "Santa María",
+        "Distrito.Id": "40"
+    },
+    {
+        "Id": "286",
+        "Corregimiento": "Chupampa",
+        "Distrito": "Santa María",
+        "Distrito.Id": "40"
+    },
+    {
+        "Id": "287",
+        "Corregimiento": "El Rincón",
+        "Distrito": "Santa María",
+        "Distrito.Id": "40"
+    },
+    {
+        "Id": "288",
+        "Corregimiento": "El Limón",
+        "Distrito": "Santa María",
+        "Distrito.Id": "40"
+    },
+    {
+        "Id": "289",
+        "Corregimiento": "Los Canelos",
+        "Distrito": "Santa María",
+        "Distrito.Id": "40"
+    },
+    {
+        "Id": "290",
+        "Corregimiento": "Pesé (cab)",
+        "Distrito": "Pesé",
+        "Distrito.Id": "41"
+    },
+    {
+        "Id": "291",
+        "Corregimiento": "Las Cabras",
+        "Distrito": "Pesé",
+        "Distrito.Id": "41"
+    },
+    {
+        "Id": "292",
+        "Corregimiento": "El Pájaro",
+        "Distrito": "Pesé",
+        "Distrito.Id": "41"
+    },
+    {
+        "Id": "293",
+        "Corregimiento": "El Barrero",
+        "Distrito": "Pesé",
+        "Distrito.Id": "41"
+    },
+    {
+        "Id": "294",
+        "Corregimiento": "El Pedregoso",
+        "Distrito": "Pesé",
+        "Distrito.Id": "41"
+    },
+    {
+        "Id": "295",
+        "Corregimiento": "El Ciruelo",
+        "Distrito": "Pesé",
+        "Distrito.Id": "41"
+    },
+    {
+        "Id": "296",
+        "Corregimiento": "Sábana Grande",
+        "Distrito": "Pesé",
+        "Distrito.Id": "41"
+    },
+    {
+        "Id": "297",
+        "Corregimiento": "Rincón Hondo",
+        "Distrito": "Pesé",
+        "Distrito.Id": "41"
+    },
+    {
+        "Id": "298",
+        "Corregimiento": "Guararé (Cab)",
+        "Distrito": "Guararé",
+        "Distrito.Id": "42"
+    },
+    {
+        "Id": "299",
+        "Corregimiento": "El Espinal",
+        "Distrito": "Guararé",
+        "Distrito.Id": "42"
+    },
+    {
+        "Id": "300",
+        "Corregimiento": "El Macano",
+        "Distrito": "Guararé",
+        "Distrito.Id": "42"
+    },
+    {
+        "Id": "301",
+        "Corregimiento": "Guararé Arriba",
+        "Distrito": "Guararé",
+        "Distrito.Id": "42"
+    },
+    {
+        "Id": "302",
+        "Corregimiento": "La Enea",
+        "Distrito": "Guararé",
+        "Distrito.Id": "42"
+    },
+    {
+        "Id": "303",
+        "Corregimiento": "La Pasera",
+        "Distrito": "Guararé",
+        "Distrito.Id": "42"
+    },
+    {
+        "Id": "304",
+        "Corregimiento": "Las Trancas",
+        "Distrito": "Guararé",
+        "Distrito.Id": "42"
+    },
+    {
+        "Id": "305",
+        "Corregimiento": " Llano Abajo",
+        "Distrito": "Guararé",
+        "Distrito.Id": "42"
+    },
+    {
+        "Id": "306",
+        "Corregimiento": "El Hato",
+        "Distrito": "Guararé",
+        "Distrito.Id": "42"
+    },
+    {
+        "Id": "307",
+        "Corregimiento": "Perales",
+        "Distrito": "Guararé",
+        "Distrito.Id": "42"
+    },
+    {
+        "Id": "308",
+        "Corregimiento": "Las Tablas (Cab)",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "309",
+        "Corregimiento": "Bajo Corral",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "310",
+        "Corregimiento": "Bayano",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "311",
+        "Corregimiento": "Carate",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "312",
+        "Corregimiento": "El Cocal",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "313",
+        "Corregimiento": "El Manantial",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "314",
+        "Corregimiento": "El Muñoz",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "315",
+        "Corregimiento": "El Pedregoso",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "316",
+        "Corregimiento": "La Laja",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "317",
+        "Corregimiento": "La Miel",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "318",
+        "Corregimiento": "La Palma",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "319",
+        "Corregimiento": "La Tiza",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "320",
+        "Corregimiento": "Las Palmitas",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "321",
+        "Corregimiento": "Las Tablas Abajo",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "322",
+        "Corregimiento": "Nuario",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "323",
+        "Corregimiento": "Palmira",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "324",
+        "Corregimiento": "Peña Blanca",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "325",
+        "Corregimiento": "Río Hondo",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "326",
+        "Corregimiento": "San José",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "327",
+        "Corregimiento": "San Miguel",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "328",
+        "Corregimiento": "Santo Domingo",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "329",
+        "Corregimiento": "El Sesteadero",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "330",
+        "Corregimiento": "Valle Rico",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "331",
+        "Corregimiento": "Vallerriquito",
+        "Distrito": "Las Tablas",
+        "Distrito.Id": "43"
+    },
+    {
+        "Id": "332",
+        "Corregimiento": "La Villa de Los Santos",
+        "Distrito": "Los Santos",
+        "Distrito.Id": "44"
+    },
+    {
+        "Id": "333",
+        "Corregimiento": "El Guásimo",
+        "Distrito": "Los Santos",
+        "Distrito.Id": "44"
+    },
+    {
+        "Id": "334",
+        "Corregimiento": "La Colorada",
+        "Distrito": "Los Santos",
+        "Distrito.Id": "44"
+    },
+    {
+        "Id": "335",
+        "Corregimiento": "La Espigadilla",
+        "Distrito": "Los Santos",
+        "Distrito.Id": "44"
+    },
+    {
+        "Id": "336",
+        "Corregimiento": "Las Cruces",
+        "Distrito": "Los Santos",
+        "Distrito.Id": "44"
+    },
+    {
+        "Id": "337",
+        "Corregimiento": "Las Guabas",
+        "Distrito": "Los Santos",
+        "Distrito.Id": "44"
+    },
+    {
+        "Id": "338",
+        "Corregimiento": "Los Angeles",
+        "Distrito": "Los Santos",
+        "Distrito.Id": "44"
+    },
+    {
+        "Id": "339",
+        "Corregimiento": "Los Olivos",
+        "Distrito": "Los Santos",
+        "Distrito.Id": "44"
+    },
+    {
+        "Id": "340",
+        "Corregimiento": "Llano Largo",
+        "Distrito": "Los Santos",
+        "Distrito.Id": "44"
+    },
+    {
+        "Id": "341",
+        "Corregimiento": "Sábana Grande",
+        "Distrito": "Los Santos",
+        "Distrito.Id": "44"
+    },
+    {
+        "Id": "342",
+        "Corregimiento": "Santa Ana",
+        "Distrito": "Los Santos",
+        "Distrito.Id": "44"
+    },
+    {
+        "Id": "343",
+        "Corregimiento": "Tres Quebradas",
+        "Distrito": "Los Santos",
+        "Distrito.Id": "44"
+    },
+    {
+        "Id": "344",
+        "Corregimiento": "Villa Lourdes",
+        "Distrito": "Los Santos",
+        "Distrito.Id": "44"
+    },
+    {
+        "Id": "345",
+        "Corregimiento": "Agua Buena",
+        "Distrito": "Los Santos",
+        "Distrito.Id": "44"
+    },
+    {
+        "Id": "346",
+        "Corregimiento": "El Ejido",
+        "Distrito": "Los Santos",
+        "Distrito.Id": "44"
+    },
+    {
+        "Id": "347",
+        "Corregimiento": "Macaracas (cab)",
+        "Distrito": "Macaracas",
+        "Distrito.Id": "45"
+    },
+    {
+        "Id": "348",
+        "Corregimiento": "Bahía Honda",
+        "Distrito": "Macaracas",
+        "Distrito.Id": "45"
+    },
+    {
+        "Id": "349",
+        "Corregimiento": "Bajos de Güera",
+        "Distrito": "Macaracas",
+        "Distrito.Id": "45"
+    },
+    {
+        "Id": "350",
+        "Corregimiento": "Corozal",
+        "Distrito": "Macaracas",
+        "Distrito.Id": "45"
+    },
+    {
+        "Id": "351",
+        "Corregimiento": "Chupá",
+        "Distrito": "Macaracas",
+        "Distrito.Id": "45"
+    },
+    {
+        "Id": "352",
+        "Corregimiento": "El Cedro",
+        "Distrito": "Macaracas",
+        "Distrito.Id": "45"
+    },
+    {
+        "Id": "353",
+        "Corregimiento": "Espino Amarillo",
+        "Distrito": "Macaracas",
+        "Distrito.Id": "45"
+    },
+    {
+        "Id": "354",
+        "Corregimiento": "La Mesa",
+        "Distrito": "Macaracas",
+        "Distrito.Id": "45"
+    },
+    {
+        "Id": "355",
+        "Corregimiento": "Las Palmas",
+        "Distrito": "Macaracas",
+        "Distrito.Id": "45"
+    },
+    {
+        "Id": "356",
+        "Corregimiento": "Llano de Piedra",
+        "Distrito": "Macaracas",
+        "Distrito.Id": "45"
+    },
+    {
+        "Id": "357",
+        "Corregimiento": "Mogollón",
+        "Distrito": "Macaracas",
+        "Distrito.Id": "45"
+    },
+    {
+        "Id": "358",
+        "Corregimiento": "Pedasí (cab)",
+        "Distrito": "Pedasí",
+        "Distrito.Id": "46"
+    },
+    {
+        "Id": "359",
+        "Corregimiento": "Los Asientos",
+        "Distrito": "Pedasí",
+        "Distrito.Id": "46"
+    },
+    {
+        "Id": "360",
+        "Corregimiento": "Mariabé",
+        "Distrito": "Pedasí",
+        "Distrito.Id": "46"
+    },
+    {
+        "Id": "361",
+        "Corregimiento": "Púrio",
+        "Distrito": "Pedasí",
+        "Distrito.Id": "46"
+    },
+    {
+        "Id": "362",
+        "Corregimiento": "Oria Arriba",
+        "Distrito": "Pedasí",
+        "Distrito.Id": "46"
+    },
+    {
+        "Id": "363",
+        "Corregimiento": "Pocrí (cab)",
+        "Distrito": "Pocrí",
+        "Distrito.Id": "47"
+    },
+    {
+        "Id": "364",
+        "Corregimiento": "El Cañafístulo",
+        "Distrito": "Pocrí",
+        "Distrito.Id": "47"
+    },
+    {
+        "Id": "365",
+        "Corregimiento": "Lajaminas",
+        "Distrito": "Pocrí",
+        "Distrito.Id": "47"
+    },
+    {
+        "Id": "366",
+        "Corregimiento": "Paraíso",
+        "Distrito": "Pocrí",
+        "Distrito.Id": "47"
+    },
+    {
+        "Id": "367",
+        "Corregimiento": "Paritilla",
+        "Distrito": "Pocrí",
+        "Distrito.Id": "47"
+    },
+    {
+        "Id": "368",
+        "Corregimiento": "Tonosí (cab)",
+        "Distrito": "Tonosí",
+        "Distrito.Id": "48"
+    },
+    {
+        "Id": "369",
+        "Corregimiento": "Altos de Güera",
+        "Distrito": "Tonosí",
+        "Distrito.Id": "48"
+    },
+    {
+        "Id": "370",
+        "Corregimiento": "Cañas",
+        "Distrito": "Tonosí",
+        "Distrito.Id": "48"
+    },
+    {
+        "Id": "371",
+        "Corregimiento": "El Bebedero",
+        "Distrito": "Tonosí",
+        "Distrito.Id": "48"
+    },
+    {
+        "Id": "372",
+        "Corregimiento": "El Cacao",
+        "Distrito": "Tonosí",
+        "Distrito.Id": "48"
+    },
+    {
+        "Id": "373",
+        "Corregimiento": "El Cortezo",
+        "Distrito": "Tonosí",
+        "Distrito.Id": "48"
+    },
+    {
+        "Id": "374",
+        "Corregimiento": "Flores",
+        "Distrito": "Tonosí",
+        "Distrito.Id": "48"
+    },
+    {
+        "Id": "375",
+        "Corregimiento": "Guánico",
+        "Distrito": "Tonosí",
+        "Distrito.Id": "48"
+    },
+    {
+        "Id": "376",
+        "Corregimiento": "La Tronosa",
+        "Distrito": "Tonosí",
+        "Distrito.Id": "48"
+    },
+    {
+        "Id": "377",
+        "Corregimiento": "Cambutal",
+        "Distrito": "Tonosí",
+        "Distrito.Id": "48"
+    },
+    {
+        "Id": "378",
+        "Corregimiento": "Isla De Cañas",
+        "Distrito": "Tonosí",
+        "Distrito.Id": "48"
+    },
+    {
+        "Id": "379",
+        "Corregimiento": "San Miguel (cab)",
+        "Distrito": "Balboa",
+        "Distrito.Id": "49"
+    },
+    {
+        "Id": "380",
+        "Corregimiento": "La Ensenada",
+        "Distrito": "Balboa",
+        "Distrito.Id": "49"
+    },
+    {
+        "Id": "381",
+        "Corregimiento": "La Esmeralda",
+        "Distrito": "Balboa",
+        "Distrito.Id": "49"
+    },
+    {
+        "Id": "382",
+        "Corregimiento": "La Guinea",
+        "Distrito": "Balboa",
+        "Distrito.Id": "49"
+    },
+    {
+        "Id": "383",
+        "Corregimiento": "Pedro González",
+        "Distrito": "Balboa",
+        "Distrito.Id": "49"
+    },
+    {
+        "Id": "384",
+        "Corregimiento": "Saboga",
+        "Distrito": "Balboa",
+        "Distrito.Id": "49"
+    },
+    {
+        "Id": "385",
+        "Corregimiento": "Chimán (cab)",
+        "Distrito": "Chimán",
+        "Distrito.Id": "50"
+    },
+    {
+        "Id": "386",
+        "Corregimiento": "Brujas",
+        "Distrito": "Chimán",
+        "Distrito.Id": "50"
+    },
+    {
+        "Id": "387",
+        "Corregimiento": "Gonzalo Vásquez",
+        "Distrito": "Chimán",
+        "Distrito.Id": "50"
+    },
+    {
+        "Id": "388",
+        "Corregimiento": "Unión Santeña",
+        "Distrito": "Chimán",
+        "Distrito.Id": "50"
+    },
+    {
+        "Id": "389",
+        "Corregimiento": "Pásiga",
+        "Distrito": "Chimán",
+        "Distrito.Id": "50"
+    },
+    {
+        "Id": "390",
+        "Corregimiento": "Chepo (cab)",
+        "Distrito": "Chepo",
+        "Distrito.Id": "51"
+    },
+    {
+        "Id": "391",
+        "Corregimiento": "Cañita",
+        "Distrito": "Chepo",
+        "Distrito.Id": "51"
+    },
+    {
+        "Id": "392",
+        "Corregimiento": "Chepillo",
+        "Distrito": "Chepo",
+        "Distrito.Id": "51"
+    },
+    {
+        "Id": "393",
+        "Corregimiento": "El Llano",
+        "Distrito": "Chepo",
+        "Distrito.Id": "51"
+    },
+    {
+        "Id": "394",
+        "Corregimiento": "Las Margaritas",
+        "Distrito": "Chepo",
+        "Distrito.Id": "51"
+    },
+    {
+        "Id": "395",
+        "Corregimiento": "Santa Cruz de Chinina",
+        "Distrito": "Chepo",
+        "Distrito.Id": "51"
+    },
+    {
+        "Id": "396",
+        "Corregimiento": "Tortí",
+        "Distrito": "Chepo",
+        "Distrito.Id": "51"
+    },
+    {
+        "Id": "397",
+        "Corregimiento": " Taboga (cab)",
+        "Distrito": "Taboga",
+        "Distrito.Id": "52"
+    },
+    {
+        "Id": "398",
+        "Corregimiento": "Otoque Occidente",
+        "Distrito": "Taboga",
+        "Distrito.Id": "52"
+    },
+    {
+        "Id": "399",
+        "Corregimiento": "Otoque Oriente",
+        "Distrito": "Taboga",
+        "Distrito.Id": "52"
+    },
+    {
+        "Id": "400",
+        "Corregimiento": "San Felipe",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "401",
+        "Corregimiento": "El Chorrillo",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "402",
+        "Corregimiento": "Santa Ana",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "403",
+        "Corregimiento": "Calidonia",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "404",
+        "Corregimiento": "Curundú",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "405",
+        "Corregimiento": "Betania",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "406",
+        "Corregimiento": "Bella Vista",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "407",
+        "Corregimiento": "Pueblo Nuevo",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "408",
+        "Corregimiento": "San Francisco",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "409",
+        "Corregimiento": "Parque Lefevre",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "410",
+        "Corregimiento": "Río Abajo",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "411",
+        "Corregimiento": "Juan Díaz",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "412",
+        "Corregimiento": "Pedregal",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "413",
+        "Corregimiento": "Ancón",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "414",
+        "Corregimiento": "Chilibre",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "415",
+        "Corregimiento": "Las Cumbres",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "416",
+        "Corregimiento": "Pacora",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "417",
+        "Corregimiento": "San Martín",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "418",
+        "Corregimiento": "Tocumen",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "419",
+        "Corregimiento": "Las Mañanitas",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "420",
+        "Corregimiento": "24 de diciembre",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "421",
+        "Corregimiento": "Alcalde Díaz",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "422",
+        "Corregimiento": "Ernesto Córdoba Campos",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "423",
+        "Corregimiento": "Caimitillo",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "424",
+        "Corregimiento": "Las Garzas",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "425",
+        "Corregimiento": "Don Bosco",
+        "Distrito": "Panamá",
+        "Distrito.Id": "53"
+    },
+    {
+        "Id": "426",
+        "Corregimiento": "Mateo Iturralde",
+        "Distrito": "San Miguelito",
+        "Distrito.Id": "54"
+    },
+    {
+        "Id": "427",
+        "Corregimiento": "Amelia Denis De Icaza",
+        "Distrito": "San Miguelito",
+        "Distrito.Id": "54"
+    },
+    {
+        "Id": "428",
+        "Corregimiento": "Belisario Porras",
+        "Distrito": "San Miguelito",
+        "Distrito.Id": "54"
+    },
+    {
+        "Id": "429",
+        "Corregimiento": "José Domingo Espinar",
+        "Distrito": "San Miguelito",
+        "Distrito.Id": "54"
+    },
+    {
+        "Id": "430",
+        "Corregimiento": "Victoriano Lorenzo",
+        "Distrito": "San Miguelito",
+        "Distrito.Id": "54"
+    },
+    {
+        "Id": "431",
+        "Corregimiento": "Arnulfo Arias",
+        "Distrito": "San Miguelito",
+        "Distrito.Id": "54"
+    },
+    {
+        "Id": "432",
+        "Corregimiento": "Belisario Frías",
+        "Distrito": "San Miguelito",
+        "Distrito.Id": "54"
+    },
+    {
+        "Id": "433",
+        "Corregimiento": "Omar Torrijos",
+        "Distrito": "San Miguelito",
+        "Distrito.Id": "54"
+    },
+    {
+        "Id": "434",
+        "Corregimiento": "Rufina Alfaro",
+        "Distrito": "San Miguelito",
+        "Distrito.Id": "54"
+    },
+    {
+        "Id": "435",
+        "Corregimiento": "Arraiján (Cab)",
+        "Distrito": "Arraiján",
+        "Distrito.Id": "55"
+    },
+    {
+        "Id": "436",
+        "Corregimiento": "Juan D. Arosemena",
+        "Distrito": "Arraiján",
+        "Distrito.Id": "55"
+    },
+    {
+        "Id": "437",
+        "Corregimiento": "Nuevo Emperador",
+        "Distrito": "Arraiján",
+        "Distrito.Id": "55"
+    },
+    {
+        "Id": "438",
+        "Corregimiento": "Santa Clara",
+        "Distrito": "Arraiján",
+        "Distrito.Id": "55"
+    },
+    {
+        "Id": "439",
+        "Corregimiento": "Veracruz",
+        "Distrito": "Arraiján",
+        "Distrito.Id": "55"
+    },
+    {
+        "Id": "440",
+        "Corregimiento": "Vista Alegre",
+        "Distrito": "Arraiján",
+        "Distrito.Id": "55"
+    },
+    {
+        "Id": "441",
+        "Corregimiento": "Burunga",
+        "Distrito": "Arraiján",
+        "Distrito.Id": "55"
+    },
+    {
+        "Id": "442",
+        "Corregimiento": "Cerro Silvestre",
+        "Distrito": "Arraiján",
+        "Distrito.Id": "55"
+    },
+    {
+        "Id": "443",
+        "Corregimiento": "Capira (Cab)",
+        "Distrito": "Capira",
+        "Distrito.Id": "56"
+    },
+    {
+        "Id": "444",
+        "Corregimiento": "aimito",
+        "Distrito": "Capira",
+        "Distrito.Id": "56"
+    },
+    {
+        "Id": "445",
+        "Corregimiento": "Campana",
+        "Distrito": "Capira",
+        "Distrito.Id": "56"
+    },
+    {
+        "Id": "446",
+        "Corregimiento": "Cermeño",
+        "Distrito": "Capira",
+        "Distrito.Id": "56"
+    },
+    {
+        "Id": "447",
+        "Corregimiento": "Cirí de los Sotos",
+        "Distrito": "Capira",
+        "Distrito.Id": "56"
+    },
+    {
+        "Id": "448",
+        "Corregimiento": "Cirí Grande",
+        "Distrito": "Capira",
+        "Distrito.Id": "56"
+    },
+    {
+        "Id": "449",
+        "Corregimiento": "El Cacao",
+        "Distrito": "Capira",
+        "Distrito.Id": "56"
+    },
+    {
+        "Id": "450",
+        "Corregimiento": "La Trinidad",
+        "Distrito": "Capira",
+        "Distrito.Id": "56"
+    },
+    {
+        "Id": "451",
+        "Corregimiento": "Las Ollas Arriba",
+        "Distrito": "Capira",
+        "Distrito.Id": "56"
+    },
+    {
+        "Id": "452",
+        "Corregimiento": "Lídice",
+        "Distrito": "Capira",
+        "Distrito.Id": "56"
+    },
+    {
+        "Id": "453",
+        "Corregimiento": "Villa Carmen",
+        "Distrito": "Capira",
+        "Distrito.Id": "56"
+    },
+    {
+        "Id": "454",
+        "Corregimiento": "Villa Rosario",
+        "Distrito": "Capira",
+        "Distrito.Id": "56"
+    },
+    {
+        "Id": "455",
+        "Corregimiento": "Santa Rosa",
+        "Distrito": "Capira",
+        "Distrito.Id": "56"
+    },
+    {
+        "Id": "456",
+        "Corregimiento": "Chame (Cab)",
+        "Distrito": "Chame",
+        "Distrito.Id": "57"
+    },
+    {
+        "Id": "457",
+        "Corregimiento": "Bejuco",
+        "Distrito": "Chame",
+        "Distrito.Id": "57"
+    },
+    {
+        "Id": "458",
+        "Corregimiento": "Buenos Aires",
+        "Distrito": "Chame",
+        "Distrito.Id": "57"
+    },
+    {
+        "Id": "459",
+        "Corregimiento": "Cabuya",
+        "Distrito": "Chame",
+        "Distrito.Id": "57"
+    },
+    {
+        "Id": "460",
+        "Corregimiento": "Chicá",
+        "Distrito": "Chame",
+        "Distrito.Id": "57"
+    },
+    {
+        "Id": "461",
+        "Corregimiento": "El Líbano",
+        "Distrito": "Chame",
+        "Distrito.Id": "57"
+    },
+    {
+        "Id": "462",
+        "Corregimiento": "Las Lajas",
+        "Distrito": "Chame",
+        "Distrito.Id": "57"
+    },
+    {
+        "Id": "463",
+        "Corregimiento": "Nueva Gorgona",
+        "Distrito": "Chame",
+        "Distrito.Id": "57"
+    },
+    {
+        "Id": "464",
+        "Corregimiento": "Punta Chame",
+        "Distrito": "Chame",
+        "Distrito.Id": "57"
+    },
+    {
+        "Id": "465",
+        "Corregimiento": "Sajalices",
+        "Distrito": "Chame",
+        "Distrito.Id": "57"
+    },
+    {
+        "Id": "466",
+        "Corregimiento": "Sorá",
+        "Distrito": "Chame",
+        "Distrito.Id": "57"
+    },
+    {
+        "Id": "467",
+        "Corregimiento": "San Carlos (cab)",
+        "Distrito": "San Carlos",
+        "Distrito.Id": "58"
+    },
+    {
+        "Id": "468",
+        "Corregimiento": "El Espino",
+        "Distrito": "San Carlos",
+        "Distrito.Id": "58"
+    },
+    {
+        "Id": "469",
+        "Corregimiento": "El Higo",
+        "Distrito": "San Carlos",
+        "Distrito.Id": "58"
+    },
+    {
+        "Id": "470",
+        "Corregimiento": "Guayabito",
+        "Distrito": "San Carlos",
+        "Distrito.Id": "58"
+    },
+    {
+        "Id": "471",
+        "Corregimiento": "La Ermita",
+        "Distrito": "San Carlos",
+        "Distrito.Id": "58"
+    },
+    {
+        "Id": "472",
+        "Corregimiento": "La Laguna",
+        "Distrito": "San Carlos",
+        "Distrito.Id": "58"
+    },
+    {
+        "Id": "473",
+        "Corregimiento": "Las Uvas",
+        "Distrito": "San Carlos",
+        "Distrito.Id": "58"
+    },
+    {
+        "Id": "474",
+        "Corregimiento": "Los Llanitos",
+        "Distrito": "San Carlos",
+        "Distrito.Id": "58"
+    },
+    {
+        "Id": "475",
+        "Corregimiento": "San José",
+        "Distrito": "San Carlos",
+        "Distrito.Id": "58"
+    },
+    {
+        "Id": "476",
+        "Corregimiento": "Barrio Balboa",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "477",
+        "Corregimiento": "Barrio Colón",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "478",
+        "Corregimiento": "Arosemena",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "479",
+        "Corregimiento": "El Arado",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "480",
+        "Corregimiento": "El Coco",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "481",
+        "Corregimiento": "Feuillet",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "482",
+        "Corregimiento": "Guadalupe",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "483",
+        "Corregimiento": "Herrera",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "484",
+        "Corregimiento": "Hurtado",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "485",
+        "Corregimiento": "Iturralde",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "486",
+        "Corregimiento": "La Represa",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "487",
+        "Corregimiento": "Los Díaz",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "488",
+        "Corregimiento": "Mendoza",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "489",
+        "Corregimiento": "Obaldía",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "490",
+        "Corregimiento": "Playa Leona",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "491",
+        "Corregimiento": "Puerto Caimito",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "492",
+        "Corregimiento": "Santa Rita",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "493",
+        "Corregimiento": "Amador",
+        "Distrito": "La Chorrera",
+        "Distrito.Id": "59"
+    },
+    {
+        "Id": "494",
+        "Corregimiento": "Atalaya (cab)",
+        "Distrito": "Atalaya",
+        "Distrito.Id": "60"
+    },
+    {
+        "Id": "495",
+        "Corregimiento": "El Barrito",
+        "Distrito": "Atalaya",
+        "Distrito.Id": "60"
+    },
+    {
+        "Id": "496",
+        "Corregimiento": "La Montañuela",
+        "Distrito": "Atalaya",
+        "Distrito.Id": "60"
+    },
+    {
+        "Id": "497",
+        "Corregimiento": "San Antonio",
+        "Distrito": "Atalaya",
+        "Distrito.Id": "60"
+    },
+    {
+        "Id": "498",
+        "Corregimiento": "La Carrillo",
+        "Distrito": "Atalaya",
+        "Distrito.Id": "60"
+    },
+    {
+        "Id": "499",
+        "Corregimiento": "Calobre (cab)",
+        "Distrito": "Calobre",
+        "Distrito.Id": "61"
+    },
+    {
+        "Id": "500",
+        "Corregimiento": "Barnizal",
+        "Distrito": "Calobre",
+        "Distrito.Id": "61"
+    },
+    {
+        "Id": "501",
+        "Corregimiento": "Chitra",
+        "Distrito": "Calobre",
+        "Distrito.Id": "61"
+    },
+    {
+        "Id": "502",
+        "Corregimiento": "El Cocla",
+        "Distrito": "Calobre",
+        "Distrito.Id": "61"
+    },
+    {
+        "Id": "503",
+        "Corregimiento": "El Potrero",
+        "Distrito": "Calobre",
+        "Distrito.Id": "61"
+    },
+    {
+        "Id": "504",
+        "Corregimiento": "La Laguna",
+        "Distrito": "Calobre",
+        "Distrito.Id": "61"
+    },
+    {
+        "Id": "505",
+        "Corregimiento": "La Raya ",
+        "Distrito": "Calobre",
+        "Distrito.Id": "61"
+    },
+    {
+        "Id": "506",
+        "Corregimiento": "La Tetilla",
+        "Distrito": "Calobre",
+        "Distrito.Id": "61"
+    },
+    {
+        "Id": "507",
+        "Corregimiento": "Las Guías",
+        "Distrito": "Calobre",
+        "Distrito.Id": "61"
+    },
+    {
+        "Id": "508",
+        "Corregimiento": "La Yeguada",
+        "Distrito": "Calobre",
+        "Distrito.Id": "61"
+    },
+    {
+        "Id": "509",
+        "Corregimiento": " Monjarás",
+        "Distrito": "Calobre",
+        "Distrito.Id": "61"
+    },
+    {
+        "Id": "510",
+        "Corregimiento": "San José",
+        "Distrito": "Calobre",
+        "Distrito.Id": "61"
+    },
+    {
+        "Id": "511",
+        "Corregimiento": "Cañazas (cab)",
+        "Distrito": "Cañazas",
+        "Distrito.Id": "62"
+    },
+    {
+        "Id": "512",
+        "Corregimiento": "Cerro de Plata",
+        "Distrito": "Cañazas",
+        "Distrito.Id": "62"
+    },
+    {
+        "Id": "513",
+        "Corregimiento": "Los Valles",
+        "Distrito": "Cañazas",
+        "Distrito.Id": "62"
+    },
+    {
+        "Id": "514",
+        "Corregimiento": "San Marcelo",
+        "Distrito": "Cañazas",
+        "Distrito.Id": "62"
+    },
+    {
+        "Id": "515",
+        "Corregimiento": "El Picador",
+        "Distrito": "Cañazas",
+        "Distrito.Id": "62"
+    },
+    {
+        "Id": "516",
+        "Corregimiento": "San José",
+        "Distrito": "Cañazas",
+        "Distrito.Id": "62"
+    },
+    {
+        "Id": "517",
+        "Corregimiento": "El Aromillo",
+        "Distrito": "Cañazas",
+        "Distrito.Id": "62"
+    },
+    {
+        "Id": "518",
+        "Corregimiento": "Las Cruces",
+        "Distrito": "Cañazas",
+        "Distrito.Id": "62"
+    },
+    {
+        "Id": "519",
+        "Corregimiento": "La Mesa (cab)",
+        "Distrito": "La Mesa",
+        "Distrito.Id": "63"
+    },
+    {
+        "Id": "520",
+        "Corregimiento": "Bisvalles",
+        "Distrito": "La Mesa",
+        "Distrito.Id": "63"
+    },
+    {
+        "Id": "521",
+        "Corregimiento": "Boró",
+        "Distrito": "La Mesa",
+        "Distrito.Id": "63"
+    },
+    {
+        "Id": "522",
+        "Corregimiento": "Llano Grande",
+        "Distrito": "La Mesa",
+        "Distrito.Id": "63"
+    },
+    {
+        "Id": "523",
+        "Corregimiento": "San Bartolo",
+        "Distrito": "La Mesa",
+        "Distrito.Id": "63"
+    },
+    {
+        "Id": "524",
+        "Corregimiento": "Los Milagros",
+        "Distrito": "La Mesa",
+        "Distrito.Id": "63"
+    },
+    {
+        "Id": "525",
+        "Corregimiento": "El Higo",
+        "Distrito": "La Mesa",
+        "Distrito.Id": "63"
+    },
+    {
+        "Id": "526",
+        "Corregimiento": "Las Palmas (cab)",
+        "Distrito": "Las Palmas",
+        "Distrito.Id": "64"
+    },
+    {
+        "Id": "527",
+        "Corregimiento": "Cerro de Casa",
+        "Distrito": "Las Palmas",
+        "Distrito.Id": "64"
+    },
+    {
+        "Id": "528",
+        "Corregimiento": "Corozal",
+        "Distrito": "Las Palmas",
+        "Distrito.Id": "64"
+    },
+    {
+        "Id": "529",
+        "Corregimiento": "El María",
+        "Distrito": "Las Palmas",
+        "Distrito.Id": "64"
+    },
+    {
+        "Id": "530",
+        "Corregimiento": "El Prado",
+        "Distrito": "Las Palmas",
+        "Distrito.Id": "64"
+    },
+    {
+        "Id": "531",
+        "Corregimiento": "El Rincón",
+        "Distrito": "Las Palmas",
+        "Distrito.Id": "64"
+    },
+    {
+        "Id": "532",
+        "Corregimiento": "Lolá ",
+        "Distrito": "Las Palmas",
+        "Distrito.Id": "64"
+    },
+    {
+        "Id": "533",
+        "Corregimiento": "Pixvae",
+        "Distrito": "Las Palmas",
+        "Distrito.Id": "64"
+    },
+    {
+        "Id": "534",
+        "Corregimiento": "Puerto Vidal",
+        "Distrito": "Las Palmas",
+        "Distrito.Id": "64"
+    },
+    {
+        "Id": "535",
+        "Corregimiento": "Zapotillo",
+        "Distrito": "Las Palmas",
+        "Distrito.Id": "64"
+    },
+    {
+        "Id": "536",
+        "Corregimiento": "San Martín de Porres",
+        "Distrito": "Las Palmas",
+        "Distrito.Id": "64"
+    },
+    {
+        "Id": "537",
+        "Corregimiento": "Viguí",
+        "Distrito": "Las Palmas",
+        "Distrito.Id": "64"
+    },
+    {
+        "Id": "538",
+        "Corregimiento": "Manuel E Amador Terrero",
+        "Distrito": "Las Palmas",
+        "Distrito.Id": "64"
+    },
+    {
+        "Id": "539",
+        "Corregimiento": "Llano de Catival",
+        "Distrito": "Mariato",
+        "Distrito.Id": "65"
+    },
+    {
+        "Id": "540",
+        "Corregimiento": "Arena",
+        "Distrito": "Mariato",
+        "Distrito.Id": "65"
+    },
+    {
+        "Id": "541",
+        "Corregimiento": "Quebro",
+        "Distrito": "Mariato",
+        "Distrito.Id": "65"
+    },
+    {
+        "Id": "542",
+        "Corregimiento": "Tebario",
+        "Distrito": "Mariato",
+        "Distrito.Id": "65"
+    },
+    {
+        "Id": "543",
+        "Corregimiento": "El Cacao",
+        "Distrito": "Mariato",
+        "Distrito.Id": "65"
+    },
+    {
+        "Id": "544",
+        "Corregimiento": "Montijo (cab)",
+        "Distrito": "Montijo",
+        "Distrito.Id": "66"
+    },
+    {
+        "Id": "545",
+        "Corregimiento": "La Garceana",
+        "Distrito": "Montijo",
+        "Distrito.Id": "66"
+    },
+    {
+        "Id": "546",
+        "Corregimiento": "Leones",
+        "Distrito": "Montijo",
+        "Distrito.Id": "66"
+    },
+    {
+        "Id": "547",
+        "Corregimiento": "Pilón",
+        "Distrito": "Montijo",
+        "Distrito.Id": "66"
+    },
+    {
+        "Id": "548",
+        "Corregimiento": "Unión del Norte",
+        "Distrito": "Montijo",
+        "Distrito.Id": "66"
+    },
+    {
+        "Id": "549",
+        "Corregimiento": "Costa Hermosa",
+        "Distrito": "Montijo",
+        "Distrito.Id": "66"
+    },
+    {
+        "Id": "550",
+        "Corregimiento": " Cébaco",
+        "Distrito": "Montijo",
+        "Distrito.Id": "66"
+    },
+    {
+        "Id": "551",
+        "Corregimiento": "Gobernadora",
+        "Distrito": "Montijo",
+        "Distrito.Id": "66"
+    },
+    {
+        "Id": "552",
+        "Corregimiento": "Río de Jesús (cab)",
+        "Distrito": "Río De Jesús",
+        "Distrito.Id": "67"
+    },
+    {
+        "Id": "553",
+        "Corregimiento": "Las Huacas",
+        "Distrito": "Río De Jesús",
+        "Distrito.Id": "67"
+    },
+    {
+        "Id": "554",
+        "Corregimiento": "Los Castillos",
+        "Distrito": "Río De Jesús",
+        "Distrito.Id": "67"
+    },
+    {
+        "Id": "555",
+        "Corregimiento": "Utira",
+        "Distrito": "Río De Jesús",
+        "Distrito.Id": "67"
+    },
+    {
+        "Id": "556",
+        "Corregimiento": "Catorce de Noviembre",
+        "Distrito": "Río De Jesús",
+        "Distrito.Id": "67"
+    },
+    {
+        "Id": "557",
+        "Corregimiento": "San Francisco (cab)",
+        "Distrito": "San Francisco",
+        "Distrito.Id": "68"
+    },
+    {
+        "Id": "558",
+        "Corregimiento": "Corral Falso",
+        "Distrito": "San Francisco",
+        "Distrito.Id": "68"
+    },
+    {
+        "Id": "559",
+        "Corregimiento": "Remance",
+        "Distrito": "San Francisco",
+        "Distrito.Id": "68"
+    },
+    {
+        "Id": "560",
+        "Corregimiento": "Los Hatillos",
+        "Distrito": "San Francisco",
+        "Distrito.Id": "68"
+    },
+    {
+        "Id": "561",
+        "Corregimiento": "San Juan",
+        "Distrito": "San Francisco",
+        "Distrito.Id": "68"
+    },
+    {
+        "Id": "562",
+        "Corregimiento": "San José",
+        "Distrito": "San Francisco",
+        "Distrito.Id": "68"
+    },
+    {
+        "Id": "563",
+        "Corregimiento": "Santa Fe (cab)",
+        "Distrito": "Santa Fé",
+        "Distrito.Id": "69"
+    },
+    {
+        "Id": "564",
+        "Corregimiento": "Calovébora",
+        "Distrito": "Santa Fé",
+        "Distrito.Id": "69"
+    },
+    {
+        "Id": "565",
+        "Corregimiento": "El Alto",
+        "Distrito": "Santa Fé",
+        "Distrito.Id": "69"
+    },
+    {
+        "Id": "566",
+        "Corregimiento": "El Cuay",
+        "Distrito": "Santa Fé",
+        "Distrito.Id": "69"
+    },
+    {
+        "Id": "567",
+        "Corregimiento": "El Pantano",
+        "Distrito": "Santa Fé",
+        "Distrito.Id": "69"
+    },
+    {
+        "Id": "568",
+        "Corregimiento": "Gatuncito",
+        "Distrito": "Santa Fé",
+        "Distrito.Id": "69"
+    },
+    {
+        "Id": "569",
+        "Corregimiento": "Río Luis",
+        "Distrito": "Santa Fé",
+        "Distrito.Id": "69"
+    },
+    {
+        "Id": "570",
+        "Corregimiento": " Rubén Cantú",
+        "Distrito": "Santa Fé",
+        "Distrito.Id": "69"
+    },
+    {
+        "Id": "571",
+        "Corregimiento": "Santiago (cab)",
+        "Distrito": "Santiago",
+        "Distrito.Id": "70"
+    },
+    {
+        "Id": "572",
+        "Corregimiento": "La Colorada",
+        "Distrito": "Santiago",
+        "Distrito.Id": "70"
+    },
+    {
+        "Id": "573",
+        "Corregimiento": "La Peña",
+        "Distrito": "Santiago",
+        "Distrito.Id": "70"
+    },
+    {
+        "Id": "574",
+        "Corregimiento": "La Raya de Santa María",
+        "Distrito": "Santiago",
+        "Distrito.Id": "70"
+    },
+    {
+        "Id": "575",
+        "Corregimiento": "Ponuga",
+        "Distrito": "Santiago",
+        "Distrito.Id": "70"
+    },
+    {
+        "Id": "576",
+        "Corregimiento": "San Pedro del Espino",
+        "Distrito": "Santiago",
+        "Distrito.Id": "70"
+    },
+    {
+        "Id": "577",
+        "Corregimiento": "Canto del Llano",
+        "Distrito": "Santiago",
+        "Distrito.Id": "70"
+    },
+    {
+        "Id": "578",
+        "Corregimiento": "Los Algarrobos",
+        "Distrito": "Santiago",
+        "Distrito.Id": "70"
+    },
+    {
+        "Id": "579",
+        "Corregimiento": "Carlos Santana",
+        "Distrito": "Santiago",
+        "Distrito.Id": "70"
+    },
+    {
+        "Id": "580",
+        "Corregimiento": "580.  Edwin Fábrega",
+        "Distrito": "Santiago",
+        "Distrito.Id": "70"
+    },
+    {
+        "Id": "581",
+        "Corregimiento": "581.  San Martín de Porres",
+        "Distrito": "Santiago",
+        "Distrito.Id": "70"
+    },
+    {
+        "Id": "582",
+        "Corregimiento": "Urracá",
+        "Distrito": "Santiago",
+        "Distrito.Id": "70"
+    },
+    {
+        "Id": "583",
+        "Corregimiento": "Rodrigo Luque",
+        "Distrito": "Santiago",
+        "Distrito.Id": "70"
+    },
+    {
+        "Id": "584",
+        "Corregimiento": "Santiago Este",
+        "Distrito": "Santiago",
+        "Distrito.Id": "70"
+    },
+    {
+        "Id": "585",
+        "Corregimiento": "Nuevo Santiago",
+        "Distrito": "Santiago",
+        "Distrito.Id": "70"
+    },
+    {
+        "Id": "586",
+        "Corregimiento": "Santiago Sur",
+        "Distrito": "Santiago",
+        "Distrito.Id": "70"
+    },
+    {
+        "Id": "587",
+        "Corregimiento": "Soná (cab)",
+        "Distrito": "Soná",
+        "Distrito.Id": "71"
+    },
+    {
+        "Id": "588",
+        "Corregimiento": "Bahía Honda",
+        "Distrito": "Soná",
+        "Distrito.Id": "71"
+    },
+    {
+        "Id": "589",
+        "Corregimiento": "Calidonia",
+        "Distrito": "Soná",
+        "Distrito.Id": "71"
+    },
+    {
+        "Id": "590",
+        "Corregimiento": "Cativé",
+        "Distrito": "Soná",
+        "Distrito.Id": "71"
+    },
+    {
+        "Id": "591",
+        "Corregimiento": "El Marañón",
+        "Distrito": "Soná",
+        "Distrito.Id": "71"
+    },
+    {
+        "Id": "592",
+        "Corregimiento": "Guarumal",
+        "Distrito": "Soná",
+        "Distrito.Id": "71"
+    },
+    {
+        "Id": "593",
+        "Corregimiento": "La Soledad",
+        "Distrito": "Soná",
+        "Distrito.Id": "71"
+    },
+    {
+        "Id": "594",
+        "Corregimiento": "Quebrada de Oro",
+        "Distrito": "Soná",
+        "Distrito.Id": "71"
+    },
+    {
+        "Id": "595",
+        "Corregimiento": "Río Grande",
+        "Distrito": "Soná",
+        "Distrito.Id": "71"
+    },
+    {
+        "Id": "596",
+        "Corregimiento": "Rodeo Viejo",
+        "Distrito": "Soná",
+        "Distrito.Id": "71"
+    },
+    {
+        "Id": "597",
+        "Corregimiento": "Hicaco",
+        "Distrito": "Soná",
+        "Distrito.Id": "71"
+    },
+    {
+        "Id": "598",
+        "Corregimiento": "La Trinchera",
+        "Distrito": "Soná",
+        "Distrito.Id": "71"
+    },
+    {
+        "Id": "599",
+        "Corregimiento": "Soloy",
+        "Distrito": "Besiko",
+        "Distrito.Id": "72"
+    },
+    {
+        "Id": "600",
+        "Corregimiento": "Boca de Balsa",
+        "Distrito": "Besiko",
+        "Distrito.Id": "72"
+    },
+    {
+        "Id": "601",
+        "Corregimiento": "Cerro Banco",
+        "Distrito": "Besiko",
+        "Distrito.Id": "72"
+    },
+    {
+        "Id": "602",
+        "Corregimiento": "Cerro de Patena",
+        "Distrito": "Besiko",
+        "Distrito.Id": "72"
+    },
+    {
+        "Id": "603",
+        "Corregimiento": "Camarón Arriba",
+        "Distrito": "Besiko",
+        "Distrito.Id": "72"
+    },
+    {
+        "Id": "604",
+        "Corregimiento": "Emplanada de Chorcha",
+        "Distrito": "Besiko",
+        "Distrito.Id": "72"
+    },
+    {
+        "Id": "605",
+        "Corregimiento": "Namnoni",
+        "Distrito": "Besiko",
+        "Distrito.Id": "72"
+    },
+    {
+        "Id": "606",
+        "Corregimiento": "Niba",
+        "Distrito": "Besiko",
+        "Distrito.Id": "72"
+    },
+    {
+        "Id": "607",
+        "Corregimiento": "Buri",
+        "Distrito": "Jirondai",
+        "Distrito.Id": "73"
+    },
+    {
+        "Id": "608",
+        "Corregimiento": "Guariviara",
+        "Distrito": "Jirondai",
+        "Distrito.Id": "73"
+    },
+    {
+        "Id": "609",
+        "Corregimiento": "Tu Gwai",
+        "Distrito": "Jirondai",
+        "Distrito.Id": "73"
+    },
+    {
+        "Id": "610",
+        "Corregimiento": "Mancreek",
+        "Distrito": "Jirondai",
+        "Distrito.Id": "73"
+    },
+    {
+        "Id": "611",
+        "Corregimiento": "Samboa",
+        "Distrito": "Jirondai",
+        "Distrito.Id": "73"
+    },
+    {
+        "Id": "612",
+        "Corregimiento": "Bisira",
+        "Distrito": "Kankintú",
+        "Distrito.Id": "74"
+    },
+    {
+        "Id": "613",
+        "Corregimiento": "Kankintú",
+        "Distrito": "Kankintú",
+        "Distrito.Id": "74"
+    },
+    {
+        "Id": "614",
+        "Corregimiento": "Guoroní",
+        "Distrito": "Kankintú",
+        "Distrito.Id": "74"
+    },
+    {
+        "Id": "615",
+        "Corregimiento": "Mununí",
+        "Distrito": "Kankintú",
+        "Distrito.Id": "74"
+    },
+    {
+        "Id": "616",
+        "Corregimiento": "Piedra Roja",
+        "Distrito": "Kankintú",
+        "Distrito.Id": "74"
+    },
+    {
+        "Id": "617",
+        "Corregimiento": "Tolote",
+        "Distrito": "Kankintú",
+        "Distrito.Id": "74"
+    },
+    {
+        "Id": "618",
+        "Corregimiento": " Calante",
+        "Distrito": "Kankintú",
+        "Distrito.Id": "74"
+    },
+    {
+        "Id": "619",
+        "Corregimiento": "Kusapín",
+        "Distrito": "Kusapín",
+        "Distrito.Id": "75"
+    },
+    {
+        "Id": "620",
+        "Corregimiento": "Bahía Azul",
+        "Distrito": "Kusapín",
+        "Distrito.Id": "75"
+    },
+    {
+        "Id": "621",
+        "Corregimiento": "Río Chiriquí",
+        "Distrito": "Kusapín",
+        "Distrito.Id": "75"
+    },
+    {
+        "Id": "622",
+        "Corregimiento": "Tobobe",
+        "Distrito": "Kusapín",
+        "Distrito.Id": "75"
+    },
+    {
+        "Id": "623",
+        "Corregimiento": "Cañaveral",
+        "Distrito": "Kusapín",
+        "Distrito.Id": "75"
+    },
+    {
+        "Id": "624",
+        "Corregimiento": "Hato Pilón",
+        "Distrito": "Mironó",
+        "Distrito.Id": "76"
+    },
+    {
+        "Id": "625",
+        "Corregimiento": "Cascabel",
+        "Distrito": "Mironó",
+        "Distrito.Id": "76"
+    },
+    {
+        "Id": "626",
+        "Corregimiento": "Hato Corotú",
+        "Distrito": "Mironó",
+        "Distrito.Id": "76"
+    },
+    {
+        "Id": "627",
+        "Corregimiento": "Hato Culantro",
+        "Distrito": "Mironó",
+        "Distrito.Id": "76"
+    },
+    {
+        "Id": "628",
+        "Corregimiento": "Hato Jobo",
+        "Distrito": "Mironó",
+        "Distrito.Id": "76"
+    },
+    {
+        "Id": "629",
+        "Corregimiento": "Hato Julí",
+        "Distrito": "Mironó",
+        "Distrito.Id": "76"
+    },
+    {
+        "Id": "630",
+        "Corregimiento": "Quebrada de Loro",
+        "Distrito": "Mironó",
+        "Distrito.Id": "76"
+    },
+    {
+        "Id": "631",
+        "Corregimiento": "Salto Dupi",
+        "Distrito": "Mironó",
+        "Distrito.Id": "76"
+    },
+    {
+        "Id": "632",
+        "Corregimiento": "Chichica",
+        "Distrito": "Muná",
+        "Distrito.Id": "77"
+    },
+    {
+        "Id": "633",
+        "Corregimiento": "Alto Caballero",
+        "Distrito": "Muná",
+        "Distrito.Id": "77"
+    },
+    {
+        "Id": "634",
+        "Corregimiento": "Bagama",
+        "Distrito": "Muná",
+        "Distrito.Id": "77"
+    },
+    {
+        "Id": "635",
+        "Corregimiento": "erro Caña",
+        "Distrito": "Muná",
+        "Distrito.Id": "77"
+    },
+    {
+        "Id": "636",
+        "Corregimiento": "Cerro Puerco",
+        "Distrito": "Muná",
+        "Distrito.Id": "77"
+    },
+    {
+        "Id": "637",
+        "Corregimiento": "Krúa",
+        "Distrito": "Muná",
+        "Distrito.Id": "77"
+    },
+    {
+        "Id": "638",
+        "Corregimiento": "Maraca",
+        "Distrito": "Muná",
+        "Distrito.Id": "77"
+    },
+    {
+        "Id": "639",
+        "Corregimiento": "Nibra",
+        "Distrito": "Muná",
+        "Distrito.Id": "77"
+    },
+    {
+        "Id": "640",
+        "Corregimiento": "Peña Blanca",
+        "Distrito": "Muná",
+        "Distrito.Id": "77"
+    },
+    {
+        "Id": "641",
+        "Corregimiento": "Rokari",
+        "Distrito": "Muná",
+        "Distrito.Id": "77"
+    },
+    {
+        "Id": "642",
+        "Corregimiento": "Sitio Prado",
+        "Distrito": "Muná",
+        "Distrito.Id": "77"
+    },
+    {
+        "Id": "643",
+        "Corregimiento": "Umani",
+        "Distrito": "Muná",
+        "Distrito.Id": "77"
+    },
+    {
+        "Id": "644",
+        "Corregimiento": "Diko",
+        "Distrito": "Muná",
+        "Distrito.Id": "77"
+    },
+    {
+        "Id": "645",
+        "Corregimiento": "Kikari",
+        "Distrito": "Muná",
+        "Distrito.Id": "77"
+    },
+    {
+        "Id": "646",
+        "Corregimiento": "Mreeni",
+        "Distrito": "Muná",
+        "Distrito.Id": "77"
+    },
+    {
+        "Id": "647",
+        "Corregimiento": "Dikeri",
+        "Distrito": "Muná",
+        "Distrito.Id": "77"
+    },
+    {
+        "Id": "648",
+        "Corregimiento": "Cerro Iglesias",
+        "Distrito": "Nole Duima",
+        "Distrito.Id": "78"
+    },
+    {
+        "Id": "649",
+        "Corregimiento": "Lajero",
+        "Distrito": "Nole Duima",
+        "Distrito.Id": "78"
+    },
+    {
+        "Id": "650",
+        "Corregimiento": "Hato Chamí",
+        "Distrito": "Nole Duima",
+        "Distrito.Id": "78"
+    },
+    {
+        "Id": "651",
+        "Corregimiento": "Susamá",
+        "Distrito": "Nole Duima",
+        "Distrito.Id": "78"
+    },
+    {
+        "Id": "652",
+        "Corregimiento": "Jadeberi",
+        "Distrito": "Nole Duima",
+        "Distrito.Id": "78"
+    },
+    {
+        "Id": "653",
+        "Corregimiento": "Buenos Aires",
+        "Distrito": "Ñurún",
+        "Distrito.Id": "79"
+    },
+    {
+        "Id": "654",
+        "Corregimiento": "Agua de Salud",
+        "Distrito": "Ñurún",
+        "Distrito.Id": "79"
+    },
+    {
+        "Id": "655",
+        "Corregimiento": "Alto de Jesús",
+        "Distrito": "Ñurún",
+        "Distrito.Id": "79"
+    },
+    {
+        "Id": "656",
+        "Corregimiento": "Cerro Pelado",
+        "Distrito": "Ñurún",
+        "Distrito.Id": "79"
+    },
+    {
+        "Id": "657",
+        "Corregimiento": "El Bale",
+        "Distrito": "Ñurún",
+        "Distrito.Id": "79"
+    },
+    {
+        "Id": "658",
+        "Corregimiento": "El Paredón",
+        "Distrito": "Ñurún",
+        "Distrito.Id": "79"
+    },
+    {
+        "Id": "659",
+        "Corregimiento": "El Piro",
+        "Distrito": "Ñurún",
+        "Distrito.Id": "79"
+    },
+    {
+        "Id": "660",
+        "Corregimiento": "Guayabito",
+        "Distrito": "Ñurún",
+        "Distrito.Id": "79"
+    },
+    {
+        "Id": "661",
+        "Corregimiento": "Guibale",
+        "Distrito": "Ñurún",
+        "Distrito.Id": "79"
+    },
+    {
+        "Id": "662",
+        "Corregimiento": "El Piro N° 2",
+        "Distrito": "Ñurún",
+        "Distrito.Id": "79"
+    },
+    {
+        "Id": "663",
+        "Corregimiento": "El Peñón",
+        "Distrito": "Ñurún",
+        "Distrito.Id": "79"
+    },
+    {
+        "Id": "664",
+        "Corregimiento": "Santa Catalina o Calovébora",
+        "Distrito": "Santa Catalina O Calovébora",
+        "Distrito.Id": "80"
+    },
+    {
+        "Id": "665",
+        "Corregimiento": "Valle Bonito (Dogata)",
+        "Distrito": "Santa Catalina O Calovébora",
+        "Distrito.Id": "80"
+    },
+    {
+        "Id": "666",
+        "Corregimiento": "Loma Yuca",
+        "Distrito": "Santa Catalina O Calovébora",
+        "Distrito.Id": "80"
+    },
+    {
+        "Id": "667",
+        "Corregimiento": "San Pedrito (Jikui)",
+        "Distrito": "Santa Catalina O Calovébora",
+        "Distrito.Id": "80"
+    },
+    {
+        "Id": "668",
+        "Corregimiento": "Alto Bilingue",
+        "Distrito": "Santa Catalina O Calovébora",
+        "Distrito.Id": "80"
+    },
+    {
+        "Id": "669",
+        "Corregimiento": "Cirilo Guaynora",
+        "Distrito": "Cémaco",
+        "Distrito.Id": "81"
+    },
+    {
+        "Id": "670",
+        "Corregimiento": "Lajas Blanca",
+        "Distrito": "Cémaco",
+        "Distrito.Id": "81"
+    },
+    {
+        "Id": "671",
+        "Corregimiento": "Manuel Ortega",
+        "Distrito": "Cémaco",
+        "Distrito.Id": "81"
+    },
+    {
+        "Id": "672",
+        "Corregimiento": " Jingurudó",
+        "Distrito": "Sambú",
+        "Distrito.Id": "82"
+    },
+    {
+        "Id": "673",
+        "Corregimiento": "Río Sábalo",
+        "Distrito": "Sambú",
+        "Distrito.Id": "82"
+    },
+    {
+        "Id": "674",
+        "Corregimiento": "Ailigandí",
+        "Distrito": "N.A",
+        "Distrito.Id": "83"
+    },
+    {
+        "Id": "675",
+        "Corregimiento": "Narganá",
+        "Distrito": "N.A",
+        "Distrito.Id": "83"
+    },
+    {
+        "Id": "676",
+        "Corregimiento": "Puerto Obaldía",
+        "Distrito": "N.A",
+        "Distrito.Id": "83"
+    },
+    {
+        "Id": "677",
+        "Corregimiento": "Tubualá",
+        "Distrito": "N.A",
+        "Distrito.Id": "83"
+    },
+    {
+        "Id": "678",
+        "Corregimiento": "Guna de Madugandí",
+        "Distrito": "N.A",
+        "Distrito.Id": "83"
+    },
+    {
+        "Id": "679",
+        "Corregimiento": "Guna de Wargandí",
+        "Distrito": "N.A",
+        "Distrito.Id": "83"
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "Id": "1",
+        "HarvesterName": "N/A"
+    },
+    {
+        "Id": "2",
+        "HarvesterName": "Logistics"
+    },
+    {
+        "Id": "3",
+        "HarvesterName": "Departamento Mercante"
+    },
+    {
+        "Id": "4",
+        "HarvesterName": "Ruben Montoya"
+    },
+    {
+        "Id": "5",
+        "HarvesterName": "Bernardo Bustillo"
+    },
+    {
+        "Id": "6",
+        "HarvesterName": "Osmar Cortez"
+    },
+    {
+        "Id": "7",
+        "HarvesterName": "JG Maritime Agency"
+    },
+    {
+        "Id": "8",
+        "HarvesterName": "Actividad Externa"
+    }
+]

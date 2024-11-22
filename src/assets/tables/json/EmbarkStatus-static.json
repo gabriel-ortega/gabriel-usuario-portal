@@ -1,0 +1,8 @@
+[
+  { "Id": 1, "StatusName": "Pre-Embarkation" },
+  { "Id": 2, "StatusName": "On Board" },
+  { "Id": 3, "StatusName": "Medical Leave" },
+  { "Id": 4, "StatusName": "Completed Embark" },
+  { "Id": 5, "StatusName": "Contract Revoked" },
+  { "Id": 6, "StatusName": "Embarkation Canceled" }
+]

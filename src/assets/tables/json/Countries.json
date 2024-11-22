@@ -1,0 +1,1826 @@
+[
+    {
+        "Id": "2",
+        "CountryName": "Afghanistan",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/af.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "3",
+        "CountryName": "Albania",
+        "CountryRegion": "EASTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/al.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "4",
+        "CountryName": "Algeria",
+        "CountryRegion": "NORTHERN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/dz.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "5",
+        "CountryName": "American Samoa",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/as.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "6",
+        "CountryName": "Andorra",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ad.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "7",
+        "CountryName": "Angola",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ao.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "8",
+        "CountryName": "Anguilla",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ai.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "9",
+        "CountryName": "Antigua and Barbuda",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ag.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "10",
+        "CountryName": "Argentina",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ar.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "11",
+        "CountryName": "Armenia",
+        "CountryRegion": "C.W. OF IND. STATES",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/am.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "12",
+        "CountryName": "Aruba",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/aw.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "13",
+        "CountryName": "Australia",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/au.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "14",
+        "CountryName": "Austria",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/at.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "15",
+        "CountryName": "Azerbaijan",
+        "CountryRegion": "C.W. OF IND. STATES",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/az.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "16",
+        "CountryName": "Bahamas",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/bs.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "17",
+        "CountryName": "Bahrain",
+        "CountryRegion": "NEAR EAST",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/bh.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "18",
+        "CountryName": "Bangladesh",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/bd.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "19",
+        "CountryName": "Barbados",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/bb.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "20",
+        "CountryName": "Belarus",
+        "CountryRegion": "C.W. OF IND. STATES",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/by.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "21",
+        "CountryName": "Belgium",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/be.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "22",
+        "CountryName": "Belize",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/bz.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "23",
+        "CountryName": "Benin",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/bj.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "24",
+        "CountryName": "Bermuda",
+        "CountryRegion": "NORTHERN AMERICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/bm.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "25",
+        "CountryName": "Bhutan",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/bt.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "26",
+        "CountryName": "Bolivia",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/bo.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "27",
+        "CountryName": "Bosnia & Herzegovina",
+        "CountryRegion": "EASTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ba.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "28",
+        "CountryName": "Botswana",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/bw.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "29",
+        "CountryName": "Brazil",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/br.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "30",
+        "CountryName": "Virgin Islands, British",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/vg.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "31",
+        "CountryName": "Brunei",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/bn.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "32",
+        "CountryName": "Bulgaria",
+        "CountryRegion": "EASTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/bg.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "33",
+        "CountryName": "Burkina Faso",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/bf.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "34",
+        "CountryName": "Burma",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/mm.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "35",
+        "CountryName": "Burundi",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/bi.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "36",
+        "CountryName": "Cambodia",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/kh.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "37",
+        "CountryName": "Cameroon",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/cm.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "38",
+        "CountryName": "Canada",
+        "CountryRegion": "NORTHERN AMERICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ca.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "39",
+        "CountryName": "Cabo Verde",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/cv.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "40",
+        "CountryName": "Cayman Islands",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ky.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "41",
+        "CountryName": "Central African Republic",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/cf.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "42",
+        "CountryName": "Chad",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/td.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "43",
+        "CountryName": "Chile",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/cl.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "44",
+        "CountryName": "China",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/cn.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "45",
+        "CountryName": "Colombia",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/co.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "46",
+        "CountryName": "Comoros",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/km.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "47",
+        "CountryName": "Congo, the Democratic Republic of the",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/cd.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "48",
+        "CountryName": "Congo",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/cg.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "49",
+        "CountryName": "Cook Islands",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ck.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "50",
+        "CountryName": "Costa Rica",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/cr.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "51",
+        "CountryName": "Côte d'Ivoire",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ci.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "52",
+        "CountryName": "Croatia",
+        "CountryRegion": "EASTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/hr.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "53",
+        "CountryName": "Cuba",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/cu.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "54",
+        "CountryName": "Cyprus",
+        "CountryRegion": "NEAR EAST",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/cy.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "55",
+        "CountryName": "Czechia",
+        "CountryRegion": "EASTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/cz.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "56",
+        "CountryName": "Denmark",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/dk.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "57",
+        "CountryName": "Djibouti",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/dj.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "58",
+        "CountryName": "Dominica",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/dm.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "59",
+        "CountryName": "Dominican Republic",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/do.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "60",
+        "CountryName": "Timor-Leste",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/tl.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "61",
+        "CountryName": "Ecuador",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ec.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "62",
+        "CountryName": "Egypt",
+        "CountryRegion": "NORTHERN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/eg.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "63",
+        "CountryName": "El Salvador",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/sv.png",
+        "CityOfRepatriation": "San Salvador",
+        "AirportCode": "SAL"
+    },
+    {
+        "Id": "64",
+        "CountryName": "Equatorial Guinea",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/gq.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "65",
+        "CountryName": "Eritrea",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/er.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "66",
+        "CountryName": "Estonia",
+        "CountryRegion": "BALTICS",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ee.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "67",
+        "CountryName": "Ethiopia",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/et.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "68",
+        "CountryName": "Faroe Islands",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/fo.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "69",
+        "CountryName": "Fiji",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/fj.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "70",
+        "CountryName": "Finland",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/fi.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "71",
+        "CountryName": "France",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/fr.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "72",
+        "CountryName": "French Guiana",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/gf.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "73",
+        "CountryName": "French Polynesia",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/pf.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "74",
+        "CountryName": "Gabon",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ga.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "75",
+        "CountryName": "Gambia",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/gm.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "76",
+        "CountryName": "Gaza Strip",
+        "CountryRegion": "NEAR EAST",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/blank.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "77",
+        "CountryName": "Georgia",
+        "CountryRegion": "C.W. OF IND. STATES",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ge.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "78",
+        "CountryName": "Germany",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/de.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "79",
+        "CountryName": "Ghana",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/gh.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "80",
+        "CountryName": "Gibralta",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/gi.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "81",
+        "CountryName": "Greece",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/gr.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "82",
+        "CountryName": "Greenland",
+        "CountryRegion": "NORTHERN AMERICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/gl.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "83",
+        "CountryName": "Grenada",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/gd.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "84",
+        "CountryName": "Guadeloupe",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/gp.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "85",
+        "CountryName": "Guam",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/gu.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "86",
+        "CountryName": "Guatemala",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/gt.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "87",
+        "CountryName": "Guernsey",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/gg.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "88",
+        "CountryName": "Guinea",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/gn.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "89",
+        "CountryName": "Guinea-Bissau",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/gw.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "90",
+        "CountryName": "Guyana",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/gy.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "91",
+        "CountryName": "Haiti",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ht.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "92",
+        "CountryName": "Honduras",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/hn.png",
+        "CityOfRepatriation": "San Pedro Sula",
+        "AirportCode": "SAP"
+    },
+    {
+        "Id": "93",
+        "CountryName": "Hong Kong",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/hk.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "94",
+        "CountryName": "Hungary",
+        "CountryRegion": "EASTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/hu.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "95",
+        "CountryName": "Iceland",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/is.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "96",
+        "CountryName": "India",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/in.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "97",
+        "CountryName": "Indonesia",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/id.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "98",
+        "CountryName": "Iran",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ir.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "99",
+        "CountryName": "Iraq",
+        "CountryRegion": "NEAR EAST",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/iq.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "100",
+        "CountryName": "Ireland",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ie.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "101",
+        "CountryName": "Isle of Man",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/im.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "102",
+        "CountryName": "Israel",
+        "CountryRegion": "NEAR EAST",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/il.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "103",
+        "CountryName": "Italy",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/it.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "104",
+        "CountryName": "Jamaica",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/jm.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "105",
+        "CountryName": "Japan",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/jp.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "106",
+        "CountryName": "Jersey",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/je.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "107",
+        "CountryName": "Jordan",
+        "CountryRegion": "NEAR EAST",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/jo.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "108",
+        "CountryName": "Kazakhstan",
+        "CountryRegion": "C.W. OF IND. STATES",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/kz.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "109",
+        "CountryName": "Kenya",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ke.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "110",
+        "CountryName": "Kiribati",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ki.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "111",
+        "CountryName": "Korea, Republic of",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/kr.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "112",
+        "CountryName": "Korea, Democratic People's Republic of",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/kp.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "113",
+        "CountryName": "Kuwait",
+        "CountryRegion": "NEAR EAST",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/kw.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "114",
+        "CountryName": "Kyrgyzstan",
+        "CountryRegion": "C.W. OF IND. STATES",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/kg.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "115",
+        "CountryName": "Laos",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/la.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "116",
+        "CountryName": "Latvia",
+        "CountryRegion": "BALTICS",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/lv.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "117",
+        "CountryName": "Lebanon",
+        "CountryRegion": "NEAR EAST",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/lb.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "118",
+        "CountryName": "Lesotho",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ls.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "119",
+        "CountryName": "Liberia",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/lr.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "120",
+        "CountryName": "Libya",
+        "CountryRegion": "NORTHERN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ly.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "121",
+        "CountryName": "Liechtenstein",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/li.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "122",
+        "CountryName": "Lithuania",
+        "CountryRegion": "BALTICS",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/lt.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "123",
+        "CountryName": "Luxembourg",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/lu.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "124",
+        "CountryName": "Macao",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/mo.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "125",
+        "CountryName": "Macedonia",
+        "CountryRegion": "EASTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/mk.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "126",
+        "CountryName": "Madagascar",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/mg.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "127",
+        "CountryName": "Malawi",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/mw.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "128",
+        "CountryName": "Malaysia",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/my.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "129",
+        "CountryName": "Maldives",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/mv.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "130",
+        "CountryName": "Mali",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ml.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "131",
+        "CountryName": "Malta",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/mt.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "132",
+        "CountryName": "Marshall Islands",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/mh.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "133",
+        "CountryName": "Martinique",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/mq.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "134",
+        "CountryName": "Mauritania",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/mr.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "135",
+        "CountryName": "Mauritius",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/mu.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "136",
+        "CountryName": "Mayotte",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/yt.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "137",
+        "CountryName": "Mexico",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/mx.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "138",
+        "CountryName": "Micronesia",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/fm.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "139",
+        "CountryName": "Moldova",
+        "CountryRegion": "C.W. OF IND. STATES",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/md.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "140",
+        "CountryName": "Monaco",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/mc.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "141",
+        "CountryName": "Mongolia",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/mn.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "142",
+        "CountryName": "Montserrat",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ms.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "143",
+        "CountryName": "Morocco",
+        "CountryRegion": "NORTHERN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ma.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "144",
+        "CountryName": "Mozambique",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/mz.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "145",
+        "CountryName": "Namibia",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/na.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "146",
+        "CountryName": "Nauru",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/nr.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "147",
+        "CountryName": "Nepal",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/np.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "148",
+        "CountryName": "Netherlands",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/nl.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "149",
+        "CountryName": "Netherlands Antilles",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/na.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "150",
+        "CountryName": "New Caledonia",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/nc.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "151",
+        "CountryName": "New Zealand",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/nz.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "152",
+        "CountryName": "Nicaragua",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ni.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "153",
+        "CountryName": "Niger",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ne.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "154",
+        "CountryName": "Nigeria",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ng.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "155",
+        "CountryName": "Northern Mariana Islands",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/mp.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "156",
+        "CountryName": "Norway",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/no.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "157",
+        "CountryName": "Oman",
+        "CountryRegion": "NEAR EAST",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/om.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "158",
+        "CountryName": "Pakistan",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/pk.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "159",
+        "CountryName": "Palau",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/pw.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "160",
+        "CountryName": "Panama",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/pa.png",
+        "CityOfRepatriation": "Panama",
+        "AirportCode": "PTY"
+    },
+    {
+        "Id": "161",
+        "CountryName": "Papua New Guinea",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/pg.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "162",
+        "CountryName": "Paraguay",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/py.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "163",
+        "CountryName": "Peru",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/pe.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "164",
+        "CountryName": "Philippines",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ph.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "165",
+        "CountryName": "Poland",
+        "CountryRegion": "EASTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/pl.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "166",
+        "CountryName": "Portugal",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/pt.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "167",
+        "CountryName": "Puerto Rico",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/pr.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "168",
+        "CountryName": "Qatar",
+        "CountryRegion": "NEAR EAST",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/qa.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "169",
+        "CountryName": "Réunion",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/re.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "170",
+        "CountryName": "Romania",
+        "CountryRegion": "EASTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ro.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "171",
+        "CountryName": "Russia",
+        "CountryRegion": "C.W. OF IND. STATES",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ru.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "172",
+        "CountryName": "Rwanda",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/rw.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "173",
+        "CountryName": "Saint Helena",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/sh.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "174",
+        "CountryName": "Saint Kitts and Nevis",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/kn.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "175",
+        "CountryName": "Saint Lucia",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/lc.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "176",
+        "CountryName": "Saint Pierre and Miquelon",
+        "CountryRegion": "NORTHERN AMERICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/pm.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "177",
+        "CountryName": "Saint Vincent and the Grenadines",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/vc.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "178",
+        "CountryName": "Samoa",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ws.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "179",
+        "CountryName": "San Marino",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/sm.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "180",
+        "CountryName": "Sao Tome and Principe",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/st.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "181",
+        "CountryName": "Saudi Arabia",
+        "CountryRegion": "NEAR EAST",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/sa.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "182",
+        "CountryName": "Senegal",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/sn.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "183",
+        "CountryName": "Serbia",
+        "CountryRegion": "EASTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/rs.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "184",
+        "CountryName": "Seychelles",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/sc.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "185",
+        "CountryName": "Sierra Leone",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/sl.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "186",
+        "CountryName": "Singapore",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/sg.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "187",
+        "CountryName": "Slovakia",
+        "CountryRegion": "EASTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/sk.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "188",
+        "CountryName": "Slovenia",
+        "CountryRegion": "EASTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/si.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "189",
+        "CountryName": "Solomon Islands",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/sb.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "190",
+        "CountryName": "Somalia",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/so.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "191",
+        "CountryName": "South Africa",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/za.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "192",
+        "CountryName": "Spain",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/es.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "193",
+        "CountryName": "Sri Lanka",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/lk.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "194",
+        "CountryName": "Sudan",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/sd.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "195",
+        "CountryName": "Suriname",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/sr.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "196",
+        "CountryName": "Swaziland",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/sz.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "197",
+        "CountryName": "Sweden",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/se.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "198",
+        "CountryName": "Switzerland",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ch.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "199",
+        "CountryName": "Syrian Arab Republic",
+        "CountryRegion": "NEAR EAST",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/sy.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "200",
+        "CountryName": "Taiwan, Province of China",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/tw.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "201",
+        "CountryName": "Tajikistan",
+        "CountryRegion": "C.W. OF IND. STATES",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/tj.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "202",
+        "CountryName": "Tanzania, United Republic of",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/tz.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "203",
+        "CountryName": "Thailand",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/th.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "204",
+        "CountryName": "Togo",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/tg.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "205",
+        "CountryName": "Tonga",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/to.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "206",
+        "CountryName": "Trinidad and Tobago",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/tt.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "207",
+        "CountryName": "Tunisia",
+        "CountryRegion": "NORTHERN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/tn.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "208",
+        "CountryName": "Turkey",
+        "CountryRegion": "NEAR EAST",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/tr.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "209",
+        "CountryName": "Turkmenistan",
+        "CountryRegion": "C.W. OF IND. STATES",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/tm.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "210",
+        "CountryName": "Turks and Caicos Islands",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/tc.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "211",
+        "CountryName": "Tuvalu",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/tv.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "212",
+        "CountryName": "Uganda",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ug.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "213",
+        "CountryName": "Ukraine",
+        "CountryRegion": "C.W. OF IND. STATES",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ua.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "214",
+        "CountryName": "United Arab Emirates",
+        "CountryRegion": "NEAR EAST",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ae.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "215",
+        "CountryName": "United Kingdom of Great Britain and Northern Island",
+        "CountryRegion": "WESTERN EUROPE",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/gb.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "216",
+        "CountryName": "United States of America",
+        "CountryRegion": "NORTHERN AMERICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/us.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "217",
+        "CountryName": "Uruguay",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/uy.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "218",
+        "CountryName": "Uzbekistan",
+        "CountryRegion": "C.W. OF IND. STATES",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/uz.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "219",
+        "CountryName": "Vanuatu",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/vu.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "220",
+        "CountryName": "Venezuela",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ve.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "221",
+        "CountryName": "Vietnam",
+        "CountryRegion": "ASIA (EX. NEAR EAST)",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/vn.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "222",
+        "CountryName": "Virgin Islands, U.S.",
+        "CountryRegion": "LATIN AMER. & CARIB",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/vi.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "223",
+        "CountryName": "Wallis and Futuna",
+        "CountryRegion": "OCEANIA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/wf.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "224",
+        "CountryName": "West Bank",
+        "CountryRegion": "NEAR EAST",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/blank.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "225",
+        "CountryName": "Western Sahara",
+        "CountryRegion": "NORTHERN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/eh.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "226",
+        "CountryName": "Yemen",
+        "CountryRegion": "NEAR EAST",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/ye.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "227",
+        "CountryName": "Zambia",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/zm.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "228",
+        "CountryName": "Zimbabwe",
+        "CountryRegion": "SUB-SAHARAN AFRICA",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/zw.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    },
+    {
+        "Id": "229",
+        "CountryName": "Dominican Republic",
+        "CountryRegion": "",
+        "Flag": "https://mp-ip.edu.pa/seafarers/countriesflags/Flags/do.png",
+        "CityOfRepatriation": "",
+        "AirportCode": ""
+    }
+]

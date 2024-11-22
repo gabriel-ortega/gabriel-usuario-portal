@@ -1,0 +1,18 @@
+[
+    {
+        "Id": "1",
+        "EducationName": "Elementary"
+    },
+    {
+        "Id": "2",
+        "EducationName": "High School"
+    },
+    {
+        "Id": "3",
+        "EducationName": "Higher Technician"
+    },
+    {
+        "Id": "4",
+        "EducationName": "University"
+    }
+]

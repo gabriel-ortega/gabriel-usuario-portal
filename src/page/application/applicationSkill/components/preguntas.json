@@ -1,0 +1,822 @@
+[
+      {
+        "id": 1,
+        "skill": "Do you have experience in the management and supervision of the kitchen personnel?",
+        "check":false,
+        "position":"cook"
+      },
+      {
+        "id": 2,
+        "skill": "Are you able to work with multicultural teams and assign tasks to them in the kitchen?",
+        "check":false,"position": "cook"
+
+    },{
+        "id": 3,
+        "skill": "Can you maintain order, follow the established galley cleaning schedule, and ensure discipline for the crew in charge after each service, while exercising proper methods to minimize equipment damage?",
+        "check":false,"position":"cook"
+
+      },
+      {
+        "id": 4,
+        "skill": "Are you aware that everything related to overtime must be coordinated with the captain, who is responsible for its authorization?",
+        "check":false,"position":"cook"
+
+      },{
+        "id": 5,
+        "skill": "Do you know how to prepare the reports that you must present to the captain, related to the catering department, to determine product availability and current food costs?",
+        "check":false,"position":"cook"
+      },
+      {
+        "id": 6,
+        "skill": "Do you understand that the cook position in no way states or implies that these are the only duties to be performed by the shipboard employee occupying this position? Shipboard employees will be required to perform any other job-related duties assigned by the master.",
+        "check":false,"position":"cook"
+
+      },{
+        "id": 7,
+        "skill": "Do you know about the established quality standards and company policies in order to supervise galley staff?",
+        "check":false,"position":"cook"
+
+      },
+      {
+        "id": 8,
+        "skill": "Do you have experience keeping the galley, pantries, mess rooms and provision rooms clean and prepared for rough weather?",
+        "check":false,"position":"cook"
+
+      },{
+        "id": 9,
+        "skill": "Understands and follows recipes, has knowledge of nutrition, raw materials, preparation techniques, and applies these skills in menu planning.",
+        "check":false,"position":"cook"
+
+      },
+      {
+        "id": 10,
+        "skill": "Understand the importance of the daily/weekly menus and organize and prepare these menus",
+        "check":false,"position":"cook"
+
+      },{
+        "id": 11,
+        "skill": "Understand the interaction between meals and the pace of daily work on board and its importance for the practical aspects of food and snack service",
+        "check":false,"position":"cook"
+
+      },
+      {
+        "id": 12,
+        "skill": "Do you have experience planning and preparing provision orders while keeping food allowance in mind?",
+        "check":false,"position":"cook"
+
+      },
+      {
+        "id": 13,
+        "skill": "Maintains good personal hygiene, understands the importance of frequent hand washing and how to perform it thoroughly, knows what kind of clothes to wear in the kitchen, and is aware of the factors that can put the health of others at risk.",
+        "check":false,"position":"cook"
+
+      },{
+        "id": 14,
+        "skill": "Do you know of how to break the chain of foodborne diseases?",
+        "check":false,"position":"cook"
+
+      },
+      {
+        "id": 15,
+        "skill": "Understands the importance of and knows how to clean and disinfect kitchens, dining rooms, and pantries, and why it is important to do so.",
+        "check":false,"position":"cook"
+
+      },{
+        "id": 16,
+        "skill": "Do you have knowledge of how to handle refrigerated and frozen products?",
+        "check":false,"position":"cook"
+
+      },
+      {
+        "id": 17,
+        "skill": "Organizes and applies appropriate working methods that ensure the correct flow of products, as well as continuous cleaning, to avoid cross-contamination of food.",
+        "check":false,"position":"cook"
+
+      },{
+        "id": 18,
+        "skill": "Maintains adequate control to ensure the safety of food when refrigerating leftovers, especially the importance of putting date in food for reuse",
+        "check":false,"position":"cook"
+        
+      },
+      {
+        "id": 19,
+        "skill": "Are you aware of the causes of allergies, how to prevent skin infections, and how to prevent skin allergies derived from food consumption, as well as how to identify the symptoms?",
+        "check":false,"position":"cook"
+
+      },{
+        "id": 20,
+        "skill": "Know the importance of keeping proper maintenance control for drinking water equipment to prevent the proliferation of bacteria in the system",
+        "check":false,"position":"cook"
+
+      },
+      {
+        "id": 21,
+        "skill": "Do you have knowledge of how to store highly perishable foods, perishables, and their shelf life?",
+        "check":false,"position":"cook"
+
+      },{
+        "id": 22,
+        "skill": "Procedure for storing food safely and safely, especially once the container is opened.",
+        "check":false,"position":"cook"
+
+      },
+      {
+        "id": 23,
+        "skill": "Ensure the handling of food products at the time of delivery and how to place them on the shelves (first come, first out system) is carried out according to procedures",
+        "check":false,"position":"cook"
+
+      },{
+        "id": 24,
+        "skill": "Are you aware that the food products to be bought, according to the composition of the menu plan, is according to the use of raw materials and the financial established?",
+        "check":false,"position":"cook"
+      },
+      {
+        "id": 25,
+        "skill": "Do you have experience in preparing and submitting a monthly stock of provisions and a galley consumables equipment inventory?",
+        "check":false,"position":"cook"
+
+      },{
+        "id": 26,
+        "skill": "Do you have the ability to calculate figures and amounts such as discounts, interest, commissions, tips, proportions, percentages?",
+        "check":false,"position":"cook"
+
+      },
+      {
+        "id": 27,
+        "skill": "Can you maintain adequate control of the quantity of provisions according to the number of crew members and the duration and nature of the voyages?",
+        "check":false,"position":"cook"
+
+      },{
+        "id": 28,
+        "skill": "Do you Know the importance of food supply, and maintains control through systematization and periodic reviews to monitor the quantity and quality of food?",
+        "check":false,"position":"cook"
+
+      },
+      {
+        "id": 29,
+        "skill": "Are you able to draw up a menu plan for an extended period?",
+        "check":false,"position":"cook"
+
+      },{
+        "id": 30,
+        "skill": "It supplies enough water to drink and prepare food.",
+        "check":false,"position":"cook"
+      },
+      {
+        "id": 31,
+        "skill": "Experience in how to manage the waste on board the ship in accordance with the provisions of Annex V of the MARPOL Convention, on waste management plans, kitchen waste should be handled and stored separately from provisions for food, raw materials and drinking water.",
+        "check":false,"position":"cook"
+      },{
+        "id": 32,
+        "skill": "Maintain security in the storage of provisions during strong surges, while avoiding unnecessary physical exertion.",
+        "check":false,"position":"cook"
+      },
+      {
+        "id": 33,
+        "skill": "Are you familiar with the IGS Code and safety management systems?",
+        "check":false,"position":"cook"
+
+      },{
+        "id": 34,
+        "skill": "Are you capable of providing first aid, particularly for kitchen-related accidents, such as fires, machine-related injuries, cuts, scalds, caustic burns, and crush injuries?",
+        "check":false,"position":"cook"
+      },
+      {
+        "id": 35,
+        "skill": "Do you know of how to deal with fires in kitchens, and the use of firefighting equipment?",
+        "check":false,"position":"cook"
+      },
+      {
+        "id": 36,
+        "skill": "Skilled professional sailor, responsible, reliable, proactive, and well-organized, with strong managerial and organizational skills in the maintenance and conservation of the vessel's decks and superstructures.",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 37,
+        "skill": "Perform operations relevant to port cargo.",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 38,
+        "skill": "Performed a safe lookout.",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 39,
+        "skill": "Stood wheel duty when required and followed helm orders from the master, watchkeeping officer or the pilot",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 40,
+        "skill": "Stood duties at port by the gangway following company´s security policy.",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 41,
+        "skill": "Anchor windlass, chains, and anchors",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 42,
+        "skill": "Mooring winches, ropes, and springs",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 43,
+        "skill": "Cranes, derricks and associated auxiliary equipment",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 44,
+        "skill": "Lifeboats, davits and associated auxiliary equipment",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 45,
+        "skill": "Cleaning and maintaining other lifesaving appliances",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 46,
+        "skill": "Outer deck railings, wires, superstructures, deck hull, fire lockers, life raft stations, paint locker, hazmat, and chemicals.",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 47,
+        "skill": "Deck Maintenance",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 48,
+        "skill": "Cut surface engrave",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 49,
+        "skill": "Loading and unloading",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 50,
+        "skill": "Painting",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 51,
+        "skill": "Fast Rescue boats Handling",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 52,
+        "skill": "Survival Craft Boat handling",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 53,
+        "skill": "Deck Inventory / Storing",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 54,
+        "skill": "Time management",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 55,
+        "skill": "Team worker",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 56,
+        "skill": "Good leader",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 57,
+        "skill": "Honest and hardworking",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 58,
+        "skill": "Can work effectively on team or independently",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 59,
+        "skill": "Neat and well organized",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 60,
+        "skill": "Respect and good treatment towards my other colleagues.",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 61,
+        "skill": "Have your ever been nominated employee of the month",
+        "check":false,
+        "position":"abos"
+      },
+      {
+        "id": 62,
+        "skill": "Can effectively perform with less or without supervision",
+        "check":false,
+        "position":"abos"
+      },{
+        "id": 63,
+        "skill": "Skilled professional sailor, responsible, reliable, proactive, and well-organized, with strong managerial and organizational skills in the maintenance and conservation of the vessel's decks and superstructures.",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 64,
+        "skill": "Have you carried out the task on board related to the able boded seaman (Abs) and ordinary Seaman (Oss) for work assignment?",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 65,
+        "skill": "Do you consider yourself to have the leadership qualities necessary to manage a multicultural crew?",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 66,
+        "skill": "Have you performed operations relevant to port cargo?",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 67,
+        "skill": "Do you have Knowledge of inventory management and ensure that there are sufficient inventories of all supplies and tools used by the deck department?",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 68,
+        "skill": "Do you have control of the operations carried out in the docking and undocking port have been supervised, including mooring ropes and/or anchor chains are properly fastened?",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 69,
+        "skill": "Anchor windlass, chains, and anchors",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 70,
+        "skill": "Mooring winches, ropes, and springs",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 71,
+        "skill": "Cranes, derricks and associated auxiliary equipment",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 72,
+        "skill": "Lifeboats, davits and associated auxiliary equipment.",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 73,
+        "skill": "Supervises the crew to ensure that all deck-planned maintenance is carried out within the specified time periods given by deck Maintenance officer.",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 74,
+        "skill": "Responsible for ensuring that all working routines and procedures associated with entering and working in confined spaces are strictly adhered to.",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 75,
+        "skill": "Do you have knowledge on how to report and fill out accident/incident reports?",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 76,
+        "skill": "Do you understand of the Company Safety & environmental protection quality management program and the responsibilities in the safety organization according to the emergency evacuation plan, as well as station bill?",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 77,
+        "skill": "Have you collaborated in carrying out firefighting drills on board the ship?",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 78,
+        "skill": "Do you have Knowledge of the responsibility that the crew in charge properly use the appropriate protective equipment?",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 79,
+        "skill": "Have you ensured that crew is using at all times the proper safety and protection equipment in the daily deck operations and the critical working areas are appropriately and adequately isolated?",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 80,
+        "skill": "Do you have knowledge of the care of hazardous material and chemicals and all areas where these areas are in use within the deck department?",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 81,
+        "skill": "Have you known of the proper handling and storage of chemicals and hazards? (Including the correct storage of the paint)",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 82,
+        "skill": "Time management",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 83,
+        "skill": "Team worker",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 84,
+        "skill": "Good leader",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 85,
+        "skill": "Honest and hardworking",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 86,
+        "skill": "Can you work effectively on team or independently",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 87,
+        "skill": "Neat and well organized",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 88,
+        "skill": "Respect and good treatment towards to my other colleagues.",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 89,
+        "skill": "Have your ever been nominated employee of the month",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 90,
+        "skill": "Can effectively perform with less or without supervision",
+        "check":false,
+        "position":"bosun"
+      },{
+        "id": 91,
+        "skill": "Hard working",
+        "check":false,
+        "position":"messman"
+      },{
+        "id": 92,
+        "skill": "Well Organized and effective support skills, being able to take the initiative with jobs at hand. Proper cleaning techniques and chemical handling",
+        "check":false,
+        "position":"messman"
+      },{
+        "id": 93,
+        "skill": "Ability to work positively and cooperatively in a diverse team environment to meet the entire housekeeping operation.",
+        "check":false,
+        "position":"messman"
+      },{
+        "id": 94,
+        "skill": "Demonstrated aptitude and monitors at all times company´s OPP procedures for sanitation and cleanliness.",
+        "check":false,
+        "position":"messman"
+      },{
+        "id": 95,
+        "skill": "Always in compliance with the company´s environmental policies and be committed to safeguarding the environment and performed all related duties and worn the proper PPE as required at all times.",
+        "check":false,
+        "position":"messman"
+      },{
+        "id": 96,
+        "skill": "Active worker and responsible Seaman able to adjust to a variety of activities such as: cleaning and sanitizing cabins, uploading and downloading provision, manipulate laundry equipment, handle cleaning machines, such as: Scrubbing machine, suction machine, shampooing machine, steaming machine, dealing with chemicals, doing the fogging, delivering food in quarantine areas, etc. ",
+        "check":false,
+        "position":"messman"
+      },{
+        "id": 97,
+        "skill": "Friendly, open-minded, organized, and effective in providing support, with the ability to take initiative with tasks at hand. Proficient in proper cleaning techniques and chemical handling.",
+        "check":false,
+        "position":"messman"
+      },{
+        "id": 98,
+        "skill": "Ability to work cooperatively every day, using common sense in a multicultural environment to meet the demands of the entire housekeeping operation.",
+        "check":false,
+        "position":"messman"
+      },{
+        "id": 99,
+        "skill": "Demonstrated aptitude and monitors at all times company´s OPP procedures for sanitation and cleanliness.",
+        "check":false,
+        "position":"messman"
+      },{
+        "id": 100,
+        "skill": "Have you contributed, supported, and performed all machinery space watches always following company´s procedures, rules, and regulations as fitter?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 101,
+        "skill": "Do you have knowledge and experience in equipment maintenance?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 102,
+        "skill": "Do you have a welding certificate by one of the following LR, ABS, DNV?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 103,
+        "skill": "Do you have knowledge and experience in welding, including TIG and MIG?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 104,
+        "skill": "Do you have knowledge in the handling and storage of the equipment used on board?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 105,
+        "skill": "Have you worked under the supervision of various departments, for example the deck and engine department?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 106,
+        "skill": "Are you aware that all overtime performed must be authorized and reported to the officer in charge, depending on the area and nature of the work performed?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 107,
+        "skill": "Have you worked with supervisors and subordinates to understand and comply with the company´s environmental policies and be committed to safeguarding the environment?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 108,
+        "skill": "Are you aware of the mechanisms to inform your superior about any situation on board that puts the environment at risk or the environmental system does not function properly onboard?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 109,
+        "skill": "Are you aware that it is your responsibility to keep the equipment and tools in good working order?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 110,
+        "skill": "Do you have Knowledge in overhauling of pumps?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 111,
+        "skill": "Do you have Knowledge in operating lathe machine?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 112,
+        "skill": "Do you have Knowledge in carrying out must steelwork, including stainless steel?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 113,
+        "skill": "Do you have Knowledge in Pipe installation and fitting?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 114,
+        "skill": "Do you have experience assisting with overhauling of diesel engines and auxiliary systems?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 115,
+        "skill": "Do you have experience taking all reading on main engine and generators, and auxiliary equipment?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 116,
+        "skill": "Do you always follow up on all working routines and procedures associated with entering and working in confined spaces, and donning hard helmets, safety belts and other PPE?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 117,
+        "skill": "Time management",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 118,
+        "skill": "Team Worker",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 119,
+        "skill": "Good Leader",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 120,
+        "skill": "Honest and hardworking",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 121,
+        "skill": "Can you work effectively on team or independently",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 122,
+        "skill": "Neat and well Organized",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 123,
+        "skill": "Can effectively perform with less or without supervision",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 124,
+        "skill": "Respect and good treatment towards my other colleagues.",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 125,
+        "skill": "Have you ever been nominated employee of the month?",
+        "check":false,
+        "position":"fitter"
+      },{
+        "id": 126,
+        "skill": "I have contributed, supported, and performed all machinery space watches always following company´s procedures, rules, and regulations as motorman / oiler",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 127,
+        "skill": "I was also responsible for the inspection, operation, and testing, as required, of all machinery and equipment under may responsibility also assisting engineers during the machinery maintenance schedule",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 128,
+        "skill": "Hard working team player and quick to learn individual",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 129,
+        "skill": "I was also responsible for helping the EWO or Engineer advised regarding the status of the vessel and assigned equipment, always in compliance with the company´s environmental policies and be committed to safeguarding the environmental.",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 130,
+        "skill": "Highly motivated and keen to learn from superiors",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 131,
+        "skill": "As wiper always keeping all the machinery spaces clean, tidy, and sanitized at all times.",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 132,
+        "skill": "Also participating in maintenance work, under supervision. Washing and rinse the floors, in daily basis, and painted at all times",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 133,
+        "skill": "In the event something went wrong it was reported immediately to the EOW. Ensures that relevant signs are posted, and advance notice was given when maintenance, repair, or cleaning operations",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 134,
+        "skill": "Performed all related duties and worn the proper PPE as required at all times",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 135,
+        "skill": "Main engine",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 136,
+        "skill": "Purifiers room",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 137,
+        "skill": "Auxiliary Engine and Generators",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 138,
+        "skill": "I.G. Fans",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 139,
+        "skill": "Central Coolers",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 140,
+        "skill": "Main Engine Air Coolers",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 141,
+        "skill": "Painting & Cleaning Engine room and tanks",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 142,
+        "skill": "Assisting on transferring and sounding fuel / oil / sludge",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 143,
+        "skill": "Assisting over hauling pumps, valves, and others.",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 144,
+        "skill": "Engine inventory and storing",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 145,
+        "skill": "Loading and unloading",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 146,
+        "skill": "Taking all reading on main engine and generators, and auxiliary equipment",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 147,
+        "skill": "Always followed all working routines and procedures associated with entering and working in confined spaces, and donning hard helmets, safety belts and other PPE.",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 148,
+        "skill": "Time management",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 149,
+        "skill": "Team Worker",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 150,
+        "skill": "Good Leader",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 151,
+        "skill": "Honest and hardworking",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 152,
+        "skill": "Can you work effectively on team or independently",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 153,
+        "skill": "Neat and well Organized",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 154,
+        "skill": "Can effectively perform with less or without supervision",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 155,
+        "skill": "Respect and good treatment towards my other colleagues.",
+        "check":false,
+        "position":"oiler"
+      },{
+        "id": 156,
+        "skill": "Have you ever been nominated employee of the month?",
+        "check":false,
+        "position":"oiler"
+      }
+    ]
+  
