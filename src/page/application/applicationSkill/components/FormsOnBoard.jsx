@@ -195,7 +195,7 @@ export function FormsOnBoard({ onDataChange, editData, userData, validate }) {
           name="imo#"
           value={data?.["imo#"] || ""}
           onChange={changeData}
-          isValid={validate && data["imo#"]}
+          // isValid={validate && data["imo#"]}
         />
         <InputText
           label="GT/HP"
@@ -247,7 +247,7 @@ export function FormsOnBoard({ onDataChange, editData, userData, validate }) {
             !data.dateOff ||
             !data.companyName ||
             !data.vesselName ||
-            !data["imo#"] ||
+            // !data["imo#"] ||
             !data.typeOfVessel[0]?.id ||
             !data["rank/position"])
         }

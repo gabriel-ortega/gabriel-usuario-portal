@@ -1,6 +1,9 @@
 import { Table } from "flowbite-react";
 import { useDispatch, useSelector } from "react-redux";
-import { getApplication, setApplicationData } from "../../../../store/userData";
+import {
+  getApplicationByUid,
+  setApplicationData,
+} from "../../../../store/userData";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -17,7 +20,7 @@ export const ApplicationsView = () => {
   const [hasApp, SethasApp] = useState(false);
 
   const load = async () => {
-    const applicantions = await dispatch(getApplication(id, true));
+    const applicantions = await dispatch(getApplicationByUid(id, true));
     SethasApp(applicantions);
   };
 

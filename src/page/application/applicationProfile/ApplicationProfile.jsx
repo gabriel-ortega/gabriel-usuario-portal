@@ -215,7 +215,7 @@ export function ApplicationProfile({ disabled = false }) {
   };
 
   useEffect(() => {
-    console.log("language Update");
+    // console.log("language Update");
     dispatch(updateApplicationProfileLangDefault(defaultLanguageForms));
     const isAnyFieldInvalid = [
       defaultLanguageForms.SPANISH?.PercentageWrite === "" ||
@@ -232,12 +232,12 @@ export function ApplicationProfile({ disabled = false }) {
   }, [defaultLanguageForms]);
 
   useEffect(() => {
-    console.log("language Update");
+    // console.log("language Update");
     dispatch(updateApplicationProfileLangOther(languageForms));
   }, [languageForms]);
 
   useEffect(() => {
-    console.log("language Update");
+    // console.log("language Update");
     dispatch(updateApplicationProfileLangMarlins(marlinTestForms));
   }, [marlinTestForms]);
 
@@ -345,7 +345,7 @@ export function ApplicationProfile({ disabled = false }) {
   const [isFormValidEmergency, setIsFormValidEmergency] = useState(true);
 
   useEffect(() => {
-    console.log("All Data Update");
+    // console.log("All Data Update");
     dispatch(updateApplicationProfileContacts(formData));
     setUnsavedChanges(true);
     if (formData?.contact?.length < 1 || !formData?.contact) {

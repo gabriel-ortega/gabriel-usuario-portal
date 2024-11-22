@@ -53,7 +53,11 @@ import { formatDate, getSeafarerDataObject } from "../../util/helperFunctions";
 import Stages from "../../assets/tables/json/RecruitmentStage-static.json";
 import applicationStatusData from "../../assets/tables/json/ApplicationStatus-static.json";
 import notFound from "../../assets/imagenes/notFound.gif";
-import { getApplicationCV, getPositions } from "../../util/services";
+import {
+  getApplicationCV,
+  getPositions,
+  getReasons,
+} from "../../util/services";
 
 export const ReviewApplication = () => {
   const [unsavedChanges, setUnsavedChanges] = useState(false);
@@ -72,11 +76,41 @@ export const ReviewApplication = () => {
   const [existe, setExiste] = useState(true);
   const [isLoading, setIsLoading] = useState(!application?.uid ? false : true);
   const [positions, setPositions] = useState([]);
+  const [reasonsData, setReasonsData] = useState([]);
+  const [filteredReasonsData, setFilteredReasonsData] = useState([]);
   const [currentPosition, setCurrentPosition] = useState({});
   const [isOpenModal, setIsOpenModal] = useState(false);
   const openModal = () => {
     setIsOpenModal(true);
   };
+
+  const filterReasons = (all = true) => {
+    if (!all) {
+      if (reasonsData.length > 0) {
+        const filter = reasonsData.filter((row) => {
+          let stagesArray;
+
+          try {
+            stagesArray =
+              typeof row.stages === "string"
+                ? JSON.parse(row.stages)
+                : row.stages;
+          } catch (error) {
+            console.error("Error parsing stages:", error);
+            return false; // Excluir la fila si no es válida
+          }
+          return stagesArray.includes(1);
+        });
+        setFilteredReasonsData(filter);
+      }
+    } else {
+      setFilteredReasonsData(reasonsData);
+    }
+  };
+
+  useEffect(() => {
+    filterReasons(false);
+  }, [reasonsData]);
 
   const closeModal = () => setIsOpenModal(false);
 
@@ -114,6 +148,8 @@ export const ReviewApplication = () => {
     setIsLoading(true);
     const fetchData = async () => {
       const positions = await getPositions();
+      const reasons = await getReasons();
+      setReasonsData(reasons);
       setPositions(positions);
       if (application?.uid !== id) {
         const existe = await dispatch(getApplication(id));
@@ -685,18 +721,14 @@ export const ReviewApplication = () => {
                       />
                     )}
                   </div>
-                  <div className="my-4">
+                  <div className="my-4 flex flex-row items-end gap-3">
                     <SelectComponents
                       id="rejectReason"
                       valueDefault="Reject Reason"
                       Text="Select a Reject Reason"
-                      // data={corregimientosData}
-                      data={[
-                        { Id: 1, reason: "Pq si" },
-                        { Id: 2, reason: "Me cayo mal" },
-                      ]}
+                      data={filteredReasonsData}
                       name_valor={true}
-                      idKey="Id"
+                      idKey="id"
                       valueKey="reason"
                       name="rejectReason"
                       initialValue={application?.rejectReason?.id}
@@ -705,6 +737,13 @@ export const ReviewApplication = () => {
                         handleApplicationData("rejectReason", selectedValue);
                       }}
                     />
+                    <button
+                      className={`border border-red-600 bg-red-600 text-white size-10 md:w-28 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-red-700 disabled:opacity-30 disabled:cursor-not-allowed`}
+                      onClick={() => filterReasons(true)}
+                    >
+                      <HiXCircle className="h-4 w-4" />
+                      <span className="hidden md:block ">Override Reasons</span>
+                    </button>
                   </div>
                   <div className="my-4">
                     <label

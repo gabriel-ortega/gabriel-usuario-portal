@@ -27,6 +27,8 @@ import {
 } from "react-icons/hi";
 import { getPositions } from "../../../util/services";
 import { FormPrompt } from "../../../hooks/FormPrompt";
+import preguntas from "../../../page/application/applicationSkill/components/preguntas.json";
+import { getPosition } from "./components/getHeaders";
 
 export function ApplicationSkill({ disabled = false }) {
   const dispatch = useDispatch();
@@ -54,6 +56,7 @@ export function ApplicationSkill({ disabled = false }) {
   );
   const [isOnBoardValid, setIsOnBoardValid] = useState(true);
   const [isSkillsValid, setIsSkillsValid] = useState(true);
+  const [skillsQuestions, setSkillsQuestions] = useState([]);
 
   const headers = {
     onboard: [
@@ -238,6 +241,7 @@ export function ApplicationSkill({ disabled = false }) {
 
   useEffect(() => {
     dispatch(updateApplicationSkill(formData));
+    console.log("data");
 
     if (
       formData?.onboard?.length < 1 &&
@@ -248,7 +252,7 @@ export function ApplicationSkill({ disabled = false }) {
       setIsOnBoardValid(true);
     }
 
-    if (formData.skill?.length > 0) {
+    if (skillsQuestions.length > 0) {
       if (formData.skill.some((skill) => skill.check === true)) {
         setIsSkillsValid(true);
       } else {
@@ -256,6 +260,22 @@ export function ApplicationSkill({ disabled = false }) {
       }
     }
   }, [formData]);
+
+  useEffect(() => {
+    const positions = position[0]?.CVFormatId;
+
+    const Skills = preguntas.filter(
+      (item) => item.position === getPosition(positions)
+    );
+    if (Skills.length > 0) {
+      if (formData.skill.some((skill) => skill.check === true)) {
+        setIsSkillsValid(true);
+      } else {
+        setIsSkillsValid(false);
+      }
+    }
+    setSkillsQuestions(Skills);
+  }, [position, formData]);
 
   const isOnLandValid = true;
 

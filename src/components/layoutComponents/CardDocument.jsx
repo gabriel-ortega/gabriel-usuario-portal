@@ -72,11 +72,8 @@ export function CardDocument({
           .split(".")
           .pop()
           .toLowerCase();
-        const { firstName, lastName } = userData;
-        const displayName =
-          !firstName || !lastName
-            ? `${userData.applicationData?.applicationProfile?.profile.firstName} ${userData.applicationData?.applicationProfile?.profile.lastName}`
-            : `${firstName} ${lastName}`;
+        // const { firstName, lastName } = userData;
+        const displayName = `${userData.applicationData?.applicationProfile?.profile.firstName} ${userData.applicationData?.applicationProfile?.profile.lastName}`;
         const fileNameToDelete = `${displayName}-${tituloalt}.${fileExtension}`;
 
         // Mostrar el toast mientras se borra el archivo

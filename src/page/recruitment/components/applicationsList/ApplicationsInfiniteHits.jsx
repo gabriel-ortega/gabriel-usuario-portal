@@ -38,8 +38,11 @@ function Hit({ hit, toggleHits }) {
   const navigate = useNavigate();
 
   const handleProfileLink = (uid) => {
-    navigate("/reviewapplication/" + uid);
+    const cleanUid = uid.replace("applicationsIndex/", "");
+    // const cleanUid = uid;
+    navigate("/reviewapplication/" + cleanUid);
   };
+
   const getPositionName = (id) => {
     if (id == 1) return "N/A";
     const item = positions.find((entry) => entry.Id == id);
@@ -62,7 +65,7 @@ function Hit({ hit, toggleHits }) {
         className={`${
           hit.isRead ? "bg-white" : "bg-yellow-100"
         } border rounded-lg p-4 shadow-md bg-white hover:bg-blue-50 hover:cursor-pointer transition duration-200 max-h-56`}
-        onClick={() => handleProfileLink(hit.uid)}
+        onClick={() => handleProfileLink(hit.path)}
       >
         <section className="flex flex-row items-center gap-4">
           <div className="">

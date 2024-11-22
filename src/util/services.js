@@ -1529,6 +1529,19 @@ export const getProvincias = async () => {
   }
 };
 
+export const getReasons = async () => {
+  try {
+    const response = await fetch(`${bd_server}/reasons/`);
+    if (!response.ok) {
+      throw new Error("Error en la respuesta del servidor");
+    }
+    const data = await response.json();
+    return data.length ? data : [];
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+};
 export const getSignReasons = async () => {
   try {
     const response = await fetch(`${bd_server}/signreasons/`);

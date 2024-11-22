@@ -130,6 +130,38 @@ export const getApplication = (uid, skip) => {
   };
 };
 
+export const getApplicationByUid = (uid, skip) => {
+  return async (dispatch) => {
+    try {
+      // Hacer una consulta para buscar el documento donde uid es igual al valor proporcionado
+      const applicationsRef = collection(FirebaseDB, "applications");
+      const q = query(applicationsRef, where("uid", "==", uid));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        const docSnap = querySnapshot.docs[0]; // Toma el primer documento encontrado
+        const docData = docSnap.data();
+        const latestVersion = docData.versions.length - 1;
+        const latest = docData.versions[latestVersion];
+
+        // Despachar las acciones con los datos obtenidos
+        dispatch(setApplication(docData));
+        dispatch(setApplicationView(docData));
+        if (!skip) {
+          dispatch(setApplicationData(latest));
+        }
+        return true;
+      } else {
+        console.log("No such document!");
+        return false;
+      }
+    } catch (error) {
+      console.error("Error fetching application:", error);
+      return false;
+    }
+  };
+};
+
 export const updateUsersData = (uid, data) => {
   return async (dispatch) => {
     dispatch(setSaving(true));
