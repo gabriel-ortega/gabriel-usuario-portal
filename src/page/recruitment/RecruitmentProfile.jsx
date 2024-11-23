@@ -52,6 +52,9 @@ const RecruitmentAttachments = lazy(() =>
 const RecruitmentStages = lazy(() =>
   import("../recruitment/components/RecruitmentStages")
 );
+const ApplicantAccount = lazy(() =>
+  import("../accountSettings/ApplicantAccount")
+);
 
 export default function RecruitmentProfile() {
   const dispatch = useDispatch();
@@ -577,7 +580,7 @@ export default function RecruitmentProfile() {
                     </Suspense>
                   ) : (
                     <Suspense fallback={<LoadingState />}>
-                      <div>User Account Manager</div>
+                      <ApplicantAccount />
                     </Suspense>
                   )}
                 </section>

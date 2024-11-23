@@ -46,7 +46,22 @@ export function CardDocument({
         try {
           // Mostrar el toast mientras se sube el archivo
           const uploadedFile = await toast.promise(
-            dispatch(uploadApplicantFile(userData, file, type, tituloalt)),
+            dispatch(
+              uploadApplicantFile(
+                {
+                  firstName:
+                    userData.applicationData?.applicationProfile?.profile
+                      .firstName,
+                  lastName:
+                    userData.applicationData?.applicationProfile?.profile
+                      .lastName,
+                  uid: userData.uid,
+                },
+                file,
+                type,
+                tituloalt
+              )
+            ),
             {
               loading: `Uploading ${titulo}...`,
               success: <b>{titulo} uploaded successfully!</b>,
@@ -78,7 +93,21 @@ export function CardDocument({
 
         // Mostrar el toast mientras se borra el archivo
         await toast.promise(
-          dispatch(deleteApplicantFile(userData, fileNameToDelete, `${type}/`)),
+          dispatch(
+            deleteApplicantFile(
+              {
+                firstName:
+                  userData.applicationData?.applicationProfile?.profile
+                    .firstName,
+                lastName:
+                  userData.applicationData?.applicationProfile?.profile
+                    .lastName,
+                uid: userData.uid,
+              },
+              fileNameToDelete,
+              `${type}/`
+            )
+          ),
           {
             loading: `Deleting ${titulo}...`,
             success: <b>{titulo} deleted successfully!</b>,

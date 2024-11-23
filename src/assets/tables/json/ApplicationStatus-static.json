@@ -3,5 +3,6 @@
   { "Id": 2, "statusName": "Pending Correction" },
   { "Id": 3, "statusName": "Approved" },
   { "Id": 4, "statusName": "Denied" },
-  { "Id": 5, "statusName": "In Evaluation" }
+  { "Id": 5, "statusName": "In Evaluation" },
+  { "Id": 6, "statusName": "Applicant Retired" }
 ]

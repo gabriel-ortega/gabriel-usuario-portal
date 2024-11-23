@@ -118,8 +118,11 @@ export default function ApplicantApplication() {
 
   return (
     <div className="md:w-11/12 md:m-auto">
-      <BannerComponent />
-      {userData.recruitmentStage !== 1 ? (
+      {/* <BannerComponent /> */}
+      {userData.recruitmentStage !== 1 &&
+      userData.recruitmentStage !== 13 &&
+      userData.recruitmentStage !== 10 &&
+      userData.recruitmentStage !== 11 ? (
         <ApplicantProcessView />
       ) : (
         <>

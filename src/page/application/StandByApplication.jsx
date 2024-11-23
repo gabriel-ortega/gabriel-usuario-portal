@@ -4,27 +4,46 @@ import { useSelector } from "react-redux";
 import {
   getApplication,
   setApplicationData,
+  updateApplicationSent,
   updateApplicationStage,
+  updateSeafarerDataFirebase,
 } from "../../store/userData";
 import { useEffect } from "react";
 import { LoadingState } from "../../components/skeleton/LoadingState";
-import { Alert, Card } from "flowbite-react";
-import { formatDate, formatTitleCase } from "../../util/helperFunctions";
+import { Alert, Button, Card, Modal } from "flowbite-react";
+import {
+  formatDate,
+  formatTitleCase,
+  getSeafarerDataObject,
+} from "../../util/helperFunctions";
 import {
   HiInformationCircle,
   HiOutlineChevronRight,
+  HiOutlineExclamationCircle,
   HiOutlineQuestionMarkCircle,
 } from "react-icons/hi";
-import { ButtonIcon, ModalYesNo } from "../../components/layoutComponents";
+import {
+  ButtonIcon,
+  ModalYesNo,
+  TextArea,
+} from "../../components/layoutComponents";
 import statusData from "../../assets/tables/json/ApplicationStatus-static.json";
+import { getReasons } from "../../util/services";
+import {
+  updateApplication,
+  updateReviewVersion,
+} from "../../store/currentViews/viewSlice";
+import toast from "react-hot-toast";
 
 export const StandByApplication = () => {
   const { userData, myApplication } = useSelector((state) => state.userData);
   const dispatch = useDispatch();
   const [versions, setVersions] = useState([{ id: 0, name: "v1" }]);
   const [latestVersion, setLatestVersion] = useState(0);
-
+  const [reasonsData, setReasonsData] = useState([]);
+  const [openModalWarning, setOpenModalWarning] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [retireReason, setRetireReason] = useState();
 
   const openModal = () => {
     setIsOpenModal(true);
@@ -33,13 +52,16 @@ export const StandByApplication = () => {
   const colorBorder = (id_status) => {
     const style = "border-2 border-opacity-75 shadow-md";
     if (id_status == 1) {
-      return `border-red-500 ${style}`;
+      return `border-yellow-500 ${style}`;
     }
     if (id_status == 2) {
       return `border-purple-500 ${style}`;
     }
     if (id_status == 3) {
       return `border-green-500 ${style}`;
+    }
+    if (id_status == 4) {
+      return `border-red-500 ${style}`;
     }
     return "";
   };
@@ -75,15 +97,102 @@ export const StandByApplication = () => {
     dispatch(updateApplicationStage(8));
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const reasons = await getReasons();
+      setReasonsData(reasons);
+    };
+    fetchData();
+  }, []);
+
+  const handleInput = (e) => {
+    setRetireReason(e.target.value);
+  };
+
+  const handleRetire = () => {
+    const vesselTypeUpdate =
+      userData.applicationData.startApplication.vesselType[0].id;
+    const departmentUpdate =
+      userData.applicationData.startApplication.department[0].id;
+    const positionUpdate =
+      userData.applicationData.startApplication.position[0].id;
+
+    const vesselTypeData = {
+      vesselType: vesselTypeUpdate,
+      department: departmentUpdate,
+      position: positionUpdate,
+    };
+
+    // Clonar el arreglo de versiones y actualizar la versión más reciente
+    // const updatedVersions = [...application.versions];
+    // updatedVersions[selectedVersion.id] = applicationData;
+
+    // Crear el objeto application actualizado con las versiones actualizadas
+    const newApplicationData = {
+      ...myApplication,
+      comment: retireReason,
+      status: 6,
+      modifiedDate: new Date().toISOString(),
+      vesselType: vesselTypeUpdate,
+    };
+
+    const updatedApplication = {
+      ...newApplicationData,
+      vesselType: vesselTypeUpdate,
+      department: departmentUpdate,
+      position: positionUpdate,
+    };
+
+    const seafarerData = getSeafarerDataObject(myApplication.latestVersion);
+
+    const newData = {
+      ...seafarerData,
+      applicationDate: myApplication?.createdOn,
+    };
+
+    // Ejecutar el dispatch con el objeto application actualizado
+    dispatch(updateReviewVersion(myApplication.latestVersion));
+
+    dispatch(updateApplication(updatedApplication));
+
+    toast.promise(
+      Promise.all([
+        dispatch(
+          updateApplicationSent(
+            myApplication.uid,
+            updatedApplication,
+            vesselTypeData
+          )
+        ),
+        dispatch(updateSeafarerDataFirebase(myApplication.uid, newData, 10)),
+      ]),
+      {
+        loading: "Saving...",
+        success: <b>Saved</b>,
+        error: <b>Ups! Something went wrong. Try again</b>,
+      }
+    );
+    setOpenModalWarning(false);
+  };
+
   return (
     <div>
       {myApplication ? (
         <section className="w-full max-w-4xl mx-auto py-12 md:py-16 lg:py-20">
           <div className=" md:px-6 lg:px-8">
             <div className="grid gap-6 md:gap-8 lg:gap-10">
-              {userData.recruitmentStage !== 1 ||
-                (userData.recruitmentStage !== 13 && (
-                  <div className="flex flex-row justify-end">
+              {userData.recruitmentStage == 1 &&
+                userData.recruitmentStage == 13 && (
+                  <div className="flex justify-between mb-2">
+                    <Button
+                      color="failure"
+                      // onClick={() => {
+                      //   setOpenModalWarning(true);
+                      // }}
+                    >
+                      Retire from the Application Process
+                    </Button>
+
                     <button
                       onClick={handleViewProfile}
                       className="whitespace-nowrap border border-blue-300 bg-white text-blue-600 w-28 h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50 disabled:opacity-30 disabled:cursor-not-allowed"
@@ -91,7 +200,7 @@ export const StandByApplication = () => {
                       View Profile
                     </button>
                   </div>
-                ))}
+                )}
 
               <div className="grid gap-6 md:grid-cols-3">
                 <Card className={`${colorBorder(myApplication.status)}`}>
@@ -122,15 +231,35 @@ export const StandByApplication = () => {
                   <p className="text-l">Submission Date</p>
                   <div className="space-y-2">
                     <p className="text-lg font-medium">
-                      {formatDate(myApplication.createdOn, "dd-mm-yyyy") || ""}
-                      {/* {formattedDate} */}
+                      {formatDate(
+                        myApplication.createdOn,
+                        "dddd, mmmm dd yyyy"
+                      ) || ""}
                     </p>
-                    {/* <p className="text-muted-foreground">
-                      Application submitted 2 weeks ago
-                    </p> */}
                   </div>
                 </Card>
               </div>
+              {userData.recruitmentStage !== 1 &&
+                userData.recruitmentStage !== 13 && (
+                  <Card className={`${colorBorder(myApplication.status)}`}>
+                    <p className="text-l">
+                      Unfortunately, your application was denied.
+                    </p>
+                    <div className="space-y-2">
+                      <p className="text-sm font-bold">
+                        {myApplication.seguimientoReason
+                          ? reasonsData.find(
+                              (reason) =>
+                                reason.id == myApplication.seguimientoReason
+                            )?.reason
+                          : "--"}
+                      </p>
+                      <p className="text-sm font-light">
+                        {myApplication.comment}
+                      </p>
+                    </div>
+                  </Card>
+                )}
 
               <section
                 className={`${
@@ -211,6 +340,44 @@ export const StandByApplication = () => {
       ) : (
         <LoadingState />
       )}
+      <Modal
+        show={openModalWarning}
+        size="md"
+        onClose={() => setOpenModalWarning(false)}
+        popup
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              {
+                "Are you sure that you want to Retire from the Application Process?"
+              }
+            </h3>
+            <span className="text-sm ">
+              Please state a reason of your withdrawal from the process
+            </span>
+            <div>
+              <TextArea classname="min-h-28" onChange={handleInput} />
+            </div>
+            <div className="flex justify-center gap-4">
+              <Button color="gray" onClick={() => setOpenModalWarning(false)}>
+                Cancel
+              </Button>
+              <Button
+                color="failure"
+                disabled={!retireReason}
+                onClick={() => {
+                  handleRetire();
+                }}
+              >
+                Continue
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
       <ModalYesNo
         text={
           "You will now start filling your application again. Once you start this process you will need to finish it before the recruitment agent can continue reviewing your application."

@@ -213,6 +213,7 @@ export const ReviewApplication = () => {
   const [selectedVersion, setSelectedVersion] = useState([]);
 
   const handleSave = (e, state, isReadChange) => {
+    console.log(isReadChange);
     e.preventDefault();
     const vesselTypeUpdate =
       userData.applicationData.startApplication.vesselType[0].id;
@@ -259,9 +260,12 @@ export const ReviewApplication = () => {
     // Ejecutar el dispatch con el objeto application actualizado
     dispatch(updateReviewVersion(currentVersionData));
     if (state) {
+      console.log("actualizo");
       dispatch(setIsRead(isReadChange));
     }
-    dispatch(updateApplication(updatedApplication));
+    dispatch(
+      updateApplication(state ? updatedApplicationIsRead : updatedApplication)
+    );
 
     toast.promise(
       dispatch(
@@ -493,9 +497,7 @@ export const ReviewApplication = () => {
             vesselTypeData
           )
         ),
-        dispatch(
-          updateSeafarerDataFirebase(application.uid, newData, Stages[17])
-        ),
+        dispatch(updateSeafarerDataFirebase(application.uid, newData, 11)),
       ]),
       {
         loading: "Saving...",
@@ -668,7 +670,7 @@ export const ReviewApplication = () => {
                       <button
                         className={`border border-green-500 bg-green-500 text-white size-10 md:w-28 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-green-600 disabled:opacity-30 disabled:cursor-not-allowed`}
                         onClick={() => handleOpenModal("approve")}
-                        disabled={disabled}
+                        // disabled={disabled}
                       >
                         <HiCheckCircle className="h-4 w-4" />
                         <span className="hidden md:block ">Approve</span>
@@ -683,9 +685,7 @@ export const ReviewApplication = () => {
                         <button
                           className={`border border-red-600 bg-red-600 text-white size-10 md:w-28 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-red-700 disabled:opacity-30 disabled:cursor-not-allowed`}
                           onClick={() => handleOpenModal("deny")}
-                          disabled={
-                            disabled || application?.rejectReason?.id == ""
-                          }
+                          disabled={application.status === 4}
                         >
                           <HiXCircle className="h-4 w-4" />
                           <span className="hidden md:block ">Reject</span>
@@ -694,7 +694,7 @@ export const ReviewApplication = () => {
                       <button
                         className={`border border-yellow-600 bg-yellow-600 text-white size-10 md:w-28 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-yellow-700 disabled:opacity-30 disabled:cursor-not-allowed`}
                         onClick={() => handleOpenModal("sendback")}
-                        disabled={application.status === 2 || disabled}
+                        // disabled={application.status === 2 || disabled}
                       >
                         <HiOutlinePencilAlt className="h-4 w-4" />
                         <span className="hidden md:block ">Set Evaluation</span>
@@ -702,7 +702,7 @@ export const ReviewApplication = () => {
                       <button
                         className={`border border-blue-300 bg-white text-blue-600 size-10 md:w-28 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50 disabled:opacity-30 disabled:cursor-not-allowed`}
                         onClick={() => handleOpenModal("sendback")}
-                        disabled={application.status === 2 || disabled}
+                        // disabled={application.status === 4}
                       >
                         <HiOutlineReply className="h-4 w-4" />
                         <span className="hidden md:block ">Send Back</span>
@@ -723,18 +723,21 @@ export const ReviewApplication = () => {
                   </div>
                   <div className="my-4 flex flex-row items-end gap-3">
                     <SelectComponents
-                      id="rejectReason"
+                      id="seguimientoReason"
                       valueDefault="Reject Reason"
                       Text="Select a Reject Reason"
                       data={filteredReasonsData}
-                      name_valor={true}
+                      name_valor={false}
                       idKey="id"
                       valueKey="reason"
-                      name="rejectReason"
-                      initialValue={application?.rejectReason?.id}
+                      name="seguimientoReason"
+                      initialValue={application?.seguimientoReason}
                       onChange={(e) => {
                         const selectedValue = e[0];
-                        handleApplicationData("rejectReason", selectedValue);
+                        handleApplicationData(
+                          "seguimientoReason",
+                          selectedValue
+                        );
                       }}
                     />
                     <button
