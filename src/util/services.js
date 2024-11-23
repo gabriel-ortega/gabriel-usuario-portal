@@ -8,6 +8,8 @@ import {
   getCountFromServer,
   orderBy,
   startAfter,
+  getDoc,
+  doc,
 } from "firebase/firestore";
 import { FirebaseDB } from "../config/firebase/config";
 
@@ -175,6 +177,68 @@ export async function exportApplicationsExcel(json) {
     window.URL.revokeObjectURL(url);
   } else {
     console.error("Error al descargar el archivo:", response.statusText);
+  }
+}
+
+
+export async function downloadExcelDocumentExpired(filters = [],url,nameDocument) {
+  try {
+    const response = await fetch(`${bd_server}/reporte/${url}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({filters}),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.statusText}`);
+    }
+
+    // Convertir la respuesta en un Blob
+    const blob = await response.blob();
+
+    // Crear una URL para el blob y descargar el archivo
+    const downloadUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = downloadUrl;
+    link.download = `${nameDocument}.xlsx`;
+    link.click();
+    URL.revokeObjectURL(downloadUrl); // Limpia la URL
+  } catch (error) {
+    console.error("Error al descargar el reporte:", error.message);
+    throw error; // Permitir manejar el error en el componente si es necesario
+  }
+}
+
+
+export async function downloadExcel(filters = [],url,nameDocument) {
+  try {
+    const response = await fetch(`${bd_server}/reporte/${url}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(filters),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.statusText}`);
+    }
+
+    // Convertir la respuesta en un Blob
+    const blob = await response.blob();
+
+    // Crear una URL para el blob y descargar el archivo
+    const downloadUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = downloadUrl;
+    link.download = `${nameDocument}.xlsx`;
+    link.click();
+    URL.revokeObjectURL(downloadUrl); // Limpia la URL
+  } catch (error) {
+    console.error("Error al descargar el reporte:", error.message);
+    throw error; // Permitir manejar el error en el componente si es necesario
   }
 }
 
@@ -490,6 +554,7 @@ export async function fetchApplicationsData(
     const formattedEndDate = filters.applicationDateEnd
       ? `${filters.applicationDateEnd}T23:59:59.999Z`
       : null;
+      console.log(formattedStartDate)
     let queryConstraints = [];
 
     // Agregar filtros dinámicos según los valores de `filters`
@@ -1291,6 +1356,39 @@ export const getApplicationCV = async (uid, version) => {
     return [];
   }
 };
+
+
+
+export const getTemplate = async () => {
+  try {
+    const docRef = doc(FirebaseDB, "citas/template");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      const newData = {
+        ...data,
+        uid: docSnap.id,
+      };
+      return newData;
+    } else {
+      console.log("No se encontró el documento");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error obteniendo los datos:", error);
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
 
 /* -----------------------FETCH DE TABLAS AUXILIARES----------------------- */
 export const getVesselType = async () => {

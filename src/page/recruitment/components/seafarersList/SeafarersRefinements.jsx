@@ -140,15 +140,7 @@ const CustomRefinementList = ({
 // Componente principal con múltiples filtros
 export const SeafarersRefinements = ({ onFilters = () => {} }) => {
   const { canRefine, refine } = useClearRefinements();
-  const [selectedRefinements, setSelectedRefinements] = useState({
-    position: [],
-    recruitmentStage: [],
-    department: [],
-    vesselType: [],
-    nationality: [],
-    residency: [],
-    available: [],
-  });
+  const [selectedRefinements, setSelectedRefinements] = useState([]);
 
   const handleRefinementChange = (attribute, values) => {
     setSelectedRefinements((prev) => ({

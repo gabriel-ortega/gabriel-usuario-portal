@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Avatar, Badge, Card, Pagination, Table } from "flowbite-react";
 import {
+  downloadExcel,
   fetchFirstInterviewsCompleted,
   fetchFirstInterviewsPending,
   fetchFirstInterviewsReport,
@@ -301,6 +302,21 @@ export const FirstInterviewList = () => {
     };
   }
 
+  const handleDowloadExcelCompleted = async () => {
+    try {
+      await downloadExcel([],"firstinterviewcompleted","first_interview_completed");
+    } catch (error) {
+      console.error("Error al descargar el reporte:", error.message);
+    }
+  };
+
+  const handleDowloadExcelPending = async () => {
+    try {
+      await downloadExcel([],"firstinterviewpending","first_interview_pending");
+    } catch (error) {
+      console.error("Error al descargar el reporte:", error.message);
+    }
+  };
   useEffect(() => {
     const today = formatDate(new Date(), "dddd, mmmm dd yyyy");
     if (dateFilter.startDate && !dateFilter.endDate) {
@@ -362,7 +378,15 @@ export const FirstInterviewList = () => {
             <section>
               <section className="px-8">
                 <section className="my-4 hidden md:block">
+                  <div className="flex justify-between items-center">
                   <span>Pending/Appointed Interviews</span>
+                  <button
+          onClick={handleDowloadExcelPending}
+          className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
+        >
+          Export to Excel
+        </button>
+        </div>
                   <div className="overflow-x-auto max-h-96">
                     <Table hoverable className="">
                       <Table.Head>
@@ -482,7 +506,16 @@ export const FirstInterviewList = () => {
                   </div>
                 </section>
                 <section className="my-10 hidden md:block">
-                  <span>Completed Interviews</span>
+                <div className="flex justify-between items-center">
+                <span>Completed Interviews</span>
+                  <button
+          onClick={handleDowloadExcelCompleted}
+          className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
+        >
+          Export to Excel
+        </button>
+        </div>
+                  
                   <div className="overflow-x-auto max-h-96">
                     <Table hoverable className="">
                       <Table.Head>

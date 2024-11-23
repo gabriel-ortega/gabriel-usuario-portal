@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
+  downloadExcelDocumentExpired,
   exportAnyExcel,
   fetchExpiredDocumentsReport,
   getPositions,
@@ -79,45 +80,18 @@ export const ExpiredDocumentsView = () => {
     loadResults(newValue);
   };
 
-  const sendArrayToBackend = () => {
-    const formattedSeafarers = seafarers.map((seafarer) => {
-      // Crear un nuevo objeto sin el campo `uid` y reordenar propiedades
-      const {
-        uid,
-        recruitmentStage,
-        position,
-        returnDate,
-        vessel,
-        name,
-        seafarerName,
-        seafarerVesselType,
-        expirationDate,
-        isExpired,
-        monthsRemaining,
-      } = seafarer;
-
-      return {
-        document: name,
-        seafarerName,
-        recruitmentStage: getStageName(recruitmentStage),
-        seafarerVesselType: getVesselTypeName(seafarerVesselType),
-        position: getPositionName(position),
-        returnDate,
-        vessel: getVesselName(vessel),
-        expirationDate,
-        isExpired,
-        monthsRemaining,
-      };
-    });
-
-    exportAnyExcel(
-      {
-        dataDinamic: formattedSeafarers,
-        title: `Expired Documents (${value} months)`,
-      },
-      `Expired Documents (${value} months)`
-    );
+  const sendArrayToBackend = async () => {
+    try {
+      await downloadExcelDocumentExpired(value,"documentexpired","Document Expired"); 
+    } catch (error) {
+      console.error("Error al descargar el reporte:", error.message);
+    }
   };
+
+
+  useEffect(()=>{
+    console.log(value)
+  },[seafarers])
 
   return (
     <>

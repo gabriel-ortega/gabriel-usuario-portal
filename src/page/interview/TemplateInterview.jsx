@@ -2,9 +2,12 @@ import { useState}  from 'react';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Table } from "flowbite-react";
-import Cookies from 'js-cookie';
 import { useEffect } from 'react';
-const interviewers = ["",'Juan Pérez', 'María López', 'Carlos Gómez'];
+import { getInterviewers, getTemplate } from '../../util/services';
+import { doc,setDoc} from 'firebase/firestore';
+import { FirebaseDB } from '../../config/firebase/config';
+
+
 const asunto = ['','Primera Entrevista','Segunda Entrevista'];
 const durations = ["",5, 10, 15, 30];
 export default function TemplateInterview() {
@@ -22,6 +25,8 @@ export default function TemplateInterview() {
     link:""
   })
 
+  const [data,setData]=useState({})
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if(name=="nameTemplate" || name=="title"){
@@ -38,13 +43,44 @@ export default function TemplateInterview() {
     }));
   };
 
- useEffect(()=>{
-  const value = Cookies.get('myCookie')?JSON.parse(Cookies.get('myCookie')):false;
- 
-    if (value) {
-      setDataTemplate(value)
+  function getNameInterviewer(uid) {
+    const result = data.entrevistador.find(item => item.uid === uid);
+    return result ? result.displayName : "";
+  }
+
+  const loadResults = async () => {
+    try {
+      const entrevistador = await getInterviewers();
+      const template = await getTemplate()
+      setDataTemplate(template.data)
+      setData(
+        {
+          ...data,
+          entrevistador:entrevistador
+        }
+      )
+    } catch (error) {
+      console.error("Error al cargar datos:", error);
     }
-},[]) 
+  };
+
+  const createTemplateFirebase = async (data) => {
+    try {
+      const docRef = doc(FirebaseDB, "citas/template");
+    const docId = docRef.id;
+    await setDoc(docRef, { data:data, id: docId });
+      
+      console.log("Documento creado con ID:", docId);
+    } catch (error) {
+      console.error("Error creando el template:", error);
+    }
+  };
+
+
+
+  useEffect(()=>{
+   loadResults()
+  },[]) 
 
   const handleChangeCreate= () => {
     setCreateTemplate(!createTemplate)
@@ -111,7 +147,7 @@ export default function TemplateInterview() {
           title: title,
           startTime: '',
           endTime: '',
-          interviewer: interviewers[0],
+          interviewer: "",
           interviewee: '',
           duration: '',
           status: '',
@@ -119,21 +155,16 @@ export default function TemplateInterview() {
         });
       };
 
-  const mostrar=(()=>{
+ /*  const mostrar=(()=>{
+    console.log(data)
     console.log("----events----")
     console.log(events)
     console.log("----Newevents----")
     console.log(newEvent)
     console.log("----dataTemplate----")
     console.log(dataTemplate)
-    const value = JSON.parse(Cookies.get('myCookie'));
 
-    if (value) {
-      console.log(value)
-    } else {
-      alert('No hay cookies guardadas.');
-    }
-  })
+  }) */
 
   const save = () => {
     if (events.id) {
@@ -143,22 +174,38 @@ export default function TemplateInterview() {
             ? { ...event, nameTemplate: events.nameTemplate, interview: events.interview, dates: events.dates }
             : event
         );
-        Cookies.set('myCookie', JSON.stringify(updatedDataTemplate), { expires: 7 });
+        createTemplateFirebase(updatedDataTemplate)
         return updatedDataTemplate;
       });
     } else {
-      let count = dataTemplate.length + 1;
+      let count = 1
+      if(dataTemplate.length > 0){
+
+     
+     count= dataTemplate.length > 0 ? Math.max(...dataTemplate.map(template => template.id)) + 1 : 1;
+    }
+      const generateUniqueId = () => {
+        while (dataTemplate.some((template) => template.id === count)) {
+          count++;
+        }
+        return count;
+      };
+      
+      // Crear el nuevo objeto con un `id` único
       const newEventsWithId = {
-        id: count,
+        id: dataTemplate.length > 0?generateUniqueId():count,
         nameTemplate: events.nameTemplate,
         interview: events.interview,
-        dates: events.dates
+        dates: events.dates,
       };
+
       setDataTemplate((prevDataTemplate) => {
-        const updatedDataTemplate = [...prevDataTemplate, newEventsWithId];
-        Cookies.set('myCookie', JSON.stringify(updatedDataTemplate), { expires: 7 });
+        const safePrevDataTemplate = Array.isArray(prevDataTemplate) ? prevDataTemplate : [];
+        const updatedDataTemplate = [...safePrevDataTemplate, newEventsWithId];
+        createTemplateFirebase(Array.isArray(updatedDataTemplate) ? updatedDataTemplate : [updatedDataTemplate]) 
         return updatedDataTemplate;
       });
+      
     }
   
     setEvents({ nameTemplate: "", interview: "", dates: [] });
@@ -197,16 +244,22 @@ export default function TemplateInterview() {
   const handleDelete = (indexToDelete,nameTable) => {
     if(nameTable==="template"){
       const updatedDates = dataTemplate.filter((template) => template.id != indexToDelete);
-      setDataTemplate(updatedDates);
+      setDataTemplate(updatedDates)
+      createTemplateFirebase(Array.isArray(updatedDates) ? updatedDates : [updatedDates])
     }else{
       const updatedDates = events.dates.filter((_, index) => index !== indexToDelete);
-      setEvents({ ...events, dates: updatedDates });
+      setEvents({ ...events, dates: updatedDates })
     }
   };
   
   const handleEdit = (id) => {
     setCreateTemplate(true)
-    setEvents(dataTemplate[id-1])
+    const index = dataTemplate.findIndex((template) => template.id === id);
+
+    // Verifica si el elemento existe en el array antes de guardarlo
+    if (index !== -1) {
+      setEvents(dataTemplate[index]);
+    }
   };
 
   const sortedEvents = [...events.dates].sort((a, b) => {
@@ -217,12 +270,13 @@ export default function TemplateInterview() {
 
   return (
     <>
-     <h1 className='text-center font-semibold text-lg mt-5'>Programación de Plantilla</h1>
-     <button type="submit" onClick={mostrar} className={` bg-[#1976d2]  rounded-md w-44 h-10 mt-4 text-center text-gray-50`}>mostrar</button>
-     <button type="submit" onClick={handleChangeCreate} className={`${createTemplate?"hidden":"block"} bg-[#1976d2]  rounded-md w-44 h-10 mt-4 text-center text-gray-50`}>Crear plantilla</button>
+
+     <h1 className='text-center font-semibold text-lg mt-5'>Template Programming</h1>
+    {/*  <button type="submit" onClick={mostrar} className={` bg-[#1976d2]  rounded-md w-44 h-10 mt-4 text-center text-gray-50`}>mostrar</button> */}
+     <button type="submit" onClick={handleChangeCreate} className={`${createTemplate?"hidden":"block"} bg-[#1976d2]  rounded-md w-44 h-10 mt-4 text-center text-gray-50`}>Create template</button>
     { createTemplate?
     <form onSubmit={handleSubmit} className='md:p-4 text-center'>
-          <fieldset className=' grid grid-cols-2 items-center'>
+          <fieldset className=' grid grid-cols-1 lg:grid-cols-2 items-center gap-6'>
           <div className="col-span-1">
     <label>Name Template:</label>
     <input
@@ -233,13 +287,13 @@ export default function TemplateInterview() {
       onChange={handleInputChange}
       required
       disabled={events.dates.length>0?true:false}
-      className="rounded-md h-8 ml-3 disabled:opacity-30"
+      className="rounded-md disabled:opacity-30 w-full border border-gray-400 h-10 "
     />
   </div>
   <div className="col-span-1">
-    <label>Asunto:</label>
+    <label>Subject:</label>
     <select
-          className='rounded-lg ml-2 disabled:opacity-30'
+          className='rounded-lg disabled:opacity-30 w-full border border-gray-400 h-10'
               name="title"
               required
               disabled={events.dates.length>0?true:false}
@@ -255,20 +309,20 @@ export default function TemplateInterview() {
   </div>
           </fieldset>
  <fieldset className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4  mt-3">
-  <legend className='text-center bg-teal-500 w-full p-1 text-gray-50 mb-2'>Tiempo</legend>
+  <legend className='text-center bg-teal-500 w-full p-1 text-gray-50 mb-2'>TIME</legend>
   <div className="col-span-1">
-    <label>Duración de la entrevista:</label>
+    <label>Duration of the Interview:</label>
     <select
       name="duration"
       value={newEvent.duration}
       required
       onChange={handleDurationChange}
-      className="mt-1 block w-full"
+      className="mt-1 block w-full border border-gray-400 h-10 rounded-md"
     >
       {durations.map((duration, index) => (
         duration!=""?
         <option key={index} value={duration}>
-          {duration} minutos
+          {duration} minutes
         </option>
         :<option key={index} value={duration}>
         {duration}
@@ -277,50 +331,51 @@ export default function TemplateInterview() {
     </select>
   </div>
   <div className="col-span-1">
-    <label>Hora de inicio:</label>
+    <label>Start Time:</label>
     <input
       type="time"
       name="startTime"
       value={newEvent.startTime}
       onChange={handleStartTimeChange}
       required
-      className="mt-1 block w-full"
+      className="mt-1 block w-full border border-gray-400 h-10 rounded-md p-2"
     />
   </div>
   <div className="col-span-1">
-    <label>Hora de finalización:</label>
+    <label>End Time:</label>
     <input
       type="time"
       name="endTime"
       value={newEvent.endTime}
       readOnly
-      className="mt-1 block w-full"
+      className="mt-1 block w-full border border-gray-400 h-10 rounded-md p-2"
     />
   </div>
 </fieldset>
          <fieldset className='grid grid-cols-1 md:grid-cols-2 mt-3 text-center'>
-         <legend className='text-center bg-teal-500 w-full p-1 text-gray-50 mb-2'>Personal</legend>
+         <legend className='text-center bg-teal-500 w-full p-1 text-gray-50 mb-2'>STAFF</legend>
          <div className="">
-            <label className='block'>Entrevistador:</label>
+            <label className='block'>Interviewer:</label>
             <select
-            className='rounded-lg ml-2'
+            className='rounded-md  border border-gray-400 h-10 w-full lg:w-52'
               name="interviewer"
               required
               value={newEvent.interviewer}
               onChange={handleInputChange}
             >
-              {interviewers.map((interviewer, index) => (
-                <option key={index} value={interviewer}>
-                  {interviewer}
+              <option value=""></option>
+              {data.entrevistador.map((interviewer, index) => (
+                <option key={index} value={interviewer.uid}>
+                  {interviewer.displayName}
                 </option>
               ))}
             </select>
               </div>
             </fieldset>
-          <div className='flex items-center justify-center gap-5 pt-7'>
-          <button type="submit" className='bg-[#1976d2]  rounded-md w-44 h-10  text-center text-gray-50'>Agregar Horario</button>
-          <button type="button" onClick={save}  className='bg-[#1976d2]  rounded-md w-44 h-10  text-center text-gray-50 '>Guardar Plantilla</button>
-          <button type="button" onClick={handleChangeCreate} className='bg-[#1976d2]  rounded-md w-44 h-10  text-center text-gray-50 '>Cancelar Plantilla</button>
+          <div className='flex flex-col items-center lg:flex-row justify-center gap-5 pt-7'>
+          <button type="submit" className='bg-green-500  rounded-md w-44 h-10  text-center text-gray-50'>Agregar Horario</button>
+          <button type="button" onClick={save} disabled={events.dates.length>0 ?false:true}  className='bg-[#1976d2]  rounded-md w-44 h-10  text-center text-gray-50 disabled:opacity-65'>Guardar Plantilla</button>
+          <button type="button" onClick={handleChangeCreate} className='bg-red-500  rounded-md w-44 h-10  text-center text-gray-50 disabled:opacity-65'>Cancelar Plantilla</button>
           </div>
           
         </form>
@@ -344,7 +399,7 @@ export default function TemplateInterview() {
           <Table.Cell>{event.duration}</Table.Cell>
           <Table.Cell>{convertToHourFormat(event.start)}</Table.Cell>
           <Table.Cell>{convertToHourFormat(event.end)}</Table.Cell>
-          <Table.Cell>{event.interviewer}</Table.Cell>
+          <Table.Cell>{getNameInterviewer(event.interviewer)}</Table.Cell>
           <Table.Cell>
             <button
               className="text-red-600 hover:underline"
@@ -395,7 +450,7 @@ export default function TemplateInterview() {
           <Table.Cell>
             <button
               className="text-red-600 hover:underline"
-              onClick={() => handleDelete(index,"template")}>
+              onClick={() => handleDelete(templateData.id,"template")}>
               Delete
             </button>
           </Table.Cell>

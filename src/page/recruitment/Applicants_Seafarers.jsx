@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { Avatar, Badge, Card, Pagination, Table } from "flowbite-react";
 import {
   countSeafarersData,
-  exportApplicationsExcel,
-  fetchSeafarersData,
+  downloadExcel,
 } from "../../util/services";
 import { useNavigate } from "react-router-dom";
 import { formatDate, formatTitleCase } from "../../util/helperFunctions";
@@ -53,9 +52,22 @@ export default function Applicants_Seafarers() {
 
   const [filters, setFilters] = useState({});
 
-  async function sendArrayToBackend() {
-    exportApplicationsExcel(filters);
-  }
+  const sendArrayToBackend = async () => {
+    try {
+      await downloadExcel([],"gapoolSeguimiento","Reporte_de_Seguimiento");
+    } catch (error) {
+      console.error("Error al descargar el reporte:", error.message);
+    }
+  };
+
+  const handleDowloadExcelAllApplicant = async () => {
+    try {
+      await downloadExcel([],"gapoolcontract","Reporte_de_AllAplicant&Seafarer");
+    } catch (error) {
+      console.error("Error al descargar el reporte:", error.message);
+    }
+  };
+  
 
   return (
     <>
@@ -74,12 +86,7 @@ export default function Applicants_Seafarers() {
         >
           Add Applicant
         </button>
-        <button
-          onClick={sendArrayToBackend}
-          className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
-        >
-          Export to Excel
-        </button>
+        
       </div>
       <TabGroup className="py-5">
         <TabList className="flex flex-row items-center  justify-center bg-white ">
@@ -92,6 +99,12 @@ export default function Applicants_Seafarers() {
         </TabList>
         <TabPanels>
           <TabPanel className="">
+          <button
+          onClick={handleDowloadExcelAllApplicant}
+          className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
+        >
+          Export to Excel
+        </button>
             <section className="p-8 w-full h-full">
               <InstantSearch
                 indexName="globalSearch"
@@ -113,6 +126,12 @@ export default function Applicants_Seafarers() {
             </section>
           </TabPanel>
           <TabPanel className="">
+          <button
+          onClick={sendArrayToBackend}
+          className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
+        >
+          Export to Excel
+        </button>
             <section className="p-8 w-full h-full">
               <InstantSearch
                 indexName="globalSearch"

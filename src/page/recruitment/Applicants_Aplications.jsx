@@ -5,6 +5,7 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { Avatar, Badge, Card, Pagination, Table } from "flowbite-react";
 import {
   countApplicationsData,
+  downloadExcel,
   exportApplicationsExcel,
   fetchApplicationsData,
   fetchApplicationsReport,
@@ -642,9 +643,13 @@ export default function Applicants_Aplications() {
 
   const [filters, setFilters] = useState({});
 
-  async function sendArrayToBackend() {
-    exportApplicationsExcel(filters);
-  }
+  const handleDowloadExcel = async () => {
+    try {
+      await downloadExcel([],"application","Reporte_de_Application"); 
+    } catch (error) {
+      console.error("Error al descargar el reporte:", error.message);
+    }
+  };
 
   return (
     <>
@@ -672,7 +677,7 @@ export default function Applicants_Aplications() {
                 </span>
               </div>
               <button
-                onClick={sendArrayToBackend}
+                onClick={handleDowloadExcel}
                 className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
               >
                 Export to Excel

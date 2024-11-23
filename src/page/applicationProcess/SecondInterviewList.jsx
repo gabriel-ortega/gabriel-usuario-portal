@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Avatar, Badge, Card, Pagination, Table } from "flowbite-react";
 import {
+  downloadExcel,
   fetchFirstInterviewsCompleted,
   fetchFirstInterviewsPending,
   fetchSecondInterviewsCompleted,
@@ -233,6 +234,22 @@ export const SecondInterviewList = () => {
     setLoadingVar(false);
   };
 
+  const handleDowloadExcelCompleted = async () => { 
+    try {
+      await downloadExcel([],"secondinterviewcompleted","second_interview_completed");
+    } catch (error) {
+      console.error("Error al descargar el reporte:", error.message);
+    }
+  };
+
+  const handleDowloadExcelPending = async () => {
+    try {
+      await downloadExcel([],"secondinterviewpending","second_interview_pending");
+    } catch (error) {
+      console.error("Error al descargar el reporte:", error.message);
+    }
+  };
+
   const loadResults = async () => {
     try {
       const pending = await fetchSecondInterviewsPending();
@@ -361,7 +378,16 @@ export const SecondInterviewList = () => {
             <section>
               <section className="px-8">
                 <section className="my-4 hidden md:block">
-                  <span>Pending/Appointed Interviews</span>
+                <div className="flex justify-between items-center">
+                <span>Pending/Appointed Interviews</span>
+                  <button
+          onClick={handleDowloadExcelPending}
+          className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
+        >
+          Export to Excel
+        </button>
+        </div>
+                  
                   <div className="overflow-x-auto max-h-96">
                     <Table hoverable className="">
                       <Table.Head>
@@ -481,7 +507,16 @@ export const SecondInterviewList = () => {
                   </div>
                 </section>
                 <section className="my-10 hidden md:block">
+                  
+                  <div className="flex justify-between items-center">
                   <span>Completed Interviews</span>
+                  <button
+          onClick={handleDowloadExcelCompleted}
+          className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
+        >
+          Export to Excel
+        </button>
+        </div>
                   <div className="overflow-x-auto max-h-96">
                     <Table hoverable className="">
                       <Table.Head>

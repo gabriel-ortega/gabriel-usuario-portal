@@ -5,6 +5,7 @@ import {
   countCanceledEmbarks,
   countCompletedEmbarks,
   countTotalEmbarks,
+  downloadExcel,
   exportAnyExcel,
   fetchActiveEmbarksData,
   getCompanies,
@@ -48,7 +49,7 @@ export const EmbarksDashboard = () => {
   const [rawEmbarksData, setRawEmbarksData] = useState([]);
   const [rawEndingEmbarks, setRawEndingEmbarks] = useState([]);
   const [rawPendingEmbarks, setRawPendingEmbarks] = useState([]);
-
+  const[filterExcel,setFilterExcel]=useState("") 
   // Memorizar la función de carga de datos usando useCallback para evitar recrearla en cada render.
   const load = useCallback(async () => {
     setIsLoading(true); // Mover dentro de la función para asegurarnos de que siempre se reinicia al iniciar carga
@@ -93,6 +94,7 @@ export const EmbarksDashboard = () => {
 
   const onSelectChange = (e, inputName) => {
     const value = e.target.value;
+    setFilterExcel(value)
     const now = new Date();
     // Calcular el inicio del mes actual
     const startOfCurrentMonth =
@@ -121,6 +123,39 @@ export const EmbarksDashboard = () => {
     // exportApplicationsExcel(filters);
     console.log(filters);
   }
+
+
+  const handleDowloadExcelAssignedEmbark = async () => {
+    try {
+      await downloadExcel([],"embarkassignedvessel","embark_assigned_vessel");
+    } catch (error) {
+      console.error("Error al descargar el reporte:", error.message);
+    }
+  };
+
+  const handleDowloadExcelEmbark = async () => {
+    try {
+      await downloadExcel([],"embark","embark");
+    } catch (error) {
+      console.error("Error al descargar el reporte:", error.message);
+    }
+  };
+
+  const handleDowloadExcelEmbarkActive = async () => {
+    try {
+      if(filterExcel == "2"){
+        await downloadExcel([],"embarkpending","embark_pending");
+      }else if (filterExcel == "1"){
+        await downloadExcel([],"embarkmes","embark_current_month");
+      }else{
+        await downloadExcel([],"embarkactive","embark_active");
+      }
+      
+    
+    } catch (error) {
+      console.error("Error al descargar el reporte:", error.message);
+    }
+  };
 
   useEffect(() => {
     console.log(selectFilterValue);
@@ -161,7 +196,7 @@ export const EmbarksDashboard = () => {
                   />
                 </div>
                 <button
-                  onClick={sendArrayToBackend}
+                  onClick={handleDowloadExcelEmbarkActive}
                   className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
                 >
                   Export to Excel
@@ -202,7 +237,7 @@ export const EmbarksDashboard = () => {
             <section className="p-8 w-full h-full">
               <div className="flex justify-end my-2">
                 <button
-                  onClick={sendArrayToBackend}
+                  onClick={handleDowloadExcelAssignedEmbark}
                   className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
                 >
                   Export to Excel
@@ -233,7 +268,7 @@ export const EmbarksDashboard = () => {
             <section className="p-8 w-full h-full">
               <div className="flex justify-end my-2">
                 <button
-                  onClick={sendArrayToBackend}
+                  onClick={handleDowloadExcelEmbark}
                   className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
                 >
                   Export to Excel

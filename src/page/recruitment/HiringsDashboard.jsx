@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Card, Pagination, Table } from "flowbite-react";
 import {
+  downloadExcel,
   exportAnyExcel,
   fetchHiringActiveData,
   getCompanies,
@@ -87,10 +88,21 @@ export const HiringsDashboard = () => {
 
   const [filters, setFilters] = useState({});
 
-  async function sendArrayToBackend() {
-    // exportApplicationsExcel(filters);
-    console.log(filters);
-  }
+  const handleDowloadExcelActive = async () => {
+    try {
+      await downloadExcel([],"hiringactive","hiring_active"); 
+    } catch (error) {
+      console.error("Error al descargar el reporte:", error.message);
+    }
+  };
+
+  const handleDowloadExcelTotal = async () => {
+    try {
+      await downloadExcel([],"hiring","hiring"); 
+    } catch (error) {
+      console.error("Error al descargar el reporte:", error.message);
+    }
+  };
 
   return (
     <section className="px-5 py-5">
@@ -145,7 +157,7 @@ export const HiringsDashboard = () => {
             <section className="p-8 w-full h-full">
               <div className="flex justify-end">
                 <button
-                  onClick={sendArrayToBackend}
+                  onClick={handleDowloadExcelActive}
                   className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
                 >
                   Export to Excel
@@ -176,7 +188,7 @@ export const HiringsDashboard = () => {
             <section className="p-8 w-full h-full">
               <div className="flex justify-end">
                 <button
-                  onClick={sendArrayToBackend}
+                  onClick={handleDowloadExcelTotal}
                   className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
                 >
                   Export to Excel
