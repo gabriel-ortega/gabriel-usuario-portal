@@ -15,20 +15,20 @@ export default function Interview() {
             <Tab className="data-[selected]:border-b-2 border-blue-500 px-2 flex flex-col md:flex-row py-2 text-sm text-black items-center justify-center md:w-56 relative">
         PROGRAMACION
             </Tab>
-            <Tab className="data-[selected]:border-b-2 border-blue-500 px-2 md:translate-y-0 h-15 py-2 text-sm text-black flex flex-col md:flex-row items-center justify-center md:w-56 relative">
+           {/*  <Tab className="data-[selected]:border-b-2 border-blue-500 px-2 md:translate-y-0 h-15 py-2 text-sm text-black flex flex-col md:flex-row items-center justify-center md:w-56 relative">
         PLANTILLA
-            </Tab>
+            </Tab> */}
             <Tab className="data-[selected]:border-b-2 border-blue-500 px-2 py-2 text-sm text-black flex flex-col md:flex-row items-center justify-center md:w-56 relative">
-        EDITAR PROGRAMACION
+        SCHEDULE
             </Tab>
           </TabList>
           <TabPanels>
             <TabPanel className="">
          <AgendaForm/>
             </TabPanel>
-            <TabPanel className="">
+            {/* <TabPanel className="">
              <TemplateInterview/>
-            </TabPanel>
+            </TabPanel> */}
             <TabPanel>
               <EditDates/>
             </TabPanel>

@@ -33,7 +33,7 @@ export function ModalYesNo({
               {text}
             </h3>
             {children}
-            <div className="flex justify-center gap-4">
+            <div className="flex justify-center gap-4 pt-5">
               {disableButtonCancel == false ? (
                 <>
                   <Button

@@ -54,6 +54,8 @@ const formValidations = {
   education: [(value) => value?.id != 0, "This field is mandatory."],
   knowAboutUs: [(value) => value?.id != 0, "This field is mandatory."],
   deported: [(value) => value != null, "This field is mandatory."],
+  visaDenied: [(value) => value != null, "This field is mandatory."],
+  visaCancelled: [(value) => value != null, "This field is mandatory."],
 };
 
 const bmiCalc = (weight, height) => {
@@ -208,6 +210,8 @@ export const ApplicantProfile = ({
     bmi,
     deported,
     deportedValid,
+    visaCancelledValid,
+    visaDeniedValid,
     formState,
     unsavedChanges,
     // isFormValid,
@@ -661,13 +665,32 @@ export const ApplicantProfile = ({
               {/* COMPONENTE SOBRE SI FUE DEPORTADO */}
 
               <YesNoInput
-                text="Have you ever been deported"
+                text="Have you ever been deported?"
                 name="deported"
                 onChange={onInputChange}
                 defaultChecked={
                   userData.applicationData.applicationProfile.profile.deported
                 }
                 isValid={!deportedValid}
+              />
+              <YesNoInput
+                text="Have you ever had a C1-D Visa Cancelled?"
+                name="visaCancelled"
+                onChange={onInputChange}
+                defaultChecked={
+                  userData.applicationData.applicationProfile.profile
+                    .visaCancelled
+                }
+                isValid={!visaCancelledValid}
+              />
+              <YesNoInput
+                text="Have you ever had a C1-D Visa Denied?"
+                name="visaDenied"
+                onChange={onInputChange}
+                defaultChecked={
+                  userData.applicationData.applicationProfile.profile.visaDenied
+                }
+                isValid={!visaDeniedValid}
               />
             </section>
           </fieldset>

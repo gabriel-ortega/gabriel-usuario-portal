@@ -11,22 +11,31 @@ import {
 import { IoAlertCircleOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getSeafarerData } from "../../store/userData";
+import {
+  getSeafarerData,
+  updateSeafarerDataFirebase,
+  updateUsersData,
+} from "../../store/userData";
 import { Button, Modal, Progress, Timeline } from "flowbite-react";
 import stagesData from "../../assets/tables/json/RecruitmentStage-static.json";
 import { formatDate } from "../../util/helperFunctions";
 import { LoadingState } from "../../components/skeleton/LoadingState";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { TextArea } from "../../components/layoutComponents";
+import { setProfileView } from "../../store/currentViews/viewSlice";
 
 export const ApplicantProcessView = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userData, isSaving } = useSelector((state) => state.userData);
   const [isLoading, setIsLoading] = useState(true);
+  const [retireReason, setRetireReason] = useState();
   const { hirings, profile, currentHiring, currentEmbark, embarks } =
     useSelector((state) => state.currentViews);
   const [openModalWarning, setOpenModalWarning] = useState(false);
+
   useEffect(() => {
     dispatch(getSeafarerData(userData.uid));
     setIsLoading(false);
@@ -51,6 +60,117 @@ export const ApplicantProcessView = () => {
       default:
         return "bg-gray-500";
     }
+  };
+
+  const handleInput = (e) => {
+    setRetireReason(e.target.value);
+  };
+  const handleRetire = () => {
+    const currentStage = profile.recruitmentStage;
+
+    let newStage;
+    let additionalFields = {};
+
+    switch (currentStage) {
+      case 1:
+        newStage = 10;
+        additionalFields = { available: false };
+        break;
+      case 2:
+        newStage = 8;
+        additionalFields = {
+          firstInterview: { status: "Retired" },
+          available: false,
+        };
+        break;
+      case 3:
+        newStage = 9;
+        additionalFields = {
+          secondInterview: { status: "Retired" },
+          available: false,
+        };
+        break;
+      case 4:
+        newStage = 16;
+        additionalFields = { available: false };
+        break;
+      case 6:
+        newStage = 22;
+        additionalFields = { available: false };
+        break;
+      case 13:
+        newStage = 7;
+        additionalFields = { available: false };
+        break;
+      case 20:
+        newStage = 23;
+        additionalFields = { available: false };
+        break;
+      // case 20:
+      //   // Prompt user for decision (e.g., modal with options)
+      //   const answerOptions = ["Own Request", "Mind Change", "Unavailable"];
+      //   const respuesta = window.prompt(
+      //     "This applicant has decided to withdraw while on VACATION. Choose a status to apply:",
+      //     answerOptions.join(", ")
+      //   );
+
+      //   switch (respuesta) {
+      //     case "Own Request":
+      //       newStage = 23;
+      //       additionalFields = { Available: false };
+      //       break;
+      //     case "Mind Change":
+      //       newStage = 22;
+      //       additionalFields = { Available: false };
+      //       break;
+      //     case "Unavailable":
+      //       newStage = 25;
+      //       additionalFields = { Available: false };
+      //       break;
+      //     default:
+      //       return; // Exit if no valid response
+      //   }
+
+      //   // Set active contract to false for currentStage 20
+      //   const activeContract = (profile.contracts || []).find(
+      //     (contract) => contract.Active
+      //   );
+      //   if (activeContract) {
+      //     additionalFields.contracts = profile.contracts.map((contract) =>
+      //       contract === activeContract ? { ...contract, Active: false } : contract
+      //     );
+      //   }
+      //   break;
+      default:
+        console.warn("Invalid stage");
+        return;
+    }
+
+    // Dispatch the update with new recruitment stage and additional fields
+    const updatedSeafarerData = {
+      recruitmentStage: newStage,
+      ...additionalFields,
+      SeguimientoDate: new Date().toISOString(),
+      SeguimientoID: currentStage,
+      SeguimientoComment: retireReason,
+    };
+
+    const profileData = {
+      ...profile,
+      recruitmentStage: newStage,
+      ...additionalFields,
+      SeguimientoDate: new Date().toISOString(),
+      SeguimientoID: currentStage,
+    };
+
+    dispatch(setProfileView(profileData));
+
+    toast.promise(dispatch(updateUsersData(profile.uid, updatedSeafarerData)), {
+      loading: "Saving...",
+      success: <b>Saved!</b>,
+      error: <b>Ups! Something went wrong. Try again</b>,
+    });
+    setOpenModalWarning(false);
   };
 
   return (
@@ -94,22 +214,7 @@ export const ApplicantProcessView = () => {
                 <h3 className="text-lg font-semibold mb-3">
                   Recruitment Progress
                 </h3>
-                <Progress
-                  progress={
-                    profile.recruitmentStage === 2 ||
-                    profile.recruitmentStage === undefined
-                      ? "0"
-                      : profile.recruitmentStage === 3
-                      ? "25"
-                      : profile.recruitmentStage === 4
-                      ? "50"
-                      : profile.recruitmentStage === 5
-                      ? "75"
-                      : "100"
-                  }
-                  label="Application Progress"
-                  className="w-full mb-4"
-                />
+
                 <div className="space-y-5">
                   <Timeline>
                     <Timeline.Item>
@@ -306,14 +411,21 @@ export const ApplicantProcessView = () => {
                 "Are you sure that you want to Retire from the Application Process?"
               }
             </h3>
+            <span className="text-sm ">
+              Please state a reason of your withdrawal from the process
+            </span>
+            <div>
+              <TextArea classname="min-h-28" onChange={handleInput} />
+            </div>
             <div className="flex justify-center gap-4">
               <Button color="gray" onClick={() => setOpenModalWarning(false)}>
                 Cancel
               </Button>
               <Button
                 color="failure"
+                disabled={!retireReason}
                 onClick={() => {
-                  setOpenModalWarning(false);
+                  handleRetire();
                 }}
               >
                 Continue

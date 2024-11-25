@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { Avatar, Card, Pagination, Table } from "flowbite-react";
+import { Avatar, Button, Card, Pagination, Table } from "flowbite-react";
 import {
   countDocumentsWithLogisticId,
   countGappoolData,
   downloadExcel,
   exportAnyExcel,
-
   fetchAllGapPoolData,
   fetchGapPoolData,
   fetchGapPoolReport,
@@ -214,7 +213,7 @@ export default function GapPoolList() {
 
   const handleDowloadExcelGappool = async () => {
     try {
-      await downloadExcel([],"gapool","Reporte_de_Application");
+      await downloadExcel([], "gapool", "Reporte_de_Application");
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
     }
@@ -222,7 +221,7 @@ export default function GapPoolList() {
 
   const handleDowloadExcelGappoolmercante = async () => {
     try {
-      await downloadExcel([],"gapoolmercante","Reporte_de_Application");
+      await downloadExcel([], "gapoolmercante", "Reporte_de_Application");
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
     }
@@ -230,7 +229,7 @@ export default function GapPoolList() {
 
   const handleDowloadExcelGappoolhotel = async () => {
     try {
-      await downloadExcel([],"gapoolhotel","Reporte_de_Application");
+      await downloadExcel([], "gapoolhotel", "Reporte_de_Application");
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
     }
@@ -250,6 +249,13 @@ export default function GapPoolList() {
 
   return (
     <>
+      <div className="pl-3 pb-4 pt-5  flex flex-row gap-3 items-center justify-between ">
+        <div className="flex flex-row gap-2 items-center justify-between">
+          <h1 className="md:pl-5 text-lg md:text-lg text-black font-bold">
+            GAP Pool
+          </h1>
+        </div>
+      </div>
       <TabGroup className="">
         <TabList className="flex flex-row items-center  justify-center bg-white ">
           <Tab className="data-[selected]:border-b-2 border-blue-500 px-2 flex flex-col md:flex-row py-2 text-sm text-black items-center justify-center md:w-56 relative">
@@ -264,20 +270,14 @@ export default function GapPoolList() {
         </TabList>
         <TabPanels>
           <TabPanel className="">
-            <div className="pl-3 pb-4 pt-5  flex flex-row gap-3 items-center justify-between ">
-              <div className="flex flex-row gap-2 items-center justify-between">
-                <h1 className="md:pl-5 text-lg md:text-lg text-black font-bold">
-                  GAP Pool List
-                </h1>
-                {/* <span> {count}</span> */}
-              </div>
-
-              <button
-                onClick={handleDowloadExcelGappool}
-                className="h-8 w-32 bg-green-700 text-center text-sm rounded-md text-white"
+            <div className="px-8 flex items-end justify-end">
+              <Button
+                // isProcessing={isLoading}
+                color={"success"}
+                // onClick={handleDowloadExcelGappool}
               >
                 Export to Excel
-              </button>
+              </Button>
             </div>
             <section className="p-8 w-full h-full">
               <InstantSearch
@@ -301,26 +301,25 @@ export default function GapPoolList() {
             </section>
           </TabPanel>
           <TabPanel className="">
-         
             <section className="p-8 w-full h-full">
               <InstantSearch
                 indexName="globalSearch"
                 searchClient={searchClient}
               >
                 <span className="pr-10">mercante</span>
-                 <button
-                onClick={handleDowloadExcelGappoolmercante}
-                className="h-8 w-32 bg-green-700 text-center text-sm rounded-md text-white"
-              >
-                Export to Excel
-              </button>
-              <span className="pr-10 pl-10">Hotel Staff</span>
-              <button
-                onClick={handleDowloadExcelGappoolhotel}
-                className="h-8 w-32 bg-green-700 text-center text-sm rounded-md text-white"
-              >
-                Export to Excel
-              </button>
+                <button
+                  onClick={handleDowloadExcelGappoolmercante}
+                  className="h-8 w-32 bg-green-700 text-center text-sm rounded-md text-white"
+                >
+                  Export to Excel
+                </button>
+                <span className="pr-10 pl-10">Hotel Staff</span>
+                <button
+                  onClick={handleDowloadExcelGappoolhotel}
+                  className="h-8 w-32 bg-green-700 text-center text-sm rounded-md text-white"
+                >
+                  Export to Excel
+                </button>
                 <div className="flex flex-col md:flex-row gap-5">
                   <div className="md:w-1/3">
                     <SeafarersRefinements onFilters={(e) => setFilters(e)} />
@@ -329,7 +328,8 @@ export default function GapPoolList() {
                     <div className="">
                       <GapoolSearchBox />
                     </div>
-                    <Configure hitsPerPage={50} filters={'logisticId != ""'} />
+                    <Configure hitsPerPage={50} filters={"logisticId != 0"} />
+                    <CustomCurrentRefinements />
                     <GapoolInfiniteHits />
                   </div>
                 </div>

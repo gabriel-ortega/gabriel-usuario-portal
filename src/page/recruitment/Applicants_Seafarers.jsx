@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
-import { Avatar, Badge, Card, Pagination, Table } from "flowbite-react";
-import {
-  countSeafarersData,
-  downloadExcel,
-} from "../../util/services";
+import { Avatar, Badge, Button, Card, Pagination, Table } from "flowbite-react";
+import { countSeafarersData, downloadExcel } from "../../util/services";
 import { useNavigate } from "react-router-dom";
 import { formatDate, formatTitleCase } from "../../util/helperFunctions";
 import { useDispatch } from "react-redux";
@@ -44,6 +41,7 @@ export default function Applicants_Seafarers() {
     const load = async () => {
       const seafarersDataCount = await countSeafarersData();
       setSeafarerCount(seafarersDataCount);
+      dispatch(setLoading(false));
     };
     dispatch(setLoading(true));
     load();
@@ -54,20 +52,26 @@ export default function Applicants_Seafarers() {
 
   const sendArrayToBackend = async () => {
     try {
-      await downloadExcel([],"gapoolSeguimiento","Reporte_de_Seguimiento");
+      dispatch(setLoading(true));
+      await downloadExcel([], "gapoolseguimiento", "Reporte_de_Seguimiento");
+      dispatch(setLoading(false));
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
+      dispatch(setLoading(false));
     }
   };
 
   const handleDowloadExcelAllApplicant = async () => {
     try {
-      await downloadExcel([],"gapoolcontract","Reporte_de_AllAplicant&Seafarer");
+      await downloadExcel(
+        [],
+        "gapoolcontract",
+        "Reporte_de_AllAplicant&Seafarer"
+      );
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
     }
   };
-  
 
   return (
     <>
@@ -86,7 +90,6 @@ export default function Applicants_Seafarers() {
         >
           Add Applicant
         </button>
-        
       </div>
       <TabGroup className="py-5">
         <TabList className="flex flex-row items-center  justify-center bg-white ">
@@ -99,12 +102,13 @@ export default function Applicants_Seafarers() {
         </TabList>
         <TabPanels>
           <TabPanel className="">
-          <button
-          onClick={handleDowloadExcelAllApplicant}
-          className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
-        >
-          Export to Excel
-        </button>
+            <button
+              onClick={handleDowloadExcelAllApplicant}
+              className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
+            >
+              Export to Excel
+            </button>
+
             <section className="p-8 w-full h-full">
               <InstantSearch
                 indexName="globalSearch"
@@ -126,12 +130,19 @@ export default function Applicants_Seafarers() {
             </section>
           </TabPanel>
           <TabPanel className="">
-          <button
-          onClick={sendArrayToBackend}
-          className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
-        >
-          Export to Excel
-        </button>
+            {/* <button
+              onClick={sendArrayToBackend}
+              className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
+            >
+              Export to Excel
+            </button> */}
+            <Button
+              isProcessing={isLoading}
+              color={"success"}
+              onClick={sendArrayToBackend}
+            >
+              Export to Excel
+            </Button>
             <section className="p-8 w-full h-full">
               <InstantSearch
                 indexName="globalSearch"

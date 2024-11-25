@@ -1379,6 +1379,26 @@ export const getTemplate = async () => {
   }
 };
 
+export const getDateInterviews = async () => {
+  try {
+    const docRef = doc(FirebaseDB, "citas/dates");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      const newData = {
+        ...data,
+        uid: docSnap.id,
+      };
+      return data;
+    } else {
+      console.log("No se encontró el documento");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error obteniendo los datos:", error);
+  }
+};
+
 
 
 

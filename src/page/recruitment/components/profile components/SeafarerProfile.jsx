@@ -134,6 +134,7 @@ export const SeafarerProfile = ({
     dateBirth = "",
     // dateBirthValid,
     phone = "",
+    secondaryPhone = "",
     // phoneValid,
     countryBirth = "",
     // countryBirthValid,
@@ -453,6 +454,16 @@ export const SeafarerProfile = ({
               data={phone.value}
               initialCountry={phone.data?.countryCode}
               onChange={onSelectPhoneChange}
+            />
+            <SelectComponenteCountryCode
+              classNamePhone="w-full block inset-0 "
+              label="Secondary Phone number"
+              text="Select your contry code and write phone"
+              value={secondaryPhone}
+              data={secondaryPhone.value}
+              Text=""
+              initialCountry={secondaryPhone.data?.countryCode}
+              onChange={(e) => onSelectPhoneChange(e, "secondaryPhone")}
             />
 
             {/* COMPONENTE DE COUNTRY OF BIRTH*/}

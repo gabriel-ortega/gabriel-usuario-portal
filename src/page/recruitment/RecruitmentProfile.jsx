@@ -327,6 +327,7 @@ export default function RecruitmentProfile() {
                         {profile?.available ? "Available" : "Unavailable"}
                       </Badge>
                       <span>{profile.email}</span>
+                      <span>{profile.logisticId}</span>
                     </div>
                     <div className="flex flex-row justify-between items-center gap-2">
                       <h1 className="text-2xl md:text-3xl  font-bold tracking-tight w-[85%]">

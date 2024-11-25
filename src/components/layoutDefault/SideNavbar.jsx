@@ -75,6 +75,8 @@ export function SideNavbar({ toggleSidebar }) {
 
   const [disableEmbark, setDisableEmbark] = useState(
     1 === userData.recruitmentStage ||
+      2 === userData.recruitmentStage ||
+      3 === userData.recruitmentStage ||
       7 === userData.recruitmentStage ||
       8 === userData.recruitmentStage ||
       9 === userData.recruitmentStage ||
@@ -104,7 +106,7 @@ export function SideNavbar({ toggleSidebar }) {
         }));
 
         setUnReadCount(unreadDocs.length);
-        if (userData.role.Id !== 3) {
+        if (userData.role !== 3) {
           if (unreadDocs.length > 0) {
             toast.success("New application received.", {
               position: "bottom-right",
@@ -130,7 +132,7 @@ export function SideNavbar({ toggleSidebar }) {
 
         // Actualiza el estado o maneja las notificaciones para `profileUpdates`
         setProfileUpdatesCount(updatesDocs.length);
-        if (userData.role.Id !== 3) {
+        if (userData.role !== 3) {
           if (updatesDocs.length > 0) {
             toast.success("New profile update received.", {
               position: "bottom-right",
@@ -225,7 +227,7 @@ export function SideNavbar({ toggleSidebar }) {
                       My Contracts
                     </Sidebar.Item>
                   </Link>
-                  <Link to={`${!disableHiring ? "/myembarks" : "/"}`}>
+                  <Link to={`${!disableEmbark ? "/myembarks" : "/"}`}>
                     <Sidebar.Item
                       title="My Embarks"
                       icon={RiShipLine}

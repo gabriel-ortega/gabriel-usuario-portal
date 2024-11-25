@@ -348,14 +348,10 @@ export const ReviewApplication = () => {
             vesselTypeData
           )
         ),
-        dispatch(
-          updateSeafarerDataFirebase(application.uid, newData, Stages[12].Id)
-        ),
-        dispatch(createFirstInterviews(application.uid)),
       ]),
       {
         loading: "Saving...",
-        success: <b>Saved & Approved</b>,
+        success: <b>Saved</b>,
         error: <b>Ups! Something went wrong. Try again</b>,
       }
     );
@@ -693,7 +689,7 @@ export const ReviewApplication = () => {
                       </Tooltip>
                       <button
                         className={`border border-yellow-600 bg-yellow-600 text-white size-10 md:w-28 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-yellow-700 disabled:opacity-30 disabled:cursor-not-allowed`}
-                        onClick={() => handleOpenModal("sendback")}
+                        onClick={() => handleOpenModal("evaluation")}
                         // disabled={application.status === 2 || disabled}
                       >
                         <HiOutlinePencilAlt className="h-4 w-4" />

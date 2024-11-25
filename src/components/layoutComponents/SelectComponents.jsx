@@ -18,6 +18,7 @@ export function SelectComponents({
   name_valor = false,
   initialValue,
   isValid = true,
+  isRequire=true
 }) {
   const [selectedValue, setSelectedValue] = useState(initialValue || "");
 
@@ -55,7 +56,7 @@ export function SelectComponents({
       </div>
       <Select
         id={id}
-        required
+        required={isRequire}
         className={`${classelect}`}
         // className="border-gray-300 bg-gray-50 text-gray-900  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 "
         color={isValid ? "gray" : "failure"}

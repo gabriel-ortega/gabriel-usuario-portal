@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import { Avatar, Badge, Card, Pagination, Table } from "flowbite-react";
+import { Avatar, Badge, Button, Card, Pagination, Table } from "flowbite-react";
 import {
   countApplicationsData,
   downloadExcel,
@@ -645,7 +645,7 @@ export default function Applicants_Aplications() {
 
   const handleDowloadExcel = async () => {
     try {
-      await downloadExcel([],"application","Reporte_de_Application"); 
+      await downloadExcel([], "application", "Reporte_de_Application");
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
     }
@@ -653,6 +653,14 @@ export default function Applicants_Aplications() {
 
   return (
     <>
+      <div className="pl-3 md:pl-5 pt-5 pb-4 flex flex-row gap-2 items-center ">
+        <h1 className="  text-lg md:text-lg  text-black font-bold">
+          Recruitment Applications
+        </h1>
+        <span className="italic font-light text-sm">
+          {"Total: " + applicationsCount}
+        </span>
+      </div>
       <TabGroup className="">
         <TabList className="flex flex-row items-center  justify-center bg-white ">
           <Tab className="data-[selected]:border-b-2 border-blue-500 px-2 flex flex-col md:flex-row py-2 text-sm text-black items-center justify-center md:w-56 relative">
@@ -667,21 +675,14 @@ export default function Applicants_Aplications() {
         </TabList>
         <TabPanels>
           <TabPanel className="">
-            <div className="flex flex-row gap-2 items-center justify-between">
-              <div className="pl-3 md:pl-5 pt-5 pb-4 flex flex-row gap-2 items-center ">
-                <h1 className="  text-lg md:text-lg  text-black font-bold">
-                  Recruitment Applications
-                </h1>
-                <span className="italic font-light text-sm">
-                  {"Total: " + applicationsCount}
-                </span>
-              </div>
-              <button
-                onClick={handleDowloadExcel}
-                className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
+            <div className="px-8 flex items-end justify-end">
+              <Button
+                // isProcessing={isLoading}
+                color={"success"}
+                // onClick={handleDowloadExcel}
               >
                 Export to Excel
-              </button>
+              </Button>
             </div>
             <section className="p-8 w-full h-full">
               <InstantSearch
