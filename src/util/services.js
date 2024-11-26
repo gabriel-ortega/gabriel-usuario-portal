@@ -409,61 +409,6 @@ export async function fetchRetirementRequests() {
   }
 }
 
-// export async function fetchSeafarersData(lastVisible = null) {
-//   try {
-//     const collRef = collection(FirebaseDB, "usersData");
-
-//     // Crear la consulta
-//     let firstQuery = query(
-//       collRef,
-//       where("role", "==", 3),
-//       where("recruitmentStage", ">", 1),
-//       limit(25)
-//     );
-
-//     // Si hay un documento visible anterior, agregar el startAfter para paginación
-//     if (lastVisible) {
-//       firstQuery = query(
-//         collRef,
-//         where("role", "==", 3),
-//         where("recruitmentStage", ">", 1),
-//         startAfter(lastVisible),
-//         limit(25)
-//       );
-//     }
-
-//     const documentSnapshots = await getDocs(firstQuery);
-
-//     if (documentSnapshots.empty) {
-//       return { data: [], lastVisible: null };
-//     }
-
-//     // Obtener los datos de los documentos
-//     const seafarersData = documentSnapshots.docs.map((doc) => {
-//       const data = doc.data();
-//       return {
-//         ...data,
-//         uid: doc.id,
-//       };
-//     });
-
-//     // Ordenar los datos por "createdOn"
-//     const sortedSeafarers = seafarersData.sort((a, b) => {
-//       return new Date(a.createdOn) - new Date(b.createdOn);
-//     });
-
-//     // Obtener el último documento visible
-//     const lastVisibleDoc =
-//       documentSnapshots.docs[documentSnapshots.docs.length - 1];
-
-//     // Devolver los datos ordenados y el último documento visible para la paginación
-//     return { data: sortedSeafarers, lastVisible: lastVisibleDoc };
-//   } catch (error) {
-//     console.error("Error fetching seafarers data:", error);
-//     return { data: [], lastVisible: null };
-//   }
-// }
-
 export async function fetchSeafarersData(
   filters,
   pageSize = 50,

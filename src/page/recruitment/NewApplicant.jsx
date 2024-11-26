@@ -1,11 +1,18 @@
-import { Button, Card } from "flowbite-react";
+import { Button, Card, Drawer, Popover, Table } from "flowbite-react";
 import {
   InputText,
   SelectComponents,
   YesNoInput,
 } from "../../components/layoutComponents";
 import { useState } from "react";
-import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
+import {
+  HiDocumentDownload,
+  HiDotsVertical,
+  HiOutlineEye,
+  HiOutlineEyeOff,
+  HiOutlinePlus,
+  HiXCircle,
+} from "react-icons/hi";
 import { LoadingState } from "../../components/skeleton/LoadingState";
 import { lazy } from "react";
 import { useSelector } from "react-redux";
@@ -23,6 +30,7 @@ import stageData from "../../assets/tables/json/RecruitmentStage-static.json";
 import { useDispatch } from "react-redux";
 import { validateEmail } from "../../util/helperFunctions";
 import { generatePassword } from "../../util/helperFunctions/generatePassword";
+import { validatePassword } from "../../util/helperFunctions/validatePassword";
 const RecruitmentSeafarerProfile = lazy(() =>
   import("./components/RecruitmentSeafarerProfile")
 );
@@ -40,6 +48,11 @@ export const NewApplicant = ({ ...props }) => {
   const { profile, vesselTypes, positions, departments } = useSelector(
     (state) => state.currentViews
   );
+  const [isOpen, setIsOpen] = useState(false);
+  const [drafts, setDrafts] = useState([
+    { addedBy: "Gabriel", createdOn: "2024-11-24", name: "Alan perez" },
+  ]);
+  const handleClose = () => setIsOpen(false);
   const [createAccount, setCreateAccount] = useState(false);
   const [recruitmentStage, setRecruitmentStage] = useState(0);
   const [email, setEmail] = useState("");
@@ -89,6 +102,9 @@ export const NewApplicant = ({ ...props }) => {
     dispatch(
       setProfileView({
         role: 3,
+        applicationStage: 1,
+        available: true,
+        logisticId: "",
         seafarerData: {
           seafarerProfile: {},
           seafarerDocument: [],
@@ -217,17 +233,136 @@ export const NewApplicant = ({ ...props }) => {
     setPassword(e);
   };
 
+  const handleGeneratePassword = () => {
+    const generated = generatePassword(10);
+    setPassword(generated);
+  };
+
+  useEffect(() => {
+    if (password) {
+      const isPasswordValid = validatePassword(password);
+      setPasswordValid(setPasswordValid(isPasswordValid.isValid));
+      console.log(isPasswordValid);
+    }
+  }, [password]);
+
+  const handleProfileChange = (e) => {
+    console.log(e);
+  };
+
+  const handleCreateSeafarer = () => {
+    const data = {
+      email,
+      password,
+      seafarerData: profile,
+    };
+    console.log(data);
+  };
+
   return (
     <section className="p-4">
+      <Drawer
+        open={isOpen}
+        onClose={handleClose}
+        position="right"
+        className="md:w-1/3"
+      >
+        <Drawer.Header
+          title="New Applicants Drafts"
+          titleIcon={() => <HiDotsVertical className="h-4 w-4 mr-2" />}
+        />
+        <Drawer.Items>
+          <section className="space-y-5">
+            <div>
+              <button
+                // onClick={}
+                className="text-sm font-sans text-green-500 hover:text-white bg-green-50 hover:bg-green-500 py-2 px-4 rounded flex items-center gap-2 transition-all duration-200"
+              >
+                Save Current Data as Draft
+              </button>
+            </div>
+            <Card className="rounded-md max-h-60 overflow-y-auto mt-2 shadow-md">
+              <Table className="table-auto w-full">
+                <Table.Head>
+                  <Table.HeadCell>Added By</Table.HeadCell>
+                  <Table.HeadCell>Name</Table.HeadCell>
+                </Table.Head>
+                <Table.Body className="divide-y">
+                  {drafts.length < 1 ? (
+                    <Table.Row>
+                      <Table.Cell>{"--"}</Table.Cell>
+                      <Table.Cell>{"--"}</Table.Cell>
+                    </Table.Row>
+                  ) : (
+                    drafts.map((draft, index) => (
+                      <Popover
+                        arrow={false}
+                        key={index}
+                        content={
+                          <div className="flex justify-center gap-2">
+                            <button
+                              className={`border border-blue-300 bg-white text-blue-600 size-10 md:w-28 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50 disabled:opacity-30 disabled:cursor-not-allowed`}
+                              onClick={() => {}}
+                            >
+                              <HiDocumentDownload className="h-4 w-4" />
+                              <span className="hidden md:block ">Load</span>
+                            </button>
+                            <button
+                              className={`border border-red-600 bg-red-600 text-white size-10 md:w-28 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-red-700 disabled:opacity-30 disabled:cursor-not-allowed`}
+                              onClick={() => {}}
+                            >
+                              <HiXCircle className="h-4 w-4" />
+                              <span className="hidden md:block ">Delete</span>
+                            </button>
+                          </div>
+                        }
+                      >
+                        <Table.Row className="hover:bg-gray-100 cursor-pointer">
+                          <Table.Cell>
+                            <div className="flex flex-col">
+                              <span>{draft.addedBy}</span>
+                              <span className="text-xs font-light">
+                                {"on: " + draft.createdOn}
+                              </span>
+                            </div>
+                          </Table.Cell>
+                          <Table.Cell>{draft.name || "--"}</Table.Cell>
+                        </Table.Row>
+                      </Popover>
+                    ))
+                  )}
+                </Table.Body>
+              </Table>
+            </Card>
+          </section>
+        </Drawer.Items>
+      </Drawer>
       {props.isModal ? (
         <div className="flex justify-center">
           <span>Add New Applicant</span>
         </div>
       ) : (
-        <div className="flex justify-start">
+        <div className="flex justify-between">
           <h1 className="md:pl-5 text-lg md:text-lg text-black font-bold">
             Add New Applicant
           </h1>
+          <div className="flex flex-row gap-2 items-center">
+            <button
+              className="border border-[#010064] bg-[#010064] text-white size-10 md:w-48 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-[#262550] disabled:opacity-30"
+              onClick={() => handleCreateSeafarer()}
+              disabled={disableSeafarerData}
+            >
+              <HiOutlinePlus className="h-4 w-4" />
+              <span className="hidden md:block ">Add New Applicant</span>
+            </button>
+            {/* <button
+              className="border border-blue-300 bg-white text-blue-600 size-10 md:w-28 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50"
+              onClick={() => setIsOpen(true)}
+            >
+              <HiDotsVertical className="h-4 w-4" />
+              <span className="hidden md:block ">Drafts</span>
+            </button> */}
+          </div>
         </div>
       )}
       <div className="space-y-3 my-3">
@@ -314,6 +449,7 @@ export const NewApplicant = ({ ...props }) => {
               text="Create Account"
               name="createAccount"
               onChange={(e) => setCreateAccount(e.target.value)}
+              // onChange={(e) => console.log(e.target.value)}
             />
           </div>
           {createAccount && (
@@ -323,9 +459,9 @@ export const NewApplicant = ({ ...props }) => {
                   <InputText
                     type={showPassword ? "text" : "password"}
                     label="Password*"
-                    // value={password}
+                    value={password}
                     name="password"
-                    // onChange={onInputChange}
+                    onChange={(e) => handlePassword(e.target.value)}
                     classname={"flex-grow w-full"}
                     // isValid={passwordValid && formSubmitted ? false : true}
                     // helpertext={
@@ -343,7 +479,7 @@ export const NewApplicant = ({ ...props }) => {
                   </div>
                   <button
                     className="border border-blue-300 bg-white text-blue-600 w-28 h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50"
-                    onClick={setPassword(generatePassword(6))}
+                    onClick={() => handleGeneratePassword()}
                   >
                     Generate
                   </button>
@@ -389,7 +525,7 @@ export const NewApplicant = ({ ...props }) => {
                       isNew={true}
                       data={profile.seafarerData?.seafarerProfile}
                       uid={profile.uid}
-                      //   onChange={(e) => handleProfileChange(e)}
+                      onChange={(e) => console.log(e)}
                       //   disabled={userData.profileUpdate || false}
                     />
                   </Suspense>

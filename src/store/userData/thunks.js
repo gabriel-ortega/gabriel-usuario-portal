@@ -43,6 +43,7 @@ import {
   updateSeafarerPhoto,
   updateSeafarerSignature,
 } from "../currentViews/viewSlice";
+import { createuserWithEmail } from "../../config/firebase/providers";
 
 export const createApplication = (userData) => {
   return async (dispatch) => {
@@ -68,6 +69,24 @@ export const createApplication = (userData) => {
     const profileRef = doc(FirebaseDB, `usersData/${uid}`);
     await setDoc(docRef, data);
     await updateDoc(profileRef, profileUpdate);
+  };
+};
+
+export const createSeafarer = (data, createAccount = false) => {
+  return async (dispatch) => {
+    const { email, password, seafarerData } = data;
+    if (createAccount) {
+      const { ok, uid, photoURL, errorMessage } = await createuserWithEmail({
+        email,
+        password,
+        displayName,
+      });
+      const docRef = doc(FirebaseDB, `usersData/${uid}`);
+      await setDoc(docRef, data);
+    } else {
+      const docRef = doc(FirebaseDB, `usersData`);
+      await setDoc(docRef, data);
+    }
   };
 };
 

@@ -104,6 +104,7 @@ export const RecruitmentSeafarerProfile = ({
     setShowH2(false);
     const newForm = {
       // id: new Date().getTime(),
+      PercentageTotal: "",
     };
     setMarlinTestForms([...marlinTestForms, newForm]);
     setProfileData((prevProfileData) => ({
@@ -146,14 +147,15 @@ export const RecruitmentSeafarerProfile = ({
 
   const handleDeleteMarlinTestForm = (index, e) => {
     setShowH2(true);
-    const updatedForms = [...marlinTestForms]; // Crear una copia del arreglo actual
+    const updatedForms = []; // Crear una copia del arreglo actual
     updatedForms.splice(index, 1); // Eliminar el elemento en la posición `index`
     setMarlinTestForms(updatedForms); // Actualizar el estado con el nuevo arreglo
     setProfileData((prevProfileData) => ({
       ...prevProfileData,
       lang: {
         ...prevProfileData.lang,
-        marlins: prevProfileData.lang?.marlins.filter((_, i) => i !== index), // Filtra el array y elimina el elemento con el índice proporcionado
+        // marlins: prevProfileData.lang?.marlins.filter((_, i) => i !== index), // Filtra el array y elimina el elemento con el índice proporcionado
+        marlins: [], // Filtra el array y elimina el elemento con el índice proporcionado
       },
     }));
   };
@@ -233,13 +235,21 @@ export const RecruitmentSeafarerProfile = ({
     // setUnsavedChanges(true);
   };
 
-  const [showH2, setShowH2] = useState(
-    (profileData.lang?.marlins?.[0] &&
+  // const [showH2, setShowH2] = useState(
+  //   (profileData.lang?.marlins?.[0] &&
+  //     Object.values(profileData.lang.marlins[0]).every(
+  //       (value) => value === "" || value === null || value === undefined
+  //     )) ||
+  //     false
+  // ); // Estado para controlar la visibilidad del h2
+  const [showH2, setShowH2] = useState(() => {
+    return (
+      !profileData.lang?.marlins?.[0] ||
       Object.values(profileData.lang.marlins[0]).every(
         (value) => value === "" || value === null || value === undefined
-      )) ||
-      false
-  ); // Estado para controlar la visibilidad del h2
+      )
+    );
+  });
 
   useEffect(() => {
     if (isLoaded) {
@@ -499,7 +509,7 @@ export const RecruitmentSeafarerProfile = ({
                       </h2>
                     )}
 
-                    {profileData.lang?.marlins?.[0] &&
+                    {/* {profileData.lang?.marlins?.[0] &&
                       !Object.values(profileData.lang.marlins[0]).every(
                         (value) =>
                           value === "" || value === null || value === undefined
@@ -515,11 +525,23 @@ export const RecruitmentSeafarerProfile = ({
                           }}
                           title=""
                         />
-                      ))}
+                      ))} */}
+                    {profileData.lang?.marlins?.[0] && (
+                      <MarlinTest
+                        // key={index}
+                        form={profileData.lang?.marlins?.[0]}
+                        onDelete={(e) => handleDeleteMarlinTestForm(0, e)}
+                        Editdata={profileData.lang?.marlins[0] || {}}
+                        onDataChange={(e) => {
+                          handleDataChange(0, e);
+                        }}
+                        title=""
+                      />
+                    )}
 
                     {/* {marlinTestForms.length === 0 && ( */}
-                    {profileData.lang?.marlins?.[0] &&
-                      Object.values(profileData.lang.marlins[0]).every(
+                    {/* {profileData.lang?.marlins?.[0] ||
+                      (Object.values(profileData.lang.marlins[0]).every(
                         (value) =>
                           value === "" || value === null || value === undefined
                       ) && (
@@ -530,7 +552,16 @@ export const RecruitmentSeafarerProfile = ({
                           label="Add"
                           icon={<GoPlusCircle className="ml-2 h-5 w-5" />}
                         />
-                      )}
+                      ))} */}
+                    {showH2 && (
+                      <ButtonIcon
+                        onClick={(e) => handleAddMarlinTestForm(e)}
+                        classnamebtn="bg-[#1976d2]"
+                        classname="flex items-center justify-center py-2 px-0 md:py-2 md:px-2"
+                        label="Add"
+                        icon={<GoPlusCircle className="ml-2 h-5 w-5" />}
+                      />
+                    )}
                   </section>
                 </section>
               </div>

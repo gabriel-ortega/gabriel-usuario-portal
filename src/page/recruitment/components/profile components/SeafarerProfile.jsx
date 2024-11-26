@@ -63,6 +63,9 @@ const formData = {
   weight: "",
   height: "",
   deported: false,
+  visaCancelled: false,
+  visaDenied: false,
+  candina: false,
 };
 
 const formValidations = {
@@ -157,6 +160,10 @@ export const SeafarerProfile = ({
     // knowAboutUsValid,
     deported,
     // deportedValid,
+    visaCancelled,
+    visaDenied,
+    candina,
+    // candinaValid,
     harvester,
     weight,
     height,
@@ -661,6 +668,27 @@ export const SeafarerProfile = ({
               onChange={onInputChange}
               defaultChecked={deported}
               // isValid={!!deportedValid}
+            />
+            <YesNoInput
+              text="Have you ever had a C1-D Visa Cancelled?"
+              name="visaCancelled"
+              onChange={onInputChange}
+              defaultChecked={visaCancelled}
+              // isValid={!visaCancelledValid}
+            />
+            <YesNoInput
+              text="Have you ever had a C1-D Visa Denied?"
+              name="visaDenied"
+              onChange={onInputChange}
+              defaultChecked={visaDenied}
+              // isValid={!visaDeniedValid}
+            />
+            <YesNoInput
+              text="Have you ever had a recruitment process with Cadina?"
+              name="candina"
+              onChange={onInputChange}
+              defaultChecked={candina}
+              // isValid={!candinaValid}
             />
             {/* <Dropzone
           label="Signature"

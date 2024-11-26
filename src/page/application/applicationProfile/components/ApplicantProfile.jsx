@@ -56,6 +56,7 @@ const formValidations = {
   deported: [(value) => value != null, "This field is mandatory."],
   visaDenied: [(value) => value != null, "This field is mandatory."],
   visaCancelled: [(value) => value != null, "This field is mandatory."],
+  candina: [(value) => value != null, "This field is mandatory."],
 };
 
 const bmiCalc = (weight, height) => {
@@ -212,6 +213,8 @@ export const ApplicantProfile = ({
     deportedValid,
     visaCancelledValid,
     visaDeniedValid,
+    candina,
+    candinaValid,
     formState,
     unsavedChanges,
     // isFormValid,
@@ -691,6 +694,15 @@ export const ApplicantProfile = ({
                   userData.applicationData.applicationProfile.profile.visaDenied
                 }
                 isValid={!visaDeniedValid}
+              />
+              <YesNoInput
+                text="Have you ever had a recruitment process with Cadina?"
+                name="candina"
+                onChange={onInputChange}
+                defaultChecked={
+                  userData.applicationData.applicationProfile.profile.candina
+                }
+                isValid={!candinaValid}
               />
             </section>
           </fieldset>
