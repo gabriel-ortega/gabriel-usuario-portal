@@ -39,6 +39,7 @@ const searchClient = algoliasearch(
 export const FirstInterviewList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const [hasData, setHasData] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [interviews, setInterviews] = useState([]);
@@ -315,26 +316,32 @@ export const FirstInterviewList = () => {
   }
 
   const handleDowloadExcelCompleted = async () => {
+    setIsLoading(true);
     try {
       await downloadExcel(
         [],
         "firstinterviewcompleted",
         "first_interview_completed"
       );
+      setIsLoading(false);
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
+      setIsLoading(false);
     }
   };
 
   const handleDowloadExcelPending = async () => {
+    setIsLoading(true);
     try {
       await downloadExcel(
         [],
         "firstinterviewpending",
         "first_interview_pending"
       );
+      setIsLoading(false);
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
+      setIsLoading(false);
     }
   };
   useEffect(() => {
@@ -405,9 +412,9 @@ export const FirstInterviewList = () => {
           <TabPanel className="">
             <div className="px-8 flex items-end justify-end">
               <Button
-                // isProcessing={isLoading}
+                isProcessing={isLoading}
                 color={"success"}
-                // onClick={sendArrayToBackend}
+                onClick={() => handleDowloadExcelPending()}
               >
                 Export to Excel
               </Button>
@@ -441,9 +448,9 @@ export const FirstInterviewList = () => {
           <TabPanel className="">
             <div className="px-8 flex items-end justify-end">
               <Button
-                // isProcessing={isLoading}
+                isProcessing={isLoading}
                 color={"success"}
-                // onClick={sendArrayToBackend}
+                onClick={() => handleDowloadExcelCompleted()}
               >
                 Export to Excel
               </Button>

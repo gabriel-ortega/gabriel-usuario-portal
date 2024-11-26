@@ -8,6 +8,7 @@ import Interview from "../interview/Interview";
 import InterviewSchedule from "../interview/InterviewSchedule";
 
 const Dashboard = lazy(() => import("../Dashboard"));
+const NewApplicant = lazy(() => import("../recruitment/NewApplicant"));
 const Applicants_Seafarers = lazy(() =>
   import("../recruitment/Applicants_Seafarers")
 );
@@ -53,6 +54,7 @@ export const PortalRoutes = () => {
         <Suspense fallback={<LoadingState />}>
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/shortnotice" element={<NewApplicant />} />
             <Route path="/seafarers" element={<Applicants_Seafarers />} />
             <Route path="/submissions" element={<Applicants_Aplications />} />
             <Route path="/firstinterviews" element={<FirstInterviewList />} />

@@ -4,6 +4,7 @@ import { getHeader, getPosition } from "./getHeaders";
 export function Skill({ positions, data, onchangedata }) {
   const [skillData, setSkillData] = useState([]);
   useEffect(() => {
+    console.log(positions);
     if (data && data.length > 0) {
       setSkillData(data);
     } else {
@@ -14,7 +15,7 @@ export function Skill({ positions, data, onchangedata }) {
         setSkillData(Skills);
       }
     }
-  }, []);
+  }, [positions]);
 
   const handleCheckboxChange = (index) => {
     setSkillData((prevFormData) => {

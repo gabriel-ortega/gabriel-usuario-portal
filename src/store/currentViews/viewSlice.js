@@ -54,6 +54,9 @@ export const viewSlice = createSlice({
     updateSeafarerProfileData: (state, { payload }) => {
       state.profile.seafarerData.seafarerProfile = payload;
     },
+    updateSeafarerEmail: (state, { payload }) => {
+      state.profile.email = payload;
+    },
     updateProfileData: (state, { payload }) => {
       state.profile.seafarerData.seafarerProfile.profile = payload;
     },
@@ -155,6 +158,7 @@ export const {
   updateSeafarerData,
   updateSeafarerProfileData,
   updateProfileData,
+  updateSeafarerEmail,
   updateSeafarerPosition,
   updateSeafarerDepartment,
   updateSeafarerVesselType,

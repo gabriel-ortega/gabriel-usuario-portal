@@ -1,4 +1,4 @@
-import { Card, Pagination, Table } from "flowbite-react";
+import { Button, Card, Pagination, Table } from "flowbite-react";
 import { useCallback } from "react";
 import { useState } from "react";
 import {
@@ -49,7 +49,7 @@ export const EmbarksDashboard = () => {
   const [rawEmbarksData, setRawEmbarksData] = useState([]);
   const [rawEndingEmbarks, setRawEndingEmbarks] = useState([]);
   const [rawPendingEmbarks, setRawPendingEmbarks] = useState([]);
-  const[filterExcel,setFilterExcel]=useState("") 
+  const [filterExcel, setFilterExcel] = useState("");
   // Memorizar la función de carga de datos usando useCallback para evitar recrearla en cada render.
   const load = useCallback(async () => {
     setIsLoading(true); // Mover dentro de la función para asegurarnos de que siempre se reinicia al iniciar carga
@@ -94,7 +94,7 @@ export const EmbarksDashboard = () => {
 
   const onSelectChange = (e, inputName) => {
     const value = e.target.value;
-    setFilterExcel(value)
+    setFilterExcel(value);
     const now = new Date();
     // Calcular el inicio del mes actual
     const startOfCurrentMonth =
@@ -124,36 +124,43 @@ export const EmbarksDashboard = () => {
     console.log(filters);
   }
 
-
   const handleDowloadExcelAssignedEmbark = async () => {
+    setIsLoading(true);
     try {
-      await downloadExcel([],"embarkassignedvessel","embark_assigned_vessel");
+      await downloadExcel([], "embarkassignedvessel", "embark_assigned_vessel");
+      setIsLoading(false);
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
+      setIsLoading(false);
     }
   };
 
   const handleDowloadExcelEmbark = async () => {
+    setIsLoading(true);
     try {
-      await downloadExcel([],"embark","embark");
+      await downloadExcel([], "embark", "embark");
+      setIsLoading(false);
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
+      setIsLoading(false);
     }
   };
 
   const handleDowloadExcelEmbarkActive = async () => {
+    setIsLoading(true);
     try {
-      if(filterExcel == "2"){
-        await downloadExcel([],"embarkpending","embark_pending");
-      }else if (filterExcel == "1"){
-        await downloadExcel([],"embarkmes","embark_current_month");
-      }else{
-        await downloadExcel([],"embarkactive","embark_active");
+      if (filterExcel == "2") {
+        await downloadExcel([], "embarkpending", "embark_pending");
+      } else if (filterExcel == "1") {
+        await downloadExcel([], "embarkmes", "embark_current_month");
+      } else {
+        await downloadExcel([], "embarkactive", "embark_active");
       }
-      
-    
+
+      setIsLoading(false);
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
+      setIsLoading(false);
     }
   };
 
@@ -195,12 +202,13 @@ export const EmbarksDashboard = () => {
                     onChange={onSelectChange}
                   />
                 </div>
-                <button
-                  onClick={handleDowloadExcelEmbarkActive}
-                  className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
+                <Button
+                  isProcessing={isLoading}
+                  color={"success"}
+                  onClick={() => handleDowloadExcelEmbarkActive()}
                 >
                   Export to Excel
-                </button>
+                </Button>
               </div>
               <InstantSearch
                 indexName="embarksIndex"
@@ -236,12 +244,13 @@ export const EmbarksDashboard = () => {
           <TabPanel className="">
             <section className="p-8 w-full h-full">
               <div className="flex justify-end my-2">
-                <button
-                  onClick={handleDowloadExcelAssignedEmbark}
-                  className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
+                <Button
+                  isProcessing={isLoading}
+                  color={"success"}
+                  onClick={() => handleDowloadExcelAssignedEmbark()}
                 >
                   Export to Excel
-                </button>
+                </Button>
               </div>
               <InstantSearch
                 indexName="embarksIndex"
@@ -267,12 +276,13 @@ export const EmbarksDashboard = () => {
           <TabPanel className="">
             <section className="p-8 w-full h-full">
               <div className="flex justify-end my-2">
-                <button
-                  onClick={handleDowloadExcelEmbark}
-                  className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
+                <Button
+                  isProcessing={isLoading}
+                  color={"success"}
+                  onClick={() => handleDowloadExcelEmbark()}
                 >
                   Export to Excel
-                </button>
+                </Button>
               </div>
               <InstantSearch
                 indexName="embarksIndex"

@@ -8,6 +8,7 @@ export function YesNoInput({
   name = "",
   isValid = true,
   classname = "justify-center",
+  disabled = false,
 }) {
   const [colorbutton, setColorbutton] = useState();
 
@@ -38,6 +39,7 @@ export function YesNoInput({
             className={`w-1/2 px-10 md:px-12 ${
               isValid ? "" : "border-red-600"
             }`}
+            disabled={disabled}
           >
             Yes
           </Button>
@@ -47,6 +49,7 @@ export function YesNoInput({
             className={`w-1/2 px-10 md:px-12 ${
               isValid ? "" : "border-red-600"
             }`}
+            disabled={disabled}
           >
             No
           </Button>

@@ -25,9 +25,19 @@ const RecruitmentSkills = ({
   onChange,
   disabled = false,
 }) => {
-  const { profile } = useSelector((state) => state.currentViews);
-  const [position, setPosition] = useState(positionData || []);
+  const { profile, positions } = useSelector((state) => state.currentViews);
+  const [position, setPosition] = useState();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (positions) {
+      const currentPosition = profile.seafarerData.position[0].id;
+      const filteredPosition = positions.find(
+        (position) => position.Id == currentPosition
+      ).CVFormatId;
+      setPosition(filteredPosition);
+    }
+  }, [profile, positions]);
 
   // Memoized handler for dispatching skill updates
   const handleSkillsChange = useCallback(
@@ -129,7 +139,7 @@ const RecruitmentSkills = ({
                       id="dischargeLetter"
                       name="dischargeLetter"
                       checked={
-                        profile?.seafarerData.onboardJustified?.dischargeLetter
+                        profile?.seafarerData?.onboardJustified?.dischargeLetter
                       }
                       onChange={(e) => handleOnboard(e)}
                     />
@@ -140,7 +150,8 @@ const RecruitmentSkills = ({
                       id="employmentLetter"
                       name="employmentLetter"
                       checked={
-                        profile?.seafarerData.onboardJustified?.employmentLetter
+                        profile?.seafarerData?.onboardJustified
+                          ?.employmentLetter
                       }
                       onChange={(e) => handleOnboard(e)}
                     />
@@ -151,7 +162,7 @@ const RecruitmentSkills = ({
                       id="evaluationsOnboard"
                       name="evaluationsOnboard"
                       checked={
-                        profile?.seafarerData.onboardJustified
+                        profile?.seafarerData?.onboardJustified
                           ?.evaluationsOnboard
                       }
                       onChange={(e) => handleOnboard(e)}
@@ -165,7 +176,7 @@ const RecruitmentSkills = ({
                       id="stampedSb"
                       name="stampedSb"
                       checked={
-                        profile?.seafarerData.onboardJustified?.stampedSb
+                        profile?.seafarerData?.onboardJustified?.stampedSb
                       }
                       onChange={(e) => handleOnboard(e)}
                     />
@@ -224,7 +235,7 @@ const RecruitmentSkills = ({
                       id="referenceLetter"
                       name="referenceLetter"
                       checked={
-                        profile?.seafarerData.onlandJustified?.referenceLetter
+                        profile?.seafarerData?.onlandJustified?.referenceLetter
                       }
                       onChange={(e) => handleOnland(e)}
                     />
@@ -235,7 +246,7 @@ const RecruitmentSkills = ({
                       id="referenceContact"
                       name="referenceContact"
                       checked={
-                        profile?.seafarerData.onlandJustified?.referenceContact
+                        profile?.seafarerData?.onlandJustified?.referenceContact
                       }
                       onChange={(e) => handleOnland(e)}
                     />
@@ -283,7 +294,7 @@ const RecruitmentSkills = ({
             <TabPanel>
               {position?.CVFormatId !== "1" ? (
                 <Skill
-                  positions={position?.CVFormatId || ""}
+                  positions={position || ""}
                   data={skillsData?.skill || []}
                   onchangedata={(value) => handleSkillsChange(value, "skill")}
                 />

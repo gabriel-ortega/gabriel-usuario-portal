@@ -23,6 +23,7 @@ export const RecruitmentSeafarerProfile = ({
   onChange,
   uid,
   disabled = false,
+  isNew = false,
 }) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -257,7 +258,7 @@ export const RecruitmentSeafarerProfile = ({
 
   return (
     <>
-      {!profileData ? (
+      {!profileData && !isNew ? (
         <LoadingState />
       ) : (
         <TabGroup className="pt-5 md:pt-8">

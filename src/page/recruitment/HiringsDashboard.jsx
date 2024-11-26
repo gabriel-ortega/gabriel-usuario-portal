@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { Card, Pagination, Table } from "flowbite-react";
+import { Button, Card, Pagination, Table } from "flowbite-react";
 import {
   downloadExcel,
   exportAnyExcel,
@@ -38,7 +38,7 @@ export const HiringsDashboard = () => {
   const { companies } = useSelector((state) => state.currentViews);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [companiesData, setCompaniesData] = useState([]);
   const [rawHiringsData, setRawHiringsData] = useState([]);
 
@@ -50,7 +50,7 @@ export const HiringsDashboard = () => {
     // dispatch(setCompanies(companiesData));
     // setCompaniesData(companiesData);
     // setRawHiringsData(activeHirings.data);
-    setIsLoading(false); // Finaliza el proceso de carga
+    // setIsLoading(false); // Finaliza el proceso de carga
   }, []);
 
   // Memorizar el valor de activeHirings solo si rawHiringsData cambia
@@ -59,7 +59,7 @@ export const HiringsDashboard = () => {
   // useEffect para cargar datos cuando el componente se monta
   useEffect(() => {
     load();
-    setIsLoading(true);
+    // setIsLoading(true);
   }, [load]); // Dependerá de la función load, que está memorizada.
 
   const groupedByCompany = activeHirings.reduce((acc, hiring) => {
@@ -89,18 +89,24 @@ export const HiringsDashboard = () => {
   const [filters, setFilters] = useState({});
 
   const handleDowloadExcelActive = async () => {
+    setIsLoading(true);
     try {
-      await downloadExcel([],"hiringactive","hiring_active"); 
+      await downloadExcel([], "hiringactive", "hiring_active");
+      setIsLoading(false);
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
+      setIsLoading(false);
     }
   };
 
   const handleDowloadExcelTotal = async () => {
+    setIsLoading(true);
     try {
-      await downloadExcel([],"hiring","hiring"); 
+      await downloadExcel([], "hiring", "hiring");
+      setIsLoading(false);
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
+      setIsLoading(false);
     }
   };
 
@@ -156,12 +162,13 @@ export const HiringsDashboard = () => {
           <TabPanel className="">
             <section className="p-8 w-full h-full">
               <div className="flex justify-end">
-                <button
-                  onClick={handleDowloadExcelActive}
-                  className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
+                <Button
+                  isProcessing={isLoading}
+                  color={"success"}
+                  onClick={() => handleDowloadExcelActive()}
                 >
                   Export to Excel
-                </button>
+                </Button>
               </div>
               <InstantSearch
                 indexName="hiringsIndex"
@@ -187,12 +194,13 @@ export const HiringsDashboard = () => {
           <TabPanel className="">
             <section className="p-8 w-full h-full">
               <div className="flex justify-end">
-                <button
-                  onClick={handleDowloadExcelTotal}
-                  className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
+                <Button
+                  isProcessing={isLoading}
+                  color={"success"}
+                  onClick={() => handleDowloadExcelTotal()}
                 >
                   Export to Excel
-                </button>
+                </Button>
               </div>
               <InstantSearch
                 indexName="hiringsIndex"

@@ -246,30 +246,6 @@ export const SecondInterviewList = () => {
     setLoadingVar(false);
   };
 
-  const handleDowloadExcelCompleted = async () => {
-    try {
-      await downloadExcel(
-        [],
-        "secondinterviewcompleted",
-        "second_interview_completed"
-      );
-    } catch (error) {
-      console.error("Error al descargar el reporte:", error.message);
-    }
-  };
-
-  const handleDowloadExcelPending = async () => {
-    try {
-      await downloadExcel(
-        [],
-        "secondinterviewpending",
-        "second_interview_pending"
-      );
-    } catch (error) {
-      console.error("Error al descargar el reporte:", error.message);
-    }
-  };
-
   const loadResults = async () => {
     try {
       const pending = await fetchSecondInterviewsPending();
@@ -379,6 +355,34 @@ export const SecondInterviewList = () => {
     }
   };
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleDowloadExcelCompleted = async () => {
+    setIsLoading(true);
+    try {
+      await downloadExcel([], "secondinterviewcompleted", "second");
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error al descargar el reporte:", error.message);
+      setIsLoading(false);
+    }
+  };
+
+  const handleDowloadExcelPending = async () => {
+    setIsLoading(true);
+    try {
+      await downloadExcel(
+        [],
+        "secondinterviewpending",
+        "second_interview_pending"
+      );
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error al descargar el reporte:", error.message);
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <div className="pl-3 pb-4 pt-5  flex flex-row gap-3 items-center justify-between ">
@@ -405,9 +409,9 @@ export const SecondInterviewList = () => {
           <TabPanel className="">
             <div className="px-8 flex items-end justify-end">
               <Button
-                // isProcessing={isLoading}
+                isProcessing={isLoading}
                 color={"success"}
-                // onClick={sendArrayToBackend}
+                onClick={() => handleDowloadExcelPending()}
               >
                 Export to Excel
               </Button>
@@ -441,9 +445,9 @@ export const SecondInterviewList = () => {
           <TabPanel className="">
             <div className="px-8 flex items-end justify-end">
               <Button
-                // isProcessing={isLoading}
+                isProcessing={isLoading}
                 color={"success"}
-                // onClick={sendArrayToBackend}
+                onClick={() => handleDowloadExcelCompleted()}
               >
                 Export to Excel
               </Button>

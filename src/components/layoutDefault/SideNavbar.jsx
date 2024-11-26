@@ -261,6 +261,15 @@ export function SideNavbar({ toggleSidebar }) {
                   className="text-sm md:text-base"
                   label="Recruitment"
                 >
+                  <Link to={"/shortnotice"}>
+                    <Sidebar.Item
+                      title="Short Notice/Add Applicant"
+                      className="text-sm md:text-base"
+                      as="div"
+                    >
+                      {truncateText("Short Notice/Add Applicant", 18)}
+                    </Sidebar.Item>
+                  </Link>
                   <Link to={"/seafarers"}>
                     <Sidebar.Item
                       title="All Applicants/Seafarers"
