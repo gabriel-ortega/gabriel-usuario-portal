@@ -267,7 +267,7 @@ export function SideNavbar({ toggleSidebar }) {
                       className="text-sm md:text-base"
                       as="div"
                     >
-                      {truncateText("All Applicants/Seafarers", 20)}
+                      {truncateText("All Applicants/Seafarers", 18)}
                     </Sidebar.Item>
                   </Link>
                   <Link to={"/submissions"}>
@@ -278,7 +278,7 @@ export function SideNavbar({ toggleSidebar }) {
                       label={unReadCount || ""}
                       labelColor="warning"
                     >
-                      {truncateText("Applications", 20)}
+                      {truncateText("Applications", 18)}
                     </Sidebar.Item>
                   </Link>
                   <Link to={"/firstinterviews"}>
@@ -287,7 +287,7 @@ export function SideNavbar({ toggleSidebar }) {
                       className="text-sm md:text-base"
                       as="div"
                     >
-                      {truncateText("First Interviews", 20)}
+                      {truncateText("First Interviews", 18)}
                     </Sidebar.Item>
                   </Link>
                   <Link to={"/secondinterviews"}>
@@ -296,7 +296,7 @@ export function SideNavbar({ toggleSidebar }) {
                       className="text-sm md:text-base"
                       as="div"
                     >
-                      {truncateText("Second Interviews", 20)}
+                      {truncateText("Second Interviews", 18)}
                     </Sidebar.Item>
                   </Link>
                   <Link to={"/gappool"}>
@@ -305,7 +305,7 @@ export function SideNavbar({ toggleSidebar }) {
                       className="text-sm md:text-base"
                       as="div"
                     >
-                      {truncateText("GAP Pool", 20)}
+                      {truncateText("GAP Pool", 18)}
                     </Sidebar.Item>
                   </Link>
                   <Link to={"/hirings"}>
@@ -314,7 +314,7 @@ export function SideNavbar({ toggleSidebar }) {
                       className="text-sm md:text-base"
                       as="div"
                     >
-                      {truncateText("Hirings", 20)}
+                      {truncateText("Hirings", 18)}
                     </Sidebar.Item>
                   </Link>
                   <Link to={"/embarks"}>
@@ -323,7 +323,17 @@ export function SideNavbar({ toggleSidebar }) {
                       className="text-sm md:text-base"
                       as="div"
                     >
-                      {truncateText("Embarks", 20)}
+                      {truncateText("Embarks", 18)}
+                    </Sidebar.Item>
+                  </Link>
+
+                  <Link to={"/expired"}>
+                    <Sidebar.Item
+                      title="Expired Documents"
+                      className="text-sm md:text-base"
+                      as="div"
+                    >
+                      {truncateText("Expired Documents", 18)}
                     </Sidebar.Item>
                   </Link>
                   <Link to={"/updaterequests"}>
@@ -334,16 +344,18 @@ export function SideNavbar({ toggleSidebar }) {
                       labelColor="warning"
                       as="div"
                     >
-                      {truncateText("Profile Update Requests", 20)}
+                      {truncateText("Profile Update Requests", 18)}
                     </Sidebar.Item>
                   </Link>
-                  <Link to={"/expired"}>
+                  <Link to={"/retirerequests"}>
                     <Sidebar.Item
-                      title="Expired Documents"
+                      title="Retirement Request"
                       className="text-sm md:text-base"
+                      // label={profileUpdatesCount || ""}
+                      // labelColor="warning"
                       as="div"
                     >
-                      {truncateText("Expired Documents", 20)}
+                      {truncateText("Retirement Request", 18)}
                     </Sidebar.Item>
                   </Link>
                 </Sidebar.Collapse>

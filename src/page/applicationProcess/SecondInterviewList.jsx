@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Avatar, Badge, Card, Pagination, Table } from "flowbite-react";
+import { Avatar, Badge, Button, Card, Pagination, Table } from "flowbite-react";
 import {
   downloadExcel,
   fetchFirstInterviewsCompleted,
@@ -26,6 +26,18 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { LoadingState } from "../../components/skeleton/LoadingState";
 import PdfView from "../../components/layoutComponents/PdfView";
 import InterviewsOverviewReport from "../../reports/InterviewsOverviewReport";
+import { InstantSearch } from "react-instantsearch";
+import { InterviewsRefinements } from "../recruitment/components/interviewLists/InterviewsRefinements";
+import { GapoolSearchBox } from "../recruitment/components/gappoolList/GapoolSearchBox";
+import { CustomCurrentRefinements } from "../recruitment/components/gappoolList/CustomCurrentRefinements";
+import { Configure } from "react-instantsearch";
+import { InterviewsInfiniteHits } from "../recruitment/components/interviewLists/InterviewsInfiniteHits";
+import { algoliasearch } from "algoliasearch";
+
+const searchClient = algoliasearch(
+  import.meta.env.VITE_ALGOLIA_ID,
+  import.meta.env.VITE_ALGOLIA_KEY
+);
 
 export const SecondInterviewList = () => {
   const dispatch = useDispatch();
@@ -234,9 +246,13 @@ export const SecondInterviewList = () => {
     setLoadingVar(false);
   };
 
-  const handleDowloadExcelCompleted = async () => { 
+  const handleDowloadExcelCompleted = async () => {
     try {
-      await downloadExcel([],"secondinterviewcompleted","second_interview_completed");
+      await downloadExcel(
+        [],
+        "secondinterviewcompleted",
+        "second_interview_completed"
+      );
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
     }
@@ -244,7 +260,11 @@ export const SecondInterviewList = () => {
 
   const handleDowloadExcelPending = async () => {
     try {
-      await downloadExcel([],"secondinterviewpending","second_interview_pending");
+      await downloadExcel(
+        [],
+        "secondinterviewpending",
+        "second_interview_pending"
+      );
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
     }
@@ -361,10 +381,21 @@ export const SecondInterviewList = () => {
 
   return (
     <>
+      <div className="pl-3 pb-4 pt-5  flex flex-row gap-3 items-center justify-between ">
+        <div className="flex flex-row gap-2 items-center justify-between">
+          <h1 className="md:pl-5 text-lg md:text-lg text-black font-bold">
+            Second Interviews
+          </h1>
+          <span className="italic font-light text-sm">{"Total: "}</span>
+        </div>
+      </div>
       <TabGroup className="">
         <TabList className="flex flex-row items-center  justify-center bg-white ">
           <Tab className="data-[selected]:border-b-2 border-blue-500 px-2 flex flex-col md:flex-row py-2 text-sm text-black items-center justify-center md:w-56 relative">
-            Second Interviews List
+            Pending / Appointed Interviews
+          </Tab>
+          <Tab className="data-[selected]:border-b-2 border-blue-500 px-2 flex flex-col md:flex-row py-2 text-sm text-black items-center justify-center md:w-56 relative">
+            Completed Interviews
           </Tab>
           <Tab className="data-[selected]:border-b-2 border-blue-500 px-2 md:translate-y-0 h-15 py-2 text-sm text-black flex flex-col md:flex-row items-center justify-center md:w-56 relative">
             Report
@@ -372,378 +403,76 @@ export const SecondInterviewList = () => {
         </TabList>
         <TabPanels>
           <TabPanel className="">
-            <h1 className=" pl-3 md:pl-5 pt-5 text-lg md:text-lg pb-4 text-black font-bold">
-              Second Interviews
-            </h1>
-            <section>
-              <section className="px-8">
-                <section className="my-4 hidden md:block">
-                <div className="flex justify-between items-center">
-                <span>Pending/Appointed Interviews</span>
-                  <button
-          onClick={handleDowloadExcelPending}
-          className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
-        >
-          Export to Excel
-        </button>
-        </div>
-                  
-                  <div className="overflow-x-auto max-h-96">
-                    <Table hoverable className="">
-                      <Table.Head>
-                        <Table.HeadCell>Name</Table.HeadCell>
-                        <Table.HeadCell>Interview Status</Table.HeadCell>
-                        <Table.HeadCell>Recruitment Dept.</Table.HeadCell>
-                        <Table.HeadCell>Department</Table.HeadCell>
-                        <Table.HeadCell>Position</Table.HeadCell>
-                        <Table.HeadCell>Nationality</Table.HeadCell>
-                        <Table.HeadCell>Residency</Table.HeadCell>
-                      </Table.Head>
-                      <Table.Body className="divide-y cursor-pointer">
-                        {interviews.length < 1 ? (
-                          <Table.Row>
-                            <Table.Cell className="whitespace-nowrap">
-                              {"--"}
-                            </Table.Cell>
-                            <Table.Cell className="whitespace-nowrap">
-                              {"--"}
-                            </Table.Cell>
-                            <Table.Cell className="whitespace-nowrap">
-                              {"--"}
-                            </Table.Cell>
-                            <Table.Cell className="whitespace-nowrap">
-                              {"--"}
-                            </Table.Cell>
-                            <Table.Cell className="whitespace-nowrap">
-                              {"--"}
-                            </Table.Cell>
-                            <Table.Cell className="whitespace-nowrap">
-                              {"--"}
-                            </Table.Cell>
-                            <Table.Cell className="whitespace-nowrap">
-                              {"--"}
-                            </Table.Cell>
-                          </Table.Row>
-                        ) : (
-                          interviews.map((seafarer, index) => (
-                            <Table.Row
-                              key={index}
-                              className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                              onClick={() =>
-                                handleProfileLink(seafarer.uid, seafarer)
-                              }
-                            >
-                              <Table.Cell className="whitespace-nowrap">
-                                {seafarer.seafarerData?.seafarerProfile?.profile
-                                  ?.firstName ||
-                                seafarer.seafarerData?.seafarerProfile?.profile
-                                  ?.lastName
-                                  ? `${seafarer.seafarerData?.seafarerProfile?.profile?.firstName} ${seafarer.seafarerData?.seafarerProfile?.profile?.lastName}`
-                                  : seafarer?.displayName
-                                  ? seafarer?.displayName
-                                  : "--"}
-                              </Table.Cell>
-                              <Table.Cell className="whitespace-nowrap">
-                                {/* {seafarer.firstInterview?.status || "--"} */}
-                                {seafarer.secondInterview?.status ? (
-                                  <Badge
-                                    color={
-                                      seafarer.secondInterview?.status ===
-                                      "Pending"
-                                        ? "warning"
-                                        : seafarer.secondsecondInterview
-                                            ?.status === "Approved"
-                                        ? "success"
-                                        : seafarer.secondfirstInterview
-                                            ?.status === "Disapproved"
-                                        ? "failure"
-                                        : seafarer.secondInterview?.status ===
-                                          "Appointed"
-                                        ? "purple"
-                                        : "info"
-                                    }
-                                  >
-                                    {seafarer.secondInterview?.status}
-                                  </Badge>
-                                ) : (
-                                  "--"
-                                )}
-                              </Table.Cell>
-                              <Table.Cell className="whitespace-nowrap">
-                                {seafarer.seafarerData?.vesselType
-                                  ? seafarer.seafarerData?.vesselType[0]?.name
-                                  : "--"}
-                              </Table.Cell>
-                              <Table.Cell className="whitespace-nowrap">
-                                {seafarer.seafarerData?.department
-                                  ? seafarer.seafarerData?.department[0]?.name
-                                  : "--"}
-                              </Table.Cell>
-                              <Table.Cell className="whitespace-nowrap">
-                                {seafarer.seafarerData?.position
-                                  ? seafarer.seafarerData?.position[0]?.name
-                                  : "--"}
-                              </Table.Cell>
-                              <Table.Cell className="whitespace-nowrap">
-                                {seafarer.seafarerData?.seafarerProfile?.profile
-                                  ?.countryBirth.CountryName || "--"}
-                              </Table.Cell>
-                              <Table.Cell className="whitespace-nowrap">
-                                {seafarer.seafarerData?.seafarerProfile?.profile
-                                  ?.countryResidency.CountryName || "--"}
-                              </Table.Cell>
-                            </Table.Row>
-                          ))
-                        )}
-                      </Table.Body>
-                    </Table>
-                  </div>
-                  <div className="flex overflow-x-auto justify-center mt-2">
-                    <Pagination
-                      currentPage={currentPage}
-                      totalPages={3}
-                      // onPageChange={onPageChange}
+            <div className="px-8 flex items-end justify-end">
+              <Button
+                // isProcessing={isLoading}
+                color={"success"}
+                // onClick={sendArrayToBackend}
+              >
+                Export to Excel
+              </Button>
+            </div>
+            <section className="p-8 w-full h-full">
+              <InstantSearch
+                indexName="secondInterviewIndex"
+                searchClient={searchClient}
+              >
+                <div className="flex flex-col md:flex-row gap-5">
+                  <div className="md:w-1/3">
+                    <InterviewsRefinements
+                    // onFilters={(e) => setFilters(e)}
                     />
                   </div>
-                </section>
-                <section className="my-10 hidden md:block">
-                  
-                  <div className="flex justify-between items-center">
-                  <span>Completed Interviews</span>
-                  <button
-          onClick={handleDowloadExcelCompleted}
-          className="md:w-32 md:h-10 bg-green-700 text-center text-sm rounded-md text-white"
-        >
-          Export to Excel
-        </button>
-        </div>
-                  <div className="overflow-x-auto max-h-96">
-                    <Table hoverable className="">
-                      <Table.Head>
-                        <Table.HeadCell>Name</Table.HeadCell>
-                        <Table.HeadCell>Interview Status</Table.HeadCell>
-                        <Table.HeadCell>Recruitment Dept.</Table.HeadCell>
-                        <Table.HeadCell>Department</Table.HeadCell>
-                        <Table.HeadCell>Position</Table.HeadCell>
-                        <Table.HeadCell>Nationality</Table.HeadCell>
-                        <Table.HeadCell>Residency</Table.HeadCell>
-                      </Table.Head>
-                      <Table.Body className="divide-y cursor-pointer">
-                        {interviewsCompleted.length < 1 ? (
-                          <Table.Row>
-                            <Table.Cell className="whitespace-nowrap">
-                              {"--"}
-                            </Table.Cell>
-                            <Table.Cell className="whitespace-nowrap">
-                              {"--"}
-                            </Table.Cell>
-                            <Table.Cell className="whitespace-nowrap">
-                              {"--"}
-                            </Table.Cell>
-                            <Table.Cell className="whitespace-nowrap">
-                              {"--"}
-                            </Table.Cell>
-                            <Table.Cell className="whitespace-nowrap">
-                              {"--"}
-                            </Table.Cell>
-                            <Table.Cell className="whitespace-nowrap">
-                              {"--"}
-                            </Table.Cell>
-                            <Table.Cell className="whitespace-nowrap">
-                              {"--"}
-                            </Table.Cell>
-                          </Table.Row>
-                        ) : (
-                          interviewsCompleted.map((seafarer, index) => (
-                            <Table.Row
-                              key={index}
-                              className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                              onClick={() =>
-                                handleProfileLink(seafarer.uid, seafarer)
-                              }
-                            >
-                              <Table.Cell className="whitespace-nowrap">
-                                {seafarer.seafarerData?.profile?.firstName ||
-                                seafarer.seafarerData?.profile?.lastName
-                                  ? `${seafarer.seafarerData?.firstName} ${seafarer.seafarerData?.lastName}`
-                                  : seafarer?.displayName
-                                  ? seafarer?.displayName
-                                  : "--"}
-                              </Table.Cell>
-                              <Table.Cell className="whitespace-nowrap">
-                                {/* {seafarer.firstInterview?.status || "--"} */}
-                                {seafarer.secondInterview?.status ? (
-                                  <Badge
-                                    color={
-                                      seafarer.secondInterview?.status ===
-                                      "Pending"
-                                        ? "warning"
-                                        : seafarer.secondInterview?.status ===
-                                          "Approved"
-                                        ? "success"
-                                        : seafarer.secondInterview?.status ===
-                                          "Disapproved"
-                                        ? "failure"
-                                        : seafarer.secondInterview?.status ===
-                                          "Appointed"
-                                        ? "purple"
-                                        : "info"
-                                    }
-                                  >
-                                    {seafarer.secondInterview?.status}
-                                  </Badge>
-                                ) : (
-                                  "--"
-                                )}
-                              </Table.Cell>
-                              <Table.Cell className="whitespace-nowrap">
-                                {seafarer.seafarerData?.vesselType
-                                  ? seafarer.seafarerData?.vesselType[0]?.name
-                                  : "--"}
-                              </Table.Cell>
-                              <Table.Cell className="whitespace-nowrap">
-                                {seafarer.seafarerData?.department
-                                  ? seafarer.seafarerData?.department[0]?.name
-                                  : "--"}
-                              </Table.Cell>
-                              <Table.Cell className="whitespace-nowrap">
-                                {seafarer.seafarerData?.position
-                                  ? seafarer.seafarerData?.position[0]?.name
-                                  : "--"}
-                              </Table.Cell>
-                              <Table.Cell className="whitespace-nowrap">
-                                {seafarer.seafarerData?.seafarerProfile?.profile
-                                  ?.countryBirth.CountryName || "--"}
-                              </Table.Cell>
-                              <Table.Cell className="whitespace-nowrap">
-                                {seafarer.seafarerData?.seafarerProfile?.profile
-                                  ?.countryResidency.CountryName || "--"}
-                              </Table.Cell>
-                            </Table.Row>
-                          ))
-                        )}
-                      </Table.Body>
-                    </Table>
-                  </div>
-                  <div className="flex overflow-x-auto justify-center mt-2">
-                    <Pagination
-                      currentPage={currentPage}
-                      totalPages={3}
-                      // onPageChange={onPageChange}
+                  <div className="container overflow-y-auto">
+                    <div className="flex flex-col items-start md:flex-row">
+                      <GapoolSearchBox />
+                      <CustomCurrentRefinements />
+                    </div>
+                    <Configure
+                      hitsPerPage={50}
+                      filters={`status: "Pending" OR status: "Appointed"`}
                     />
+                    <InterviewsInfiniteHits type={"second"} />
                   </div>
-                </section>
-              </section>
-              <div className="space-y-4 px-2 md:hidden">
-                <SelectComponents
-                  Text="Select a Status Filter"
-                  data={[
-                    { id: 1, name: "Pending/Appointed" },
-                    { id: 2, name: "Completed" },
-                  ]}
-                  idKey={"id"}
-                  valueKey={"name"}
-                  initialValue={{ id: 1, name: "Pending/Appointed" }}
-                  name_valor={true}
-                  onChange={(e) => handleViewChange(e[0])}
-                />
-                {(mobileView === "2" ? interviewsCompleted : interviews)
-                  .length === 0 ? (
-                  <div className=" flex justify-center items-center">
-                    No Data
-                  </div>
-                ) : (
-                  (mobileView === "2" ? interviewsCompleted : interviews).map(
-                    (seafarer, index) => {
-                      if (!seafarer) {
-                        return <div key={index}>No Data</div>;
-                      }
-                      return (
-                        <Card
-                          key={index}
-                          className="cursor-pointer"
-                          onClick={() =>
-                            handleProfileLink(seafarer.uid, seafarer)
-                          }
-                        >
-                          <section className="flex items-center">
-                            <div className="mr-4 flex items-center  bg-primary">
-                              <Avatar
-                                className="text-primary-foreground"
-                                rounded
-                                // size="md"
-                                img={seafarer?.photoURL}
-                                placeholderInitials=""
-                              />
-                            </div>
-                            <div className="flex-col flex-1 space-y-1">
-                              <p className="text-sm font-semibold leading-none">
-                                {seafarer.seafarerData?.seafarerProfile?.profile
-                                  ?.firstName ||
-                                seafarer.seafarerData?.seafarerProfile?.profile
-                                  ?.lastName
-                                  ? `${seafarer.seafarerData?.seafarerProfile?.profile?.firstName} ${seafarer.seafarerData?.seafarerProfile?.profile?.lastName}`
-                                  : seafarer?.displayName
-                                  ? seafarer?.displayName
-                                  : "--"}
-                              </p>
-                              <p className="text-xs text-muted-foreground ">
-                                {seafarer.seafarerData?.vesselType
-                                  ? seafarer.seafarerData?.vesselType[0]?.name
-                                  : "--"}
-                              </p>
-                              <p className="text-xs text-muted-foreground ">
-                                {seafarer.seafarerData?.position
-                                  ? seafarer.seafarerData?.position[0]?.name
-                                  : "--"}
-                              </p>
-                              <p className="text-xs text-muted-foreground font-light">
-                                {seafarer.seafarerData?.department
-                                  ? seafarer.seafarerData?.department[0]?.name
-                                  : "--"}
-                              </p>
-                              <p className="">
-                                {seafarer.secondInterview?.status ? (
-                                  <span className="flex items-center">
-                                    <Badge
-                                      color={
-                                        seafarer.secondInterview?.status ===
-                                        "Pending"
-                                          ? "warning"
-                                          : seafarer.secondInterview?.status ===
-                                            "Approved"
-                                          ? "success"
-                                          : seafarer.secondInterview?.status ===
-                                            "Disapproved"
-                                          ? "failure"
-                                          : seafarer.secondInterview?.status ===
-                                            "Appointed"
-                                          ? "purple"
-                                          : "info"
-                                      }
-                                    >
-                                      {seafarer.secondInterview?.status}
-                                    </Badge>
-                                  </span>
-                                ) : (
-                                  "--"
-                                )}
-                              </p>
-                            </div>
-                          </section>
-                        </Card>
-                      );
-                    }
-                  )
-                )}
-                <div className="flex overflow-x-auto justify-center mt-2">
-                  <Pagination
-                    currentPage={currentPage}
-                    totalPages={3}
-                    // onPageChange={onPageChange}
-                  />
                 </div>
-              </div>
+              </InstantSearch>
+            </section>
+          </TabPanel>
+          <TabPanel className="">
+            <div className="px-8 flex items-end justify-end">
+              <Button
+                // isProcessing={isLoading}
+                color={"success"}
+                // onClick={sendArrayToBackend}
+              >
+                Export to Excel
+              </Button>
+            </div>
+            <section className="p-8 w-full h-full">
+              <InstantSearch
+                indexName="secondInterviewIndex"
+                searchClient={searchClient}
+              >
+                <div className="flex flex-col md:flex-row gap-5">
+                  <div className="md:w-1/3">
+                    <InterviewsRefinements
+                    // onFilters={(e) => setFilters(e)}
+                    />
+                  </div>
+                  <div className="container overflow-y-auto">
+                    <div className="flex flex-col items-start md:flex-row">
+                      <GapoolSearchBox />
+                      <CustomCurrentRefinements />
+                    </div>
+                    <Configure
+                      hitsPerPage={50}
+                      filters={`status: "Approved" OR status: "Disapproved" OR status: "Reviewing" OR status: "Retired"`}
+                    />
+
+                    <InterviewsInfiniteHits type={"second"} />
+                  </div>
+                </div>
+              </InstantSearch>
             </section>
           </TabPanel>
           <TabPanel className="">

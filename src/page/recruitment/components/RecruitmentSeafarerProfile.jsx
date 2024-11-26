@@ -114,7 +114,9 @@ export const RecruitmentSeafarerProfile = ({
     }));
   };
 
-  const [marlinTestForms, setMarlinTestForms] = useState([]);
+  const [marlinTestForms, setMarlinTestForms] = useState(
+    profileData.lang?.marlins || []
+  );
 
   /* Función para actualizar los datos guardados */
   const handleDataChange = (index, newData) => {
@@ -230,7 +232,13 @@ export const RecruitmentSeafarerProfile = ({
     // setUnsavedChanges(true);
   };
 
-  const [showH2, setShowH2] = useState(true); // Estado para controlar la visibilidad del h2
+  const [showH2, setShowH2] = useState(
+    (profileData.lang?.marlins?.[0] &&
+      Object.values(profileData.lang.marlins[0]).every(
+        (value) => value === "" || value === null || value === undefined
+      )) ||
+      false
+  ); // Estado para controlar la visibilidad del h2
 
   useEffect(() => {
     if (isLoaded) {
@@ -323,7 +331,7 @@ export const RecruitmentSeafarerProfile = ({
                     <SeafarerProfile
                       userData={{ ...profileData?.profile, uid: uid }}
                       // userData={data?.profile || {}}
-                      // onChange={(e) => console.log(e)}
+                      onChange={(e) => console.log(e)}
                       // onChange={(e) => handleProfileFields(e)}
                     />
                   )}
@@ -490,28 +498,38 @@ export const RecruitmentSeafarerProfile = ({
                       </h2>
                     )}
 
-                    {marlinTestForms.map((form, index) => (
-                      <MarlinTest
-                        key={index}
-                        form={form}
-                        onDelete={(e) => handleDeleteMarlinTestForm(index, e)}
-                        Editdata={profileData.lang?.marlins[index] || {}}
-                        onDataChange={(e) => {
-                          handleDataChange(index, e);
-                        }}
-                        title=""
-                      />
-                    ))}
+                    {profileData.lang?.marlins?.[0] &&
+                      !Object.values(profileData.lang.marlins[0]).every(
+                        (value) =>
+                          value === "" || value === null || value === undefined
+                      ) &&
+                      marlinTestForms.map((form, index) => (
+                        <MarlinTest
+                          key={index}
+                          form={form}
+                          onDelete={(e) => handleDeleteMarlinTestForm(index, e)}
+                          Editdata={profileData.lang?.marlins[index] || {}}
+                          onDataChange={(e) => {
+                            handleDataChange(index, e);
+                          }}
+                          title=""
+                        />
+                      ))}
 
-                    {marlinTestForms.length === 0 && (
-                      <ButtonIcon
-                        onClick={handleAddMarlinTestForm}
-                        classnamebtn="bg-[#1976d2]"
-                        classname="flex items-center justify-center py-2 px-0 md:py-2 md:px-2"
-                        label="Add"
-                        icon={<GoPlusCircle className="ml-2 h-5 w-5" />}
-                      />
-                    )}
+                    {/* {marlinTestForms.length === 0 && ( */}
+                    {profileData.lang?.marlins?.[0] &&
+                      Object.values(profileData.lang.marlins[0]).every(
+                        (value) =>
+                          value === "" || value === null || value === undefined
+                      ) && (
+                        <ButtonIcon
+                          onClick={handleAddMarlinTestForm}
+                          classnamebtn="bg-[#1976d2]"
+                          classname="flex items-center justify-center py-2 px-0 md:py-2 md:px-2"
+                          label="Add"
+                          icon={<GoPlusCircle className="ml-2 h-5 w-5" />}
+                        />
+                      )}
                   </section>
                 </section>
               </div>

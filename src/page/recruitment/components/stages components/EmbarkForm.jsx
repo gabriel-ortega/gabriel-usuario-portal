@@ -24,6 +24,7 @@ import {
   HiOutlineExclamationCircle,
   HiOutlineMenuAlt1,
   HiOutlinePlusSm,
+  HiOutlineXCircle,
   HiSave,
   HiUserCircle,
 } from "react-icons/hi";
@@ -1058,6 +1059,20 @@ export const EmbarkForm = ({
             </Tooltip>
           </div>
         </div>
+        {status == 1 && (
+          <div className="flex justify-end">
+            <button
+              className={` border border-red-300 bg-white text-red-600 size-10 md:w-36 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-red-50 disabled:opacity-30`}
+              // disabled={!unfit || status !== 2}
+              onClick={() => handleInception("")}
+              title={"Cancel Embark"}
+            >
+              <HiOutlineXCircle className="h-4 w-4" />
+
+              <span className="hidden md:block ">{"Cancel Embark"}</span>
+            </button>
+          </div>
+        )}
 
         <div className="my-5">
           <TabGroup>

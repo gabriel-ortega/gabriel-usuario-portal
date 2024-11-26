@@ -180,15 +180,18 @@ export async function exportApplicationsExcel(json) {
   }
 }
 
-
-export async function downloadExcelDocumentExpired(filters = [],url,nameDocument) {
+export async function downloadExcelDocumentExpired(
+  filters = [],
+  url,
+  nameDocument
+) {
   try {
     const response = await fetch(`${bd_server}/reporte/${url}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({filters}),
+      body: JSON.stringify({ filters }),
     });
 
     if (!response.ok) {
@@ -211,8 +214,7 @@ export async function downloadExcelDocumentExpired(filters = [],url,nameDocument
   }
 }
 
-
-export async function downloadExcel(filters = [],url,nameDocument) {
+export async function downloadExcel(filters = [], url, nameDocument) {
   try {
     const response = await fetch(`${bd_server}/reporte/${url}`, {
       method: "POST",
@@ -347,11 +349,10 @@ export async function fetchProfileUpdatesBatch(lastVisibleDoc = null) {
   try {
     const collRef = collection(FirebaseDB, "profileUpdates");
 
-    // Crear la consulta con el límite de 20 documentos y la condición de `recruitmentStage`
     let profileUpdatesQuery = query(
       collRef,
-      orderBy("createdOn", "desc"),
-      limit(20)
+      orderBy("createdOn", "desc")
+      // limit(20)
     );
 
     // Si hay un documento visible, significa que es una página siguiente
@@ -359,8 +360,8 @@ export async function fetchProfileUpdatesBatch(lastVisibleDoc = null) {
       profileUpdatesQuery = query(
         collRef,
         orderBy("createdOn", "desc"),
-        startAfter(lastVisibleDoc),
-        limit(20)
+        startAfter(lastVisibleDoc)
+        // limit(20)
       );
     }
 
@@ -383,6 +384,28 @@ export async function fetchProfileUpdatesBatch(lastVisibleDoc = null) {
   } catch (error) {
     console.error("Error fetching profile updates:", error);
     return { data: [], lastVisible: null };
+  }
+}
+
+export async function fetchRetirementRequests() {
+  const url = `${firebaseServer}/retireeInfo`;
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json", // Agrega si es necesario
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json(); // Procesar la respuesta
+    return data;
+  } catch (error) {
+    console.error("Error fetching documents report:", error);
   }
 }
 
@@ -554,7 +577,7 @@ export async function fetchApplicationsData(
     const formattedEndDate = filters.applicationDateEnd
       ? `${filters.applicationDateEnd}T23:59:59.999Z`
       : null;
-      console.log(formattedStartDate)
+    console.log(formattedStartDate);
     let queryConstraints = [];
 
     // Agregar filtros dinámicos según los valores de `filters`
@@ -1357,8 +1380,6 @@ export const getApplicationCV = async (uid, version) => {
   }
 };
 
-
-
 export const getTemplate = async () => {
   try {
     const docRef = doc(FirebaseDB, "citas/template");
@@ -1398,17 +1419,6 @@ export const getDateInterviews = async () => {
     console.error("Error obteniendo los datos:", error);
   }
 };
-
-
-
-
-
-
-
-
-
-
-
 
 /* -----------------------FETCH DE TABLAS AUXILIARES----------------------- */
 export const getVesselType = async () => {

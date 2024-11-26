@@ -9,6 +9,8 @@ import { LoadingState } from "../../components/skeleton/LoadingState";
 import { fetchProfileUpdatesBatch } from "../../util/services";
 import { useEffect } from "react";
 import applicationStatusData from "../../assets/tables/json/ApplicationStatus-static.json";
+import { setProfileUpdateData } from "../../store/currentViews/viewSlice";
+import { getSeafarerData } from "../../store/userData";
 
 export const UpdateRequests = () => {
   const dispatch = useDispatch();
@@ -23,10 +25,10 @@ export const UpdateRequests = () => {
 
   const [dataPagination, setDataPagination] = useState();
 
-  const handleProfileLink = (applicationData, applicationDataLatest, uid) => {
-    //   dispatch(setApplicationView(applicationData));
-    //   dispatch(setApplicationData(applicationDataLatest));
-    navigate("/reviewapplication/" + uid);
+  const handleProfileLink = (updateData, id) => {
+    dispatch(setProfileUpdateData(updateData));
+    dispatch(getSeafarerData(updateData.uid));
+    navigate("/reviewupdate/" + id);
   };
 
   const loadResults = async () => {
@@ -69,11 +71,8 @@ export const UpdateRequests = () => {
                       className={`${
                         application.isRead ? "bg-white" : "bg-yellow-100"
                       } dark:border-gray-700 dark:bg-gray-800`}
-                      onClick={
-                        () => handleProfileLink()
-                        //   application.applicationData,
-                        //   application.applicationData.versions[latestVersion],
-                        //   application.applicationData.uid
+                      onClick={() =>
+                        handleProfileLink(application, application.id)
                       }
                     >
                       <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">

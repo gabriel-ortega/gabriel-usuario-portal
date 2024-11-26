@@ -213,7 +213,7 @@ export default function FirstInterview() {
             updateSeafarerDataFirebase(
               profile.uid,
               profile.seafarerData,
-              Stages[2]
+              Stages[2].Id
             )
           ),
           dispatch(createSecondInterviews(profile.uid))
@@ -268,7 +268,7 @@ export default function FirstInterview() {
             updateSeafarerDataFirebase(
               profile.uid,
               profile.seafarerData,
-              Stages[13]
+              Stages[13].Id
             )
           )
         ),
@@ -293,7 +293,7 @@ export default function FirstInterview() {
 
     const newUpdatedData = {
       ...targetData,
-      status: "Review",
+      status: "Reviewing",
       interviewer: targetData.interviewer || { id: uid },
     };
 
@@ -315,7 +315,7 @@ export default function FirstInterview() {
             // firstInterviewData.id,
             currentInterview.id,
             updatedArray[selectedVersion.id],
-            "Review"
+            "Reviewing"
           ),
           dispatch(
             updateSeafarerDataFirebase(

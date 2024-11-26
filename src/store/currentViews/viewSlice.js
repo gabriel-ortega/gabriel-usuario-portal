@@ -135,6 +135,9 @@ export const viewSlice = createSlice({
     setSignOffReasons: (state, { payload }) => {
       state.signOffReasons = payload;
     },
+    setProfileUpdateData: (state, { payload }) => {
+      state.profileUpdate = payload;
+    },
   },
 });
 
@@ -178,4 +181,5 @@ export const {
   setVessels,
   setCompanies,
   setSignOffReasons,
+  setProfileUpdateData,
 } = viewSlice.actions;

@@ -66,6 +66,10 @@ export const ProfileOptions = () => {
   const [sortedNotes, setSortedNotes] = useState([]);
   const [sortedHistory, setSortedHistory] = useState([]);
 
+  const seguimientoStages = [
+    7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 22, 23, 24, 25, 26, 27,
+  ];
+
   const onCurrentCommentChange = (e) => {
     const { name, value } = e.target;
     setCurrentComment((prev) => ({
@@ -295,6 +299,7 @@ export const ProfileOptions = () => {
   };
 
   const [retireMessage, setRetireMessage] = useState("");
+  const [reactivateMessage, setReactivateMessage] = useState("");
 
   const handleRetireModal = () => {
     const currentStage = profile.recruitmentStage;
@@ -317,13 +322,17 @@ export const ProfileOptions = () => {
         message =
           "This applicant has decided to withdraw from the application process, their status will change to 'Retired in GAP Pool'";
         break;
+      case 5:
+        message =
+          "This applicant has decided to withdraw from the application process, their status will change to 'Refused - Own Request / Active Retired'";
+        break;
       case 6:
         message =
           "This applicant has decided to withdraw from the application process, their status will change to 'Refused - Own Request / Active Retired'";
         break;
       case 13:
         message =
-          "This applicant has decided to withdraw from the application process, their status will change to 'Retired in First Interview'";
+          "This applicant has decided to withdraw from the application process, their status will change to 'Retired in Evaluation'";
         break;
       case 20:
         message =
@@ -335,6 +344,52 @@ export const ProfileOptions = () => {
 
     setRetireMessage(message);
     setCurrentModal("retire");
+    setIsOpen(true);
+  };
+
+  const handleReactivateModal = () => {
+    const currentStage = profile.SeguimientoID;
+    let message = "";
+
+    switch (currentStage) {
+      case 1:
+        message =
+          "This applicant was retired in the application process, their status will change to 'Application Process'";
+        break;
+      case 2:
+        message =
+          "This applicant was retired in First Interview, their status will change to 'First Interview'";
+        break;
+      case 3:
+        message =
+          "This applicant was retired in Second Interview, their status will change to 'Second Interview'";
+        break;
+      case 4:
+        message =
+          "This applicant was retired in GAP Pool, their status will change to 'GAP Pool'";
+        break;
+      case 5:
+        message =
+          "This applicant was retired in Hiring Process, their status will change to 'GAP Pool'";
+        break;
+      case 6:
+        message =
+          "This applicant was retired in Embarkation Process, their status will change to 'GAP Pool'";
+        break;
+      case 13:
+        message =
+          "This applicant was retired in Evaluation, their status will change to 'Evaluation'";
+        break;
+      case 20:
+        message =
+          "This applicant was retired from the application process while being in VACATION, their status will change to 'GAP Pool'";
+        break;
+      default:
+        message = "Invalid stage";
+    }
+
+    setReactivateMessage(message);
+    setCurrentModal("reactivate");
     setIsOpen(true);
   };
 
@@ -367,8 +422,12 @@ export const ProfileOptions = () => {
         newStage = 16;
         additionalFields = { available: false };
         break;
+      case 5:
+        newStage = 23;
+        additionalFields = { available: false };
+        break;
       case 6:
-        newStage = 22;
+        newStage = 23;
         additionalFields = { available: false };
         break;
       case 13:
@@ -445,6 +504,115 @@ export const ProfileOptions = () => {
     });
   };
 
+  const handleReactivate = () => {
+    const currentStage = profile.SeguimientoID;
+
+    let newStage;
+    let additionalFields = {};
+
+    switch (currentStage) {
+      case 1:
+        newStage = currentStage;
+        additionalFields = { available: true };
+        break;
+      case 2:
+        newStage = currentStage;
+        additionalFields = {
+          available: true,
+        };
+        break;
+      case 3:
+        newStage = currentStage;
+        additionalFields = {
+          available: true,
+        };
+        break;
+      case 4:
+        newStage = currentStage;
+        additionalFields = { available: true };
+        break;
+      case 5:
+        newStage = 4;
+        additionalFields = { available: true };
+        break;
+      case 6:
+        newStage = 4;
+        additionalFields = { available: true };
+        break;
+      case 13:
+        newStage = currentStage;
+        additionalFields = { available: true };
+        break;
+      case 20:
+        newStage = 4;
+        additionalFields = { available: true };
+        break;
+      // case 20:
+      //   // Prompt user for decision (e.g., modal with options)
+      //   const answerOptions = ["Own Request", "Mind Change", "Unavailable"];
+      //   const respuesta = window.prompt(
+      //     "This applicant has decided to withdraw while on VACATION. Choose a status to apply:",
+      //     answerOptions.join(", ")
+      //   );
+
+      //   switch (respuesta) {
+      //     case "Own Request":
+      //       newStage = 23;
+      //       additionalFields = { Available: false };
+      //       break;
+      //     case "Mind Change":
+      //       newStage = 22;
+      //       additionalFields = { Available: false };
+      //       break;
+      //     case "Unavailable":
+      //       newStage = 25;
+      //       additionalFields = { Available: false };
+      //       break;
+      //     default:
+      //       return; // Exit if no valid response
+      //   }
+
+      //   // Set active contract to false for currentStage 20
+      //   const activeContract = (profile.contracts || []).find(
+      //     (contract) => contract.Active
+      //   );
+      //   if (activeContract) {
+      //     additionalFields.contracts = profile.contracts.map((contract) =>
+      //       contract === activeContract ? { ...contract, Active: false } : contract
+      //     );
+      //   }
+      //   break;
+      default:
+        console.warn("Invalid stage");
+        return;
+    }
+
+    // Dispatch the update with new recruitment stage and additional fields
+    const updatedSeafarerData = {
+      recruitmentStage: newStage,
+      ...additionalFields,
+      SeguimientoDate: "",
+      SeguimientoID: 0,
+    };
+
+    const profileData = {
+      ...profile,
+      recruitmentStage: newStage,
+      ...additionalFields,
+      SeguimientoDate: "",
+      SeguimientoID: 0,
+    };
+    setIsOpen(false);
+
+    dispatch(setProfileView(profileData));
+
+    toast.promise(dispatch(updateUsersData(profile.uid, updatedSeafarerData)), {
+      loading: "Saving...",
+      success: <b>Saved!</b>,
+      error: <b>Ups! Something went wrong. Try again</b>,
+    });
+  };
+
   return (
     <section className="flex flex-col gap-10">
       <div className="flex flex-col gap-4 justify-start items-start">
@@ -475,14 +643,25 @@ export const ProfileOptions = () => {
         >
           Update Recruitment Stage
         </button>
-        <button
-          onClick={() => {
-            handleRetireModal();
-          }}
-          className="text-sm font-sans text-red-500 hover:text-white bg-red-50 hover:bg-red-500 py-2 px-4 rounded flex items-center gap-2 transition-all duration-200"
-        >
-          Retire Applicant
-        </button>
+        {seguimientoStages.includes(profile.recruitmentStage) ? (
+          <button
+            onClick={() => {
+              handleReactivateModal();
+            }}
+            className="text-sm font-sans text-white hover:text-white bg-green-500 hover:bg-green-600 py-2 px-4 rounded flex items-center gap-2 transition-all duration-200"
+          >
+            Reactivate Process
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              handleRetireModal();
+            }}
+            className="text-sm font-sans text-red-500 hover:text-white bg-red-50 hover:bg-red-500 py-2 px-4 rounded flex items-center gap-2 transition-all duration-200"
+          >
+            Retire Applicant
+          </button>
+        )}
       </div>
 
       <div className="flex flex-col gap-6">
@@ -655,6 +834,8 @@ export const ProfileOptions = () => {
             <div>Transfering Seafarer</div>
           ) : currentModal == "retire" ? (
             <div>Retiring Seafarer</div>
+          ) : currentModal == "reactivate" ? (
+            <div>Reactivate Seafarer</div>
           ) : currentModal == "reject" ? (
             <div>Rejecting Seafarer</div>
           ) : currentModal == "comment" ? (
@@ -798,6 +979,30 @@ export const ProfileOptions = () => {
               >
                 {/* <FaFloppyDisk className="h-4 w-4" /> */}
                 <span className=" ">Retire</span>
+              </button>
+            </div>
+          </div>
+        ) : currentModal == "reactivate" ? (
+          <div className="flex flex-col justify-center items-center gap-4">
+            <span>{reactivateMessage}</span>
+            <div className="flex flex-row justify-center items-center gap-3">
+              <button
+                title="Cancel"
+                className={`w-16 border border-blue-300 bg-white text-blue-600 size-10 md:w-28 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50 disabled:opacity-30`}
+                //   disabled={isSaving}
+                onClick={(e) => closeModal(e)}
+              >
+                {/* <FaFloppyDisk className="h-4 w-4" /> */}
+                <span className=" ">Cancel</span>
+              </button>
+              <button
+                title="Continue"
+                className={`w-16 border border-green-600 bg-green-600 text-white size-10 md:w-28 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-green-700 disabled:opacity-30 disabled:cursor-not-allowed`}
+                //   disabled={isSaving}
+                onClick={() => handleReactivate()}
+              >
+                {/* <FaFloppyDisk className="h-4 w-4" /> */}
+                <span className=" ">Reactivate</span>
               </button>
             </div>
           </div>

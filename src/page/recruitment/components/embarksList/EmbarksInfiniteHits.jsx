@@ -40,6 +40,7 @@ function Hit({ hit, type }) {
   const handleContractLink = (id) => {
     // Dispatch con el objeto modificado
     navigate("/embark/" + id);
+    // console.log(id);
   };
   const getPositionName = (id) => {
     if (id == 1) return "N/A";

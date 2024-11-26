@@ -432,7 +432,7 @@ export const FirstInterviewList = () => {
                       hitsPerPage={50}
                       filters={`status: "Pending" OR status: "Appointed"`}
                     />
-                    <InterviewsInfiniteHits />
+                    <InterviewsInfiniteHits type={"first"} />
                   </div>
                 </div>
               </InstantSearch>
@@ -469,7 +469,7 @@ export const FirstInterviewList = () => {
                       filters={`status: "Approved" OR status: "Disapproved" OR status: "Reviewing" OR status: "Retired"`}
                     />
 
-                    <InterviewsInfiniteHits />
+                    <InterviewsInfiniteHits type={"first"} />
                   </div>
                 </div>
               </InstantSearch>

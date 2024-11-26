@@ -20,6 +20,7 @@ const Applicants_Aplications = lazy(() =>
 const ReviewApplication = lazy(() =>
   import("../application/ReviewApplication")
 );
+const ReviewUpdate = lazy(() => import("../recruitment/ReviewUpdate"));
 const FirstInterviewList = lazy(() =>
   import("../applicationProcess/FirstInterviewList")
 );
@@ -42,6 +43,7 @@ const ExpiredDocumentsView = lazy(() =>
 );
 const UpdateRequests = lazy(() => import("../recruitment/UpdateRequests"));
 const SearchTest = lazy(() => import("../../components/searchBar/SearchTest"));
+const RetireRequest = lazy(() => import("../recruitment/RetireRequest"));
 
 export const PortalRoutes = () => {
   const { userData } = useSelector((state) => state.userData);
@@ -68,12 +70,14 @@ export const PortalRoutes = () => {
               path="/reviewapplication/:id"
               element={<ReviewApplication />}
             />
+            <Route path="/reviewupdate/:id" element={<ReviewUpdate />} />
 
             <Route path="/globalsearch" element={<SearchTest />} />
             <Route path="/interview-first/:id" element={<FirstInterview />} />
             <Route path="/interview-second/:id" element={<SecondInterview />} />
             <Route path="/expired" element={<ExpiredDocumentsView />} />
             <Route path="/updaterequests" element={<UpdateRequests />} />
+            <Route path="/retirerequests" element={<RetireRequest />} />
             <Route path="/*" element={<Navigate to="/dashboard" />} />
           </Routes>
         </Suspense>

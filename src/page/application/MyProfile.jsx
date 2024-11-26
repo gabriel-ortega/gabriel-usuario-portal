@@ -103,8 +103,7 @@ export default function MyProfile() {
     }
   );
 
-  const handleProfileChange = () => {
-    // console.log(e);
+  const handleProfileChange = (e) => {
     setHasUnsavedChanges(true);
     // setAllSeafarerData({ ...allSeafarerData, seafarerProfile: e });
   };

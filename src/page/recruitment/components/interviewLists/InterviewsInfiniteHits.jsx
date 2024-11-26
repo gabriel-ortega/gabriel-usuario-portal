@@ -31,14 +31,18 @@ function unixToYyyyMmDd(unixTimestamp) {
   return `${year}-${month}-${day}`;
 }
 
-function Hit({ hit, toggleHits }) {
+function Hit({ hit, toggleHits, type }) {
   const { positions, departments, vesselTypes } = useSelector(
     (state) => state.currentViews
   );
   const navigate = useNavigate();
 
   const handleProfileLink = (uid) => {
-    navigate("/interview-first/" + uid);
+    if (type == "first") {
+      navigate("/interview-first/" + uid);
+    } else {
+      navigate("/interview-second/" + uid);
+    }
   };
   const getPositionName = (id) => {
     if (id == 1) return "N/A";
@@ -242,7 +246,7 @@ export function InterviewsInfiniteHits({ ...props }) {
           <>
             {hits.map((hit) => (
               <li key={hit.objectID} className="ais-InfiniteHits-item my-3">
-                <Hit hit={hit} />
+                <Hit hit={hit} type={props.type} />
               </li>
             ))}
             <li

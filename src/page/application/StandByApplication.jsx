@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import {
   getApplication,
   setApplicationData,
+  setUserData,
+  submitRetireRequest,
   updateApplicationSent,
   updateApplicationStage,
   updateSeafarerDataFirebase,
@@ -109,70 +111,80 @@ export const StandByApplication = () => {
     setRetireReason(e.target.value);
   };
 
+  // const handleRetire = () => {
+  //   const vesselTypeUpdate =
+  //     userData.applicationData.startApplication.vesselType[0].id;
+  //   const departmentUpdate =
+  //     userData.applicationData.startApplication.department[0].id;
+  //   const positionUpdate =
+  //     userData.applicationData.startApplication.position[0].id;
+
+  //   const vesselTypeData = {
+  //     vesselType: vesselTypeUpdate,
+  //     department: departmentUpdate,
+  //     position: positionUpdate,
+  //   };
+
+  //   // Clonar el arreglo de versiones y actualizar la versión más reciente
+  //   // const updatedVersions = [...application.versions];
+  //   // updatedVersions[selectedVersion.id] = applicationData;
+
+  //   // Crear el objeto application actualizado con las versiones actualizadas
+  //   const newApplicationData = {
+  //     ...myApplication,
+  //     comment: retireReason,
+  //     status: 6,
+  //     modifiedDate: new Date().toISOString(),
+  //     vesselType: vesselTypeUpdate,
+  //   };
+
+  //   const updatedApplication = {
+  //     ...newApplicationData,
+  //     vesselType: vesselTypeUpdate,
+  //     department: departmentUpdate,
+  //     position: positionUpdate,
+  //   };
+
+  //   const seafarerData = getSeafarerDataObject(myApplication.latestVersion);
+
+  //   const newData = {
+  //     ...seafarerData,
+  //     applicationDate: myApplication?.createdOn,
+  //   };
+
+  //   // Ejecutar el dispatch con el objeto application actualizado
+  //   dispatch(updateReviewVersion(myApplication.latestVersion));
+
+  //   dispatch(updateApplication(updatedApplication));
+
+  //   toast.promise(
+  //     Promise.all([
+  //       dispatch(
+  //         updateApplicationSent(
+  //           myApplication.uid,
+  //           updatedApplication,
+  //           vesselTypeData
+  //         )
+  //       ),
+  //       dispatch(updateSeafarerDataFirebase(myApplication.uid, newData, 10)),
+  //     ]),
+  //     {
+  //       loading: "Saving...",
+  //       success: <b>Saved</b>,
+  //       error: <b>Ups! Something went wrong. Try again</b>,
+  //     }
+  //   );
+  //   setOpenModalWarning(false);
+  // };
+
   const handleRetire = () => {
-    const vesselTypeUpdate =
-      userData.applicationData.startApplication.vesselType[0].id;
-    const departmentUpdate =
-      userData.applicationData.startApplication.department[0].id;
-    const positionUpdate =
-      userData.applicationData.startApplication.position[0].id;
-
-    const vesselTypeData = {
-      vesselType: vesselTypeUpdate,
-      department: departmentUpdate,
-      position: positionUpdate,
-    };
-
-    // Clonar el arreglo de versiones y actualizar la versión más reciente
-    // const updatedVersions = [...application.versions];
-    // updatedVersions[selectedVersion.id] = applicationData;
-
-    // Crear el objeto application actualizado con las versiones actualizadas
-    const newApplicationData = {
-      ...myApplication,
-      comment: retireReason,
-      status: 6,
-      modifiedDate: new Date().toISOString(),
-      vesselType: vesselTypeUpdate,
-    };
-
-    const updatedApplication = {
-      ...newApplicationData,
-      vesselType: vesselTypeUpdate,
-      department: departmentUpdate,
-      position: positionUpdate,
-    };
-
-    const seafarerData = getSeafarerDataObject(myApplication.latestVersion);
-
-    const newData = {
-      ...seafarerData,
-      applicationDate: myApplication?.createdOn,
-    };
-
-    // Ejecutar el dispatch con el objeto application actualizado
-    dispatch(updateReviewVersion(myApplication.latestVersion));
-
-    dispatch(updateApplication(updatedApplication));
-
-    toast.promise(
-      Promise.all([
-        dispatch(
-          updateApplicationSent(
-            myApplication.uid,
-            updatedApplication,
-            vesselTypeData
-          )
-        ),
-        dispatch(updateSeafarerDataFirebase(myApplication.uid, newData, 10)),
-      ]),
-      {
-        loading: "Saving...",
-        success: <b>Saved</b>,
-        error: <b>Ups! Something went wrong. Try again</b>,
-      }
-    );
-    setOpenModalWarning(false);
+    const data = { ...userData, retireRequest: true };
+    dispatch(setUserData(data));
+    toast.promise(dispatch(submitRetireRequest(userData.uid, retireReason)), {
+      loading: "Saving...",
+      success: <b>Submited!</b>,
+      error: <b>Ups! Something went wrong. Try again</b>,
+    });
   };
 
   return (
@@ -184,12 +196,7 @@ export const StandByApplication = () => {
               {userData.recruitmentStage == 1 &&
                 userData.recruitmentStage == 13 && (
                   <div className="flex justify-between mb-2">
-                    <Button
-                      color="failure"
-                      // onClick={() => {
-                      //   setOpenModalWarning(true);
-                      // }}
-                    >
+                    <Button color="failure" onClick={handleRetire()}>
                       Retire from the Application Process
                     </Button>
 

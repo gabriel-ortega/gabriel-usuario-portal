@@ -83,8 +83,11 @@ export const SecondInterviewForm = ({
 
   // Estado centralizado para las evaluaciones
   const [evaluations, setEvaluations] = useState({});
+
   useEffect(() => {
-    setEvaluations(data?.evaluations);
+    if (data?.evaluations) {
+      setEvaluations(data?.evaluations);
+    }
   }, [data]);
 
   const interviewData = useMemo(() => data, []);

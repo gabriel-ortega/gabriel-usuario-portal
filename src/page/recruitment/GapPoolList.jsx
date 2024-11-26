@@ -274,7 +274,7 @@ export default function GapPoolList() {
               <Button
                 // isProcessing={isLoading}
                 color={"success"}
-                // onClick={handleDowloadExcelGappool}
+                onClick={handleDowloadExcelGappool}
               >
                 Export to Excel
               </Button>

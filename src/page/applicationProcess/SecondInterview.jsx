@@ -482,7 +482,7 @@ export default function SecondInterview() {
                 <div className="flex items-center justify-start">
                   <Badge color="purple">
                     {profile?.recruitmentStage
-                      ? Stages[profile?.recruitmentStage - 1].StageName
+                      ? Stages[profile?.recruitmentStage - 1]?.StageName
                       : "Undefined"}
                   </Badge>
                 </div>

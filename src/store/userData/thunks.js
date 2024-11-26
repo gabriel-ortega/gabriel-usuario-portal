@@ -36,6 +36,7 @@ import {
   setEmbarks,
   setFirstInterview,
   setHirings,
+  setProfileUpdateData,
   setProfileView,
   setSecondInterview,
   updateSeafarerComments,
@@ -84,20 +85,52 @@ export const submitProfileUpdate = (uid, userData) => {
     const profileUpdate = {
       profileUpdate: true,
     };
-    const docRef = doc(FirebaseDB, `profileUpdates/${uid}`);
+    const docRef = doc(FirebaseDB, `profileUpdates`);
     const profileRef = doc(FirebaseDB, `usersData/${uid}`);
     await setDoc(docRef, data);
     await updateDoc(profileRef, profileUpdate);
   };
 };
 
-export const getProfileUpdate = (uid) => {
+export const submitRetireRequest = (uid, reason) => {
+  return async (dispatch) => {
+    const date = new Date().toISOString();
+    const data = {
+      status: 1,
+      createdOn: date,
+      reason: reason,
+      uid: uid,
+    };
+    const profileUpdate = {
+      retireRequest: true,
+    };
+    const docRef = doc(FirebaseDB, `retireRequests`);
+    const profileRef = doc(FirebaseDB, `usersData/${uid}`);
+    await setDoc(docRef, data);
+    await updateDoc(profileRef, profileUpdate);
+  };
+};
+
+export const updateRetireRequest = (id, status) => {
+  return async (dispatch) => {
+    const date = new Date().toISOString();
+    const data = {
+      status: status,
+      modifiedOn: date,
+    };
+    const docRef = doc(FirebaseDB, `retireRequests/${id}`);
+    await updateDoc(docRef, data);
+  };
+};
+
+export const getProfileUpdate = (id) => {
   return async (dispatch) => {
     try {
-      const docRef = doc(FirebaseDB, `profileUpdates/${uid}`);
+      const docRef = doc(FirebaseDB, `profileUpdates/${id}`);
 
       const docSnap = await getDoc(docRef);
-      dispatch(setProfileView(docSnap.data()));
+      const data = docSnap.data();
+      dispatch(setProfileUpdateData({ ...data, id: docSnap.id }));
       return true;
     } catch (error) {
       return false;
@@ -730,28 +763,52 @@ export const updateSeafarerHiring = (id, data, status) => {
   };
 };
 
+// export const getSeafarerEmbarksById = (id) => {
+//   return async (dispatch) => {
+//     try {
+//       const docRef = collection(FirebaseDB, `embarks`);
+//       const q = query(docRef, where("id", "==", id));
+//       const docSnap = await getDocs(q);
+
+//       if (!docSnap.empty) {
+//         // Verificamos si hay documentos
+//         const embarks = docSnap.docs.map((doc) => {
+//           const data = doc.data();
+//           return { ...data, id: doc.id };
+//         });
+//         dispatch(setCurrentEmbark(embarks[0]));
+//         return true; // Regresa true si encuentra los embarks
+//       } else {
+//         console.log("No embarks found for the given ID");
+//         return false; // Si no encuentra documentos, retorna false
+//       }
+//     } catch (error) {
+//       console.error("Error fetching embarks data:", error);
+//       return false; // Si hay un error, retorna false
+//     }
+//   };
+// };
+
 export const getSeafarerEmbarksById = (id) => {
   return async (dispatch) => {
     try {
-      const docRef = collection(FirebaseDB, `embarks`);
-      const q = query(docRef, where("id", "==", id));
-      const docSnap = await getDocs(q);
+      const docRef = doc(FirebaseDB, `embarks`, id); // Buscar documento directamente por ID
+      const docSnap = await getDoc(docRef);
 
-      if (!docSnap.empty) {
-        // Verificamos si hay documentos
-        const embarks = docSnap.docs.map((doc) => {
-          const data = doc.data();
-          return { ...data, id: doc.id };
-        });
-        dispatch(setCurrentEmbark(embarks[0]));
-        return true; // Regresa true si encuentra los embarks
+      if (docSnap.exists()) {
+        // Si el documento existe
+        const data = docSnap.data();
+        const embark = { ...data, id: docSnap.id }; // Agregar el ID al objeto de datos
+
+        dispatch(setCurrentEmbark(embark)); // Actualizar el estado con el embarque encontrado
+        return true; // Retornar true si encuentra el documento
       } else {
-        console.log("No embarks found for the given ID");
-        return false; // Si no encuentra documentos, retorna false
+        console.log("No embark found for the given ID");
+        return false; // Retornar false si no existe el documento
       }
     } catch (error) {
-      console.error("Error fetching embarks data:", error);
-      return false; // Si hay un error, retorna false
+      console.error("Error fetching embark data:", error);
+      return false; // Retornar false si ocurre un error
     }
   };
 };

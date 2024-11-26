@@ -13,10 +13,12 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {
   getSeafarerData,
+  setUserData,
+  submitRetireRequest,
   updateSeafarerDataFirebase,
   updateUsersData,
 } from "../../store/userData";
-import { Button, Modal, Progress, Timeline } from "flowbite-react";
+import { Badge, Button, Modal, Progress, Timeline } from "flowbite-react";
 import stagesData from "../../assets/tables/json/RecruitmentStage-static.json";
 import { formatDate } from "../../util/helperFunctions";
 import { LoadingState } from "../../components/skeleton/LoadingState";
@@ -35,6 +37,10 @@ export const ApplicantProcessView = () => {
   const { hirings, profile, currentHiring, currentEmbark, embarks } =
     useSelector((state) => state.currentViews);
   const [openModalWarning, setOpenModalWarning] = useState(false);
+
+  const seguimientoStages = [
+    7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 22, 23, 24, 25, 26, 27,
+  ];
 
   useEffect(() => {
     dispatch(getSeafarerData(userData.uid));
@@ -65,112 +71,123 @@ export const ApplicantProcessView = () => {
   const handleInput = (e) => {
     setRetireReason(e.target.value);
   };
+
+  // const handleRetire = () => {
+  //   const currentStage = profile.recruitmentStage;
+
+  //   let newStage;
+  //   let additionalFields = {};
+
+  //   switch (currentStage) {
+  //     case 1:
+  //       newStage = 10;
+  //       additionalFields = { available: false };
+  //       break;
+  //     case 2:
+  //       newStage = 8;
+  //       additionalFields = {
+  //         firstInterview: { status: "Retired" },
+  //         available: false,
+  //       };
+  //       break;
+  //     case 3:
+  //       newStage = 9;
+  //       additionalFields = {
+  //         secondInterview: { status: "Retired" },
+  //         available: false,
+  //       };
+  //       break;
+  //     case 4:
+  //       newStage = 16;
+  //       additionalFields = { available: false };
+  //       break;
+  //     case 6:
+  //       newStage = 22;
+  //       additionalFields = { available: false };
+  //       break;
+  //     case 13:
+  //       newStage = 7;
+  //       additionalFields = { available: false };
+  //       break;
+  //     case 20:
+  //       newStage = 23;
+  //       additionalFields = { available: false };
+  //       break;
+  //     // case 20:
+  //     //   // Prompt user for decision (e.g., modal with options)
+  //     //   const answerOptions = ["Own Request", "Mind Change", "Unavailable"];
+  //     //   const respuesta = window.prompt(
+  //     //     "This applicant has decided to withdraw while on VACATION. Choose a status to apply:",
+  //     //     answerOptions.join(", ")
+  //     //   );
+
+  //     //   switch (respuesta) {
+  //     //     case "Own Request":
+  //     //       newStage = 23;
+  //     //       additionalFields = { Available: false };
+  //     //       break;
+  //     //     case "Mind Change":
+  //     //       newStage = 22;
+  //     //       additionalFields = { Available: false };
+  //     //       break;
+  //     //     case "Unavailable":
+  //     //       newStage = 25;
+  //     //       additionalFields = { Available: false };
+  //     //       break;
+  //     //     default:
+  //     //       return; // Exit if no valid response
+  //     //   }
+
+  //     //   // Set active contract to false for currentStage 20
+  //     //   const activeContract = (profile.contracts || []).find(
+  //     //     (contract) => contract.Active
+  //     //   );
+  //     //   if (activeContract) {
+  //     //     additionalFields.contracts = profile.contracts.map((contract) =>
+  //     //       contract === activeContract ? { ...contract, Active: false } : contract
+  //     //     );
+  //     //   }
+  //     //   break;
+  //     default:
+  //       console.warn("Invalid stage");
+  //       return;
+  //   }
+
+  //   // Dispatch the update with new recruitment stage and additional fields
+  //   const updatedSeafarerData = {
+  //     recruitmentStage: newStage,
+  //     ...additionalFields,
+  //     SeguimientoDate: new Date().toISOString(),
+  //     SeguimientoID: currentStage,
+  //     SeguimientoComment: retireReason,
+  //   };
+
+  //   const profileData = {
+  //     ...profile,
+  //     recruitmentStage: newStage,
+  //     ...additionalFields,
+  //     SeguimientoDate: new Date().toISOString(),
+  //     SeguimientoID: currentStage,
+  //   };
+
+  //   dispatch(setProfileView(profileData));
+
+  //   toast.promise(dispatch(updateUsersData(profile.uid, updatedSeafarerData)), {
+  //     loading: "Saving...",
+  //     success: <b>Saved!</b>,
+  //     error: <b>Ups! Something went wrong. Try again</b>,
+  //   });
+  //   setOpenModalWarning(false);
+  // };
+
   const handleRetire = () => {
-    const currentStage = profile.recruitmentStage;
-
-    let newStage;
-    let additionalFields = {};
-
-    switch (currentStage) {
-      case 1:
-        newStage = 10;
-        additionalFields = { available: false };
-        break;
-      case 2:
-        newStage = 8;
-        additionalFields = {
-          firstInterview: { status: "Retired" },
-          available: false,
-        };
-        break;
-      case 3:
-        newStage = 9;
-        additionalFields = {
-          secondInterview: { status: "Retired" },
-          available: false,
-        };
-        break;
-      case 4:
-        newStage = 16;
-        additionalFields = { available: false };
-        break;
-      case 6:
-        newStage = 22;
-        additionalFields = { available: false };
-        break;
-      case 13:
-        newStage = 7;
-        additionalFields = { available: false };
-        break;
-      case 20:
-        newStage = 23;
-        additionalFields = { available: false };
-        break;
-      // case 20:
-      //   // Prompt user for decision (e.g., modal with options)
-      //   const answerOptions = ["Own Request", "Mind Change", "Unavailable"];
-      //   const respuesta = window.prompt(
-      //     "This applicant has decided to withdraw while on VACATION. Choose a status to apply:",
-      //     answerOptions.join(", ")
-      //   );
-
-      //   switch (respuesta) {
-      //     case "Own Request":
-      //       newStage = 23;
-      //       additionalFields = { Available: false };
-      //       break;
-      //     case "Mind Change":
-      //       newStage = 22;
-      //       additionalFields = { Available: false };
-      //       break;
-      //     case "Unavailable":
-      //       newStage = 25;
-      //       additionalFields = { Available: false };
-      //       break;
-      //     default:
-      //       return; // Exit if no valid response
-      //   }
-
-      //   // Set active contract to false for currentStage 20
-      //   const activeContract = (profile.contracts || []).find(
-      //     (contract) => contract.Active
-      //   );
-      //   if (activeContract) {
-      //     additionalFields.contracts = profile.contracts.map((contract) =>
-      //       contract === activeContract ? { ...contract, Active: false } : contract
-      //     );
-      //   }
-      //   break;
-      default:
-        console.warn("Invalid stage");
-        return;
-    }
-
-    // Dispatch the update with new recruitment stage and additional fields
-    const updatedSeafarerData = {
-      recruitmentStage: newStage,
-      ...additionalFields,
-      SeguimientoDate: new Date().toISOString(),
-      SeguimientoID: currentStage,
-      SeguimientoComment: retireReason,
-    };
-
-    const profileData = {
-      ...profile,
-      recruitmentStage: newStage,
-      ...additionalFields,
-      SeguimientoDate: new Date().toISOString(),
-      SeguimientoID: currentStage,
-    };
-
-    dispatch(setProfileView(profileData));
-
-    toast.promise(dispatch(updateUsersData(profile.uid, updatedSeafarerData)), {
+    const data = { ...profile, retireRequest: true };
+    dispatch(setUserData(data));
+    toast.promise(dispatch(submitRetireRequest(profile.uid, retireReason)), {
       loading: "Saving...",
-      success: <b>Saved!</b>,
+      success: <b>Submited!</b>,
       error: <b>Ups! Something went wrong. Try again</b>,
     });
-    setOpenModalWarning(false);
   };
 
   return (
@@ -178,7 +195,12 @@ export const ApplicantProcessView = () => {
       <div className="">
         {/* Left Column */}
         <div className="space-y-8 p-6 ">
-          <div className="flex justify-end mb-2">
+          <div className="flex justify-between mb-2 items-center">
+            {profile.retireRequest ? (
+              <Badge color={"warning"}>Retirement Request Submited </Badge>
+            ) : (
+              <span></span>
+            )}
             <Button
               color="failure"
               onClick={() => {
@@ -208,6 +230,8 @@ export const ApplicantProcessView = () => {
           </div>
           {isLoading ? (
             <LoadingState />
+          ) : seguimientoStages.includes(profile?.recruitmentStage) ? (
+            <section>Retirado/rechazado</section>
           ) : (
             <>
               <div>
@@ -414,7 +438,7 @@ export const ApplicantProcessView = () => {
             <span className="text-sm ">
               Please state a reason of your withdrawal from the process
             </span>
-            <div>
+            <div className="my-3">
               <TextArea classname="min-h-28" onChange={handleInput} />
             </div>
             <div className="flex justify-center gap-4">
