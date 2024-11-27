@@ -4,7 +4,7 @@ import {
   SelectComponents,
   YesNoInput,
 } from "../../components/layoutComponents";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   HiDocumentDownload,
   HiDotsVertical,
@@ -31,6 +31,10 @@ import { useDispatch } from "react-redux";
 import { validateEmail } from "../../util/helperFunctions";
 import { generatePassword } from "../../util/helperFunctions/generatePassword";
 import { validatePassword } from "../../util/helperFunctions/validatePassword";
+import { checkIdentification, isEmailAvailable } from "../../util/services";
+import toast from "react-hot-toast";
+import { createSeafarer } from "../../store/userData";
+import { useNavigate } from "react-router-dom";
 const RecruitmentSeafarerProfile = lazy(() =>
   import("./components/RecruitmentSeafarerProfile")
 );
@@ -43,6 +47,7 @@ const RecruitmentCertificates = lazy(() =>
 );
 
 export const NewApplicant = ({ ...props }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const { profile, vesselTypes, positions, departments } = useSelector(
@@ -56,7 +61,39 @@ export const NewApplicant = ({ ...props }) => {
   const [createAccount, setCreateAccount] = useState(false);
   const [recruitmentStage, setRecruitmentStage] = useState(0);
   const [email, setEmail] = useState("");
+  const [isAvailable, setIsAvailable] = useState(null); // null: No verificado, true: Disponible, false: No disponible
+  const [typingTimeout, setTypingTimeout] = useState(null);
+
+  const handleEmail = (e) => {
+    const value = e;
+    setEmail(value);
+    dispatch(updateSeafarerEmail(value));
+
+    // Debounce para evitar consultas innecesarias
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
+
+    setTypingTimeout(
+      setTimeout(async () => {
+        if (value) {
+          const available = await isEmailAvailable(value);
+          const isEmailValid = validateEmail(value);
+          setEmailValid(available && isEmailValid);
+          setIsAvailable(available);
+          if (!available) {
+            setEmailValidations("E-mail already in use");
+          }
+        } else {
+          setIsAvailable(null);
+          setEmailValid(emailValid);
+        }
+      }, 500) // Tiempo de espera antes de verificar
+    );
+  };
+  const [displayName, setDisplayName] = useState("");
   const [emailValid, setEmailValid] = useState(true);
+  const [emailValidations, setEmailValidations] = useState([]);
   const [password, setPassword] = useState("");
   const [passwordValid, setPasswordValid] = useState(false);
   const [disableSeafarerData, setDisableSeafarerData] = useState(true);
@@ -217,15 +254,16 @@ export const NewApplicant = ({ ...props }) => {
     }
   }, [recruitmentStage, selectedValues]);
 
-  const handleEmail = (e) => {
-    setEmail(e);
-    // dispatch(updateSeafarerEmail(e))
-  };
+  // const handleEmail = (e) => {
+  //   setEmail(e);
+  //   // dispatch(updateSeafarerEmail(e))
+  // };
 
   useEffect(() => {
     if (email) {
       const isEmailValid = validateEmail(email);
       setEmailValid(isEmailValid);
+      setEmailValidations("Invalid e-mail");
     }
   }, [email]);
 
@@ -241,22 +279,84 @@ export const NewApplicant = ({ ...props }) => {
   useEffect(() => {
     if (password) {
       const isPasswordValid = validatePassword(password);
-      setPasswordValid(setPasswordValid(isPasswordValid.isValid));
-      console.log(isPasswordValid);
+      setPasswordValid(isPasswordValid);
     }
   }, [password]);
 
-  const handleProfileChange = (e) => {
-    console.log(e);
-  };
+  useEffect(() => {
+    if (
+      profile.seafarerData?.seafarerProfile?.profile?.firstName ||
+      profile.seafarerData?.seafarerProfile?.profile?.lastName
+    ) {
+      setDisplayName(
+        `${profile.seafarerData?.seafarerProfile?.profile?.firstName || ""} ${
+          profile.seafarerData?.seafarerProfile?.profile?.lastName || ""
+        }`.toUpperCase()
+      );
+    }
+  }, [profile]);
 
-  const handleCreateSeafarer = () => {
+  const handleProfileChange = (e) => {};
+
+  const handleCreateSeafarer = async () => {
+    const date = new Date().toISOString();
     const data = {
       email,
       password,
-      seafarerData: profile,
+      displayName,
+      seafarerData: {
+        ...profile,
+        createdOn: date,
+        notes: [{ type: 2, Note: "Creation", user: "", createdOn: date }],
+        seafarerData: {
+          ...profile.seafarerData,
+          applicationDate: date,
+        },
+      },
     };
-    console.log(data);
+
+    if (!profile.identification) {
+      toast.error(
+        "Please provide an identification for the Seafarer/Applicant."
+      );
+      return;
+    } else {
+      const idCheck = await checkIdentification(profile.identification);
+      if (!idCheck) {
+        toast.error("There already is an applicant with that identification.");
+        return;
+      }
+    }
+
+    if (!displayName) {
+      toast.error("Please provide a name for the Seafarer/Applicant.");
+      return;
+    }
+
+    if (createAccount && (!emailValid || !passwordValid)) {
+      toast.error(
+        "Set a valid e-mail and password if you want to create an account."
+      );
+      return;
+    }
+
+    try {
+      // Usar toast.promise para manejar los estados
+      const result = await toast.promise(
+        dispatch(createSeafarer(data, false)), // Aquí se ejecuta createSeafarer
+        {
+          loading: "Creating Seafarer...",
+          success: <b>Created!</b>,
+          error: <b>Ups! Something went wrong. Try again</b>,
+        }
+      );
+
+      // Aquí `result` será el valor retornado por createSeafarer
+      // console.log("Seafarer created with ID:", result); // O manejarlo según necesites
+      navigate("/profile/" + result);
+    } catch (error) {
+      toast.error("Error creating seafarer:", error);
+    }
   };
 
   return (
@@ -441,16 +541,16 @@ export const NewApplicant = ({ ...props }) => {
               onChange={(e) => handleEmail(e.target.value)}
               classname={""}
               isValid={!emailValid ? false : true}
-              helpertext={!emailValid ? "Invalid E-mail" : ""}
+              helpertext={!emailValid ? emailValidations : ""}
               required
             />
-            <YesNoInput
+            {/* <YesNoInput
               disabled={!email || !emailValid ? true : false}
               text="Create Account"
               name="createAccount"
               onChange={(e) => setCreateAccount(e.target.value)}
               // onChange={(e) => console.log(e.target.value)}
-            />
+            /> */}
           </div>
           {createAccount && (
             <div className="grid grid-cols-1 lg:grid-cols-2 justify-center items-start mt-3 transition-all duration-75">
@@ -463,12 +563,20 @@ export const NewApplicant = ({ ...props }) => {
                     name="password"
                     onChange={(e) => handlePassword(e.target.value)}
                     classname={"flex-grow w-full"}
-                    // isValid={passwordValid && formSubmitted ? false : true}
-                    // helpertext={
-                    //   !!passwordValid && formSubmitted ? passwordValid : ""
-                    // }
-                    // helpertext={!!passwordValid && formSubmitted ? passwordValid : ""}
-                    // color={!!passwordValid && formSubmitted ? "error" : "default"}
+                    isValid={
+                      passwordValid?.isValid ? passwordValid.isValid : ""
+                    }
+                    helpertext={
+                      passwordValid.errors
+                        ? passwordValid.errors.map((error, index) => (
+                            <React.Fragment key={index}>
+                              {error}
+                              <br />
+                            </React.Fragment>
+                          ))
+                        : ""
+                    }
+                    // helpertext={<pre>{passwordValid.errors?.join("\n")}</pre>}
                     required
                   />
                   <div
@@ -570,7 +678,7 @@ export const NewApplicant = ({ ...props }) => {
                           profile.seafarerData?.seafarerProfile?.profile
                             ?.lastName,
                       }}
-                      //   onChange={(e) => handleCertificatesChange(e)}
+                      // onChange={(e) => handleCertificatesChange(e)}
                       //   disabled={userData.profileUpdate || false}
                     />
                   </Suspense>

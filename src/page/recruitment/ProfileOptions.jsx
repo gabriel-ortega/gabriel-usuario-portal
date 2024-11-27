@@ -36,6 +36,7 @@ import {
   updateUsersData,
 } from "../../store/userData";
 import stageData from "../../assets/tables/json/RecruitmentStage-static.json";
+import { formatDate } from "../../util/helperFunctions";
 
 export const ProfileOptions = () => {
   const dispatch = useDispatch();
@@ -815,13 +816,17 @@ export const ProfileOptions = () => {
         <div className="flex flex-col gap-1 text-sm">
           <span>Created On:</span>
           <span className="text-xs font-light">
-            {profile?.createdOn || "--"}
+            {profile?.createdOn
+              ? formatDate(profile.createdOn, "dddd, mmmm dd yyyy")
+              : "--"}
           </span>
         </div>
         <div className="flex flex-col gap-1 text-sm">
           <span>Last Modified:</span>
           <span className="text-xs font-light">
-            {profile?.modifiedOn || "--"}
+            {profile?.modifiedOn
+              ? formatDate(profile.modifiedOn, "dddd, mmmm dd yyyy")
+              : "--"}
           </span>
         </div>
       </div>

@@ -33,6 +33,7 @@ export const initialUserDataExternal = (data) => {
     firstInterview: {},
     secondInterview: {},
     available: true,
+    notes: [{ type: 2, Note: "Creation", user: "", createdOn: todayDate }],
   };
   return userData;
 };
@@ -77,6 +78,7 @@ export const initialUserDataRegistered = (uid, registerForm) => {
     available: true,
     firstInterview: {},
     secondInterview: {},
+    notes: [{ type: 2, Note: "Creation", user: "", createdOn: todayDate }],
   };
   return userData;
 };

@@ -13,7 +13,7 @@ const RecruitmentCertificates = ({
   certificatesData,
   additionalData,
   seafarerData,
-  onChange,
+  onChange = () => {},
   disabled = false,
 }) => {
   const [certificateNames, setCertificateNames] = useState([]);

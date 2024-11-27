@@ -16,7 +16,7 @@ export const RecruitmentDocuments = ({
   documentsData,
   additionalData,
   seafarerData,
-  onChange,
+  onChange = () => {},
   disabled = false,
 }) => {
   const [documentNames, setDocumentNames] = useState([]);

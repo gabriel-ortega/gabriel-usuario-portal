@@ -74,18 +74,24 @@ export const createApplication = (userData) => {
 
 export const createSeafarer = (data, createAccount = false) => {
   return async (dispatch) => {
-    const { email, password, seafarerData } = data;
+    const { email, password, displayName, seafarerData } = data;
+
     if (createAccount) {
-      const { ok, uid, photoURL, errorMessage } = await createuserWithEmail({
+      const { ok, uid } = await createuserWithEmail({
         email,
         password,
         displayName,
       });
+      if (!ok) {
+        return false;
+      }
       const docRef = doc(FirebaseDB, `usersData/${uid}`);
-      await setDoc(docRef, data);
+      await setDoc(docRef, seafarerData);
+      return uid;
     } else {
-      const docRef = doc(FirebaseDB, `usersData`);
-      await setDoc(docRef, data);
+      const docRef = doc(collection(FirebaseDB, "usersData")); // ID generado automáticamente
+      await setDoc(docRef, { ...seafarerData, uid: docRef.id });
+      return docRef.id; // Devuelve el ID generado
     }
   };
 };
@@ -217,10 +223,10 @@ export const getApplicationByUid = (uid, skip) => {
 export const updateUsersData = (uid, data) => {
   return async (dispatch) => {
     dispatch(setSaving(true));
-
+    const date = new Date().toISOString();
     try {
       const docRef = doc(FirebaseDB, `usersData/${uid}`);
-      await updateDoc(docRef, data);
+      await updateDoc(docRef, { ...data, modifiedOn: date });
       dispatch(setSaving(false));
     } catch (error) {
       console.error("Error updating seafarer:", error);

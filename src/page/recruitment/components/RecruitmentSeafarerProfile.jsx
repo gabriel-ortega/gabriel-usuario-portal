@@ -20,7 +20,7 @@ import { LoadingState } from "../../../components/skeleton/LoadingState";
 
 export const RecruitmentSeafarerProfile = ({
   data,
-  onChange,
+  onChange = () => {},
   uid,
   disabled = false,
   isNew = false,

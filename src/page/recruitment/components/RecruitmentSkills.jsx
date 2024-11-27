@@ -22,7 +22,7 @@ import { LoadingState } from "../../../components/skeleton/LoadingState";
 const RecruitmentSkills = ({
   skillsData,
   positionData,
-  onChange,
+  onChange = () => {},
   disabled = false,
 }) => {
   const { profile, positions } = useSelector((state) => state.currentViews);

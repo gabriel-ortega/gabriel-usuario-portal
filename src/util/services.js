@@ -17,6 +17,22 @@ const bd_server = import.meta.env.VITE_BD_SERVER;
 const firebaseServer = import.meta.env.VITE_FIREBASE_FUNCTIONS;
 const localServer = "192.168.1.41:4000";
 
+export async function isEmailAvailable(email) {
+  if (!email) return false; // Validación inicial
+  const usersRef = collection(FirebaseDB, "usersData");
+  const q = query(usersRef, where("email", "==", email));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.empty; // Devuelve `true` si no hay registros
+}
+
+export async function checkIdentification(identification) {
+  if (!identification) return false; // Validación inicial
+  const usersRef = collection(FirebaseDB, "usersData");
+  const q = query(usersRef, where("identification", "==", identification));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.empty; // Devuelve `true` si no hay registros
+}
+
 export async function fetchApplicationsReport(
   filters = { startDate: "", endDate: "" }
 ) {

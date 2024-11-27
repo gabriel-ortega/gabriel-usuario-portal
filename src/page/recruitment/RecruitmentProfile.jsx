@@ -21,6 +21,7 @@ import { capitalizeFirstLetter, formatDate } from "../../util/helperFunctions";
 import { useDispatch } from "react-redux";
 import {
   getSeafarerData,
+  setUserData,
   updateSeafarerDataFirebase,
   updateUsersData,
 } from "../../store/userData";
@@ -237,6 +238,7 @@ export default function RecruitmentProfile() {
 
   const save = (e) => {
     e.preventDefault();
+    const date = new Date().toISOString();
     // toast.promise(
     //   dispatch(updateSeafarerDataFirebase(profile.uid, profile.seafarerData)),
     //   {
@@ -250,6 +252,7 @@ export default function RecruitmentProfile() {
       success: <b>Saved!</b>,
       error: <b>Ups! Something went wrong. Try again</b>,
     });
+    dispatch(setUserData({ ...profile, modifiedOn: date }));
 
     setHasUnsavedChanges(false);
   };
