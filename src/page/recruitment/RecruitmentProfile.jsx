@@ -252,7 +252,7 @@ export default function RecruitmentProfile() {
       success: <b>Saved!</b>,
       error: <b>Ups! Something went wrong. Try again</b>,
     });
-    dispatch(setUserData({ ...profile, modifiedOn: date }));
+    // dispatch(setUserData({ ...profile, modifiedOn: date }));
 
     setHasUnsavedChanges(false);
   };
