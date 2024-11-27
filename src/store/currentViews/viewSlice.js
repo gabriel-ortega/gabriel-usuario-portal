@@ -38,6 +38,12 @@ export const viewSlice = createSlice({
     updateSeafarerStage: (state, { payload }) => {
       state.profile.recruitmentStage = payload;
     },
+    updateSeafarerAvailable: (state, { payload }) => {
+      state.profile.available = payload;
+    },
+    updateLogisticId: (state, { payload }) => {
+      state.profile.logisticId = payload;
+    },
     updateSeafarerPhoto: (state, { payload }) => {
       state.profile.photoURL = payload;
       state.profile.seafarerData.photoURL = payload;
@@ -152,6 +158,8 @@ export const {
   updateReviewVersion,
   setProfileView,
   updateSeafarerStage,
+  updateLogisticId,
+  updateSeafarerAvailable,
   updateSeafarerPhoto,
   updateSeafarerSignature,
   updateSeafarerIdentification,

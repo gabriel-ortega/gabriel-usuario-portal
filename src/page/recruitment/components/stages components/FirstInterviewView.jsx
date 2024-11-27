@@ -96,7 +96,7 @@ export const FirstInterviewView = () => {
           Latest Interview Date:{" "}
           <span className="font-bold">
             {latestInterview?.interviewDate
-              ? formatDate(latestInterview?.interviewDate, "dd-mm-yyyy")
+              ? formatDate(latestInterview?.interviewDate, "mm-dd-yyyy")
               : "--"}
           </span>
         </span>
@@ -156,7 +156,9 @@ export const FirstInterviewView = () => {
                         {interview.appointment || "--"}
                       </Table.Cell>
                       <Table.Cell className="whitespace-nowrap">
-                        {interview.interviewDate || "--"}
+                        {interview.interviewDate
+                          ? formatDate(interview.interviewDate, "mm-dd-yyyy")
+                          : "--"}
                       </Table.Cell>
                     </Table.Row>
                   );

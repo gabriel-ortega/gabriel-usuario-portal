@@ -57,6 +57,7 @@ export function SideNavbar({ toggleSidebar }) {
     1 === userData.recruitmentStage ||
       2 === userData.recruitmentStage ||
       3 === userData.recruitmentStage ||
+      4 === userData.recruitmentStage ||
       7 === userData.recruitmentStage ||
       8 === userData.recruitmentStage ||
       9 === userData.recruitmentStage ||
@@ -77,6 +78,8 @@ export function SideNavbar({ toggleSidebar }) {
     1 === userData.recruitmentStage ||
       2 === userData.recruitmentStage ||
       3 === userData.recruitmentStage ||
+      4 === userData.recruitmentStage ||
+      5 === userData.recruitmentStage ||
       7 === userData.recruitmentStage ||
       8 === userData.recruitmentStage ||
       9 === userData.recruitmentStage ||

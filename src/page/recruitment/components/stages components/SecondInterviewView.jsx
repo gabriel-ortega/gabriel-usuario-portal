@@ -94,7 +94,9 @@ export const SecondInterviewView = () => {
         <span>
           Latest Interview Date:{" "}
           <span className="font-bold">
-            {latestInterview?.interviewDate || "--"}
+            {latestInterview?.interviewDate
+              ? formatDate(latestInterview?.interviewDate, "mm-dd-yyyy")
+              : "--"}
           </span>
         </span>
         <span className="flex flex-row justify-end">
@@ -149,7 +151,9 @@ export const SecondInterviewView = () => {
                       {interview.appointment || "--"}
                     </Table.Cell>
                     <Table.Cell className="whitespace-nowrap">
-                      {interview.interviewDate || "--"}
+                      {interview.interviewDate
+                        ? formatDate(interview.interviewDate, "mm-dd-yyyy")
+                        : "--"}
                     </Table.Cell>
                   </Table.Row>
                 ))
@@ -183,14 +187,6 @@ export const SecondInterviewView = () => {
               >
                 {currentInterview?.status}
               </Badge>
-            </div>
-            <div className="flex flex-row gap-2 ">
-              <div className="font-light text-sm flex flex-row items-center justify-start gap-2">
-                Created On:
-              </div>
-              <div className="font-light text-sm flex flex-row items-center justify-start gap-2">
-                Modified On:
-              </div>
             </div>
           </div>
         }

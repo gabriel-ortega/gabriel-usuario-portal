@@ -4,6 +4,7 @@ import { GoPlusCircle } from "react-icons/go";
 import {
   ModalYesNo,
   SelectComponents,
+  YesNoInput,
 } from "../../components/layoutComponents";
 import {
   HiOutlinePencil,
@@ -24,6 +25,7 @@ import {
 } from "../../util/services";
 import {
   setProfileView,
+  updateSeafarerAvailable,
   updateSeafarerData,
   updateSeafarerDepartment,
   updateSeafarerPosition,
@@ -636,6 +638,11 @@ export const ProfileOptions = () => {
     dispatch(updateSeafarerData(seafarerData));
   };
 
+  const handleAvailable = (e) => {
+    // console.log(e.target.value);
+    dispatch(updateSeafarerAvailable(e.target.value));
+  };
+
   return (
     <section className="flex flex-col gap-10">
       <div className="flex flex-col gap-4 justify-start items-start">
@@ -696,6 +703,14 @@ export const ProfileOptions = () => {
             Retire Applicant
           </button>
         )}
+        <div>
+          <YesNoInput
+            text="Available"
+            name="available"
+            defaultChecked={profile.available}
+            onChange={handleAvailable}
+          />
+        </div>
       </div>
 
       <div className="flex flex-col gap-6">

@@ -117,6 +117,23 @@ export const submitProfileUpdate = (uid, userData) => {
   };
 };
 
+export const setLogisticId = (uid) => {
+  return async (dispatch) => {
+    const date = new Date().toISOString();
+    const data = {
+      uid: uid,
+      createdOn: date,
+    };
+
+    try {
+      // Usa addDoc para agregar el documento con un ID generado automáticamente
+      const docRef = await addDoc(collection(FirebaseDB, `gappool`), data);
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+  };
+};
+
 export const submitRetireRequest = (uid, reason) => {
   return async (dispatch) => {
     const date = new Date().toISOString();
@@ -574,7 +591,9 @@ export const updateFirstInterviewDoc = (uid, id, data, status) => {
       // const docRef = doc(FirebaseDB, `usersData/${uid}/firstInterviews/${id}`);
       const docRef = doc(FirebaseDB, `firstInterviews/${id}`);
       await updateDoc(docRef, data);
-      const statusUpdate = { firstInterview: { status: status } };
+      const statusUpdate = {
+        firstInterview: { status: status, date: data.interviewDate || "" },
+      };
       const statusRef = doc(FirebaseDB, `usersData/${uid}`);
       await updateDoc(statusRef, statusUpdate);
       dispatch(setSaving(false));
@@ -629,7 +648,9 @@ export const updateSecondInterviewDoc = (uid, id, data, status) => {
       // const docRef = doc(FirebaseDB, `usersData/${uid}/secondInterviews/${id}`);
       const docRef = doc(FirebaseDB, `secondInterviews/${id}`);
       await updateDoc(docRef, data);
-      const statusUpdate = { secondInterview: { status: status } };
+      const statusUpdate = {
+        secondInterview: { status: status, date: data.interviewDate || "" },
+      };
       const statusRef = doc(FirebaseDB, `usersData/${uid}`);
       await updateDoc(statusRef, statusUpdate);
       dispatch(setSaving(false));

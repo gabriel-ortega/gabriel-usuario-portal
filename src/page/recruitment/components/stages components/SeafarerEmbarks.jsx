@@ -14,6 +14,7 @@ import {
 } from "../../../../store/userData";
 import { setCurrentEmbark } from "../../../../store/currentViews/viewSlice";
 import { getVessels } from "../../../../util/services";
+import { formatDate } from "../../../../util/helperFunctions";
 // import { EmbarkForm } from "./EmbarkForm";
 const EmbarkForm = lazy(() => import("./EmbarkForm"));
 
@@ -110,6 +111,7 @@ export const SeafarerEmbarks = () => {
             <Table.HeadCell>Contract Length (Months)</Table.HeadCell>
             <Table.HeadCell>Estimated Sign Off Date</Table.HeadCell>
             <Table.HeadCell>Sign Off Date</Table.HeadCell>
+            <Table.HeadCell>DOA</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y cursor-pointer">
             {sortedEmbarks.length < 1 || isLoading ? (
@@ -144,22 +146,35 @@ export const SeafarerEmbarks = () => {
                     ] || "--"}
                   </Table.Cell>
                   <Table.Cell className="whitespace-nowrap">
-                    {embark.returnDate || "--"}
+                    {embark.returnDate
+                      ? formatDate(embark.returnDate, "mm-dd-yyyy")
+                      : "--"}
                   </Table.Cell>
                   <Table.Cell className="whitespace-nowrap">
-                    {embark.commenceDate || "--"}
+                    {embark.commenceDate
+                      ? formatDate(embark.commenceDate, "mm-dd-yyyy")
+                      : "--"}
                   </Table.Cell>
                   <Table.Cell className="whitespace-nowrap">
-                    {embark.signOnDate || "--"}
+                    {embark.signOnDate
+                      ? formatDate(embark.signOnDate, "mm-dd-yyyy")
+                      : "--"}
                   </Table.Cell>
                   <Table.Cell className="whitespace-nowrap">
                     {embark.contractLength || "--"}
                   </Table.Cell>
                   <Table.Cell className="whitespace-nowrap">
-                    {embark.estimatedSignOffDate || "--"}
+                    {embark.estimatedSignOffDate
+                      ? formatDate(embark.estimatedSignOffDate, "mm-dd-yyyy")
+                      : "--"}
                   </Table.Cell>
                   <Table.Cell className="whitespace-nowrap">
-                    {embark.signOffDate || "--"}
+                    {embark.signOffDate
+                      ? formatDate(embark.signOffDate, "mm-dd-yyyy")
+                      : "--"}
+                  </Table.Cell>
+                  <Table.Cell className="whitespace-nowrap">
+                    {embark.doa ? formatDate(embark.doa, "mm-dd-yyyy") : "--"}
                   </Table.Cell>
                 </Table.Row>
               ))

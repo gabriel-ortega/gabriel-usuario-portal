@@ -64,9 +64,10 @@ export const RecruitmentSeafarerProfile = ({
 
   const handleVaccineDataChange = (vaccineType, fieldName, value) => {
     setProfileData({
-      ...profileData,
+      ...profile.seafarerData?.seafarerProfile,
       vaccines: {
-        ...profileData?.vaccines,
+        // ...profileData?.vaccines,
+        ...profile.seafarerData?.seafarerProfile?.vaccines,
         [vaccineType]: value,
         // [vaccineType]: {
         //   // ...profileData.vaccines[vaccineType],
@@ -79,7 +80,8 @@ export const RecruitmentSeafarerProfile = ({
   const onVaccineUpload = async (attach) => {
     if (attach) {
       setProfileData({
-        ...profileData,
+        // ...profileData,
+        ...profile.seafarerData?.seafarerProfile,
         vaccines: {
           ...profileData?.vaccines,
           attach: attach,
@@ -91,7 +93,8 @@ export const RecruitmentSeafarerProfile = ({
   const handleVaccineAdd = (e) => {
     if (profileData.vaccines?.additionalVaccines !== e && e) {
       setProfileData({
-        ...profileData,
+        // ...profileData,
+        ...profile.seafarerData?.seafarerProfile,
         vaccines: {
           ...profileData?.vaccines,
           additionalVaccines: e,
@@ -112,7 +115,8 @@ export const RecruitmentSeafarerProfile = ({
     };
     setMarlinTestForms([...marlinTestForms, newForm]);
     setProfileData((prevProfileData) => ({
-      ...prevProfileData,
+      // ...prevProfileData,
+      ...profile.seafarerData?.seafarerProfile,
       lang: {
         ...prevProfileData.lang,
         marlins: [...(prevProfileData.lang?.marlins || []), newForm], // Mantiene los elementos anteriores y agrega newForm
@@ -133,7 +137,8 @@ export const RecruitmentSeafarerProfile = ({
     });
     setProfileData((prevProfileData) => {
       const updatedLang = {
-        ...prevProfileData.lang,
+        // ...prevProfileData.lang,
+        ...profile.seafarerData?.seafarerProfile?.lang,
         marlins: prevProfileData?.lang?.marlins
           ? [...prevProfileData.lang.marlins] // Clonar para evitar mutación directa
           : [], // Inicializar si no existe
@@ -143,7 +148,8 @@ export const RecruitmentSeafarerProfile = ({
       updatedLang.marlins[index] = newData;
 
       return {
-        ...prevProfileData,
+        // ...prevProfileData,
+        ...profile.seafarerData?.seafarerProfile,
         lang: updatedLang, // Actualizar lang con la nueva versión de other
       };
     });
@@ -155,9 +161,11 @@ export const RecruitmentSeafarerProfile = ({
     updatedForms.splice(index, 1); // Eliminar el elemento en la posición `index`
     setMarlinTestForms(updatedForms); // Actualizar el estado con el nuevo arreglo
     setProfileData((prevProfileData) => ({
-      ...prevProfileData,
+      // ...prevProfileData,
+      ...profile.seafarerData?.seafarerProfile,
       lang: {
-        ...prevProfileData.lang,
+        // ...prevProfileData.lang,
+        ...profile.seafarerData?.seafarerProfile?.lang,
         // marlins: prevProfileData.lang?.marlins.filter((_, i) => i !== index), // Filtra el array y elimina el elemento con el índice proporcionado
         marlins: [], // Filtra el array y elimina el elemento con el índice proporcionado
       },
@@ -177,7 +185,8 @@ export const RecruitmentSeafarerProfile = ({
     };
     setLanguageForms([...languageForms, newForm]);
     setProfileData((prevProfileData) => ({
-      ...prevProfileData,
+      // ...prevProfileData,
+      ...profile.seafarerData?.seafarerProfile,
       lang: {
         ...prevProfileData.lang,
         other: [...(prevProfileData.lang?.other || []), newForm], // Mantiene los elementos anteriores y agrega newForm
@@ -190,9 +199,11 @@ export const RecruitmentSeafarerProfile = ({
     updatedForms.splice(index, 1); // Eliminar el elemento en la posición `index`
     setLanguageForms(updatedForms); // Actualizar el estado con el nuevo arreglo
     setProfileData((prevProfileData) => ({
-      ...prevProfileData,
+      // ...prevProfileData,
+      ...profile.seafarerData?.seafarerProfile,
       lang: {
-        ...prevProfileData.lang,
+        // ...prevProfileData.lang,
+        ...profile.seafarerData?.seafarerProfile?.lang,
         other: prevProfileData.lang?.other.filter((_, i) => i !== index), // Filtra el array y elimina el elemento con el índice proporcionado
       },
     }));
@@ -207,7 +218,8 @@ export const RecruitmentSeafarerProfile = ({
     });
     setProfileData((prevProfileData) => {
       const updatedLang = {
-        ...prevProfileData.lang,
+        // ...prevProfileData.lang,
+        ...profile.seafarerData?.seafarerProfile?.lang,
         other: prevProfileData?.lang?.other
           ? [...prevProfileData.lang.other] // Clonar para evitar mutación directa
           : [], // Inicializar si no existe
@@ -227,9 +239,11 @@ export const RecruitmentSeafarerProfile = ({
   const saveLanguageDataDefault = (index, newData) => {
     // console.log(newData);
     setProfileData({
-      ...profileData,
+      // ...profileData,
+      ...profile.seafarerData?.seafarerProfile,
       lang: {
-        ...profileData.lang,
+        // ...profileData.lang,
+        ...profile.seafarerData?.seafarerProfile?.lang,
         default: {
           ...profileData?.lang?.default,
           [index]: newData,

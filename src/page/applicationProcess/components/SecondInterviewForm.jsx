@@ -29,6 +29,7 @@ import {
 import toast from "react-hot-toast";
 import {
   createNewSecondInterviews,
+  setLogisticId,
   updateSeafarerDataFirebase,
   updateSecondInterviewDoc,
 } from "../../../store/userData";
@@ -282,7 +283,8 @@ export const SecondInterviewForm = ({
               profile.seafarerData,
               Stages[3].Id
             )
-          )
+          ),
+          dispatch(setLogisticId(profile.uid))
         ),
       ]),
       {
@@ -419,17 +421,17 @@ export const SecondInterviewForm = ({
   const handleInception = (type) => {
     if (type === "approve") {
       setModalText(
-        "Are you sure you want to approve this applicant and set it ready for Second Interview?"
+        "Are you sure you want to approve this applicant's interview and set them on GAP Pool?"
       );
       setModalConfirm(() => handleApprove);
     } else if (type === "deny") {
       setModalText(
-        "Are you sure you want to deny this applicant's First Interview?"
+        "Are you sure you want to deny this applicant's Second Interview?"
       );
       setModalConfirm(() => handleDeny);
     } else if (type === "review") {
       setModalText(
-        "Are you sure you want to set this First Interview as In Review?"
+        "Are you sure you want to set this Second Interview as In Review?"
       );
       setModalConfirm(() => handleReview);
     }

@@ -287,7 +287,7 @@ export const ApplicantProcessView = () => {
                                 userData.recruitmentStage > 2
                             )}
                           </span>
-                          First Interveiew
+                          First Interview
                         </Timeline.Title>
                         <Timeline.Body>
                           If your application is selected, you'll move on to a
@@ -356,6 +356,10 @@ export const ApplicantProcessView = () => {
                                 userData.recruitmentStage == 17 ||
                                 userData.recruitmentStage == 20 ||
                                 userData.recruitmentStage == 21
+                                ? true
+                                : userData.recruitmentStage == 4
+                                ? false
+                                : null
                             )}
                           </span>
                           Hiring Contract
@@ -366,13 +370,19 @@ export const ApplicantProcessView = () => {
                           the terms and conditions of your employment. You’re
                           almost there!
                         </Timeline.Body>
-                        <Button
-                          color="gray"
-                          onClick={() => navigate("/myhiring")}
-                        >
-                          See my contracts
-                          <HiArrowNarrowRight className="ml-2 h-3 w-3" />
-                        </Button>
+                        {userData.recruitmentStage == 5 ||
+                          userData.recruitmentStage == 6 ||
+                          userData.recruitmentStage == 17 ||
+                          userData.recruitmentStage == 20 ||
+                          (userData.recruitmentStage == 21 && (
+                            <Button
+                              color="gray"
+                              onClick={() => navigate("/myhiring")}
+                            >
+                              See my contracts
+                              <HiArrowNarrowRight className="ml-2 h-3 w-3" />
+                            </Button>
+                          ))}
                       </Timeline.Content>
                     </Timeline.Item>
                     <Timeline.Item>
@@ -382,12 +392,13 @@ export const ApplicantProcessView = () => {
                         <Timeline.Title className="flex flex-row gap-3 items-center">
                           <span>
                             {getStageIcon(
-                              userData.recruitmentStage == 5 ||
-                                userData.recruitmentStage == 6 ||
+                              userData.recruitmentStage == 6 ||
                                 userData.recruitmentStage == 17 ||
                                 userData.recruitmentStage == 20 ||
                                 userData.recruitmentStage == 21
                                 ? true
+                                : userData.recruitmentStage == 5
+                                ? false
                                 : null
                             )}
                           </span>
@@ -399,13 +410,18 @@ export const ApplicantProcessView = () => {
                           get you started in your new role, including onboarding
                           and logistical preparations. Welcome aboard!
                         </Timeline.Body>
-                        <Button
-                          color="gray"
-                          onClick={() => navigate("/myembarks")}
-                        >
-                          See my embarks
-                          <HiArrowNarrowRight className="ml-2 h-3 w-3" />
-                        </Button>
+                        {userData.recruitmentStage == 6 ||
+                          userData.recruitmentStage == 17 ||
+                          userData.recruitmentStage == 20 ||
+                          (userData.recruitmentStage == 21 && (
+                            <Button
+                              color="gray"
+                              onClick={() => navigate("/myembarks")}
+                            >
+                              See my embarks
+                              <HiArrowNarrowRight className="ml-2 h-3 w-3" />
+                            </Button>
+                          ))}
                       </Timeline.Content>
                     </Timeline.Item>
                   </Timeline>
