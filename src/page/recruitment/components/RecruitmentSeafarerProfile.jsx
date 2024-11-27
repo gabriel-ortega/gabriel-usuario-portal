@@ -17,6 +17,7 @@ import FormsContact from "../../application/applicationProfile/components/FormsC
 import { useDispatch } from "react-redux";
 import { updateSeafarerProfileData } from "../../../store/currentViews/viewSlice";
 import { LoadingState } from "../../../components/skeleton/LoadingState";
+import { useSelector } from "react-redux";
 
 export const RecruitmentSeafarerProfile = ({
   data,
@@ -25,6 +26,7 @@ export const RecruitmentSeafarerProfile = ({
   disabled = false,
   isNew = false,
 }) => {
+  const { profile } = useSelector((state) => state.currentViews);
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const [profileData, setProfileData] = useState(data || {});
@@ -50,9 +52,11 @@ export const RecruitmentSeafarerProfile = ({
   };
 
   const handleContacts = (e) => {
+    // e.preventDefault();
+    // console.log(profileData);
     if (profileData?.contacts?.contact !== e) {
       setProfileData({
-        ...profileData,
+        ...profile.seafarerData.seafarerProfile,
         contacts: { contact: e },
       });
     }

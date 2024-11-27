@@ -68,7 +68,6 @@ export default function RecruitmentProfile() {
   const [existe, setExiste] = useState(true);
   const [isLoading, setIsLoading] = useState(!profile?.uid ? false : true);
   const [currentPositionData, setCurrentPositionData] = useState();
-
   const [positions, setPositions] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [typeOfVessel, setTypeOfVessel] = useState([]);

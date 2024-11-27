@@ -19,7 +19,6 @@ export default function FormsContact({ onDataChange, editData, validate }) {
   const { phone, onSelectPhoneChange, formState } = useForm(data);
 
   useEffect(() => {
-    console.log(formState);
     if (
       data.firstNames &&
       data.lastNames &&

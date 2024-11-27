@@ -24,6 +24,7 @@ import {
 } from "../../util/services";
 import {
   setProfileView,
+  updateSeafarerData,
   updateSeafarerDepartment,
   updateSeafarerPosition,
   updateSeafarerStage,
@@ -36,7 +37,7 @@ import {
   updateUsersData,
 } from "../../store/userData";
 import stageData from "../../assets/tables/json/RecruitmentStage-static.json";
-import { formatDate } from "../../util/helperFunctions";
+import { formatDate, getSeafarerDataObject } from "../../util/helperFunctions";
 
 export const ProfileOptions = () => {
   const dispatch = useDispatch();
@@ -66,6 +67,21 @@ export const ProfileOptions = () => {
   const [commentState, setCommentState] = useState("");
   const [sortedNotes, setSortedNotes] = useState([]);
   const [sortedHistory, setSortedHistory] = useState([]);
+  const [hasApplicationData, setHasApplicationData] = useState();
+
+  useEffect(() => {
+    if (
+      profile.recruitmentStage === 1 && // Verifica que el stage sea 1
+      profile.seafarerData && // Asegura que exista seafarerData
+      Object.keys(profile.seafarerData).length === 0 && // Verifica que el objeto esté vacío
+      profile.applicationData && // Asegura que exista applicationData
+      Object.keys(profile.applicationData).length > 0 // Verifica que el objeto no esté vacío
+    ) {
+      setHasApplicationData(true);
+    } else {
+      setHasApplicationData(false); // Asegura que el estado se actualice si las condiciones no se cumplen
+    }
+  }, [profile]);
 
   const seguimientoStages = [
     7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 22, 23, 24, 25, 26, 27,
@@ -614,9 +630,26 @@ export const ProfileOptions = () => {
     });
   };
 
+  const handleSetProfileData = () => {
+    const seafarerData = getSeafarerDataObject(profile.applicationData);
+    // console.log(seafarerData);
+    dispatch(updateSeafarerData(seafarerData));
+  };
+
   return (
     <section className="flex flex-col gap-10">
       <div className="flex flex-col gap-4 justify-start items-start">
+        {hasApplicationData && (
+          <button
+            onClick={() => {
+              setCurrentModal("applicationData");
+              setIsOpen(true);
+            }}
+            className="text-sm font-sans text-white  bg-[#010064]  hover:bg-[#262550] py-2 px-4 rounded flex items-center gap-2 transition-all duration-200"
+          >
+            Set Application Data
+          </button>
+        )}
         <button
           onClick={() => {
             setCurrentModal("changePosition");
@@ -847,6 +880,8 @@ export const ProfileOptions = () => {
             <div>Updating Comment</div>
           ) : currentModal == "deleteComment" ? (
             <div>Deleting Comment</div>
+          ) : currentModal == "applicationData" ? (
+            <div>Set Profile Data</div>
           ) : (
             <div>Undefined</div>
           )
@@ -1133,6 +1168,33 @@ export const ProfileOptions = () => {
               >
                 {/* <FaFloppyDisk className="h-4 w-4" /> */}
                 <span className=" ">Delete</span>
+              </button>
+            </div>
+          </div>
+        ) : currentModal == "applicationData" ? (
+          <div className="flex flex-col justify-center items-center gap-4">
+            <span>
+              This Applicant is in application stage and has application data.
+              Do you want to apply this data to the applicant's profile?
+            </span>
+            <div className="flex flex-row justify-center items-center gap-3">
+              <button
+                title="Cancel"
+                className={`w-16 border border-blue-300 bg-white text-blue-600 size-10 md:w-28 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50 disabled:opacity-30`}
+                //   disabled={isSaving}
+                onClick={(e) => closeModal(e)}
+              >
+                {/* <FaFloppyDisk className="h-4 w-4" /> */}
+                <span className=" ">Cancel</span>
+              </button>
+              <button
+                title="Continue"
+                className={`w-16 border border-green-600 bg-green-600 text-white size-10 md:w-28 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-green-700 disabled:opacity-30 disabled:cursor-not-allowed`}
+                //   disabled={isSaving}
+                onClick={() => handleSetProfileData()}
+              >
+                {/* <FaFloppyDisk className="h-4 w-4" /> */}
+                <span className=" ">Apply</span>
               </button>
             </div>
           </div>
