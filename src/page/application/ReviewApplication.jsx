@@ -69,13 +69,13 @@ export const ReviewApplication = () => {
   const { applicationData } = userData;
   // const { startApplication } = applicationData;
   // const { profile } = applicationData.applicationProfile;
-  const { application } = useSelector((state) => state.currentViews);
+  const { application, positions } = useSelector((state) => state.currentViews);
   const [versions, setVersions] = useState([{ id: 0, name: "v1" }]);
   const [latestVersion, setLatestVersion] = useState(0);
   const [disabled, setDisabled] = useState(false);
   const [existe, setExiste] = useState(true);
   const [isLoading, setIsLoading] = useState(!application?.uid ? false : true);
-  const [positions, setPositions] = useState([]);
+  // const [positions, setPositions] = useState([]);
   const [reasonsData, setReasonsData] = useState([]);
   const [filteredReasonsData, setFilteredReasonsData] = useState([]);
   const [currentPosition, setCurrentPosition] = useState({});
@@ -115,16 +115,19 @@ export const ReviewApplication = () => {
   const closeModal = () => setIsOpenModal(false);
 
   useEffect(() => {
-    if (positions && userData?.startApplication?.position?.[0]?.id) {
+    if (
+      positions &&
+      userData?.applicationData?.startApplication?.position?.[0]?.id
+    ) {
       const matchingPosition = positions.find(
-        (pos) => pos.Id == userData?.startApplication?.position[0].id
+        (pos) =>
+          pos.Id == userData?.applicationData?.startApplication?.position[0].id
       );
-
       if (matchingPosition) {
         setCurrentPosition(matchingPosition);
       }
     }
-  }, [positions, userData?.startApplication?.position]);
+  }, [positions, userData?.applicationData?.startApplication?.position]);
 
   async function getCV() {
     try {
@@ -135,7 +138,9 @@ export const ReviewApplication = () => {
       }
 
       const currentPositionId = currentPosition.CVFormatId;
-      const url = `https://cv-formater.onrender.com/pdf_render/application?formatId=${currentPositionId}&id=${profile.uid}`;
+      const url = `https://cv-formater.onrender.com/pdf_render/applications?formatId=${currentPositionId}&id=${
+        userData.uid
+      }&version=${Number(selectedVersion.id)}`;
 
       // Abre la URL en una nueva pestaña
       window.open(url, "_blank");
@@ -147,10 +152,10 @@ export const ReviewApplication = () => {
   useEffect(() => {
     setIsLoading(true);
     const fetchData = async () => {
-      const positions = await getPositions();
+      // const positions = await getPositions();
       const reasons = await getReasons();
       setReasonsData(reasons);
-      setPositions(positions);
+      // setPositions(positions);
       if (application?.uid !== id) {
         const existe = await dispatch(getApplication(id));
         setExiste(existe);
@@ -210,10 +215,9 @@ export const ReviewApplication = () => {
     navigate("/submissions");
   };
 
-  const [selectedVersion, setSelectedVersion] = useState([]);
+  const [selectedVersion, setSelectedVersion] = useState(latestVersion);
 
   const handleSave = (e, state, isReadChange) => {
-    console.log(isReadChange);
     e.preventDefault();
     const vesselTypeUpdate =
       userData.applicationData.startApplication.vesselType[0].id;
@@ -791,7 +795,7 @@ export const ReviewApplication = () => {
                           idKey={"id"}
                           valueKey={"name"}
                           initialValue={selectedVersion?.id}
-                          // onChange={(e) => handleVersionChange(e)}
+                          onChange={(e) => handleVersionChange(e)}
                         />
                       </div>
                       <Badge

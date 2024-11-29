@@ -57,8 +57,8 @@ const formValidations = {
   visaDenied: [(value) => value != null, "This field is mandatory."],
   visaCancelled: [(value) => value != null, "This field is mandatory."],
   candina: [(value) => value != null, "This field is mandatory."],
-  height: [(value) => value.ft != "", "This field is mandatory."],
-  weight: [(value) => value.kg != "", "This field is mandatory."],
+  height: [(value) => value?.ft != "", "This field is mandatory."],
+  weight: [(value) => value?.kg != "", "This field is mandatory."],
 };
 
 const bmiCalc = (weight, height) => {

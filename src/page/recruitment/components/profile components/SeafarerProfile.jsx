@@ -35,8 +35,10 @@ import {
   uploadSeafarerUserSignature,
 } from "../../../../store/userData";
 import {
+  setProfileUpdateData,
   updateProfileData,
   updateSeafarerData,
+  updateSeafarerProfileData,
   updateSeafarerSignature,
 } from "../../../../store/currentViews/viewSlice";
 import toast from "react-hot-toast";
@@ -331,7 +333,13 @@ export const SeafarerProfile = ({
       // onChange(formState);
       // console.log(formState);
       // const newSeafarerData = profile.seafarerData;
-      dispatch(updateProfileData(formState));
+      // dispatch(updateProfileData(formState));
+      dispatch(
+        updateSeafarerProfileData({
+          ...profile.seafarerData.seafarerProfile,
+          profile: formState,
+        })
+      );
     }
   }, [formState]);
 
