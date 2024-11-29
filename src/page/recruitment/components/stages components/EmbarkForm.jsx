@@ -132,6 +132,7 @@ export const EmbarkForm = ({
     currentEmbark,
     interviewers,
     positions,
+    departments,
   } = useSelector((state) => state.currentViews);
   const [openModalWarning, setOpenModalWarning] = useState(false);
   const [openModalEndEmbark, setOpenModalEndEmbark] = useState(false);
@@ -139,6 +140,7 @@ export const EmbarkForm = ({
   const embarkData = useMemo(() => data, []);
   const [isNewLocal, setIsNewLocal] = useState(isNew);
   const [vesselData, setVesselData] = useState([]);
+  const [filteredPositions, setFilteredPositions] = useState([]);
 
   // Hook para gestionar el formulario
   const {
@@ -221,6 +223,13 @@ export const EmbarkForm = ({
       dispatch(setCurrentEmbark(combinedState));
     }
   }, [formState]);
+
+  useEffect(() => {
+    if (positions && departments && profile) {
+      const vesselType = profile.seafarerData.vesselType[0].id;
+      const filter = departments.filter((pos) => pos.id);
+    }
+  }, [profile]);
 
   const getStatusColor = (status) => {
     switch (status) {

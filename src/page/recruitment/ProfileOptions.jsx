@@ -76,7 +76,7 @@ export const ProfileOptions = () => {
     if (
       profile.recruitmentStage === 1 && // Verifica que el stage sea 1
       profile.seafarerData && // Asegura que exista seafarerData
-      Object.keys(profile.seafarerData).length === 0 && // Verifica que el objeto esté vacío
+      // Object.keys(profile.seafarerData).length === 0 && // Verifica que el objeto esté vacío
       profile.applicationData && // Asegura que exista applicationData
       Object.keys(profile.applicationData).length > 0 // Verifica que el objeto no esté vacío
     ) {

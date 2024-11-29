@@ -42,7 +42,10 @@ export const ReviewForm = ({ disabled, reviewData }) => {
 
   const profileLang = userData.applicationData.applicationProfile.lang || [];
 
-  const profileFields = userData.applicationData.applicationProfile.profile;
+  const profileFields = {
+    ...userData.applicationData.applicationProfile.profile,
+    profilePicture: "",
+  };
 
   const documents = userData.applicationData.applicationDocument || [];
 
