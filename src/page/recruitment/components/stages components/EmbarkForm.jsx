@@ -227,9 +227,16 @@ export const EmbarkForm = ({
   useEffect(() => {
     if (positions && departments && profile) {
       const vesselType = profile.seafarerData.vesselType[0].id;
-      const filter = departments.filter((pos) => pos.id);
+      const dept = profile.seafarerData.deparment[0].id;
+      if (vesselType == 1) {
+        const filter = positions.filter((pos) => pos.PassengerDeptID == dept);
+        setFilteredPositions(filter);
+      } else if (vesselType == 2) {
+        const filter = positions.filter((pos) => pos.MerchantDeptID == dept);
+        setFilteredPositions(filter);
+      }
     }
-  }, [profile]);
+  }, [departments, positions, profile]);
 
   const getStatusColor = (status) => {
     switch (status) {

@@ -21,12 +21,12 @@ export default function Navbar1({ toggleSidebar, setSearchValue = () => {} }) {
   const { displayName: accountName } = useSelector((state) => state.auth);
   const { userData } = useSelector((state) => state.userData);
   const displayNameUser =
-    userData.seafarerData?.seafarerProfile?.profile.firstName &&
-    userData.seafarerData?.seafarerProfile?.profile.lastName
+    userData.seafarerData?.seafarerProfile?.profile?.firstName &&
+    userData.seafarerData?.seafarerProfile?.profile?.lastName
       ? `${userData.seafarerData?.seafarerProfile?.profile.firstName} ${userData.seafarerData?.seafarerProfile?.profile.lastName}`
       : accountName;
   const firstAndLastAdmin =
-    userData.firstName && userData.lastName
+    userData?.firstName && userData?.lastName
       ? `${userData.firstName} ${userData.lastName}`
       : accountName;
   const { photoURL } = userData;
