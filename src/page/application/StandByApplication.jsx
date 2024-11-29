@@ -12,7 +12,7 @@ import {
 } from "../../store/userData";
 import { useEffect } from "react";
 import { LoadingState } from "../../components/skeleton/LoadingState";
-import { Alert, Button, Card, Modal } from "flowbite-react";
+import { Alert, Badge, Button, Card, Modal } from "flowbite-react";
 import {
   formatDate,
   formatTitleCase,
@@ -197,14 +197,20 @@ export const StandByApplication = () => {
                 userData.recruitmentStage == 13 && ( */}
               {myApplication.status !== 4 && (
                 <div className="flex justify-between mb-2">
-                  <Button
-                    color="failure"
-                    onClick={() => {
-                      setOpenModalWarning(true);
-                    }}
-                  >
-                    Retire from the Application Process
-                  </Button>
+                  {userData.retireRequest ? (
+                    <Badge color={"warning"}>
+                      Retirement Request Submited{" "}
+                    </Badge>
+                  ) : (
+                    <Button
+                      color="failure"
+                      onClick={() => {
+                        setOpenModalWarning(true);
+                      }}
+                    >
+                      Retire from the Application Process
+                    </Button>
+                  )}
 
                   <button
                     onClick={() => handleViewProfile()}

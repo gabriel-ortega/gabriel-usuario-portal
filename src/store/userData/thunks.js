@@ -146,10 +146,15 @@ export const submitRetireRequest = (uid, reason) => {
     const profileUpdate = {
       retireRequest: true,
     };
-    const docRef = doc(FirebaseDB, `retireRequests`);
-    const profileRef = doc(FirebaseDB, `usersData/${uid}`);
-    await setDoc(docRef, data);
-    await updateDoc(profileRef, profileUpdate);
+    try {
+      const docRef = doc(collection(FirebaseDB, "retirerequest"));
+
+      const profileRef = doc(FirebaseDB, `usersData/${uid}`);
+      await setDoc(docRef, data);
+      await updateDoc(profileRef, profileUpdate);
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
   };
 };
 

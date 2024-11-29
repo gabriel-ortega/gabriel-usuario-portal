@@ -137,6 +137,7 @@ export const EmbarkForm = ({
   const [openModalWarning, setOpenModalWarning] = useState(false);
   const [openModalEndEmbark, setOpenModalEndEmbark] = useState(false);
   const [openModalPromote, setOpenModalPromote] = useState(false);
+  const [openModalCancel, setOpenModalCancel] = useState(false);
   const embarkData = useMemo(() => data, []);
   const [isNewLocal, setIsNewLocal] = useState(isNew);
   const [vesselData, setVesselData] = useState([]);
@@ -225,9 +226,9 @@ export const EmbarkForm = ({
   }, [formState]);
 
   useEffect(() => {
-    if (positions && departments && profile) {
-      const vesselType = profile.seafarerData.vesselType[0].id;
-      const dept = profile.seafarerData.deparment[0].id;
+    const vesselType = profile.seafarerData.vesselType?.[0]?.id;
+    const dept = profile.seafarerData.department?.[0]?.id;
+    if (positions && departments && vesselType && dept) {
       if (vesselType == 1) {
         const filter = positions.filter((pos) => pos.PassengerDeptID == dept);
         setFilteredPositions(filter);
@@ -253,7 +254,7 @@ export const EmbarkForm = ({
       case 6:
         return "red";
       case 7:
-        return "green";
+        return "blue";
       default:
         return "gray"; // Default color
     }
@@ -538,9 +539,10 @@ export const EmbarkForm = ({
           }
         );
 
-        onInputChange({
-          target: { name: "status", value: 1 },
-        });
+        // onInputChange({
+        //   target: { name: "status", value: 1 },
+        // });
+        dispatch(setCurrentEmbark(toUpdate));
       }
     }
   };
@@ -712,84 +714,6 @@ export const EmbarkForm = ({
     setselectedStage(Number(id));
   };
 
-  // const handleEndEmbark = () => {
-  //   const toUpdate = {
-  //     ...formState,
-  //     status: selectedStage == 24 ? 5 : 4,
-  //     uid: profile.uid,
-  //     contractId: currentHiring.id,
-  //     contractCompany: currentHiring.company,
-  //   };
-
-  //   if (isNewLocal) {
-  //     // Si es un nuevo registro
-  //     const newEmbarksList = [...embarks, toUpdate];
-  //     dispatch(setEmbarks(newEmbarksList));
-  //     setIsNewLocal(false);
-  //     const updatedProfile = { ...profile, recruitmentStage: selectedStage };
-  //     dispatch(setProfileView(updatedProfile));
-  //     toast.promise(
-  //       Promise.all([
-  //         dispatch(createSeafarerEmbark(toUpdate)),
-  //         dispatch(
-  //           updateSeafarerDataFirebase(
-  //             profile.uid,
-  //             profile.seafarerData,
-  //             selectedStage
-  //           )
-  //         ),
-  //       ]),
-  //       {
-  //         loading: "Saving...",
-  //         success: <b>Saved</b>,
-  //         error: <b>Ups! Something went wrong. Try again</b>,
-  //       }
-  //     );
-  //   } else {
-  //     // Si es un registro existente
-  //     const embarkIndex = embarks.findIndex(
-  //       (embark) => embark.id === currentEmbark.id
-  //     );
-
-  //     if (embarkIndex !== -1) {
-  //       const updatedEmbarks = [...embarks];
-  //       updatedEmbarks[embarkIndex] = {
-  //         ...updatedEmbarks[embarkIndex],
-  //         ...formState,
-  //         status: selectedStage == 24 ? 5 : 4,
-  //       };
-  //       dispatch(setEmbarks(updatedEmbarks));
-  //       const updatedProfile = { ...profile, recruitmentStage: selectedStage };
-  //       dispatch(setProfileView(updatedProfile));
-  //       toast.promise(
-  //         Promise.all([
-  //           dispatch(
-  //             updateSeafarerEmbark(currentEmbark.id, {
-  //               ...formState,
-  //               status: selectedStage == 24 ? 5 : 4,
-  //             })
-  //           ),
-  //           dispatch(
-  //             updateSeafarerDataFirebase(
-  //               profile.uid,
-  //               profile.seafarerData,
-  //               selectedStage
-  //             )
-  //           ),
-  //         ]),
-  //         {
-  //           loading: "Saving...",
-  //           success: <b>Saved</b>,
-  //           error: <b>Ups! Something went wrong. Try again</b>,
-  //         }
-  //       );
-
-  //       onInputChange({
-  //         target: { name: "status", value: selectedStage == 24 ? 5 : 4 },
-  //       });
-  //     }
-  //   }
-  // };
   const handleEndEmbark = () => {
     const toUpdate = {
       ...formState,
@@ -909,17 +833,107 @@ export const EmbarkForm = ({
     setOpenModalEndEmbark(false);
   };
 
-  const handleCancel = () => {};
+  const handleCancel = () => {
+    const toUpdate = {
+      ...formState,
+      status: 6,
+      uid: profile.uid,
+      contractId: currentHiring.id,
+      contractCompany: currentHiring.company,
+    };
+
+    if (isNewLocal) {
+      const newEmbarksList = [...embarks, toUpdate];
+      dispatch(setEmbarks(newEmbarksList));
+      setIsNewLocal(false);
+
+      const updatedProfile = {
+        ...profile,
+        recruitmentStage: selectedStage,
+        seafarerData: updatedProfileData,
+      };
+
+      dispatch(setProfileView(updatedProfile));
+
+      toast.promise(
+        Promise.all([
+          dispatch(createSeafarerEmbark(toUpdate)),
+          dispatch(updateUsersData(profile.uid, updatedProfileData)),
+        ]),
+        {
+          loading: "Saving...",
+          success: <b>Saved</b>,
+          error: <b>Ups! Something went wrong. Try again</b>,
+        }
+      );
+    } else {
+      const embarkIndex = embarks.findIndex(
+        (embark) => embark.id === currentEmbark.id
+      );
+
+      if (embarkIndex !== -1) {
+        const updatedEmbarks = [...embarks];
+        updatedEmbarks[embarkIndex] = {
+          ...updatedEmbarks[embarkIndex],
+          ...formState,
+          status: selectedStage == 24 ? 5 : 4,
+        };
+
+        dispatch(setEmbarks(updatedEmbarks));
+
+        const updatedProfile = {
+          ...profile,
+          recruitmentStage: selectedStage,
+          seafarerData: updatedProfileData,
+        };
+
+        dispatch(setProfileView(updatedProfile));
+
+        toast.promise(
+          Promise.all([
+            dispatch(
+              updateSeafarerEmbark(currentEmbark.id, {
+                ...formState,
+                status: selectedStage == 24 ? 5 : 4,
+              })
+            ),
+            dispatch(
+              updateSeafarerDataFirebase(
+                profile.uid,
+                updatedProfileData,
+                selectedStage
+              )
+            ),
+          ]),
+          {
+            loading: "Saving...",
+            success: <b>Saved</b>,
+            error: <b>Ups! Something went wrong. Try again</b>,
+          }
+        );
+
+        onInputChange({
+          target: { name: "status", value: selectedStage == 24 ? 5 : 4 },
+        });
+      }
+    }
+    setOpenModalEndEmbark(false);
+  };
 
   const [positionSelected, setPositionSelected] = useState();
 
   const handlePromote = () => {
+    const today = formatDate(new Date().toISOString(), "yyyy-mm-dd");
+
     const toUpdate = {
       ...formState,
       status: 7,
       uid: profile.uid,
       contractId: currentHiring.id,
       contractCompany: currentHiring.company,
+      elegibleToReturn: true,
+      signOffReason: { id: "12", name: "Promotion" },
+      signOffDate: today,
     };
 
     // Crear el nuevo registro para agregar a `skills.onboard`
@@ -937,7 +951,7 @@ export const EmbarkForm = ({
         positions &&
         positions.find((pos) => pos.Id == currentEmbark.position).PositionName, // Rango/posición
       dateOn: signOnDate, // Fecha de inicio
-      dateOff: signOffDate, // Fecha de finalización
+      dateOff: today, // Fecha de finalización
     };
 
     // Agregar el nuevo registro al arreglo `skills.onboard`
@@ -969,11 +983,7 @@ export const EmbarkForm = ({
         Promise.all([
           dispatch(createSeafarerEmbark(toUpdate)),
           dispatch(
-            updateSeafarerDataFirebase(
-              profile.uid,
-              updatedProfileData,
-              selectedStage
-            )
+            updateSeafarerDataFirebase(profile.uid, updatedProfileData, 19)
           ),
         ]),
         {
@@ -993,6 +1003,12 @@ export const EmbarkForm = ({
           ...updatedEmbarks[embarkIndex],
           ...formState,
           status: 7,
+          uid: profile.uid,
+          contractId: currentHiring.id,
+          contractCompany: currentHiring.company,
+          elegibleToReturn: true,
+          signOffReason: { id: "12", name: "Promotion" },
+          signOffDate: today,
         };
 
         dispatch(setEmbarks(updatedEmbarks));
@@ -1004,21 +1020,22 @@ export const EmbarkForm = ({
         };
 
         dispatch(setProfileView(updatedProfile));
-
         toast.promise(
           Promise.all([
             dispatch(
               updateSeafarerEmbark(currentEmbark.id, {
                 ...formState,
                 status: 7,
+                uid: profile.uid,
+                contractId: currentHiring.id,
+                contractCompany: currentHiring.company,
+                elegibleToReturn: true,
+                signOffReason: { id: "12", name: "Promotion" },
+                signOffDate: today,
               })
             ),
             dispatch(
-              updateSeafarerDataFirebase(
-                profile.uid,
-                updatedProfileData,
-                selectedStage
-              )
+              updateSeafarerDataFirebase(profile.uid, updatedProfileData, 19)
             ),
           ]),
           {
@@ -1028,12 +1045,13 @@ export const EmbarkForm = ({
           }
         );
       }
-      onInputChange({
-        target: { name: "status", value: selectedStage == 24 ? 5 : 4 },
-      });
-      onInputChange({
-        target: { name: "elegibleToReturn", value: true },
-      });
+      dispatch(setCurrentEmbark(toUpdate));
+      // onInputChange({
+      //   target: { name: "status", value: 7 },
+      // });
+      // onInputChange({
+      //   target: { name: "elegibleToReturn", value: true },
+      // });
     }
     setOpenModalEndEmbark(false);
   };
@@ -1069,7 +1087,7 @@ export const EmbarkForm = ({
     } else if (type === "cancel") {
       setModalText("Are you sure that you want to cancel this embark?");
       setModalConfirm(() => handleCancel);
-      setOpenModalWarning(true);
+      setOpenModalCancel(true);
     } else if (type === "promote") {
       setModalText("Are you sure that you want to promote this seafarer?");
       setModalConfirm(() => handlePromote);
@@ -1158,6 +1176,7 @@ export const EmbarkForm = ({
                 status == 4 ||
                 status == 5 ||
                 status == 6 ||
+                status == 7 ||
                 !isOnBoardValid
                   ? ""
                   : "hidden"
@@ -1170,6 +1189,7 @@ export const EmbarkForm = ({
                   status == 4 ||
                   status == 5 ||
                   status == 6 ||
+                  status == 7 ||
                   !isOnBoardValid
                 }
                 onClick={() => handleInception("onboard")}
@@ -1184,14 +1204,18 @@ export const EmbarkForm = ({
               content="Cannot End the Embark."
               style="light"
               className={
-                (status !== 2 || status !== 3) && !endEmbarkValid
+                (status !== 2 || status !== 3 || status !== 7) &&
+                !endEmbarkValid
                   ? ""
                   : "hidden"
               }
             >
               <button
                 className={`border border-red-300 bg-white text-red-600 size-10 md:w-36 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-red-50 disabled:opacity-30`}
-                disabled={(status !== 2 || status !== 3) && !endEmbarkValid}
+                disabled={
+                  ((status !== 2 || status !== 3) && !endEmbarkValid) ||
+                  status == 7
+                }
                 onClick={() => handleInception("sign-off")}
                 title={"End Embark"}
               >
@@ -1656,6 +1680,7 @@ export const EmbarkForm = ({
             <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
               {modalText}
             </h3>
+
             <div className="flex justify-center gap-4">
               <Button color="gray" onClick={() => setOpenModalWarning(false)}>
                 Cancel
@@ -1737,7 +1762,8 @@ export const EmbarkForm = ({
               <SelectComponents
                 id="position"
                 valueDefault={"Position"}
-                data={positions}
+                // data={positions}
+                data={filteredPositions}
                 name_valor={true}
                 idKey="Id"
                 valueKey="PositionName"
@@ -1753,12 +1779,63 @@ export const EmbarkForm = ({
               </Button>
               <Button
                 color="success"
+                disabled={
+                  positionSelected == profile?.seafarerData.position[0]?.id ||
+                  !positionSelected
+                }
                 onClick={() => {
-                  modalConfirm();
-                  setOpenModalWarning(false);
+                  handlePromote();
                 }}
               >
                 Promote Seafarer
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={openModalCancel}
+        size="md"
+        onClose={() => setOpenModalCancel(false)}
+        popup
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              {modalText}
+            </h3>
+            <div className="flex flex-col gap-5 my-6">
+              <span>Select a reason for this embark's cancellation:</span>
+              <SelectComponents
+                id="reason"
+                valueDefault={"Reasons"}
+                // data={datafilter.Departament}
+                name_valor={false}
+                idKey="id"
+                valueKey="reason"
+                name="reason"
+                Text="Select a Reason"
+                // initialValue={selectedValues?.department[0]?.id}
+                // onChange={(value) => handleSelectChange(value, "department")}
+              />
+            </div>
+            <div className="flex justify-center gap-4">
+              <Button color="gray" onClick={() => setOpenModalPromote(false)}>
+                Cancel
+              </Button>
+              <Button
+                color="failure"
+                // disabled={
+                //   positionSelected == profile?.seafarerData.position[0]?.id ||
+                //   !positionSelected
+                // }
+                onClick={() => {
+                  handleCancel();
+                }}
+              >
+                Cancel Embark
               </Button>
             </div>
           </div>

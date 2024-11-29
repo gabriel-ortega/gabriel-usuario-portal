@@ -10,6 +10,7 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import {
   HiCheckCircle,
   HiOutlineClipboardList,
+  HiOutlineClock,
   HiOutlineDocument,
   HiOutlineMenuAlt1,
   HiOutlineQuestionMarkCircle,
@@ -413,7 +414,66 @@ export const FirstInterviewForm = ({
       ]),
       {
         loading: "Saving...",
-        success: <b>Saved & Dissaproved</b>,
+        success: <b>Saved</b>,
+        error: <b>Ups! Something went wrong. Try again</b>,
+      }
+    );
+    // setSaved(true);
+    // setHasUnsavedChanges(false);
+  };
+
+  const handlePending = () => {
+    // e.preventDefault();
+    // Clone the firstInterview array to avoid mutating the original array
+    const updatedArray = [...firstInterview];
+    const currentIndex = updatedArray.findIndex(
+      (item) => item.id === currentInterview.id
+    );
+
+    // Verifica si existe currentData, y mezcla con los datos existentes
+    const newUpdatedData = {
+      ...(updatedArray[currentIndex] || {}), // Mantén los datos actuales del array
+      ...(currentData || data), // Mezcla currentData o data si están presentes
+      status: "Pending", // Sobrescribe el campo status
+    };
+
+    // Actualiza el array con el nuevo objeto fusionado
+    updatedArray[currentIndex] = newUpdatedData;
+
+    if (!updatedArray[currentIndex].interviewer) {
+      updatedArray[currentIndex] = {
+        ...updatedArray[currentIndex],
+        interviewer: { id: currentInterviewerData },
+      };
+    }
+
+    const updatedProfile = { ...profile, recruitmentStage: Stages[1].Id };
+
+    // Dispatch the entire updated array
+    dispatch(updateFirstInterview(updatedArray));
+    dispatch(setCurrentInterview(updatedArray[currentIndex]));
+    dispatch(setProfileView(updatedProfile));
+    toast.promise(
+      Promise.all([
+        dispatch(
+          updateFirstInterviewDoc(
+            profile.uid,
+            updatedArray[currentIndex].id,
+            updatedArray[currentIndex],
+            "Pending"
+          ),
+          dispatch(
+            updateSeafarerDataFirebase(
+              profile.uid,
+              profile.seafarerData,
+              Stages[1].Id
+            )
+          )
+        ),
+      ]),
+      {
+        loading: "Saving...",
+        success: <b>Saved</b>,
         error: <b>Ups! Something went wrong. Try again</b>,
       }
     );
@@ -440,6 +500,11 @@ export const FirstInterviewForm = ({
         "Are you sure you want to set this First Interview as In Review?"
       );
       setModalConfirm(() => handleReview);
+    } else if (type === "pending") {
+      setModalText(
+        "Are you sure you want to set this First Interview as Pending?"
+      );
+      setModalConfirm(() => handlePending);
     }
     openModal();
   };
@@ -505,6 +570,22 @@ export const FirstInterviewForm = ({
             >
               <MdRotate90DegreesCcw className="h-4 w-4" />
               <span className="hidden md:block ">In Review</span>
+            </button>
+            <button
+              className={`border border-yellow-300 bg-white text-yellow-600 size-10 md:w-28 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-yellow-50 ${
+                disabled ? "opacity-30 cursor-not-allowed" : ""
+              } `}
+              onClick={() => {
+                if (isModal) {
+                  handleInception("pending");
+                } else {
+                  handleOpenModal("pending");
+                }
+              }}
+              disabled={disabled}
+            >
+              <HiOutlineClock className="h-4 w-4" />
+              <span className="hidden md:block ">Set Pending</span>
             </button>
           </div>
           <button

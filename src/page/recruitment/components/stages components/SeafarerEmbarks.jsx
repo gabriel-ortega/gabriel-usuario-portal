@@ -80,6 +80,8 @@ export const SeafarerEmbarks = () => {
         return "red";
       case 6:
         return "red";
+      case 7:
+        return "blue";
       default:
         return "gray"; // Default color
     }
