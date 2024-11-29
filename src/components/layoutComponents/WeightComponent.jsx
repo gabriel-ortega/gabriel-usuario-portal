@@ -58,7 +58,7 @@ export const WeightComponent = ({ initialWeight, onWeightChange }) => {
             color={valueForm.selected === "kg" ? "blue" : "gray"} // Comparación estricta para kg
             onClick={() => handleFormatSelection("kg")}
             className={`px-2 md:px-2 ${
-              valueForm.selected !== null ? "" : "border-red-600"
+              valueForm.selected !== "" ? "" : "border-red-600"
             }`}
           >
             kg
@@ -67,7 +67,7 @@ export const WeightComponent = ({ initialWeight, onWeightChange }) => {
             color={valueForm.selected === "lb" ? "blue" : "gray"} // Comparación estricta para lb
             onClick={() => handleFormatSelection("lb")}
             className={`px-2 md:px-2 ${
-              valueForm.selected !== null ? "" : "border-red-600"
+              valueForm.selected !== "" ? "" : "border-red-600"
             }`}
           >
             lb

@@ -26,6 +26,7 @@ export const SeafarerEmbarks = () => {
     profile,
     currentEmbark: currentEmbarkState,
     currentHiring,
+    positions,
   } = useSelector((state) => state.currentViews);
   const [isLoading, setIsLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
@@ -208,6 +209,15 @@ export const SeafarerEmbarks = () => {
               <Badge color={statusColor} size={"sm"}>
                 {EmbarkStatus[currentEmbarkState?.status - 1]?.StatusName || ""}
               </Badge>
+            </div>
+            <div className="font-bold flex flex-row items-center justify-start gap-2">
+              Embarked As:
+              <span className="text-gray-500 font-normal">
+                {currentEmbarkState.position &&
+                  positions &&
+                  positions.find((pos) => pos.Id == currentEmbarkState.position)
+                    .PositionName}
+              </span>
             </div>
           </div>
         }

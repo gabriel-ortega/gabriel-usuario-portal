@@ -193,21 +193,27 @@ export const StandByApplication = () => {
         <section className="w-full max-w-4xl mx-auto py-12 md:py-16 lg:py-20">
           <div className=" md:px-6 lg:px-8">
             <div className="grid gap-6 md:gap-8 lg:gap-10">
-              {userData.recruitmentStage == 1 &&
-                userData.recruitmentStage == 13 && (
-                  <div className="flex justify-between mb-2">
-                    <Button color="failure" onClick={handleRetire()}>
-                      Retire from the Application Process
-                    </Button>
+              {/* {userData.recruitmentStage == 1 &&
+                userData.recruitmentStage == 13 && ( */}
+              {myApplication.status !== 4 && (
+                <div className="flex justify-between mb-2">
+                  <Button
+                    color="failure"
+                    onClick={() => {
+                      setOpenModalWarning(true);
+                    }}
+                  >
+                    Retire from the Application Process
+                  </Button>
 
-                    <button
-                      onClick={handleViewProfile}
-                      className="whitespace-nowrap border border-blue-300 bg-white text-blue-600 w-28 h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50 disabled:opacity-30 disabled:cursor-not-allowed"
-                    >
-                      View Profile
-                    </button>
-                  </div>
-                )}
+                  <button
+                    onClick={() => handleViewProfile()}
+                    className="whitespace-nowrap border border-blue-300 bg-white text-blue-600 w-28 h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50 disabled:opacity-30 disabled:cursor-not-allowed"
+                  >
+                    View Profile
+                  </button>
+                </div>
+              )}
 
               <div className="grid gap-6 md:grid-cols-3">
                 <Card className={`${colorBorder(myApplication.status)}`}>
@@ -246,27 +252,26 @@ export const StandByApplication = () => {
                   </div>
                 </Card>
               </div>
-              {userData.recruitmentStage !== 1 &&
-                userData.recruitmentStage !== 13 && (
-                  <Card className={`${colorBorder(myApplication.status)}`}>
-                    <p className="text-l">
-                      Unfortunately, your application was denied.
+              {myApplication.status == 4 && (
+                <Card className={`${colorBorder(myApplication.status)}`}>
+                  <p className="text-l">
+                    Unfortunately, your application was denied.
+                  </p>
+                  <div className="space-y-2">
+                    <p className="text-sm font-bold">
+                      {myApplication.seguimientoReason
+                        ? reasonsData.find(
+                            (reason) =>
+                              reason.id == myApplication.seguimientoReason
+                          )?.reason
+                        : "--"}
                     </p>
-                    <div className="space-y-2">
-                      <p className="text-sm font-bold">
-                        {myApplication.seguimientoReason
-                          ? reasonsData.find(
-                              (reason) =>
-                                reason.id == myApplication.seguimientoReason
-                            )?.reason
-                          : "--"}
-                      </p>
-                      <p className="text-sm font-light">
-                        {myApplication.comment}
-                      </p>
-                    </div>
-                  </Card>
-                )}
+                    <p className="text-sm font-light">
+                      {myApplication.comment}
+                    </p>
+                  </div>
+                </Card>
+              )}
 
               <section
                 className={`${

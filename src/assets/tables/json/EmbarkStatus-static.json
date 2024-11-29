@@ -4,5 +4,6 @@
   { "Id": 3, "StatusName": "Medical Leave" },
   { "Id": 4, "StatusName": "Completed Embark" },
   { "Id": 5, "StatusName": "Contract Revoked" },
-  { "Id": 6, "StatusName": "Embarkation Canceled" }
+  { "Id": 6, "StatusName": "Embarkation Canceled" },
+  { "Id": 7, "StatusName": "Promoted" }
 ]

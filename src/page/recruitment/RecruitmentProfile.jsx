@@ -328,8 +328,15 @@ export default function RecruitmentProfile() {
                       <Badge color={profile?.available ? "green" : "warning"}>
                         {profile?.available ? "Available" : "Unavailable"}
                       </Badge>
+                      {profile.logisticId !== 0 &&
+                        profile.logisticId !== "" && (
+                          <>
+                            <Badge color={"indigo"}>
+                              {"Logistic ID: " + profile?.logisticId}
+                            </Badge>
+                          </>
+                        )}
                       <span>{profile.email}</span>
-                      <span>{profile.logisticId}</span>
                     </div>
                     <div className="flex flex-row justify-between items-center gap-2">
                       <h1 className="text-2xl md:text-3xl  font-bold tracking-tight w-[85%]">
@@ -408,7 +415,9 @@ export default function RecruitmentProfile() {
                         Application Date:{" "}
                         <span className="font-bold">
                           {formatDate(
-                            profile.seafarerData?.applicationDate || "",
+                            profile.seafarerData?.applicationDate ||
+                              profile.createdOn ||
+                              profile.seafarerData?.createdOn,
                             "MM-dd-yyyy"
                           )}
                         </span>

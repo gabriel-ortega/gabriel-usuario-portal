@@ -1,46 +1,50 @@
 [
-    {
-        "Id": "1",
-        "Reason": "Vacation"
-    },
-    {
-        "Id": "2",
-        "Reason": "Dismissal"
-    },
-    {
-        "Id": "3",
-        "Reason": "Poor Performance"
-    },
-    {
-        "Id": "4",
-        "Reason": "Resignation"
-    },
-    {
-        "Id": "5",
-        "Reason": "Misconduct"
-    },
-    {
-        "Id": "6",
-        "Reason": "Drunk"
-    },
-    {
-        "Id": "7",
-        "Reason": "Lack of Competition"
-    },
-    {
-        "Id": "8",
-        "Reason": "Work Permit Leave"
-    },
-    {
-        "Id": "9",
-        "Reason": "Jump the ship"
-    },
-    {
-        "Id": "10",
-        "Reason": "Transfer Vessel"
-    },
-    {
-        "Id": "11",
-        "Reason": "Medical Emergency"
-    }
+  {
+    "Id": "1",
+    "Reason": "Vacation"
+  },
+  {
+    "Id": "2",
+    "Reason": "Dismissal"
+  },
+  {
+    "Id": "3",
+    "Reason": "Poor Performance"
+  },
+  {
+    "Id": "4",
+    "Reason": "Resignation"
+  },
+  {
+    "Id": "5",
+    "Reason": "Misconduct"
+  },
+  {
+    "Id": "6",
+    "Reason": "Drunk"
+  },
+  {
+    "Id": "7",
+    "Reason": "Lack of Competition"
+  },
+  {
+    "Id": "8",
+    "Reason": "Work Permit Leave"
+  },
+  {
+    "Id": "9",
+    "Reason": "Jump the ship"
+  },
+  {
+    "Id": "10",
+    "Reason": "Transfer Vessel"
+  },
+  {
+    "Id": "11",
+    "Reason": "Medical Emergency"
+  },
+  {
+    "Id": "12",
+    "Reason": "Promotion"
+  }
 ]

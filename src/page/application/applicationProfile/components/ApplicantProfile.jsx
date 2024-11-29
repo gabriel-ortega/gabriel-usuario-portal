@@ -57,6 +57,8 @@ const formValidations = {
   visaDenied: [(value) => value != null, "This field is mandatory."],
   visaCancelled: [(value) => value != null, "This field is mandatory."],
   candina: [(value) => value != null, "This field is mandatory."],
+  height: [(value) => value.ft != "", "This field is mandatory."],
+  weight: [(value) => value.kg != "", "This field is mandatory."],
 };
 
 const bmiCalc = (weight, height) => {
@@ -207,7 +209,9 @@ export const ApplicantProfile = ({
     },
     knowAboutUsValid,
     height,
+    heightValid,
     weight,
+    weightValid,
     bmi,
     deported,
     deportedValid,
@@ -243,6 +247,8 @@ export const ApplicantProfile = ({
       educationValid,
       knowAboutUsValid,
       deportedValid,
+      weightValid,
+      heightValid,
       // Validar provincia, distrito y corregimiento si countryResidency es "160"
       ...(countryResidency === "160"
         ? [
@@ -274,6 +280,8 @@ export const ApplicantProfile = ({
     corregimiento?.id,
     formValid,
     countryResidency,
+    weightValid,
+    heightValid,
   ]);
 
   const [dataPanama, setPanama] = useState(

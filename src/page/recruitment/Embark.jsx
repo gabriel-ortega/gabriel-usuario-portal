@@ -30,41 +30,72 @@ export const Embark = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { isSaving, userData } = useSelector((state) => state.userData);
-  const { profile, currentHiring, currentEmbark, interviewers } = useSelector(
-    (state) => state.currentViews
-  );
+  const { profile, currentHiring, currentEmbark, interviewers, positions } =
+    useSelector((state) => state.currentViews);
   const [isLoading, setIsLoading] = useState(true);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [existe, setExiste] = useState(true);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     if (currentEmbark?.id !== id) {
+  //       const existeVar = await dispatch(getSeafarerEmbarksById(id));
+  //       setExiste(existeVar);
+  //     }
+  //     if (interviewers.length < 1) {
+  //       load();
+  //     }
+  //   };
+  //   fetchData();
+  // }, [id]);
+
+  // useEffect(() => {
+  //   if (profile?.uid !== currentEmbark?.uid) {
+  //     dispatch(getSeafarerData(currentEmbark.uid));
+  //   }
+  // }, [currentEmbark]);
+
+  // useEffect(() => {
+  //   if (profile?.uid) {
+  //     setIsLoading(false);
+  //   }
+
+  //   return () => {
+  //     setIsLoading(true);
+  //   };
+  // }, [profile]);
+
   useEffect(() => {
     const fetchData = async () => {
+      // Verificar y cargar datos del embark si el ID es diferente al actual
       if (currentEmbark?.id !== id) {
         const existeVar = await dispatch(getSeafarerEmbarksById(id));
         setExiste(existeVar);
       }
+
+      // Cargar entrevistadores si aún no están cargados
       if (interviewers.length < 1) {
         load();
       }
+
+      // Cargar datos del perfil si es necesario
+      if (profile?.uid !== currentEmbark?.uid) {
+        await dispatch(getSeafarerData(currentEmbark.uid));
+      }
+
+      // Finalizar la carga una vez que los datos del perfil estén disponibles
+      if (profile?.uid) {
+        setIsLoading(false);
+      }
     };
+
+    setIsLoading(true); // Activar la carga
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    if (profile?.uid !== currentEmbark?.uid) {
-      dispatch(getSeafarerData(currentEmbark.uid));
-    }
-  }, [currentEmbark]);
-
-  useEffect(() => {
-    if (profile?.uid) {
-      setIsLoading(false);
-    }
 
     return () => {
-      setIsLoading(true);
+      setIsLoading(true); // Asegurar el estado de carga al desmontar
     };
-  }, [profile]);
+  }, [id, currentEmbark, profile?.uid, interviewers.length]);
 
   const load = async () => {
     const data = await getInterviewers();
@@ -96,9 +127,6 @@ export const Embark = () => {
 
     setHasUnsavedChanges(false);
   };
-  useEffect(() => {
-    console.log(hasUnsavedChanges);
-  }, [hasUnsavedChanges]);
 
   return (
     <>
@@ -146,6 +174,18 @@ export const Embark = () => {
                       {/* <div className="w-28 md:w-1/6 font-bold"> */}
                       <Badge size={"sm"} color={"warning"}>
                         {currentHiring?.company?.name}
+                      </Badge>
+                      <Badge size={"sm"} color={"info"}>
+                        <div className="font-bold flex flex-row items-center justify-start gap-2">
+                          Embarked As:
+                          <span className="text-gray-500 font-normal">
+                            {currentEmbark.position &&
+                              positions &&
+                              positions.find(
+                                (pos) => pos.Id == currentEmbark.position
+                              ).PositionName}
+                          </span>
+                        </div>
                       </Badge>
                       {/* </div> */}
                     </div>

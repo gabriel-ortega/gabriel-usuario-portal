@@ -90,7 +90,7 @@ export const EmbarksDashboard = () => {
   };
 
   const [baseFilters, setBaseFilters] = useState("status:2 OR status:3");
-  const [selectFilterValue, setSelectFilterValue] = useState();
+  const [selectFilterValue, setSelectFilterValue] = useState("");
 
   const onSelectChange = (e, inputName) => {
     const value = e.target.value;
@@ -105,16 +105,22 @@ export const EmbarksDashboard = () => {
       new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59).getTime() /
       1000;
 
-    if (value == 1) {
-      `estimatedSignOffDate < ${Math.floor(
-        now.setDate(now.getDate() - 365) / 1000
-      )}`;
-    } else if (value == 2) {
-      `estimatedSignOffDate:${Math.floor(startOfCurrentMonth)} TO ${Math.floor(
-        endOfCurrentMonth
-      )}`;
+    if (value == 2) {
+      setSelectFilterValue(
+        `estimatedSignOffDate < ${Math.floor(
+          now.setDate(now.getDate() - 365) / 1000
+        )}`
+      );
+    } else if (value == 1) {
+      setSelectFilterValue(
+        `estimatedSignOffDate:${Math.floor(
+          startOfCurrentMonth
+        )} TO ${Math.floor(endOfCurrentMonth)}`
+      );
+    } else {
+      setSelectFilterValue("");
     }
-    setSelectFilterValue(value);
+    // setSelectFilterValue(value);
   };
 
   const [filters, setFilters] = useState({});
@@ -163,10 +169,6 @@ export const EmbarksDashboard = () => {
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    console.log(selectFilterValue);
-  }, [selectFilterValue]);
 
   return (
     <section className="px-5 py-5">
@@ -231,9 +233,14 @@ export const EmbarksDashboard = () => {
                       //     ? `${baseFilters} AND ${selectFilterValue}`
                       //     : baseFilters
                       // }
-                      filters={
-                        "estimatedSignOffDate < 1751587200 AND (status:2 OR status:6)"
-                      }
+                      // filters={
+                      //   "estimatedSignOffDate < 1751587200 AND (status:2 OR status:6)"
+                      // }
+                      filters={`(status:2 OR status:3) ${
+                        selectFilterValue !== ""
+                          ? `AND ${selectFilterValue}`
+                          : ""
+                      } `}
                     />
                     <EmbarksInfiniteHits type={"active"} />
                   </div>
@@ -311,359 +318,3 @@ export const EmbarksDashboard = () => {
 };
 
 export default EmbarksDashboard;
-
-// {isLoading ? (
-//   <LoadingState />
-// ) : (
-//   <>
-//     <div className="flex flex-col md:flex-row gap-5 md:gap-10 items-center justify-center px-5">
-//       <Card className="flex flex-col gap-3 items-center justify-center text-xs">
-//         <span className="font-bold text-gray-500">Ongoing Embarks</span>
-//         <span className="text-center">{activeEmbarks.length}</span>
-//       </Card>
-//       <Card className="flex flex-col gap-3 items-center justify-center text-xs">
-//         <span className="font-bold text-gray-500">Completed Embarks</span>
-//         <span className="text-center">{embarksCompletedCount}</span>
-//       </Card>
-//       <Card className="flex flex-col gap-3 items-center justify-center text-xs">
-//         <span className="font-bold text-gray-500">
-//           Contract Revoked Embarks
-//         </span>
-//         <span className="text-center">{embarksCanceledCount}</span>
-//       </Card>
-//       <Card className="flex flex-col gap-3 items-center justify-center text-xs">
-//         <span className="font-bold text-gray-500">Total Embarks</span>
-//         <span className="text-center">{embarksCount}</span>
-//       </Card>
-//     </div>
-//     <section className="my-10">
-//       <span className="font-semibold ">Active Embarks</span>
-//       <button
-//         onClick={getExcel}
-//         className="h-8 w-32 bg-green-700 text-center text-sm rounded-md text-white"
-//       >
-//         Export to Excel
-//       </button>
-//       <div className="my-10">
-//         <div className="overflow-x-auto max-h-96">
-//           <Table hoverable className="">
-//             <Table.Head>
-//               <Table.HeadCell className="whitespace-nowrap">
-//                 Logistic ID
-//               </Table.HeadCell>
-//               <Table.HeadCell>Recruitment Dept.</Table.HeadCell>
-//               <Table.HeadCell>Name</Table.HeadCell>
-//               <Table.HeadCell>Position</Table.HeadCell>
-//               <Table.HeadCell>Company</Table.HeadCell>
-//               <Table.HeadCell>Vessel</Table.HeadCell>
-//               <Table.HeadCell>Embark Status</Table.HeadCell>
-//               <Table.HeadCell>Sign On Date</Table.HeadCell>
-//               <Table.HeadCell>Estimated Sign Off</Table.HeadCell>
-//               <Table.HeadCell>Sign Off Date</Table.HeadCell>
-//             </Table.Head>
-//             <Table.Body className="divide-y cursor-pointer">
-//               {activeEmbarks.length < 0 ? (
-//                 <Table.Row>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   {/* <Table.Cell className="whitespace-nowrap">
-//                   {"--"}
-//                 </Table.Cell> */}
-//                 </Table.Row>
-//               ) : (
-//                 activeEmbarks.map((embark, index) => (
-//                   <Table.Row
-//                     key={index}
-//                     className="bg-white dark:border-gray-700 dark:bg-gray-800"
-//                     onClick={() => handleEmbarkLink(embark, embark.id)}
-//                   >
-//                     <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-//                       {embark.seafarer?.logisticId || "--"}
-//                     </Table.Cell>
-//                     <Table.Cell className="whitespace-nowrap ">
-//                       {embark.seafarer?.seafarerData?.vesselType?.[0]
-//                         ?.name || "--"}
-//                     </Table.Cell>
-//                     <Table.Cell className="whitespace-nowrap">
-//                       {embark.seafarer.seafarerData?.seafarerProfile
-//                         ?.profile?.firstName ||
-//                       embark.seafarer.seafarerData?.seafarerProfile
-//                         ?.profile?.lastName
-//                         ? `${embark.seafarer.seafarerData?.seafarerProfile?.profile?.firstName} ${embark.seafarer.seafarerData?.seafarerProfile?.profile?.lastName}`
-//                         : embark.seafarer?.displayName
-//                         ? embark.seafarer?.displayName
-//                         : "--"}
-//                     </Table.Cell>
-//                     <Table.Cell className="whitespace-nowrap ">
-//                       {embark.seafarer?.seafarerData?.position?.[0]
-//                         ?.name || "--"}
-//                     </Table.Cell>
-//                     <Table.Cell className="whitespace-nowrap ">
-//                       {/* {companiesData.find(
-//                         (companies) => hiring.company?.id === companies.Id
-//                       )?.CompanyName || "--"} */}
-//                       {companiesData.find(
-//                         (companies) =>
-//                           String(embark.contract?.company?.id) ===
-//                           String(companies.Id)
-//                       )?.CompanyName || "--"}
-//                     </Table.Cell>
-//                     <Table.Cell className="whitespace-nowrap ">
-//                       {embark.vessel?.name || "--"}
-//                     </Table.Cell>
-//                     <Table.Cell className="whitespace-nowrap ">
-//                       {embarkStatus[embark.status - 1].StatusName || "--"}
-//                     </Table.Cell>
-//                     <Table.Cell className="whitespace-nowrap ">
-//                       {embark.signOnDate || "--"}
-//                     </Table.Cell>
-//                     <Table.Cell className="whitespace-nowrap ">
-//                       {embark.estimatedSignOffDate || "--"}
-//                     </Table.Cell>
-//                     <Table.Cell className="whitespace-nowrap ">
-//                       {embark.signOffDate || "--"}
-//                     </Table.Cell>
-//                   </Table.Row>
-//                 ))
-//               )}
-//             </Table.Body>
-//           </Table>
-//         </div>
-//         <div className="flex overflow-x-auto justify-center mt-2">
-//           <Pagination
-//             currentPage={1}
-//             totalPages={3}
-//             // onPageChange={onPageChange}
-//           />
-//         </div>
-//       </div>
-//     </section>
-//     <section className="my-10 flex flex-col md:flex-row gap-5 md:gap-10 items-center justify-center">
-//       <Card className=" w-1/2">
-//         <span className="text-xs font-medium text-gray-500">
-//           Embarks Ending on the Current Month
-//         </span>
-//         <div className="overflow-x-auto max-h-96">
-//           <Table hoverable className="">
-//             <Table.Head>
-//               <Table.HeadCell className="">Embark Status</Table.HeadCell>
-//               <Table.HeadCell>Name</Table.HeadCell>
-//               <Table.HeadCell>Vessel</Table.HeadCell>
-//               <Table.HeadCell>Sign On Date</Table.HeadCell>
-//               <Table.HeadCell>Estimated Sign Off</Table.HeadCell>
-//             </Table.Head>
-//             <Table.Body className="divide-y cursor-pointer">
-//               {endingEmbarks.length < 1 ? (
-//                 <Table.Row>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                 </Table.Row>
-//               ) : (
-//                 endingEmbarks.map((embark, index) => (
-//                   <Table.Row
-//                     key={index}
-//                     className="bg-white dark:border-gray-700 dark:bg-gray-800"
-//                   >
-//                     <Table.Cell className="whitespace-nowrap ">
-//                       {embark.status.name || "--"}
-//                     </Table.Cell>
-//                     <Table.Cell className="whitespace-nowrap">
-//                       {embark.seafarer.seafarerData?.seafarerProfile
-//                         ?.profile?.firstName ||
-//                       embark.seafarer.seafarerData?.seafarerProfile
-//                         ?.profile?.lastName
-//                         ? `${embark.seafarer.seafarerData?.seafarerProfile?.profile?.firstName} ${embark.seafarer.seafarerData?.seafarerProfile?.profile?.lastName}`
-//                         : embark.seafarer?.displayName
-//                         ? embark.seafarer?.displayName
-//                         : "--"}
-//                     </Table.Cell>
-//                     <Table.Cell className="whitespace-nowrap ">
-//                       {embark.vessel?.name || "--"}
-//                     </Table.Cell>
-//                     <Table.Cell className="whitespace-nowrap ">
-//                       {embark.signOnDate || "--"}
-//                     </Table.Cell>
-//                     <Table.Cell className="whitespace-nowrap ">
-//                       {embark.estimatedSignOffDate || "--"}
-//                     </Table.Cell>
-//                   </Table.Row>
-//                 ))
-//               )}
-//             </Table.Body>
-//           </Table>
-//         </div>
-//       </Card>
-//       <Card className=" w-1/2">
-//         <span className="text-xs font-medium text-gray-500">
-//           Embarks Pending to Set as Completed
-//         </span>
-//         <div className="overflow-x-auto max-h-96">
-//           <Table hoverable className="">
-//             <Table.Head>
-//               <Table.HeadCell className="">Embark Status</Table.HeadCell>
-//               <Table.HeadCell>Name</Table.HeadCell>
-//               <Table.HeadCell>Vessel</Table.HeadCell>
-//               <Table.HeadCell>Sign On Date</Table.HeadCell>
-//               <Table.HeadCell>Estimated Sign Off</Table.HeadCell>
-//             </Table.Head>
-//             <Table.Body className="divide-y cursor-pointer">
-//               {pendingEmbarks.length < 1 ? (
-//                 <Table.Row>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                   <Table.Cell className="whitespace-nowrap">
-//                     {"--"}
-//                   </Table.Cell>
-//                 </Table.Row>
-//               ) : (
-//                 pendingEmbarks.map((embark, index) => (
-//                   <Table.Row
-//                     key={index}
-//                     className="bg-white dark:border-gray-700 dark:bg-gray-800"
-//                   >
-//                     <Table.Cell className="whitespace-nowrap ">
-//                       {embark.status.name || "--"}
-//                     </Table.Cell>
-//                     <Table.Cell className="whitespace-nowrap">
-//                       {embark.seafarer.seafarerData?.seafarerProfile
-//                         ?.profile?.firstName ||
-//                       embark.seafarer.seafarerData?.seafarerProfile
-//                         ?.profile?.lastName
-//                         ? `${embark.seafarer.seafarerData?.seafarerProfile?.profile?.firstName} ${embark.seafarer.seafarerData?.seafarerProfile?.profile?.lastName}`
-//                         : embark.seafarer?.displayName
-//                         ? embark.seafarer?.displayName
-//                         : "--"}
-//                     </Table.Cell>
-//                     <Table.Cell className="whitespace-nowrap ">
-//                       {embark.vessel?.name || "--"}
-//                     </Table.Cell>
-
-//                     <Table.Cell className="whitespace-nowrap ">
-//                       {embark.signOnDate || "--"}
-//                     </Table.Cell>
-
-//                     <Table.Cell className="whitespace-nowrap ">
-//                       {embark.estimatedSignOffDate || "--"}
-//                     </Table.Cell>
-//                   </Table.Row>
-//                 ))
-//               )}
-//             </Table.Body>
-//           </Table>
-//         </div>
-//       </Card>
-//     </section>
-//     <section className="my-10">
-//       <span className="font-semibold ">All Embarks</span>
-//       <div className="my-10">
-//         <div className="overflow-x-auto max-h-96">
-//           <Table hoverable className="">
-//             <Table.Head>
-//               <Table.HeadCell className="whitespace-nowrap">
-//                 Logistic ID
-//               </Table.HeadCell>
-//               <Table.HeadCell>Recruitment Dept.</Table.HeadCell>
-//               <Table.HeadCell>Name</Table.HeadCell>
-//               <Table.HeadCell>Position</Table.HeadCell>
-//               <Table.HeadCell>Company</Table.HeadCell>
-//               <Table.HeadCell>Vessel</Table.HeadCell>
-//               <Table.HeadCell>Embark Status</Table.HeadCell>
-//               <Table.HeadCell>Sign On Date</Table.HeadCell>
-//               <Table.HeadCell>Sign Off Date</Table.HeadCell>
-//               <Table.HeadCell>Sign Off Reason</Table.HeadCell>
-//             </Table.Head>
-//             <Table.Body className="divide-y cursor-pointer">
-//               <Table.Row>
-//                 <Table.Cell className="whitespace-nowrap">
-//                   {"--"}
-//                 </Table.Cell>
-//                 <Table.Cell className="whitespace-nowrap">
-//                   {"--"}
-//                 </Table.Cell>
-//                 <Table.Cell className="whitespace-nowrap">
-//                   {"--"}
-//                 </Table.Cell>
-//                 <Table.Cell className="whitespace-nowrap">
-//                   {"--"}
-//                 </Table.Cell>
-//                 <Table.Cell className="whitespace-nowrap">
-//                   {"--"}
-//                 </Table.Cell>
-//                 <Table.Cell className="whitespace-nowrap">
-//                   {"--"}
-//                 </Table.Cell>
-//                 <Table.Cell className="whitespace-nowrap">
-//                   {"--"}
-//                 </Table.Cell>
-//                 <Table.Cell className="whitespace-nowrap">
-//                   {"--"}
-//                 </Table.Cell>
-//                 <Table.Cell className="whitespace-nowrap">
-//                   {"--"}
-//                 </Table.Cell>
-//                 <Table.Cell className="whitespace-nowrap">
-//                   {"--"}
-//                 </Table.Cell>
-//               </Table.Row>
-//             </Table.Body>
-//           </Table>
-//         </div>
-//         <div className="flex overflow-x-auto justify-center mt-2">
-//           <Pagination
-//             currentPage={1}
-//             totalPages={3}
-//             // onPageChange={onPageChange}
-//           />
-//         </div>
-//       </div>
-//     </section>
-//   </>
-// )}

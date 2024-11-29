@@ -18,7 +18,7 @@ import {
   updateSeafarerDataFirebase,
   updateUsersData,
 } from "../../store/userData";
-import { Badge, Button, Modal, Progress, Timeline } from "flowbite-react";
+import { Badge, Button, Card, Modal, Progress, Timeline } from "flowbite-react";
 import stagesData from "../../assets/tables/json/RecruitmentStage-static.json";
 import { formatDate } from "../../util/helperFunctions";
 import { LoadingState } from "../../components/skeleton/LoadingState";
@@ -27,6 +27,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { TextArea } from "../../components/layoutComponents";
 import { setProfileView } from "../../store/currentViews/viewSlice";
+import { getReasons } from "../../util/services";
 
 export const ApplicantProcessView = () => {
   const navigate = useNavigate();
@@ -37,12 +38,17 @@ export const ApplicantProcessView = () => {
   const { hirings, profile, currentHiring, currentEmbark, embarks } =
     useSelector((state) => state.currentViews);
   const [openModalWarning, setOpenModalWarning] = useState(false);
-
+  const [reasonsData, setReasonsData] = useState([]);
   const seguimientoStages = [
     7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 22, 23, 24, 25, 26, 27,
   ];
 
   useEffect(() => {
+    const fetchData = async () => {
+      const reasons = await getReasons();
+      setReasonsData(reasons);
+    };
+    fetchData();
     dispatch(getSeafarerData(userData.uid));
     setIsLoading(false);
   }, []);
@@ -72,114 +78,6 @@ export const ApplicantProcessView = () => {
     setRetireReason(e.target.value);
   };
 
-  // const handleRetire = () => {
-  //   const currentStage = profile.recruitmentStage;
-
-  //   let newStage;
-  //   let additionalFields = {};
-
-  //   switch (currentStage) {
-  //     case 1:
-  //       newStage = 10;
-  //       additionalFields = { available: false };
-  //       break;
-  //     case 2:
-  //       newStage = 8;
-  //       additionalFields = {
-  //         firstInterview: { status: "Retired" },
-  //         available: false,
-  //       };
-  //       break;
-  //     case 3:
-  //       newStage = 9;
-  //       additionalFields = {
-  //         secondInterview: { status: "Retired" },
-  //         available: false,
-  //       };
-  //       break;
-  //     case 4:
-  //       newStage = 16;
-  //       additionalFields = { available: false };
-  //       break;
-  //     case 6:
-  //       newStage = 22;
-  //       additionalFields = { available: false };
-  //       break;
-  //     case 13:
-  //       newStage = 7;
-  //       additionalFields = { available: false };
-  //       break;
-  //     case 20:
-  //       newStage = 23;
-  //       additionalFields = { available: false };
-  //       break;
-  //     // case 20:
-  //     //   // Prompt user for decision (e.g., modal with options)
-  //     //   const answerOptions = ["Own Request", "Mind Change", "Unavailable"];
-  //     //   const respuesta = window.prompt(
-  //     //     "This applicant has decided to withdraw while on VACATION. Choose a status to apply:",
-  //     //     answerOptions.join(", ")
-  //     //   );
-
-  //     //   switch (respuesta) {
-  //     //     case "Own Request":
-  //     //       newStage = 23;
-  //     //       additionalFields = { Available: false };
-  //     //       break;
-  //     //     case "Mind Change":
-  //     //       newStage = 22;
-  //     //       additionalFields = { Available: false };
-  //     //       break;
-  //     //     case "Unavailable":
-  //     //       newStage = 25;
-  //     //       additionalFields = { Available: false };
-  //     //       break;
-  //     //     default:
-  //     //       return; // Exit if no valid response
-  //     //   }
-
-  //     //   // Set active contract to false for currentStage 20
-  //     //   const activeContract = (profile.contracts || []).find(
-  //     //     (contract) => contract.Active
-  //     //   );
-  //     //   if (activeContract) {
-  //     //     additionalFields.contracts = profile.contracts.map((contract) =>
-  //     //       contract === activeContract ? { ...contract, Active: false } : contract
-  //     //     );
-  //     //   }
-  //     //   break;
-  //     default:
-  //       console.warn("Invalid stage");
-  //       return;
-  //   }
-
-  //   // Dispatch the update with new recruitment stage and additional fields
-  //   const updatedSeafarerData = {
-  //     recruitmentStage: newStage,
-  //     ...additionalFields,
-  //     SeguimientoDate: new Date().toISOString(),
-  //     SeguimientoID: currentStage,
-  //     SeguimientoComment: retireReason,
-  //   };
-
-  //   const profileData = {
-  //     ...profile,
-  //     recruitmentStage: newStage,
-  //     ...additionalFields,
-  //     SeguimientoDate: new Date().toISOString(),
-  //     SeguimientoID: currentStage,
-  //   };
-
-  //   dispatch(setProfileView(profileData));
-
-  //   toast.promise(dispatch(updateUsersData(profile.uid, updatedSeafarerData)), {
-  //     loading: "Saving...",
-  //     success: <b>Saved!</b>,
-  //     error: <b>Ups! Something went wrong. Try again</b>,
-  //   });
-  //   setOpenModalWarning(false);
-  // };
-
   const handleRetire = () => {
     const data = { ...profile, retireRequest: true };
     dispatch(setUserData(data));
@@ -201,14 +99,18 @@ export const ApplicantProcessView = () => {
             ) : (
               <span></span>
             )}
-            <Button
-              color="failure"
-              onClick={() => {
-                setOpenModalWarning(true);
-              }}
-            >
-              Retire from the Application Process
-            </Button>
+            {seguimientoStages.includes(profile?.recruitmentStage) ? (
+              <></>
+            ) : (
+              <Button
+                color="failure"
+                onClick={() => {
+                  setOpenModalWarning(true);
+                }}
+              >
+                Retire from the Application Process
+              </Button>
+            )}
           </div>
           <div>
             <h3 className="text-black text-center font-bold text-2xl mb-4">
@@ -231,7 +133,22 @@ export const ApplicantProcessView = () => {
           {isLoading ? (
             <LoadingState />
           ) : seguimientoStages.includes(profile?.recruitmentStage) ? (
-            <section>Retirado/rechazado</section>
+            <section>
+              <Card className="border-red-300">
+                <p className="text-l">
+                  Unfortunately, your application process was terminated.
+                </p>
+                <div className="space-y-2">
+                  <p className="text-sm font-bold">
+                    {profile.seguimientoReason
+                      ? reasonsData.find(
+                          (reason) => reason.id == profile.seguimientoReason
+                        )?.reason
+                      : "--"}
+                  </p>
+                </div>
+              </Card>
+            </section>
           ) : (
             <>
               <div>
@@ -355,6 +272,7 @@ export const ApplicantProcessView = () => {
                                 userData.recruitmentStage == 6 ||
                                 userData.recruitmentStage == 17 ||
                                 userData.recruitmentStage == 20 ||
+                                userData.recruitmentStage == 19 ||
                                 userData.recruitmentStage == 21
                                 ? true
                                 : userData.recruitmentStage == 4
@@ -370,19 +288,20 @@ export const ApplicantProcessView = () => {
                           the terms and conditions of your employment. You’re
                           almost there!
                         </Timeline.Body>
-                        {userData.recruitmentStage == 5 ||
+                        {(userData.recruitmentStage == 5 ||
                           userData.recruitmentStage == 6 ||
                           userData.recruitmentStage == 17 ||
+                          userData.recruitmentStage == 19 ||
                           userData.recruitmentStage == 20 ||
-                          (userData.recruitmentStage == 21 && (
-                            <Button
-                              color="gray"
-                              onClick={() => navigate("/myhiring")}
-                            >
-                              See my contracts
-                              <HiArrowNarrowRight className="ml-2 h-3 w-3" />
-                            </Button>
-                          ))}
+                          userData.recruitmentStage == 21) && (
+                          <Button
+                            color="gray"
+                            onClick={() => navigate("/myhiring")}
+                          >
+                            See my contracts
+                            <HiArrowNarrowRight className="ml-2 h-3 w-3" />
+                          </Button>
+                        )}
                       </Timeline.Content>
                     </Timeline.Item>
                     <Timeline.Item>
@@ -394,6 +313,7 @@ export const ApplicantProcessView = () => {
                             {getStageIcon(
                               userData.recruitmentStage == 6 ||
                                 userData.recruitmentStage == 17 ||
+                                userData.recruitmentStage == 19 ||
                                 userData.recruitmentStage == 20 ||
                                 userData.recruitmentStage == 21
                                 ? true
@@ -410,18 +330,19 @@ export const ApplicantProcessView = () => {
                           get you started in your new role, including onboarding
                           and logistical preparations. Welcome aboard!
                         </Timeline.Body>
-                        {userData.recruitmentStage == 6 ||
+                        {(userData.recruitmentStage == 6 ||
                           userData.recruitmentStage == 17 ||
+                          userData.recruitmentStage == 19 ||
                           userData.recruitmentStage == 20 ||
-                          (userData.recruitmentStage == 21 && (
-                            <Button
-                              color="gray"
-                              onClick={() => navigate("/myembarks")}
-                            >
-                              See my embarks
-                              <HiArrowNarrowRight className="ml-2 h-3 w-3" />
-                            </Button>
-                          ))}
+                          userData.recruitmentStage == 21) && (
+                          <Button
+                            color="gray"
+                            onClick={() => navigate("/myembarks")}
+                          >
+                            See my embarks
+                            <HiArrowNarrowRight className="ml-2 h-3 w-3" />
+                          </Button>
+                        )}
                       </Timeline.Content>
                     </Timeline.Item>
                   </Timeline>

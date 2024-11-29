@@ -53,6 +53,7 @@ import EmbarkStatus from "../../../../assets/tables/json/EmbarkStatus-static.jso
 import FormatsHiring from "./FormatsHiring";
 import { useMemo } from "react";
 import FormatsEmbark from "./FormatsEmbark";
+import { formatDate } from "../../../../util/helperFunctions";
 const EmbarkForm = lazy(() => import("./EmbarkForm"));
 
 const formData = {
@@ -88,6 +89,7 @@ export const HiringForm = ({
     embarks,
     currentEmbark: currentEmbarkState,
     currentHiring,
+    positions,
   } = useSelector((state) => state.currentViews);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -168,7 +170,7 @@ export const HiringForm = ({
           id: currentInterviewerData,
           name: interviewers.find(
             (current) => current.uid === currentInterviewerData
-          ).displayName,
+          )?.displayName,
         },
       };
       dispatch(setCurrentHiring(combinedState));
@@ -281,6 +283,13 @@ export const HiringForm = ({
     updatedArray[currentIndex] = data;
 
     // dispatch(setHirings(updatedArray));
+    // const mostRecentEmbark = embarks.reduce((mostRecent, current) => {
+    //   return new Date(current.signOffDate) > new Date(mostRecent.signOffDate)
+    //     ? current
+    //     : mostRecent;
+    // });
+
+    // console.log(mostRecentEmbark.doa);
 
     if (isNew) {
       if (profile.recruitmentStage !== 5 && formState.status.id === "1") {
@@ -568,10 +577,14 @@ export const HiringForm = ({
                         </Table.HeadCell>
                         <Table.HeadCell>Estimated Sign Off Date</Table.HeadCell>
                         <Table.HeadCell>Sign Off Date</Table.HeadCell>
+                        <Table.HeadCell>DOA</Table.HeadCell>
                       </Table.Head>
                       <Table.Body className="divide-y cursor-pointer">
                         {embarks.length < 1 ? (
                           <Table.Row>
+                            <Table.Cell className="whitespace-nowrap">
+                              {"--"}
+                            </Table.Cell>
                             <Table.Cell className="whitespace-nowrap">
                               {"--"}
                             </Table.Cell>
@@ -617,22 +630,43 @@ export const HiringForm = ({
                                 {embark.vessel?.name || "--"}
                               </Table.Cell>
                               <Table.Cell className="whitespace-nowrap">
-                                {embark.returnDate || "--"}
+                                {embark.returnDate
+                                  ? formatDate(embark.returnDate, "mm-dd-yyyy")
+                                  : "--"}
                               </Table.Cell>
                               <Table.Cell className="whitespace-nowrap">
-                                {embark.commenceDate || "--"}
+                                {embark.commenceDate
+                                  ? formatDate(
+                                      embark.commenceDate,
+                                      "mm-dd-yyyy"
+                                    )
+                                  : "--"}
                               </Table.Cell>
                               <Table.Cell className="whitespace-nowrap">
-                                {embark.signOnDate || "--"}
+                                {embark.signOnDate
+                                  ? formatDate(embark.signOnDate, "mm-dd-yyyy")
+                                  : "--"}
                               </Table.Cell>
                               <Table.Cell className="whitespace-nowrap">
                                 {embark.contractLength || "--"}
                               </Table.Cell>
                               <Table.Cell className="whitespace-nowrap">
-                                {embark.estimatedSignOffDate || "--"}
+                                {embark.estimatedSignOffDate
+                                  ? formatDate(
+                                      embark.estimatedSignOffDate,
+                                      "mm-dd-yyyy"
+                                    )
+                                  : "--"}
                               </Table.Cell>
                               <Table.Cell className="whitespace-nowrap">
-                                {embark.signOffDate || "--"}
+                                {embark.signOffDate
+                                  ? formatDate(embark.signOffDate, "mm-dd-yyyy")
+                                  : "--"}
+                              </Table.Cell>
+                              <Table.Cell className="whitespace-nowrap">
+                                {embark.doa
+                                  ? formatDate(embark.doa, "mm-dd-yyyy")
+                                  : "--"}
                               </Table.Cell>
                             </Table.Row>
                           ))
@@ -683,6 +717,15 @@ export const HiringForm = ({
                   ? ""
                   : EmbarkStatus[currentEmbarkState?.status - 1]?.StatusName}
               </Badge>
+            </div>
+            <div className="font-bold flex flex-row items-center justify-start gap-2">
+              Embarked As:
+              <span className="text-gray-500 font-normal">
+                {currentEmbarkState.position &&
+                  positions &&
+                  positions.find((pos) => pos.Id == currentEmbarkState.position)
+                    .PositionName}
+              </span>
             </div>
           </div>
         }

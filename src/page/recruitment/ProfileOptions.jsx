@@ -21,6 +21,7 @@ import { useEffect } from "react";
 import {
   getDepartments,
   getPositions,
+  getReasons,
   getVesselType,
 } from "../../util/services";
 import {
@@ -107,10 +108,12 @@ export const ProfileOptions = () => {
       const vessel = await getVesselType();
       const department = await getDepartments();
       const position = await getPositions();
+      const reasons = await getReasons();
       setData({
         Vessel: vessel,
         Departament: department,
         Position: position,
+        Reasons: reasons,
       });
       setIsLoading(false);
     } catch (error) {
@@ -711,6 +714,18 @@ export const ProfileOptions = () => {
             onChange={handleAvailable}
           />
         </div>
+        {seguimientoStages.includes(profile.recruitmentStage) && (
+          <div className="flex flex-col gap-3 text-sm">
+            <span className="text-zinc-400">{"Retire / Denied Reason:"}</span>
+            <span>
+              {data.Reasons
+                ? data.Reasons.find(
+                    (reason) => reason.id == profile.seguimientoReason
+                  ).reason
+                : ""}
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="flex flex-col gap-6">
@@ -803,7 +818,8 @@ export const ProfileOptions = () => {
                           <div className="flex flex-col">
                             <span>{note.user}</span>
                             <span className="text-xs font-light">
-                              {"on: " + note.createdOn}
+                              {"on: " +
+                                formatDate(note.createdOn, "mm-dd-yyyy")}
                             </span>
                           </div>
                         </Table.Cell>
@@ -847,7 +863,8 @@ export const ProfileOptions = () => {
                         <div className="flex flex-col">
                           <span>{history.user}</span>
                           <span className="text-xs font-light">
-                            {"on: " + history.createdOn}
+                            {"on: " +
+                              formatDate(history.createdOn, "mm-dd-yyyy")}
                           </span>
                         </div>
                       </Table.Cell>

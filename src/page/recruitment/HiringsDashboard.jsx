@@ -45,11 +45,11 @@ export const HiringsDashboard = () => {
   // Memorizar la función de carga de datos usando useCallback para evitar recrearla en cada render.
   const load = useCallback(async () => {
     // setIsLoading(true); // Mover dentro de la función para asegurarnos de que siempre se reinicia al iniciar carga
-    // const activeHirings = await fetchHiringActiveData();
+    const activeHirings = await fetchHiringActiveData();
     // const companiesData = await getCompanies();
     // dispatch(setCompanies(companiesData));
     // setCompaniesData(companiesData);
-    // setRawHiringsData(activeHirings.data);
+    setRawHiringsData(activeHirings.data);
     // setIsLoading(false); // Finaliza el proceso de carga
   }, []);
 

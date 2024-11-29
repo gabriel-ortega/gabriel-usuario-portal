@@ -40,6 +40,8 @@ function Hit({ hit, toggleHits }) {
 
   const handleContractLink = (id) => {
     // Dispatch con el objeto modificado
+    // const cleanUid = id.replace("hiringsIndex/", "");
+    // // console.log(id);
     navigate("/contract/" + id);
   };
   const getPositionName = (id) => {

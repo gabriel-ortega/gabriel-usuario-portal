@@ -24,6 +24,7 @@ import {
   HiOutlineExclamationCircle,
   HiOutlineMenuAlt1,
   HiOutlinePlusSm,
+  HiOutlineShieldCheck,
   HiOutlineXCircle,
   HiSave,
   HiUserCircle,
@@ -67,6 +68,7 @@ import FormatsEmbark from "./FormatsEmbark";
 import { getVessels } from "../../../../util/services";
 
 const formData = {
+  position: "",
   status: "",
   vessel: "",
   returnDate: "",
@@ -123,10 +125,17 @@ export const EmbarkForm = ({
   const dispatch = useDispatch();
   // const [vesselData, setVesselData] = useState([]);
   const { isSaving, isLoading } = useSelector((state) => state.userData);
-  const { profile, embarks, currentHiring, currentEmbark, interviewers } =
-    useSelector((state) => state.currentViews);
+  const {
+    profile,
+    embarks,
+    currentHiring,
+    currentEmbark,
+    interviewers,
+    positions,
+  } = useSelector((state) => state.currentViews);
   const [openModalWarning, setOpenModalWarning] = useState(false);
   const [openModalEndEmbark, setOpenModalEndEmbark] = useState(false);
+  const [openModalPromote, setOpenModalPromote] = useState(false);
   const embarkData = useMemo(() => data, []);
   const [isNewLocal, setIsNewLocal] = useState(isNew);
   const [vesselData, setVesselData] = useState([]);
@@ -227,6 +236,8 @@ export const EmbarkForm = ({
         return "red";
       case 6:
         return "red";
+      case 7:
+        return "green";
       default:
         return "gray"; // Default color
     }
@@ -444,6 +455,7 @@ export const EmbarkForm = ({
       uid: profile.uid,
       contractId: currentHiring.id,
       contractCompany: currentHiring.company,
+      position: profile.seafarerData.position[0].id,
     };
 
     if (isNewLocal) {
@@ -482,6 +494,7 @@ export const EmbarkForm = ({
           ...updatedEmbarks[embarkIndex],
           ...formState,
           status: 1,
+          position: profile.seafarerData.position[0].id,
         };
         dispatch(setEmbarks(updatedEmbarks));
         const updatedProfile = { ...profile, recruitmentStage: Stages[5].Id };
@@ -523,6 +536,7 @@ export const EmbarkForm = ({
       uid: profile.uid,
       contractId: currentHiring.id,
       contractCompany: currentHiring.company,
+      position: profile.seafarerData.position[0].id,
     };
 
     if (isNewLocal) {
@@ -561,6 +575,7 @@ export const EmbarkForm = ({
           ...updatedEmbarks[embarkIndex],
           ...formState,
           status: 2,
+          position: profile.seafarerData.position[0].id,
         };
         dispatch(setEmbarks(updatedEmbarks));
         const updatedProfile = { ...profile, recruitmentStage: Stages[18].Id };
@@ -878,6 +893,135 @@ export const EmbarkForm = ({
     setOpenModalEndEmbark(false);
   };
 
+  const handleCancel = () => {};
+
+  const [positionSelected, setPositionSelected] = useState();
+
+  const handlePromote = () => {
+    const toUpdate = {
+      ...formState,
+      status: 7,
+      uid: profile.uid,
+      contractId: currentHiring.id,
+      contractCompany: currentHiring.company,
+    };
+
+    // Crear el nuevo registro para agregar a `skills.onboard`
+    const newOnboardSkill = {
+      companyName: currentHiring.company?.name, // Nombre de la compañía
+      vesselName: vessel?.name, // Nombre del buque
+      "imo#": vesselData[vessel?.id - 1]?.IMO, // IMO #
+      "gt/hp":
+        vesselData[vessel?.id - 1]?.["Gross Tonage"] +
+        "/" +
+        vesselData[vessel?.id - 1]?.["HP"], // GT/HP
+      typeOfVessel: { name: vesselData[vessel?.id - 1]?.["Vessel Type"] }, // Tipo de buque
+      "rank/position":
+        currentEmbark.position &&
+        positions &&
+        positions.find((pos) => pos.Id == currentEmbark.position).PositionName, // Rango/posición
+      dateOn: signOnDate, // Fecha de inicio
+      dateOff: signOffDate, // Fecha de finalización
+    };
+
+    // Agregar el nuevo registro al arreglo `skills.onboard`
+    const updatedSkills = {
+      ...profile.seafarerData.skills,
+      onboard: [...profile.seafarerData.skills.onboard, newOnboardSkill],
+    };
+
+    const updatedProfileData = {
+      ...profile.seafarerData,
+      skills: updatedSkills,
+      position: positionSelected,
+    };
+
+    if (isNewLocal) {
+      const newEmbarksList = [...embarks, toUpdate];
+      dispatch(setEmbarks(newEmbarksList));
+      setIsNewLocal(false);
+
+      const updatedProfile = {
+        ...profile,
+        recruitmentStage: 19,
+        seafarerData: updatedProfileData,
+      };
+
+      dispatch(setProfileView(updatedProfile));
+
+      toast.promise(
+        Promise.all([
+          dispatch(createSeafarerEmbark(toUpdate)),
+          dispatch(
+            updateSeafarerDataFirebase(
+              profile.uid,
+              updatedProfileData,
+              selectedStage
+            )
+          ),
+        ]),
+        {
+          loading: "Saving...",
+          success: <b>Saved</b>,
+          error: <b>Ups! Something went wrong. Try again</b>,
+        }
+      );
+    } else {
+      const embarkIndex = embarks.findIndex(
+        (embark) => embark.id === currentEmbark.id
+      );
+
+      if (embarkIndex !== -1) {
+        const updatedEmbarks = [...embarks];
+        updatedEmbarks[embarkIndex] = {
+          ...updatedEmbarks[embarkIndex],
+          ...formState,
+          status: 7,
+        };
+
+        dispatch(setEmbarks(updatedEmbarks));
+
+        const updatedProfile = {
+          ...profile,
+          recruitmentStage: 19,
+          seafarerData: updatedProfileData,
+        };
+
+        dispatch(setProfileView(updatedProfile));
+
+        toast.promise(
+          Promise.all([
+            dispatch(
+              updateSeafarerEmbark(currentEmbark.id, {
+                ...formState,
+                status: 7,
+              })
+            ),
+            dispatch(
+              updateSeafarerDataFirebase(
+                profile.uid,
+                updatedProfileData,
+                selectedStage
+              )
+            ),
+          ]),
+          {
+            loading: "Saving...",
+            success: <b>Saved</b>,
+            error: <b>Ups! Something went wrong. Try again</b>,
+          }
+        );
+      }
+      onInputChange({
+        target: { name: "status", value: selectedStage == 24 ? 5 : 4 },
+      });
+      onInputChange({
+        target: { name: "elegibleToReturn", value: true },
+      });
+    }
+    setOpenModalEndEmbark(false);
+  };
+
   const [modalText, setModalText] = useState("");
   const [modalConfirm, setModalConfirm] = useState(() => () => {});
 
@@ -902,10 +1046,18 @@ export const EmbarkForm = ({
       setOpenModalEndEmbark(true);
     } else if (type === "medical") {
       setModalText(
-        "Are you sure that you want to set the new stage as Medical Leave."
+        "Are you sure that you want to set the new stage as Medical Leave?"
       );
       setModalConfirm(() => handleMedical);
       setOpenModalWarning(true);
+    } else if (type === "cancel") {
+      setModalText("Are you sure that you want to cancel this embark?");
+      setModalConfirm(() => handleCancel);
+      setOpenModalWarning(true);
+    } else if (type === "promote") {
+      setModalText("Are you sure that you want to promote this seafarer?");
+      setModalConfirm(() => handlePromote);
+      setOpenModalPromote(true);
     }
   };
 
@@ -1064,12 +1216,26 @@ export const EmbarkForm = ({
             <button
               className={` border border-red-300 bg-white text-red-600 size-10 md:w-36 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-red-50 disabled:opacity-30`}
               // disabled={!unfit || status !== 2}
-              onClick={() => handleInception("")}
+              onClick={() => handleInception("cancel")}
               title={"Cancel Embark"}
             >
               <HiOutlineXCircle className="h-4 w-4" />
 
               <span className="hidden md:block ">{"Cancel Embark"}</span>
+            </button>
+          </div>
+        )}
+        {status == 2 && (
+          <div className="flex justify-end">
+            <button
+              className={` border border-green-500 bg-green-500 text-white size-10 md:w-48 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-green-600`}
+              // disabled={!unfit || status !== 2}
+              onClick={() => handleInception("promote")}
+              title={"Promote Seafarer"}
+            >
+              <HiOutlineShieldCheck className="h-4 w-4" />
+
+              <span className="hidden md:block ">{"Promote Seafarer"}</span>
             </button>
           </div>
         )}
@@ -1532,6 +1698,51 @@ export const EmbarkForm = ({
                 onClick={() => handleEndEmbark()}
               >
                 Set new stage
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={openModalPromote}
+        size="md"
+        onClose={() => setOpenModalPromote(false)}
+        popup
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              {modalText}
+            </h3>
+            <div className="flex flex-col gap-5 my-6">
+              <span>Select the new position for this seafarer:</span>
+              <SelectComponents
+                id="position"
+                valueDefault={"Position"}
+                data={positions}
+                name_valor={true}
+                idKey="Id"
+                valueKey="PositionName"
+                name="positionSelected"
+                Text="Select a Position"
+                initialValue={profile?.seafarerData.position[0]?.id}
+                onChange={(value) => setPositionSelected(value)}
+              />
+            </div>
+            <div className="flex justify-center gap-4">
+              <Button color="gray" onClick={() => setOpenModalPromote(false)}>
+                Cancel
+              </Button>
+              <Button
+                color="success"
+                onClick={() => {
+                  modalConfirm();
+                  setOpenModalWarning(false);
+                }}
+              >
+                Promote Seafarer
               </Button>
             </div>
           </div>
