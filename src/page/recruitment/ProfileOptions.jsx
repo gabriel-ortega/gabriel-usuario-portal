@@ -721,7 +721,7 @@ export const ProfileOptions = () => {
               {data.Reasons
                 ? data.Reasons.find(
                     (reason) => reason.id == profile.seguimientoReason
-                  ).reason
+                  )?.reason
                 : ""}
             </span>
           </div>
