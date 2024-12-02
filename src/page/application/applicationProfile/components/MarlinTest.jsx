@@ -24,9 +24,10 @@ export default function MarlinTest({
   onDataChange,
   Editdata,
   title,
+  userData,
 }) {
   const dispatch = useDispatch();
-  const { userData } = useSelector((state) => state.userData);
+  // const { userData } = useSelector((state) => state.userData);
   // Estado local para manejar el archivo adjunto
   const [attachedFile, setAttachedFile] = useState(
     Editdata?.attachedFile || null
@@ -95,68 +96,6 @@ export default function MarlinTest({
     onDelete(e);
   };
 
-  // Cambia el documento adjunto
-  // const changeDocument = (file) => {
-  //   if (file) {
-  //     setAttachedFile(file);
-  //     if (onDataChange && typeof onDataChange === "function") {
-  //       onDataChange({
-  //         ...test,
-  //         attachedFile: { url: "url", name: "archivo" },
-  //       });
-  //     }
-  //   } else {
-  //     setAttachedFile(null);
-  //     onDataChange({
-  //       ...test,
-  //       attachedFile: {},
-  //     });
-  //   }
-  // };
-
-  // const changeDocument = async (file) => {
-  //   if (file) {
-  //     if (!file.url) {
-  //       try {
-  //         // Mostrar el toast mientras se sube el archivo
-  //         const uploadedFile = await toast.promise(
-  //           dispatch(
-  //             uploadApplicantFile(
-  //               userData,
-  //               file,
-  //               "",
-  //               "Marlins Test Certificate"
-  //             )
-  //           ),
-  //           {
-  //             loading: "Uploading Marlins Test Certificate...",
-  //             success: <b>Certificate uploaded successfully!</b>,
-  //             error: <b>Failed to upload the certificate. Please try again.</b>,
-  //           }
-  //         );
-
-  //         // Actualizar el estado con el archivo subido
-  //         setAttachedFile(uploadedFile);
-
-  //         // Actualizar los datos si onDataChange es una función válida
-  //         if (onDataChange && typeof onDataChange === "function") {
-  //           onDataChange({
-  //             ...test,
-  //             attachedFile: uploadedFile,
-  //           });
-  //         }
-  //       } catch (error) {
-  //         console.error("Error uploading the certificate:", error);
-  //       }
-  //     }
-  //   } else {
-  //     setAttachedFile(file);
-  //     onDataChange({
-  //       ...test,
-  //       attachedFile: {},
-  //     });
-  //   }
-  // };
   const changeDocument = async (file) => {
     if (file) {
       if (!file.url) {

@@ -139,7 +139,7 @@ export const ReviewApplication = () => {
 
       const currentPositionId = currentPosition.CVFormatId;
       const url = `https://cv-formater.onrender.com/pdf_render/applications?formatId=${currentPositionId}&id=${
-        userData.uid
+        application.uid
       }&version=${Number(selectedVersion.id)}`;
 
       // Abre la URL en una nueva pestaña

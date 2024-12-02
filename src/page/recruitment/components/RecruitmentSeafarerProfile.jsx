@@ -25,6 +25,7 @@ export const RecruitmentSeafarerProfile = ({
   uid,
   disabled = false,
   isNew = false,
+  isUpdate = false,
 }) => {
   const { profile } = useSelector((state) => state.currentViews);
   const dispatch = useDispatch();
@@ -359,6 +360,7 @@ export const RecruitmentSeafarerProfile = ({
                   ) : (
                     <SeafarerProfile
                       userData={{ ...profileData?.profile, uid: uid }}
+                      // isUpdate={isUpdate}
                       // userData={data?.profile || {}}
                       onChange={(e) => console.log(e)}
                       // onChange={(e) => handleProfileFields(e)}
@@ -547,6 +549,15 @@ export const RecruitmentSeafarerProfile = ({
                     {profileData.lang?.marlins?.[0] && (
                       <MarlinTest
                         // key={index}
+                        userData={{
+                          firstName:
+                            profile.seafarerData?.seafarerProfile?.profile
+                              ?.firstName,
+                          lastName:
+                            profile.seafarerData?.seafarerProfile?.profile
+                              ?.lastName,
+                          uid: profile.uid,
+                        }}
                         form={profileData.lang?.marlins?.[0]}
                         onDelete={(e) => handleDeleteMarlinTestForm(0, e)}
                         Editdata={profileData.lang?.marlins[0] || {}}

@@ -5,7 +5,7 @@ import { LayoutDefault } from "../../components/layoutDefault";
 import { lazy, Suspense } from "react";
 import { LoadingState } from "../../components/skeleton/LoadingState";
 import MyReport from "../application/MyReport";
-import ProfileUpdateRequest from "../application/ProfileUpdateRequest";
+// import ProfileUpdateRequest from "../application/ProfileUpdateRequest";
 
 const Home = lazy(() => import("../Home"));
 const ApplicantApplication = lazy(() => import("../ApplicantApplication"));

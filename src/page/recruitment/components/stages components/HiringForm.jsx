@@ -185,62 +185,24 @@ export const HiringForm = ({
 
   const getStatusColor = (status) => {
     switch (status) {
-      case "Active":
+      case 1:
+        return "warning";
+      case 2:
         return "green";
-      case "Inactive":
+      case 3:
+        return "orange";
+      case 4:
+        return "green";
+      case 5:
+        return "green";
+      case 6:
         return "red";
+      case 7:
+        return "blue";
       default:
         return "gray"; // Default color
     }
   };
-
-  // const save = (e) => {
-  //   e.preventDefault();
-
-  //   // Verificación para nuevo registro
-  //   if (isNew) {
-  //     // Comprobación si status.name es 1 y ya existe un hiring activo
-  //     if (formState.status.id === "1") {
-  //       const existingActiveHiring = hirings.find(
-  //         (hiring) => hiring.status.id === "1"
-  //       );
-
-  //       if (existingActiveHiring) {
-  //         toast.error(
-  //           `There is already an active hiring with ${existingActiveHiring.company.name}. You cannot add another.`
-  //         );
-  //         return; // Evita la creación si ya existe uno activo
-  //       }
-  //     }
-
-  //     // Comprobación si ya existe otro hiring con la misma compañía
-  //     const existingSameCompanyHiring = hirings.find(
-  //       (hiring) => hiring.company.id === formState.company.id
-  //     );
-
-  //     if (existingSameCompanyHiring) {
-  //       toast.error(
-  //         `There is already a hiring with the company ${existingSameCompanyHiring.company.name}. Please use a different company.`
-  //       );
-  //       return; // Evita la creación si ya existe una contratación con la misma compañía
-  //     }
-
-  //     // Si pasa las verificaciones, se guarda el nuevo registro
-  //     const data = { ...formState, uid: profile.uid };
-  //     toast.promise(dispatch(createSeafarerHiring(data)), {
-  //       loading: "Saving...",
-  //       success: <b>Saved</b>,
-  //       error: <b>Ups! Something went wrong. Try again</b>,
-  //     });
-  //   } else {
-  //     // Guardar un hiring existente
-  //     toast.promise(dispatch(updateSeafarerHiring(data.id, formState)), {
-  //       loading: "Saving...",
-  //       success: <b>Saved</b>,
-  //       error: <b>Ups! Something went wrong. Try again</b>,
-  //     });
-  //   }
-  // };
 
   const save = (e) => {
     // e.preventDefault();
@@ -335,7 +297,7 @@ export const HiringForm = ({
     setOpenModalWarning(false);
   };
 
-  const statusColor = getStatusColor(status?.name || "");
+  const statusColor = getStatusColor(currentEmbarkState.status || "");
 
   const disabled = false;
   const disabledStyle = "";
@@ -712,7 +674,7 @@ export const HiringForm = ({
             </div>
             <div className="font-bold flex flex-row items-center justify-start gap-2">
               Embark Status:
-              <Badge color="red" size={"sm"}>
+              <Badge color={statusColor} size={"sm"}>
                 {isNewVariable
                   ? ""
                   : EmbarkStatus[currentEmbarkState?.status - 1]?.StatusName}

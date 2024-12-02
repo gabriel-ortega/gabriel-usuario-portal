@@ -36,10 +36,10 @@ export default function MyProfile() {
   const { profile } = useSelector((state) => state.currentViews);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const handleClose = () => setIsOpen(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [existe, setExiste] = useState(true);
   const [isLoading, setIsLoading] = useState(!profile?.uid ? false : true);
-  const handleClose = () => setIsOpen(false);
 
   useEffect(() => {
     const fetchData = async () => {

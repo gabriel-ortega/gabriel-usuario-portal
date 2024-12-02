@@ -62,12 +62,12 @@ const AgendaForm = () => {
     }
   };
 
-  const convertToFullDate = (time, referenceDate) => {
+ /*  const convertToFullDate = (time, referenceDate) => {
     const [hours, minutes] = time.split(":").map(Number);
     const date = new Date(referenceDate);
     date.setHours(hours, minutes, 0, 0);
     return date;
-  };
+  }; */
   
 
   const normalizeDate = (dateString) => {
@@ -89,7 +89,7 @@ const AgendaForm = () => {
           const matchesEnd = filterData.end
               ? new Date(interview.end).setHours(0, 0, 0, 0) <= normalizeDate(filterData.end).setHours(0, 0, 0, 0)
               : true;
-    console.log(filterData)
+    /* console.log(filterData) */
         const matchesMode = filterData.mode
           ? interview.mode === filterData.mode
           : true;
@@ -292,120 +292,108 @@ const AgendaForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   
+    // Validación inicial
     if (!selectedDate) {
-      alert("Enter Date");
+      alert("Por favor, ingresa una fecha");
       return;
     }
   
-    let updatedDataTemplate = [];
-    if (filter.template.length == 0) {
-      const createTimeSlots = () => {
-        const start = new Date(`${selectedDate}T${newEvent.startTime}`);
-        const end = new Date(`${selectedDate}T${newEvent.endTime}`);
-        const duration = newEvent.duration; // Duración en minutos
-      
-        const timeSlots = [];
-      
-        // Recorremos cada entrevistador en el array `newEvent.interviewer`
-        newEvent.interviewer.forEach((interviewerId) => {
-          let currentStart = new Date(start);
-      
-          // Creamos bloques de tiempo hasta que currentStart alcance o supere end
-          while (currentStart < end) {
-            let currentEnd = new Date(currentStart.getTime() + duration * 60000); // Añade la duración en milisegundos
-      
-            // Si currentEnd supera el end, lo ajustamos a end
-            if (currentEnd > end) {
-              currentEnd = new Date(end);
-            }
-      
-            // Generamos un id único más robusto
-            const id = `${interviewerId}-${currentStart.toISOString()}-${currentEnd.toISOString()}`;
-      
-            // Agregamos cada bloque de tiempo al array de eventos
-            timeSlots.push({
-              id, // Campo único para identificar el evento
-              title: `${filter.valueFilterTemplate} (Entrevistador: ${getNameInterviewer(interviewerId)}, Usuario: ${newEvent.interviewee})`,
-              asunto: filter.valueFilterTemplate,
-              start: currentStart,
-              end: currentEnd,
-              interviewer: interviewerId,
-              interviewee: newEvent.interviewee,
-              duration: duration,
-              status: newEvent.status,
-              mode: filter.valueFilterMode,
-              link: newEvent.link,
-            });
-      
-            // Avanzamos el currentStart al siguiente bloque de tiempo
-            currentStart = new Date(currentStart.getTime() + duration * 60000);
-          }
-        });
-      
-        return timeSlots;
-      };
-      
-      setEvents((prevEvents) => {
-        const newTimeSlots = createTimeSlots();
-      
-        // Evitamos duplicados verificando todas las propiedades clave
-        const existingIds = new Set(dataEvents.map((event) => event.id)); // Conjunto de IDs existentes
-        const mergedEvents = [...prevEvents];
-      
-        newTimeSlots.forEach((event) => {
-          // Si el ID ya existe, ignoramos este evento
-          if (!existingIds.has(event.id)) {
-            mergedEvents.push(event);
-            existingIds.add(event.id); // Añadimos el nuevo ID al conjunto
-          }
-        });
-      
-        // Actualizamos dataEvents con los eventos sin duplicados
-        setDataEvents((prevData) => [...prevData, ...mergedEvents]);
-      
-        return mergedEvents;
-      });
-  
-    } else {
-      const eventsFromTemplates = filter.template
-        .filter((template) => template.nameTemplate === filter.filterTemplate)
-        .flatMap((template) => {
-          return template.dates.map((date) => {
-            const start = new Date(`${selectedDate}T${date.start}`);
-            const end = new Date(`${selectedDate}T${date.end}`);
-  
-            return {
-              title: `${date.title} (Entrevistador: ${date.interviewer}, Usuario: ${date.interviewee})`,
-              asunto:date.title,
-              start: start,
-              end: end,
-              interviewer: date.interviewer,
-              interviewee: date.interviewee,
-              duration: date.duration,
-              status: date.status,
-              mode: filter.valueFilterMode,
-              link: date.link,
-            };
-          });
-        });
-      setEvents((prevEvents) => {
-        updatedDataTemplate = [...prevEvents, ...eventsFromTemplates]; 
-        setDataEvents((prevData) => [...prevData, ...updatedDataTemplate]);
-        return updatedDataTemplate;
-      });
+    if (!newEvent.startTime || !newEvent.endTime || !newEvent.duration || !newEvent.interviewer.length) {
+      alert("Faltan datos para generar los eventos");
+      return;
     }
   
-    setNewEvent({
-      title: '',
-      startTime: '',
-      endTime: '',
-      interviewer: "",
-      interviewee: "",
-      duration: durations[0],
-    });
-
-    setFilter({template:"",filterTemplate:"",valueFilterTemplate:""})
+    // Función para crear los bloques de tiempo
+    const createTimeSlots = () => {
+      const timeSlots = [];
+      const start = new Date(`${selectedDate}T${newEvent.startTime}`);
+      const end = new Date(`${selectedDate}T${newEvent.endTime}`);
+      const duration = newEvent.duration; // Duración en minutos
+  
+      newEvent.interviewer.forEach((interviewerId) => {
+        let currentStart = new Date(start);
+  
+        // Creamos bloques de tiempo hasta alcanzar el final
+        while (currentStart < end) {
+          let currentEnd = new Date(currentStart.getTime() + duration * 60000); // Añade la duración en milisegundos
+  
+          if (currentEnd > end) {
+            currentEnd = new Date(end); // Ajusta al límite final
+          }
+  
+          // Generamos un id único
+          const id = `${interviewerId}-${currentStart.toISOString()}-${currentEnd.toISOString()}-${Math.random()
+            .toString(36)
+            .substr(2, 9)}`;
+  
+          // Agregamos el bloque de tiempo
+          timeSlots.push({
+            id, // Campo único para identificar el evento
+            title: `${filter.valueFilterTemplate} (Entrevistador: ${getNameInterviewer(interviewerId)}, Usuario: ${newEvent.interviewee})`,
+            asunto: filter.valueFilterTemplate,
+            start: currentStart,
+            end: currentEnd,
+            interviewer: interviewerId,
+            interviewee: newEvent.interviewee,
+            duration: duration,
+            status: newEvent.status,
+            mode: filter.valueFilterMode,
+            link: newEvent.link,
+          });
+  
+          // Avanzamos al siguiente bloque
+          currentStart = new Date(currentStart.getTime() + duration * 60000);
+        }
+      });
+  
+      return timeSlots;
+    };
+  
+    try {
+      // Creamos los bloques de tiempo
+      const newTimeSlots = createTimeSlots();
+      console.log("Nuevos bloques de tiempo creados:", newTimeSlots);
+  
+      // Actualizamos dataEvents y evitamos duplicados
+      setDataEvents((prevData) => {
+        const existingIds = new Set(prevData.map((event) => event.id)); // Conjunto de IDs existentes
+        const filteredSlots = newTimeSlots.filter((event) => !existingIds.has(event.id)); // Filtramos duplicados
+        return [...prevData, ...filteredSlots];
+      });
+  
+      // Actualizamos events
+      setEvents((prevEvents) => {
+        const existingIds = new Set(prevEvents.map((event) => event.id)); // Conjunto de IDs existentes
+        const mergedEvents = newTimeSlots.filter((event) => !existingIds.has(event.id)); // Filtramos duplicados
+        return [...prevEvents, ...mergedEvents];
+      });
+  
+      // Restablecemos el estado de newEvent
+      setNewEvent({
+        title: "",
+        startTime: "",
+        endTime: "",
+        interviewer: [],
+        interviewee: "",
+        duration: durations[0] || 30, // Valor por defecto si durations está vacío
+        status: "",
+        link: "",
+      });
+  
+      // Restablecemos el estado de filtros
+      setFilter({
+        template: "",
+        filterTemplate: "",
+        valueFilterTemplate: "",
+      });
+  
+      
+    } catch (error) {
+      console.error("Error al crear los bloques de tiempo:", error);
+      alert("Ocurrió un error al crear los eventos. Por favor, verifica los datos ingresados.");
+    }
   };
+   
   
 
   const mostrar=(()=>{
@@ -447,7 +435,7 @@ const AgendaForm = () => {
   return (
     <>
      <h1 className='text-center font-semibold text-lg mt-5'>Programación de Citas</h1>
-     <button type="button" onClick={mostrar} className={` bg-[#1976d2]  rounded-md w-44 h-10  text-center text-gray-50`}>mostrar</button>
+     {/* <button type="button" onClick={mostrar} className={` bg-[#1976d2]  rounded-md w-44 h-10  text-center text-gray-50`}>mostrar</button> */}
      <p className={`${events.length>0?"block":"hidden"} text-lg text-red-600 text-end`}>You have unsaved schedules</p>
      <div className='flex justify-between items-center'>
       

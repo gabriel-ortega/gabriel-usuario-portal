@@ -71,6 +71,36 @@ export const ProfileOptions = () => {
   const [sortedNotes, setSortedNotes] = useState([]);
   const [sortedHistory, setSortedHistory] = useState([]);
   const [hasApplicationData, setHasApplicationData] = useState();
+  const [filteredReasonsData, setFilteredReasonsData] = useState([]);
+  const [seguimientoReason, setSeguimientoReason] = useState();
+
+  const filterReasons = (all = true) => {
+    if (!all) {
+      if (data.Reasons?.length > 0) {
+        const filter = data.Reasons.filter((row) => {
+          let stagesArray;
+
+          try {
+            stagesArray =
+              typeof row.stages === "string"
+                ? JSON.parse(row.stages)
+                : row.stages;
+          } catch (error) {
+            console.error("Error parsing stages:", error);
+            return false; // Excluir la fila si no es válida
+          }
+          return stagesArray.includes(1);
+        });
+        setFilteredReasonsData(filter);
+      }
+    } else {
+      setFilteredReasonsData(data.Reasons);
+    }
+  };
+
+  useEffect(() => {
+    filterReasons(false);
+  }, [data]);
 
   useEffect(() => {
     if (
@@ -506,6 +536,7 @@ export const ProfileOptions = () => {
       ...additionalFields,
       SeguimientoDate: new Date().toISOString(),
       SeguimientoID: currentStage,
+      seguimientoReason: seguimientoReason,
     };
 
     const profileData = {
@@ -514,6 +545,7 @@ export const ProfileOptions = () => {
       ...additionalFields,
       SeguimientoDate: new Date().toISOString(),
       SeguimientoID: currentStage,
+      seguimientoReason: seguimientoReason,
     };
     setIsOpen(false);
 
@@ -1033,6 +1065,31 @@ export const ProfileOptions = () => {
         ) : currentModal == "retire" ? (
           <div className="flex flex-col justify-center items-center gap-4">
             <span>{retireMessage}</span>
+            <div className="flex flex-row gap-5 items-end">
+              <SelectComponents
+                id="seguimientoReason"
+                valueDefault="Reject Reason"
+                Text="Select a Reject Reason"
+                data={filteredReasonsData}
+                name_valor={false}
+                idKey="id"
+                valueKey="reason"
+                name="seguimientoReason"
+                // initialValue={application?.seguimientoReason}
+                onChange={(e) => {
+                  const selectedValue = e.target.value;
+                  // console.log(selectedValue);
+                  setSeguimientoReason(selectedValue);
+                }}
+              />
+              <button
+                className={`border border-red-600 bg-red-600 text-white size-10 md:w-28 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-red-700 disabled:opacity-30 disabled:cursor-not-allowed`}
+                onClick={() => filterReasons(true)}
+              >
+                <HiXCircle className="h-4 w-4" />
+                <span className="hidden md:block ">Override Reasons</span>
+              </button>{" "}
+            </div>
             <div className="flex flex-row justify-center items-center gap-3">
               <button
                 title="Cancel"

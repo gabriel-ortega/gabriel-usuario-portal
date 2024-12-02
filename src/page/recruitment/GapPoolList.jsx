@@ -47,6 +47,7 @@ export default function GapPoolList() {
   const [dataDashboard, setDataDashboard] = useState({});
   const [openForm, setOpenForm] = useState(false);
   const [loadingVar, setLoadingVar] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   /* availableExperienceBoardList:[
         {
@@ -212,26 +213,35 @@ export default function GapPoolList() {
   const [filters, setFilters] = useState({});
 
   const handleDowloadExcelGappool = async () => {
+    setIsLoading(true);
     try {
       await downloadExcel([], "gapool", "Reporte_de_Application");
+      setIsLoading(false);
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
+      setIsLoading(false);
     }
   };
 
   const handleDowloadExcelGappoolmercante = async () => {
+    setIsLoading(true);
     try {
       await downloadExcel([], "gapoolmercante", "Reporte_de_Application");
+      setIsLoading(false);
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
+      setIsLoading(false);
     }
   };
 
   const handleDowloadExcelGappoolhotel = async () => {
+    setIsLoading(true);
     try {
       await downloadExcel([], "gapoolhotel", "Reporte_de_Application");
+      setIsLoading(false);
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
+      setIsLoading(false);
     }
   };
 
@@ -272,7 +282,7 @@ export default function GapPoolList() {
           <TabPanel className="">
             <div className="px-8 flex items-end justify-end">
               <Button
-                // isProcessing={isLoading}
+                isProcessing={isLoading}
                 color={"success"}
                 onClick={handleDowloadExcelGappool}
               >
@@ -301,25 +311,29 @@ export default function GapPoolList() {
             </section>
           </TabPanel>
           <TabPanel className="">
+            <div className="px-8 flex items-end justify-end">
+              <div className="flex flex-row gap-4">
+                <Button
+                  isProcessing={isLoading}
+                  color={"success"}
+                  onClick={handleDowloadExcelGappoolmercante}
+                >
+                  Merchant List
+                </Button>
+                <Button
+                  isProcessing={isLoading}
+                  color={"success"}
+                  onClick={handleDowloadExcelGappoolhotel}
+                >
+                  Hotel Staff List
+                </Button>
+              </div>
+            </div>
             <section className="p-8 w-full h-full">
               <InstantSearch
                 indexName="globalSearch"
                 searchClient={searchClient}
               >
-                <span className="pr-10">mercante</span>
-                <button
-                  onClick={handleDowloadExcelGappoolmercante}
-                  className="h-8 w-32 bg-green-700 text-center text-sm rounded-md text-white"
-                >
-                  Export to Excel
-                </button>
-                <span className="pr-10 pl-10">Hotel Staff</span>
-                <button
-                  onClick={handleDowloadExcelGappoolhotel}
-                  className="h-8 w-32 bg-green-700 text-center text-sm rounded-md text-white"
-                >
-                  Export to Excel
-                </button>
                 <div className="flex flex-col md:flex-row gap-5">
                   <div className="md:w-1/3">
                     <SeafarersRefinements onFilters={(e) => setFilters(e)} />
@@ -473,172 +487,4 @@ export default function GapPoolList() {
       ) : null}
     </>
   );
-}
-
-{
-  /* <section>
-              <section className="px-8">
-                <div className="overflow-x-auto max-h-96">
-                  <Table hoverable className="hidden md:block">
-                    <Table.Head>
-                      <Table.HeadCell className="whitespace-nowrap">
-                        Logistic ID
-                      </Table.HeadCell>
-                      <Table.HeadCell>Name</Table.HeadCell>
-                      <Table.HeadCell>Process Stage</Table.HeadCell>
-                      <Table.HeadCell>Recruitment Dept.</Table.HeadCell>
-                      <Table.HeadCell>Department</Table.HeadCell>
-                      <Table.HeadCell>Position</Table.HeadCell>
-                      <Table.HeadCell>Phone</Table.HeadCell>
-                      <Table.HeadCell>Available</Table.HeadCell>
-                      <Table.HeadCell>Application Date</Table.HeadCell>
-                      <Table.HeadCell>Nationality</Table.HeadCell>
-                      <Table.HeadCell>Residency</Table.HeadCell>
-                    </Table.Head>
-                    <Table.Body className="divide-y cursor-pointer">
-                      {seafarers.map((seafarer, index) => (
-                        <Table.Row
-                          key={index}
-                          className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                          onClick={() =>
-                            handleProfileLink(seafarer.uid, seafarer)
-                          }
-                        >
-                          <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                            {seafarer?.logisticId || "--"}
-                          </Table.Cell>
-                          <Table.Cell className="whitespace-nowrap">
-                            {seafarer.seafarerData?.seafarerProfile?.profile
-                              ?.firstName ||
-                            seafarer.seafarerData?.seafarerProfile?.profile
-                              ?.lastName
-                              ? `${seafarer.seafarerData?.seafarerProfile?.profile?.firstName} ${seafarer.seafarerData?.seafarerProfile?.profile?.lastName}`
-                              : seafarer?.displayName
-                              ? seafarer?.displayName
-                              : "--"}
-                          </Table.Cell>
-                          <Table.Cell className="whitespace-nowrap">
-                            {seafarer?.recruitmentStage
-                              ? stageData[seafarer?.recruitmentStage - 1]
-                                  .StageName
-                              : "--"}
-                          </Table.Cell>
-                          <Table.Cell className="whitespace-nowrap">
-                            {seafarer.seafarerData?.vesselType
-                              ? seafarer.seafarerData?.vesselType[0]?.name
-                              : "--"}
-                          </Table.Cell>
-                          <Table.Cell className="whitespace-nowrap">
-                            {seafarer.seafarerData?.department
-                              ? seafarer.seafarerData?.department[0]?.name
-                              : "--"}
-                          </Table.Cell>
-                          <Table.Cell className="whitespace-nowrap">
-                            {seafarer.seafarerData?.position
-                              ? seafarer.seafarerData?.position[0]?.name
-                              : "--"}
-                          </Table.Cell>
-                          <Table.Cell className="whitespace-nowrap">
-                            {seafarer.seafarerData?.seafarerProfile?.profile
-                              ?.phone.value || "--"}
-                          </Table.Cell>
-                          <Table.Cell className="whitespace-nowrap">
-                            {seafarer.seafarerData?.available
-                              ? seafarer.seafarerData?.available
-                                ? "Yes"
-                                : "No"
-                              : "--"}
-                          </Table.Cell>
-                          <Table.Cell className="whitespace-nowrap">
-                            {seafarer.seafarerData?.applicationDate
-                              ? formatDate(
-                                  seafarer.seafarerData?.applicationDate,
-                                  "yyyy-mm-dd"
-                                )
-                              : "--"}
-                          </Table.Cell>
-                          <Table.Cell className="whitespace-nowrap">
-                            {seafarer.seafarerData?.seafarerProfile?.profile
-                              ?.countryBirth.CountryName || "--"}
-                          </Table.Cell>
-                          <Table.Cell className="whitespace-nowrap">
-                            {seafarer.seafarerData?.seafarerProfile?.profile
-                              ?.countryResidency.CountryName || "--"}
-                          </Table.Cell>
-                        </Table.Row>
-                      ))}
-                    </Table.Body>
-                  </Table>
-                </div>
-              </section>
-              <div className="space-y-4 px-2 md:hidden">
-                {seafarers.map((seafarer, index) => {
-                  return (
-                    <Card
-                      key={index}
-                      className="cursor-pointer"
-                      onClick={() => handleProfileLink(seafarer.uid, seafarer)}
-                    >
-                      <section className="flex items-center">
-                        <div className="mr-4 flex items-center  bg-primary">
-                          <Avatar
-                            className="text-primary-foreground"
-                            rounded
-                            // size="md"
-                            img={seafarer?.photoURL}
-                            placeholderInitials=""
-                          />
-                        </div>
-                        <div className="flex-col flex-1 space-y-1">
-                          <p className="text-sm font-semibold leading-none">
-                            {seafarer.seafarerData?.seafarerProfile?.profile
-                              ?.firstName ||
-                            seafarer.seafarerData?.seafarerProfile?.profile
-                              ?.lastName
-                              ? `${seafarer.seafarerData?.seafarerProfile?.profile?.firstName} ${seafarer.seafarerData?.seafarerProfile?.profile?.lastName}`
-                              : seafarer?.displayName
-                              ? seafarer?.displayName
-                              : "--"}
-                          </p>
-                          <p className="text-xs text-muted-foreground ">
-                            {seafarer.seafarerData?.vesselType
-                              ? seafarer.seafarerData?.vesselType[0]?.name
-                              : "--"}
-                          </p>
-                          <p className="text-xs text-muted-foreground ">
-                            {seafarer.seafarerData?.position
-                              ? seafarer.seafarerData?.position[0]?.name
-                              : "--"}
-                          </p>
-                          <p className="text-xs text-muted-foreground font-light">
-                            {seafarer.seafarerData?.department
-                              ? seafarer.seafarerData?.department[0]?.name
-                              : "--"}
-                          </p>
-                          <section className="flex flex-cols-2 items-center">
-                            <p className="text-xs text-muted-foreground font-medium">
-                              {seafarer?.recruitmentStage
-                                ? stageData[seafarer?.recruitmentStage - 1]
-                                    .StageName
-                                : "--"}
-                            </p>
-                            <p className="ml-auto font-light">
-                              {seafarer.logisticId || "--"}
-                            </p>
-                          </section>
-                        </div>
-                      </section>
-                    </Card>
-                  );
-                })}
-              </div>
-
-              <div className="flex overflow-x-auto justify-center mt-2">
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={3}
-                  // onPageChange={onPageChange}
-                />
-              </div>
-            </section> */
 }

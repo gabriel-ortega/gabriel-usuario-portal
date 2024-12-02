@@ -129,61 +129,66 @@ const RecruitmentSkills = ({
           <TabPanels>
             {/* On Board Experience Panel */}
             <TabPanel className="items-center">
-              <section className="flex flex-col gap-3  justify-center text-xs mt-5 ml-5">
-                <span className="font-bold text-gray-500">
-                  Experience on board details
-                </span>
-                <div className="flex flex-col md:flex-row gap-5">
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="dischargeLetter"
-                      name="dischargeLetter"
-                      checked={
-                        profile?.seafarerData?.onboardJustified?.dischargeLetter
-                      }
-                      onChange={(e) => handleOnboard(e)}
-                    />
-                    <Label htmlFor="dischargeLetter">Discharge Letter</Label>
+              {profile.role !== 3 && (
+                <section className="flex flex-col gap-3  justify-center text-xs mt-5 ml-5">
+                  <span className="font-bold text-gray-500">
+                    Experience on board details
+                  </span>
+                  <div className="flex flex-col md:flex-row gap-5">
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="dischargeLetter"
+                        name="dischargeLetter"
+                        checked={
+                          profile?.seafarerData?.onboardJustified
+                            ?.dischargeLetter
+                        }
+                        onChange={(e) => handleOnboard(e)}
+                      />
+                      <Label htmlFor="dischargeLetter">Discharge Letter</Label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="employmentLetter"
+                        name="employmentLetter"
+                        checked={
+                          profile?.seafarerData?.onboardJustified
+                            ?.employmentLetter
+                        }
+                        onChange={(e) => handleOnboard(e)}
+                      />
+                      <Label htmlFor="employmentLetter">
+                        Employment Letter
+                      </Label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="evaluationsOnboard"
+                        name="evaluationsOnboard"
+                        checked={
+                          profile?.seafarerData?.onboardJustified
+                            ?.evaluationsOnboard
+                        }
+                        onChange={(e) => handleOnboard(e)}
+                      />
+                      <Label htmlFor="evaluationsOnboard">
+                        Evaluations on board
+                      </Label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="stampedSb"
+                        name="stampedSb"
+                        checked={
+                          profile?.seafarerData?.onboardJustified?.stampedSb
+                        }
+                        onChange={(e) => handleOnboard(e)}
+                      />
+                      <Label htmlFor="stampedSb">Stamped Seamanbook</Label>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="employmentLetter"
-                      name="employmentLetter"
-                      checked={
-                        profile?.seafarerData?.onboardJustified
-                          ?.employmentLetter
-                      }
-                      onChange={(e) => handleOnboard(e)}
-                    />
-                    <Label htmlFor="employmentLetter">Employment Letter</Label>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="evaluationsOnboard"
-                      name="evaluationsOnboard"
-                      checked={
-                        profile?.seafarerData?.onboardJustified
-                          ?.evaluationsOnboard
-                      }
-                      onChange={(e) => handleOnboard(e)}
-                    />
-                    <Label htmlFor="evaluationsOnboard">
-                      Evaluations on board
-                    </Label>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="stampedSb"
-                      name="stampedSb"
-                      checked={
-                        profile?.seafarerData?.onboardJustified?.stampedSb
-                      }
-                      onChange={(e) => handleOnboard(e)}
-                    />
-                    <Label htmlFor="stampedSb">Stamped Seamanbook</Label>
-                  </div>
-                </div>
-              </section>
+                </section>
+              )}
               <AddSomethingTable
                 formTitle={"On Board Experience"}
                 bgClassName=""
@@ -225,35 +230,41 @@ const RecruitmentSkills = ({
 
             {/* On Land Experience Panel */}
             <TabPanel className="items-center">
-              <section className="flex flex-col gap-3  justify-center text-xs mt-5 ml-5">
-                <span className="font-bold text-gray-500">
-                  Experience on land details
-                </span>
-                <div className="flex flex-col md:flex-row gap-5">
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="referenceLetter"
-                      name="referenceLetter"
-                      checked={
-                        profile?.seafarerData?.onlandJustified?.referenceLetter
-                      }
-                      onChange={(e) => handleOnland(e)}
-                    />
-                    <Label htmlFor="referenceLetter">Reference Letter</Label>
+              {profile.role !== 3 && (
+                <section className="flex flex-col gap-3  justify-center text-xs mt-5 ml-5">
+                  <span className="font-bold text-gray-500">
+                    Experience on land details
+                  </span>
+                  <div className="flex flex-col md:flex-row gap-5">
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="referenceLetter"
+                        name="referenceLetter"
+                        checked={
+                          profile?.seafarerData?.onlandJustified
+                            ?.referenceLetter
+                        }
+                        onChange={(e) => handleOnland(e)}
+                      />
+                      <Label htmlFor="referenceLetter">Reference Letter</Label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="referenceContact"
+                        name="referenceContact"
+                        checked={
+                          profile?.seafarerData?.onlandJustified
+                            ?.referenceContact
+                        }
+                        onChange={(e) => handleOnland(e)}
+                      />
+                      <Label htmlFor="referenceContact">
+                        Reference Contact
+                      </Label>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="referenceContact"
-                      name="referenceContact"
-                      checked={
-                        profile?.seafarerData?.onlandJustified?.referenceContact
-                      }
-                      onChange={(e) => handleOnland(e)}
-                    />
-                    <Label htmlFor="referenceContact">Reference Contact</Label>
-                  </div>
-                </div>
-              </section>
+                </section>
+              )}
               <AddSomethingTable
                 formTitle={"On Land Experience"}
                 bgClassName=""

@@ -50,6 +50,7 @@ export const RetireRequest = () => {
   }, []);
 
   const handleSelected = (e) => {
+    console.log(e);
     setSelected(e);
     setOpenModalWarning(true);
   };
@@ -270,7 +271,9 @@ export const RetireRequest = () => {
               }
             </h3>
             <div className="flex flex-col gap-3 my-4">
-              <span>{`Applicant: ${selected.uid}`}</span>
+              <span>{`Applicant: ${
+                selected.seafarerName || "Undefined"
+              }`}</span>
               <div className="flex flex-col gap-2">
                 <span className="text-sm font-semibold">
                   This Applicant is retiring while being on:

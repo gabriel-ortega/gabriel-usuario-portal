@@ -704,7 +704,7 @@ export const ApplicantProfile = ({
                 isValid={!visaDeniedValid}
               />
               <YesNoInput
-                text="Have you ever had a recruitment process with Cadina?"
+                text="Have you ever had a recruitment process with Candina?"
                 name="candina"
                 onChange={onInputChange}
                 defaultChecked={

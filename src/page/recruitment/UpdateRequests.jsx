@@ -54,7 +54,7 @@ export const UpdateRequests = () => {
           {loadingVar ? (
             <LoadingState />
           ) : (
-            <Table hoverable className="hidden md:block">
+            <Table hoverable className="">
               <Table.Head>
                 <Table.HeadCell>Status</Table.HeadCell>
                 <Table.HeadCell>Name</Table.HeadCell>

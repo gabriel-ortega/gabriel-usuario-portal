@@ -28,6 +28,7 @@ import toast from "react-hot-toast";
 import { TextArea } from "../../components/layoutComponents";
 import { setProfileView } from "../../store/currentViews/viewSlice";
 import { getReasons } from "../../util/services";
+import InterviewSchedule from "../../page/interview/InterviewSchedule";
 
 export const ApplicantProcessView = () => {
   const navigate = useNavigate();
@@ -38,7 +39,9 @@ export const ApplicantProcessView = () => {
   const { hirings, profile, currentHiring, currentEmbark, embarks } =
     useSelector((state) => state.currentViews);
   const [openModalWarning, setOpenModalWarning] = useState(false);
+  const [openModalInterview, setOpenModalInterview] = useState(false);
   const [reasonsData, setReasonsData] = useState([]);
+  const [selectedInterview, setSelectedInterview] = useState(0);
   const seguimientoStages = [
     7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 22, 23, 24, 25, 26, 27,
   ];
@@ -213,7 +216,13 @@ export const ApplicantProcessView = () => {
                           for the role.
                         </Timeline.Body>
                         {profile.firstInterview?.status == "Pending" && (
-                          <Button color="gray">
+                          <Button
+                            color="gray"
+                            onClick={() => {
+                              setSelectedInterview(1);
+                              setOpenModalInterview(true);
+                            }}
+                          >
                             Book an Interview
                             <HiArrowNarrowRight className="ml-2 h-3 w-3" />
                           </Button>
@@ -392,6 +401,19 @@ export const ApplicantProcessView = () => {
                 Continue
               </Button>
             </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={openModalInterview}
+        size="xl"
+        onClose={() => setOpenModalInterview(false)}
+        popup
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <InterviewSchedule type={selectedInterview} />
           </div>
         </Modal.Body>
       </Modal>

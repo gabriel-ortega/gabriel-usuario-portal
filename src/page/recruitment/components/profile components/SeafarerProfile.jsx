@@ -101,11 +101,12 @@ const bmiCalc = (weight, height) => {
 };
 
 export const SeafarerProfile = ({
+  isUpdate = false,
   // userData,
   formValid = () => {},
   onChange = () => {},
 }) => {
-  const { profile } = useSelector((state) => state.currentViews);
+  const { profile, profileUpdate } = useSelector((state) => state.currentViews);
   const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch();
 
@@ -178,7 +179,11 @@ export const SeafarerProfile = ({
     onSelectCountryChange,
     onSelectPhoneChange,
     onSelectChange,
-  } = useForm(profile?.seafarerData?.seafarerProfile?.profile || formData);
+  } = useForm(
+    isUpdate
+      ? profileUpdate?.seafarerData?.seafarerProfile?.profile
+      : profile?.seafarerData?.seafarerProfile?.profile || formData
+  );
 
   const loadResults = async () => {
     try {
@@ -692,7 +697,7 @@ export const SeafarerProfile = ({
               // isValid={!visaDeniedValid}
             />
             <YesNoInput
-              text="Have you ever had a recruitment process with Cadina?"
+              text="Have you ever had a recruitment process with Candina?"
               name="candina"
               onChange={onInputChange}
               defaultChecked={candina}

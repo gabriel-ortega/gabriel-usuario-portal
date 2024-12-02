@@ -98,22 +98,39 @@ export const createSeafarer = (data, createAccount = false) => {
 
 export const submitProfileUpdate = (uid, userData) => {
   return async (dispatch) => {
-    const toSave = userData;
-    const date = new Date().toISOString();
-    const data = {
-      seafarerData: toSave,
-      status: 1,
-      createdOn: date,
-      uid: uid,
-      isRead: false,
-    };
-    const profileUpdate = {
-      profileUpdate: true,
-    };
-    const docRef = doc(FirebaseDB, `profileUpdates`);
-    const profileRef = doc(FirebaseDB, `usersData/${uid}`);
-    await setDoc(docRef, data);
-    await updateDoc(profileRef, profileUpdate);
+    try {
+      const toSave = userData;
+      const date = new Date().toISOString();
+
+      const data = {
+        seafarerData: toSave,
+        status: 1,
+        createdOn: date,
+        uid: uid,
+        isRead: false,
+      };
+
+      const profileUpdate = {
+        profileUpdate: true,
+      };
+
+      // Referencia a la colección
+      const collectionRef = collection(FirebaseDB, "profileUpdates");
+
+      // Crear un nuevo documento con ID automático
+      const docRef = await addDoc(collectionRef, data);
+
+      // Actualizar el campo 'id' en el documento recién creado
+      await updateDoc(docRef, { id: docRef.id });
+
+      // Actualizar el documento del usuario en 'usersData'
+      const profileRef = doc(FirebaseDB, `usersData/${uid}`);
+      await updateDoc(profileRef, profileUpdate);
+
+      console.log(`Profile update submitted successfully for UID: ${uid}`);
+    } catch (error) {
+      console.error("Error submitting profile update:", error);
+    }
   };
 };
 
@@ -147,7 +164,7 @@ export const submitRetireRequest = (uid, reason) => {
       retireRequest: true,
     };
     try {
-      const docRef = doc(collection(FirebaseDB, "retirerequest"));
+      const docRef = doc(collection(FirebaseDB, "retireRequests"));
 
       const profileRef = doc(FirebaseDB, `usersData/${uid}`);
       await setDoc(docRef, data);

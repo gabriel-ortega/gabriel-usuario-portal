@@ -28,6 +28,7 @@ import {
   HiOutlineXCircle,
   HiSave,
   HiUserCircle,
+  HiXCircle,
 } from "react-icons/hi";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { RiShipLine } from "react-icons/ri";
@@ -46,6 +47,8 @@ import {
   getSeafarerHiringsById,
   updateSeafarerDataFirebase,
   updateSeafarerEmbark,
+  updateSeafarerHiring,
+  updateUsersData,
   uploadApplicantFile,
 } from "../../../../store/userData";
 import { MdOutlineAccessTime } from "react-icons/md";
@@ -65,7 +68,7 @@ import FormF_PMSSA20 from "./FormF_PMSSA20";
 import { formatDate } from "../../../../util/helperFunctions";
 import { useMemo } from "react";
 import FormatsEmbark from "./FormatsEmbark";
-import { getVessels } from "../../../../util/services";
+import { getReasons, getVessels } from "../../../../util/services";
 
 const formData = {
   position: "",
@@ -142,6 +145,9 @@ export const EmbarkForm = ({
   const [isNewLocal, setIsNewLocal] = useState(isNew);
   const [vesselData, setVesselData] = useState([]);
   const [filteredPositions, setFilteredPositions] = useState([]);
+  const [reasonsData, setReasonsData] = useState([]);
+  const [filteredReasonsData, setFilteredReasonsData] = useState([]);
+  const [seguimientoReason, setSeguimientoReason] = useState();
 
   // Hook para gestionar el formulario
   const {
@@ -182,6 +188,34 @@ export const EmbarkForm = ({
     onSelectChange,
   } = useForm(isNew ? formData : embarkData || formData, formValidations);
 
+  const filterReasons = (all = true) => {
+    if (!all) {
+      if (reasonsData.length > 0) {
+        const filter = reasonsData.filter((row) => {
+          let stagesArray;
+
+          try {
+            stagesArray =
+              typeof row.stages === "string"
+                ? JSON.parse(row.stages)
+                : row.stages;
+          } catch (error) {
+            console.error("Error parsing stages:", error);
+            return false; // Excluir la fila si no es válida
+          }
+          return stagesArray.includes(1);
+        });
+        setFilteredReasonsData(filter);
+      }
+    } else {
+      setFilteredReasonsData(reasonsData);
+    }
+  };
+
+  useEffect(() => {
+    filterReasons(false);
+  }, [reasonsData]);
+
   useEffect(() => {
     if (!isNewLocal) {
       if (currentHiring?.id !== data?.contractId) {
@@ -191,6 +225,8 @@ export const EmbarkForm = ({
     const fetchData = async () => {
       try {
         const vessels = await getVessels();
+        const reasons = await getReasons();
+        setReasonsData(reasons);
         const companyId = Number(currentHiring.company?.id);
         const filteredVessels = vessels.filter(
           (vessel) => vessel.CompanyId === companyId
@@ -727,7 +763,7 @@ export const EmbarkForm = ({
     const newOnboardSkill = {
       companyName: currentHiring.company?.name, // Nombre de la compañía
       vesselName: vessel?.name, // Nombre del buque
-      "imo#": vesselData[vessel?.id - 1]?.IMO, // IMO #
+      "imo#": String(vesselData[vessel?.id - 1]?.IMO), // IMO #
       "gt/hp":
         vesselData[vessel?.id - 1]?.["Gross Tonage"] +
         "/" +
@@ -849,8 +885,17 @@ export const EmbarkForm = ({
 
       const updatedProfile = {
         ...profile,
-        recruitmentStage: selectedStage,
-        seafarerData: updatedProfileData,
+        recruitmentStage: 23,
+        seguimientoReason: seguimientoReason,
+        available: false,
+      };
+
+      const updatedContract = {
+        ...currentHiring,
+        status: {
+          id: "2",
+          name: "Inactive",
+        },
       };
 
       dispatch(setProfileView(updatedProfile));
@@ -858,7 +903,8 @@ export const EmbarkForm = ({
       toast.promise(
         Promise.all([
           dispatch(createSeafarerEmbark(toUpdate)),
-          dispatch(updateUsersData(profile.uid, updatedProfileData)),
+          dispatch(updateUsersData(profile.uid, updatedProfile)),
+          dispatch(updateSeafarerHiring(currentHiring.id, updatedContract)),
         ]),
         {
           loading: "Saving...",
@@ -876,17 +922,24 @@ export const EmbarkForm = ({
         updatedEmbarks[embarkIndex] = {
           ...updatedEmbarks[embarkIndex],
           ...formState,
-          status: selectedStage == 24 ? 5 : 4,
+          status: 6,
         };
 
         dispatch(setEmbarks(updatedEmbarks));
 
         const updatedProfile = {
           ...profile,
-          recruitmentStage: selectedStage,
-          seafarerData: updatedProfileData,
+          recruitmentStage: 23,
+          seguimientoReason: seguimientoReason,
+          available: false,
         };
-
+        const updatedContract = {
+          ...currentHiring,
+          status: {
+            id: "2",
+            name: "Inactive",
+          },
+        };
         dispatch(setProfileView(updatedProfile));
 
         toast.promise(
@@ -894,16 +947,11 @@ export const EmbarkForm = ({
             dispatch(
               updateSeafarerEmbark(currentEmbark.id, {
                 ...formState,
-                status: selectedStage == 24 ? 5 : 4,
+                status: 6,
               })
             ),
-            dispatch(
-              updateSeafarerDataFirebase(
-                profile.uid,
-                updatedProfileData,
-                selectedStage
-              )
-            ),
+            dispatch(updateUsersData(profile.uid, updatedProfile)),
+            dispatch(updateSeafarerHiring(currentHiring.id, updatedContract)),
           ]),
           {
             loading: "Saving...",
@@ -911,10 +959,7 @@ export const EmbarkForm = ({
             error: <b>Ups! Something went wrong. Try again</b>,
           }
         );
-
-        onInputChange({
-          target: { name: "status", value: selectedStage == 24 ? 5 : 4 },
-        });
+        dispatch(setCurrentEmbark(toUpdate));
       }
     }
     setOpenModalEndEmbark(false);
@@ -940,7 +985,7 @@ export const EmbarkForm = ({
     const newOnboardSkill = {
       companyName: currentHiring.company?.name, // Nombre de la compañía
       vesselName: vessel?.name, // Nombre del buque
-      "imo#": vesselData[vessel?.id - 1]?.IMO, // IMO #
+      "imo#": String(vesselData[vessel?.id - 1]?.IMO), // IMO #
       "gt/hp":
         vesselData[vessel?.id - 1]?.["Gross Tonage"] +
         "/" +
@@ -1204,18 +1249,12 @@ export const EmbarkForm = ({
               content="Cannot End the Embark."
               style="light"
               className={
-                (status !== 2 || status !== 3 || status !== 7) &&
-                !endEmbarkValid
-                  ? ""
-                  : "hidden"
+                status !== 2 || status !== 3 || !endEmbarkValid ? "" : "hidden"
               }
             >
               <button
                 className={`border border-red-300 bg-white text-red-600 size-10 md:w-36 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-red-50 disabled:opacity-30`}
-                disabled={
-                  ((status !== 2 || status !== 3) && !endEmbarkValid) ||
-                  status == 7
-                }
+                disabled={status !== 2 || status !== 3 || !endEmbarkValid}
                 onClick={() => handleInception("sign-off")}
                 title={"End Embark"}
               >
@@ -1808,21 +1847,34 @@ export const EmbarkForm = ({
             </h3>
             <div className="flex flex-col gap-5 my-6">
               <span>Select a reason for this embark's cancellation:</span>
-              <SelectComponents
-                id="reason"
-                valueDefault={"Reasons"}
-                // data={datafilter.Departament}
-                name_valor={false}
-                idKey="id"
-                valueKey="reason"
-                name="reason"
-                Text="Select a Reason"
-                // initialValue={selectedValues?.department[0]?.id}
-                // onChange={(value) => handleSelectChange(value, "department")}
-              />
+              <div className="flex flex-row gap-5 items-end">
+                <SelectComponents
+                  id="seguimientoReason"
+                  valueDefault="Reject Reason"
+                  Text="Select a Reject Reason"
+                  data={filteredReasonsData}
+                  name_valor={false}
+                  idKey="id"
+                  valueKey="reason"
+                  name="seguimientoReason"
+                  // initialValue={application?.seguimientoReason}
+                  onChange={(e) => {
+                    const selectedValue = e.target.value;
+                    // console.log(selectedValue);
+                    setSeguimientoReason(selectedValue);
+                  }}
+                />
+                <button
+                  className={`border border-red-600 bg-red-600 text-white size-10 md:w-28 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-red-700 disabled:opacity-30 disabled:cursor-not-allowed`}
+                  onClick={() => filterReasons(true)}
+                >
+                  <HiXCircle className="h-4 w-4" />
+                  <span className="hidden md:block ">Override Reasons</span>
+                </button>{" "}
+              </div>
             </div>
             <div className="flex justify-center gap-4">
-              <Button color="gray" onClick={() => setOpenModalPromote(false)}>
+              <Button color="gray" onClick={() => setOpenModalCancel(false)}>
                 Cancel
               </Button>
               <Button

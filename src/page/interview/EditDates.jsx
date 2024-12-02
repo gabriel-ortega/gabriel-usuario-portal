@@ -8,7 +8,7 @@ import { DatepickerComponent, InputText, SelectComponents } from '../../componen
 import { downloadExcel, getDateInterviews, getInterviewers } from '../../util/services';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { getUserData } from '../../store/userData';
+import { getSeafarerData, getUserData } from '../../store/userData';
 import { doc, setDoc } from 'firebase/firestore';
 import { FirebaseDB } from '../../config/firebase/config';
 
@@ -26,10 +26,6 @@ export default function EditDates() {
     const [interviewFilter,setInterviewFilter]=useState({interviewer:[]})
     const openModal = () => {
       setIsOpen(true);
-     /*  if(profile.uid != id ){
-dispatch(getUserData(id))
-      } */
-
 
     };
     const closeModal = () => setIsOpen(false);
@@ -123,6 +119,7 @@ dispatch(getUserData(id))
 
     useEffect(() => {
       loadResults()
+      
     }, []);
 
 
@@ -192,7 +189,9 @@ setInterviewFilter({interviewer:[]})
       };
       
 
-
+useEffect(()=>{
+  console.log(profile)
+},[profile])
       useEffect(() => {
         filterInterviews(dates)
       }, [dataValue.dateI,dataValue.dateF,dataValue.mode,dataValue.asunto,interviewFilter.interviewer]);
@@ -238,6 +237,11 @@ setInterviewFilter({interviewer:[]})
 
       const handleEdit = (indexToEdit) => {
         const editDates = dates.filter((index) => index.id == indexToEdit);
+        if(editDates[0].interviewee){
+          dispatch(getSeafarerData(editDates[0].interviewee))
+        }
+        
+        console.log(editDates[0].interviewee)
         setValueFormEdit(
           {
             id:editDates[0].id,
@@ -246,18 +250,35 @@ setInterviewFilter({interviewer:[]})
             startTime:convertirFechaYHora(editDates[0].start),
             endTime:convertirFechaYHora(editDates[0].end),
             interviewer:editDates[0].interviewer,
-            interviewee:editDates[0].interviewee,
+            interviewee:  editDates[0].interviewee,
             status:editDates[0].status,
             mode:editDates[0].mode,
 
           }
         )
+
+        
         openModal()
       };
+
+
+      /* const getNameUser = (uid) => {
+        // Despacha la acción para obtener los datos del marinero
+        dispatch(getSeafarerData("YGHU9jxUwgZMjYpDYfQh1yaEa3s2"));
+    
+        // Verifica si los datos están disponibles y concatena el nombre o retorna ""
+        const firstName = profile?.seafarerData?.seafarerProfile?.profile?.firstName || "";
+        const lastName = profile?.seafarerData?.seafarerProfile?.profile?.lastName || "";
+    
+        const name = firstName + " " + lastName;
+    
+        return name;
+    } */
 
       const mostrar=(()=>{
         console.log(dataValue)
         console.log(dates)
+        console.log(profile)
         console.log(datesFilter)
         console.log(valueFormEdit)
       })
@@ -297,7 +318,7 @@ setInterviewFilter({interviewer:[]})
         };
   return (
     <>
-   {/*  <button type="button" onClick={mostrar} className={` bg-[#1976d2]  rounded-md w-44 h-10  text-center text-gray-50`}>Mostrar</button> */}
+    <button type="button" onClick={mostrar} className={` bg-[#1976d2]  rounded-md w-44 h-10  text-center text-gray-50`}>Mostrar</button>
        
    <button
           onClick={handleDowloadExcelSchedule}
@@ -339,7 +360,6 @@ setInterviewFilter({interviewer:[]})
             
           />
           </div>
-
 
           <DatepickerComponent 
             classnamedate=""
@@ -470,11 +490,20 @@ setInterviewFilter({interviewer:[]})
             data={interviewer}
             idKey="id"
             valueKey="displayName"
-            onChange={changeData}
-           
-            
+            onChange={changeData} 
           />
-    <InputText labelinput='Interviewee' read={true} value={valueFormEdit.interviewee} onChange={changeData} name="interviewee" />
+    <InputText
+  labelinput="Interviewee"
+  read={true}
+  value={
+    profile?.seafarerData?.seafarerProfile?.profile?.firstName && profile?.seafarerData?.seafarerProfile?.profile?.lastName
+      ? `${profile.seafarerData.seafarerProfile.profile.firstName} ${profile.seafarerData.seafarerProfile.profile.lastName}`
+      : "" // Si alguno de los dos valores está vacío, muestra una cadena vacía
+  }
+  onChange={changeData}
+  name="interviewee"
+/>
+
     <SelectComponents
             name={"status"}
             initialValue={valueFormEdit.status}

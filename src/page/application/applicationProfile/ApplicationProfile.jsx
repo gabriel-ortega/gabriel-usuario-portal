@@ -734,6 +734,15 @@ export function ApplicationProfile({ disabled = false }) {
                     marlinTestForms.map((form, index) => (
                       <MarlinTest
                         key={index}
+                        userData={{
+                          firstName:
+                            userData.applicationData?.applicationProfile
+                              ?.profile?.firstName,
+                          lastName:
+                            userData.applicationData?.applicationProfile
+                              ?.profile?.lastName,
+                          uid: userData.uid,
+                        }}
                         // form={form}
                         onDelete={(e) => handleDeleteMarlinTestForm(index)}
                         Editdata={

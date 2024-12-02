@@ -77,7 +77,7 @@ export const SeafarerEmbarks = () => {
       case 4:
         return "green";
       case 5:
-        return "red";
+        return "green";
       case 6:
         return "red";
       case 7:
