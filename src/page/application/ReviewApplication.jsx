@@ -58,6 +58,7 @@ import {
   getPositions,
   getReasons,
 } from "../../util/services";
+import { StartApplicantion } from "./StartApplicantion";
 
 export const ReviewApplication = () => {
   const [unsavedChanges, setUnsavedChanges] = useState(false);
@@ -83,8 +84,6 @@ export const ReviewApplication = () => {
   const openModal = () => {
     setIsOpenModal(true);
   };
-
-  useEffect(() => {}, [application]);
 
   const filterReasons = (all = true) => {
     if (!all) {
@@ -176,9 +175,9 @@ export const ReviewApplication = () => {
         }))
       );
       setLatestVersion(application.versions.length - 1);
-    }
-    if (!application.isRead && application.versions) {
-      handleSave("", true, !application.isRead);
+      // if (application.isRead == false) {
+      //   handleSave("", true, !application.isRead);
+      // }
     }
   }, [application]);
 
@@ -197,14 +196,18 @@ export const ReviewApplication = () => {
     },
     {
       Id: 2,
-      value: "Documents",
+      value: "Position/Department",
     },
     {
       Id: 3,
-      value: "Certificates",
+      value: "Documents",
     },
     {
       Id: 4,
+      value: "Certificates",
+    },
+    {
+      Id: 5,
       value: "Experience & Skills",
     },
   ]);
@@ -925,6 +928,14 @@ export const ReviewApplication = () => {
                 </div>
 
                 <div className="hidden md:flex flex-col items-center mt-3">
+                  {(applicationData.startApplication.position?.[0].id == 1 ||
+                    !applicationData.startApplication.position?.[0].id ||
+                    applicationData.startApplication.department?.[0].id == 1 ||
+                    !applicationData.startApplication.department?.[0].id) && (
+                    <span className="text-sm text-red-500">
+                      Select a valid Position/Department
+                    </span>
+                  )}
                   <Button.Group>
                     <Button
                       className={`${
@@ -945,10 +956,19 @@ export const ReviewApplication = () => {
                       color="gray"
                       onClick={() => setCurrentTab("2")}
                     >
-                      {/* <HiAdjustments className="mr-3 h-4 w-4" /> */}
+                      {/* <HiUserCircle className="mr-3 h-4 w-4" /> */}
                       {tabs[1].value}
                     </Button>
+
                     <Button
+                      disabled={
+                        applicationData.startApplication.position?.[0].id ==
+                          1 ||
+                        !applicationData.startApplication.position?.[0].id ||
+                        applicationData.startApplication.department?.[0].id ==
+                          1 ||
+                        !applicationData.startApplication.department?.[0].id
+                      }
                       className={`${
                         currentTab === "3" &&
                         "bg-[#1976d2] text-white focus:text-white"
@@ -956,10 +976,19 @@ export const ReviewApplication = () => {
                       color="gray"
                       onClick={() => setCurrentTab("3")}
                     >
-                      {/* <HiCloudDownload className="mr-3 h-4 w-4" /> */}
+                      {/* <HiAdjustments className="mr-3 h-4 w-4" /> */}
                       {tabs[2].value}
                     </Button>
+
                     <Button
+                      disabled={
+                        applicationData.startApplication.position?.[0].id ==
+                          1 ||
+                        !applicationData.startApplication.position?.[0].id ||
+                        applicationData.startApplication.department?.[0].id ==
+                          1 ||
+                        !applicationData.startApplication.department?.[0].id
+                      }
                       className={`${
                         currentTab === "4" &&
                         "bg-[#1976d2] text-white focus:text-white"
@@ -969,6 +998,18 @@ export const ReviewApplication = () => {
                     >
                       {/* <HiCloudDownload className="mr-3 h-4 w-4" /> */}
                       {tabs[3].value}
+                    </Button>
+
+                    <Button
+                      className={`${
+                        currentTab === "5" &&
+                        "bg-[#1976d2] text-white focus:text-white"
+                      }`}
+                      color="gray"
+                      onClick={() => setCurrentTab("5")}
+                    >
+                      {/* <HiCloudDownload className="mr-3 h-4 w-4" /> */}
+                      {tabs[4].value}
                     </Button>
                   </Button.Group>
                 </div>
@@ -982,8 +1023,10 @@ export const ReviewApplication = () => {
                   ) : currentTab === "1" ? (
                     <ApplicationProfile disabled={disabled} />
                   ) : currentTab === "2" ? (
-                    <ApplicationDocument disabled={disabled} />
+                    <StartApplicantion disabled={disabled} />
                   ) : currentTab === "3" ? (
+                    <ApplicationDocument disabled={disabled} />
+                  ) : currentTab === "4" ? (
                     <ApplicationCertificates disabled={disabled} />
                   ) : (
                     <ApplicationSkill disabled={disabled} />

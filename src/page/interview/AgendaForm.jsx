@@ -484,7 +484,6 @@ const AgendaForm = () => {
         />
         <Drawer.Items>
           <form onSubmit={handleSubmit} className=" text-center">
-            {/* {showSection.manual ? ( */}
             <>
               <fieldset className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-3 mb-6 ">
                 <legend className="text-center bg-teal-500 w-full p-1 text-gray-50 mb-2">
@@ -583,15 +582,13 @@ const AgendaForm = () => {
                 </div>
               </fieldset>
             </>
-            {/* ) : null} */}
-            {/* {showSection.manual || showSection.template ? ( */}
+
             <button
               type="submit"
               className="bg-[#1976d2]  rounded-md w-44 h-10 mt-4 text-center text-gray-50"
             >
               Agregar Entrevista
             </button>
-            {/* ) : null} */}
           </form>
         </Drawer.Items>
       </Drawer>
@@ -842,12 +839,12 @@ const AgendaForm = () => {
             className=""
             style={{ height: "100vh" }}
             messages={{
-              next: "Siguiente",
-              previous: "Anterior",
-              today: "Hoy",
-              month: "Mes",
-              week: "Semana",
-              day: "Día",
+              next: "Next",
+              previous: "Previous",
+              today: "Today",
+              month: "Month",
+              week: "Week",
+              day: "Day",
             }}
             onSelectEvent={(event) =>
               alert(

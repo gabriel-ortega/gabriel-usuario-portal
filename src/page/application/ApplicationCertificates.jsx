@@ -372,7 +372,12 @@ export default function ApplicationCertificates({ disabled = false }) {
                     onDataChange={handleDataChange}
                     handleRemoveDocument={handleRemoveDocument}
                     buttonDelete={item.visible}
-                    Datacard={formData.find((f) => f.id === item.Id)}
+                    // Datacard={formData.find((f) => f.id === item.Id)}
+                    Datacard={formData.find(
+                      (f) =>
+                        f.id == item.Id ||
+                        (f.documentName && f.documentName.id == item.Id)
+                    )}
                     fieldConfig={fieldConfig}
                     type={"certificates"}
                   />

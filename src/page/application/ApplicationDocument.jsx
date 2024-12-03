@@ -42,6 +42,7 @@ export function ApplicationDocument({ disabled = false }) {
   const [formData, setFormData] = useState(
     userData.applicationData.applicationDocument
   );
+
   const [document, setDocument] = useState([]);
   const [valueDocument, setValueDocument] = useState([]);
   const [visibleDocuments, setVisibleDocuments] = useState([]);
@@ -52,6 +53,12 @@ export function ApplicationDocument({ disabled = false }) {
     e.preventDefault();
     setIsOpen(true);
   };
+
+  useEffect(() => {
+    console.log(formData);
+    console.log(visibleDocuments);
+  }, [formData, visibleDocuments]);
+
   const closeModal = () => setIsOpen(false);
   const parentRef = useRef(null);
   const cardRefs = useRef({});
@@ -387,7 +394,15 @@ export function ApplicationDocument({ disabled = false }) {
                     onDataChange={handleDataChange}
                     handleRemoveDocument={handleRemoveDocument}
                     buttonDelete={item.visible}
-                    Datacard={formData.find((f) => f.id === item.Id)}
+                    // Datacard={formData.find((f) => f.id === item.Id)}
+                    // Datacard={formData.find(
+                    //   (f) => f.documentName.id == item.Id
+                    // )}
+                    Datacard={formData.find(
+                      (f) =>
+                        f.id == item.Id ||
+                        (f.documentName && f.documentName.id == item.Id)
+                    )}
                     type={"documents"}
                   />
                 </div>
