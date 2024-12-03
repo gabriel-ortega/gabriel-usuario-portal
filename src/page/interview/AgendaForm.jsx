@@ -18,7 +18,7 @@ import {
   ModalYesNo,
   SelectComponents,
 } from "../../components/layoutComponents";
-import { Badge, Drawer, Modal, Table } from "flowbite-react";
+import { Badge, Button, Drawer, Modal, Table } from "flowbite-react";
 import { HiOutlineQuestionMarkCircle, HiPlus } from "react-icons/hi";
 import { MdFilterAlt, MdFilterAltOff } from "react-icons/md";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
@@ -59,6 +59,7 @@ const AgendaForm = () => {
   const [parent] = useAutoAnimate();
   const [isOpenModalEvent, setIsOpenModalEvent] = useState(false);
   const [isOpenModalList, setIsOpenModalList] = useState(false);
+  const [modalListText, setModalListText] = useState("");
   const openModalList = () => {
     setIsOpenModalList(true);
   };
@@ -455,7 +456,7 @@ const AgendaForm = () => {
 
           // Agregamos el bloque de tiempo
           timeSlots.push({
-            id, // Campo único para identificar el evento
+            // id, // Campo único para identificar el evento
             title: `${
               filter.valueFilterTemplate
             } (Entrevistador: ${getNameInterviewer(interviewerId)}, Usuario: ${
@@ -574,17 +575,13 @@ const AgendaForm = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(newEvent);
-  }, [newEvent]);
-
   const handleEdit = (indexToEdit) => {
     const editDates = filteredEvents.filter((index) => index.id == indexToEdit);
     if (editDates[0].interviewee) {
       dispatch(getSeafarerData(editDates[0].interviewee));
     }
 
-    console.log(editDates[0].interviewee);
+    // console.log(editDates[0].interviewee);
     setValueFormEdit({
       id: editDates[0].id,
       asunto: editDates[0].asunto,
@@ -604,11 +601,17 @@ const AgendaForm = () => {
       const eventDate = new Date(event.start); // Convertir la fecha del evento
       return eventDate.toDateString() === selectedDate.toDateString(); // Comparar solo el día
     });
-    console.log(filteredEvents); // Opcional: ver los eventos filtrados
+    // console.log(filteredEvents); // Opcional: ver los eventos filtrados
     setDatesFilter(filteredEvents);
     setIsOpenModalList(true);
   };
 
+  const handleSave = (id) => {
+    console.log(valueFormEdit);
+  };
+  const handleDelete = (id) => {
+    console.log(valueFormEdit);
+  };
   return (
     <>
       <Drawer
@@ -994,6 +997,7 @@ const AgendaForm = () => {
                           const eventsForSelectedDate =
                             handleList(selectedDate); // Obtener eventos filtrados
                           console.log(eventsForSelectedDate); // Opcional: manejar eventos seleccionados
+                          setModalListText(formattedDate);
                         }}
                       >{`${formattedDate} (${count})`}</Badge>
                     )
@@ -1019,116 +1023,133 @@ const AgendaForm = () => {
               onSelectEvent={(event) => handleEdit(event.id)}
             />
           </div>
-          <ModalYesNo
-            isOpen={isOpenModalEvent}
-            closeModal={closeModalEvent}
-            textyes="Save"
-            textno="Close"
-            // onConfirm={handleConfirm}
-            // onCancel={handleCancel}
-            classmodal=" md:pt-0"
-            size="4xl"
-            icon={<HiOutlineQuestionMarkCircle className="w-9 h-9 m-auto" />}
+          <Modal
+            show={isOpenModalEvent}
+            size="xl"
+            onClose={() => setIsOpenModalEvent(false)}
+            popup
           >
-            <form className=" pb-5 grid grid-cols-1 lg:grid-cols-2 gap-5">
-              {/* <InputText labelinput='Asunto' value={valueFormEdit.asunto} name="asunto" onChange={changeData}/> */}
-              <SelectComponents
-                name={"asunto"}
-                initialValue={valueFormEdit.asunto}
-                valueDefault={"Interview Stage:"}
-                Text="Interview Stage"
-                className={""}
-                data={[
-                  { id: 1, name: "First Interview" },
-                  { id: 2, name: "Second Interview" },
-                ]}
-                idKey="name"
-                valueKey="name"
-                // onChange={changeData}
-              />
-              <InputText
-                labelinput="Link"
-                value={valueFormEdit.link}
-                name="link"
-                // onChange={changeData}
-              />
-              <InputText
-                labelinput="Start Time"
-                value={valueFormEdit.startTime}
-                read={true}
-                name="startTime"
-                // onChange={changeData}
-              />
-              <InputText
-                labelinput="End Time"
-                value={valueFormEdit.endTime}
-                read={true}
-                name="endTime"
-                // onChange={changeData}
-              />
-              <SelectComponents
-                name={"interviewer"}
-                initialValue={valueFormEdit.interviewer}
-                valueDefault={"Interviewer"}
-                Text="Interviewer"
-                className={""}
-                // data={interviewer}
-                idKey="id"
-                valueKey="displayName"
-                // onChange={changeData}
-              />
-              <InputText
-                labelinput="Interviewee"
-                read={true}
-                value={
-                  profile?.seafarerData?.seafarerProfile?.profile?.firstName &&
-                  profile?.seafarerData?.seafarerProfile?.profile?.lastName
-                    ? `${profile.seafarerData.seafarerProfile.profile.firstName} ${profile.seafarerData.seafarerProfile.profile.lastName}`
-                    : "" // Si alguno de los dos valores está vacío, muestra una cadena vacía
-                }
-                // onChange={changeData}
-                name="interviewee"
-              />
+            <Modal.Header>Edit Appointment</Modal.Header>
+            <Modal.Body>
+              <form className=" pb-5 grid grid-cols-1 lg:grid-cols-2 gap-5">
+                {/* <InputText labelinput='Asunto' value={valueFormEdit.asunto} name="asunto" onChange={changeData}/> */}
+                <SelectComponents
+                  name={"asunto"}
+                  initialValue={valueFormEdit.asunto}
+                  valueDefault={"Interview Stage:"}
+                  Text="Interview Stage"
+                  className={""}
+                  data={[
+                    { id: 1, name: "First Interview" },
+                    { id: 2, name: "Second Interview" },
+                  ]}
+                  idKey="name"
+                  valueKey="name"
+                  // onChange={changeData}
+                />
+                <InputText
+                  labelinput="Link"
+                  value={valueFormEdit.link}
+                  name="link"
+                  // onChange={changeData}
+                />
+                <InputText
+                  labelinput="Start Time"
+                  value={valueFormEdit.startTime}
+                  read={true}
+                  name="startTime"
+                  // onChange={changeData}
+                />
+                <InputText
+                  labelinput="End Time"
+                  value={valueFormEdit.endTime}
+                  read={true}
+                  name="endTime"
+                  // onChange={changeData}
+                />
+                <SelectComponents
+                  name={"interviewer"}
+                  initialValue={valueFormEdit.interviewer}
+                  valueDefault={"Interviewer"}
+                  Text="Interviewer"
+                  className={""}
+                  // data={interviewer}
+                  idKey="id"
+                  valueKey="displayName"
+                  // onChange={changeData}
+                />
+                <InputText
+                  labelinput="Interviewee"
+                  read={true}
+                  value={
+                    profile?.seafarerData?.seafarerProfile?.profile
+                      ?.firstName &&
+                    profile?.seafarerData?.seafarerProfile?.profile?.lastName
+                      ? `${profile.seafarerData.seafarerProfile.profile.firstName} ${profile.seafarerData.seafarerProfile.profile.lastName}`
+                      : "" // Si alguno de los dos valores está vacío, muestra una cadena vacía
+                  }
+                  // onChange={changeData}
+                  name="interviewee"
+                />
 
-              <SelectComponents
-                name={"status"}
-                initialValue={valueFormEdit.status}
-                valueDefault={"Status:"}
-                Text="Status"
-                className={""}
-                data={[
-                  { id: 1, name: "Canceled" },
-                  { id: 2, name: "Pending" },
-                  { id: 3, name: "Completed" },
-                  { id: 4, name: "Appointed" },
-                ]}
-                idKey="name"
-                valueKey="name"
-                // onChange={changeData}
-              />
-              <SelectComponents
-                name={"mode"}
-                initialValue={valueFormEdit.mode}
-                valueDefault={"Interview Mode:"}
-                Text="Mode"
-                className={""}
-                data={[
-                  { id: 1, name: "Face To Face" },
-                  { id: 2, name: "Online" },
-                ]}
-                idKey="name"
-                valueKey="name"
-                // onChange={changeData}
-              />
-            </form>
-          </ModalYesNo>
+                <SelectComponents
+                  name={"status"}
+                  initialValue={valueFormEdit.status}
+                  valueDefault={"Status:"}
+                  Text="Status"
+                  className={""}
+                  data={[
+                    { id: 1, name: "Canceled" },
+                    { id: 2, name: "Pending" },
+                    { id: 3, name: "Completed" },
+                    { id: 4, name: "Appointed" },
+                  ]}
+                  idKey="name"
+                  valueKey="name"
+                  // onChange={changeData}
+                />
+                <SelectComponents
+                  name={"mode"}
+                  initialValue={valueFormEdit.mode}
+                  valueDefault={"Interview Mode:"}
+                  Text="Mode"
+                  className={""}
+                  data={[
+                    { id: 1, name: "Face To Face" },
+                    { id: 2, name: "Online" },
+                  ]}
+                  idKey="name"
+                  valueKey="name"
+                  // onChange={changeData}
+                />
+              </form>
+              <div className="flex justify-center gap-4">
+                <Button
+                  color="failure"
+                  // onClick={() => setIsOpenModalEvent(false)}
+                  onClick={() => handleDelete()}
+                >
+                  Delete
+                </Button>
+                <Button
+                  color="success"
+                  onClick={() => {
+                    handleSave();
+                  }}
+                >
+                  Save
+                </Button>
+              </div>
+            </Modal.Body>
+          </Modal>
+
           <Modal
             show={isOpenModalList}
             size="xxl"
             onClose={() => setIsOpenModalList(false)}
             popup
           >
-            <Modal.Header />
+            <Modal.Header>{`Available Appointments for: ${modalListText}`}</Modal.Header>
             <Modal.Body>
               <div className="overflow-x-auto pt-10">
                 {datesFilter.length > 0 ? (

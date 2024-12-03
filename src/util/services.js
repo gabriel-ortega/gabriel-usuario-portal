@@ -12,6 +12,7 @@ import {
   doc,
   addDoc,
   setDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { FirebaseDB } from "../config/firebase/config";
 
@@ -1441,6 +1442,17 @@ export const saveCita = async (id, data) => {
     // console.log(`Cita guardada exitosamente con ID ${id}`);
   } catch (error) {
     console.error(`Error al guardar la cita con ID ${id}:`, error);
+    throw error;
+  }
+};
+
+export const deleteCita = async (id) => {
+  try {
+    const citaRef = doc(FirebaseDB, "appointments", id);
+    await deleteDoc(citaRef); // Elimina el documento
+    console.log(`Cita eliminada exitosamente con ID ${id}`);
+  } catch (error) {
+    console.error(`Error al eliminar la cita con ID ${id}:`, error);
     throw error;
   }
 };
