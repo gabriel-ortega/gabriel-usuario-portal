@@ -31,8 +31,10 @@ const RecruitmentSkills = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (positions) {
-      const currentPosition = profile.seafarerData.position[0].id;
+    if (positions && profile) {
+      const currentPosition =
+        profile.seafarerData.position?.[0]?.id ||
+        profile.applicationData.startApplication.position?.[0]?.id;
       const filteredPosition = positions.find(
         (position) => position.Id == currentPosition
       ).CVFormatId;

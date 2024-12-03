@@ -490,6 +490,19 @@ const AgendaForm = () => {
                 <legend className="text-center bg-teal-500 w-full p-1 text-gray-50 mb-2">
                   TIME
                 </legend>
+                <input
+                  type="date"
+                  className="w-full border border-gray-400 h-10 rounded-md"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                />
+
+                <label>Interview:</label>
+                <select
+                  className=" w-full border border-gray-400 h-10 rounded-md"
+                  name="filtro"
+                  value={filter.valueFilterTemplate}
+                ></select>
                 <div className="col-span-1">
                   <label>Duration of the Interview:</label>
                   <select

@@ -84,6 +84,8 @@ export const ReviewApplication = () => {
     setIsOpenModal(true);
   };
 
+  useEffect(() => {}, [application]);
+
   const filterReasons = (all = true) => {
     if (!all) {
       if (reasonsData.length > 0) {
@@ -175,6 +177,9 @@ export const ReviewApplication = () => {
       );
       setLatestVersion(application.versions.length - 1);
     }
+    if (!application.isRead && application.versions) {
+      handleSave("", true, !application.isRead);
+    }
   }, [application]);
 
   useEffect(() => {
@@ -218,7 +223,9 @@ export const ReviewApplication = () => {
   const [selectedVersion, setSelectedVersion] = useState(latestVersion);
 
   const handleSave = (e, state, isReadChange) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     const vesselTypeUpdate =
       userData.applicationData.startApplication.vesselType[0].id;
     const departmentUpdate =
