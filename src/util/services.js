@@ -1373,12 +1373,15 @@ export const saveCitas = async (documents) => {
     // Iterar sobre los documentos y agregar cada uno a la colección
     const batchResults = await Promise.all(
       documents.map(async (doc) => {
-        const docRef = await addDoc(collection(FirebaseDB, "citas"), doc);
+        const docRef = await addDoc(
+          collection(FirebaseDB, "appointments"),
+          doc
+        );
         return { ...doc, id: docRef.id }; // Añadir el campo 'id' al documento
       })
     );
 
-    console.log("Documentos guardados exitosamente:", batchResults);
+    // console.log("Documentos guardados exitosamente:", batchResults);
     return batchResults; // Devuelve los documentos con sus IDs
   } catch (error) {
     console.error(
@@ -1391,7 +1394,7 @@ export const saveCitas = async (documents) => {
 
 export const getCitas = async () => {
   try {
-    const citasCollection = collection(FirebaseDB, "citas");
+    const citasCollection = collection(FirebaseDB, "appointments");
     const querySnapshot = await getDocs(citasCollection);
 
     // Mapear los documentos obtenidos para devolverlos como un arreglo de objetos
@@ -1400,7 +1403,7 @@ export const getCitas = async () => {
       ...doc.data(), // Incluye los datos del documento
     }));
 
-    console.log("Documentos obtenidos de la colección 'citas':", citas);
+    // console.log("Documentos obtenidos de la colección 'citas':", citas);
     return citas; // Devuelve los documentos como un arreglo
   } catch (error) {
     console.error(
@@ -1413,7 +1416,7 @@ export const getCitas = async () => {
 
 export const getCitasByUid = async (uid) => {
   try {
-    const citasCollection = collection(FirebaseDB, "citas");
+    const citasCollection = collection(FirebaseDB, "appointments");
     const q = query(citasCollection, where("uid", "==", uid));
     const querySnapshot = await getDocs(q);
 
@@ -1423,7 +1426,7 @@ export const getCitasByUid = async (uid) => {
       ...doc.data(), // Incluye los datos del documento
     }));
 
-    console.log(`Citas obtenidas para uid ${uid}:`, citas);
+    // console.log(`Citas obtenidas para uid ${uid}:`, citas);
     return citas; // Devuelve los documentos filtrados
   } catch (error) {
     console.error(`Error al obtener citas para uid ${uid}:`, error);
@@ -1433,9 +1436,9 @@ export const getCitasByUid = async (uid) => {
 
 export const saveCita = async (id, data) => {
   try {
-    const citaRef = doc(FirebaseDB, "citas", id);
+    const citaRef = doc(FirebaseDB, "appointments", id);
     await setDoc(citaRef, data, { merge: true }); // Usa merge para evitar sobreescritura completa
-    console.log(`Cita guardada exitosamente con ID ${id}`);
+    // console.log(`Cita guardada exitosamente con ID ${id}`);
   } catch (error) {
     console.error(`Error al guardar la cita con ID ${id}:`, error);
     throw error;

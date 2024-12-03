@@ -1261,12 +1261,14 @@ export const EmbarkForm = ({
               content="Cannot End the Embark."
               style="light"
               className={
-                status !== 2 || status !== 3 || !endEmbarkValid ? "" : "hidden"
+                (status !== 2 && status !== 3) || !endEmbarkValid
+                  ? ""
+                  : "hidden"
               }
             >
               <button
                 className={`border border-red-300 bg-white text-red-600 size-10 md:w-36 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-red-50 disabled:opacity-30`}
-                disabled={status !== 2 || status !== 3 || !endEmbarkValid}
+                disabled={(status !== 2 && status !== 3) || !endEmbarkValid}
                 onClick={() => handleInception("sign-off")}
                 title={"End Embark"}
               >

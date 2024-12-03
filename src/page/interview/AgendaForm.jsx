@@ -4,32 +4,77 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import {
   downloadExcel,
+  getCitas,
   getDateInterviews,
   getInterviewers,
   getTemplate,
+  saveCitas,
 } from "../../util/services";
 import { doc, setDoc } from "firebase/firestore";
 import { FirebaseDB } from "../../config/firebase/config";
 import {
   DatepickerComponent,
+  InputText,
+  ModalYesNo,
   SelectComponents,
 } from "../../components/layoutComponents";
-import { Drawer } from "flowbite-react";
-import { HiPlus } from "react-icons/hi";
+import { Badge, Drawer, Modal } from "flowbite-react";
+import { HiOutlineQuestionMarkCircle, HiPlus } from "react-icons/hi";
 import { MdFilterAlt, MdFilterAltOff } from "react-icons/md";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import toast from "react-hot-toast";
+import { formatDate } from "../../util/helperFunctions";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getSeafarerData } from "../../store/userData";
 const localizer = momentLocalizer(moment);
 
 const asunto = ["", "First Interview", "Second Interview"];
-const durations = ["", 5, 10, 15, 30];
+const durations = ["", 5, 10, 15, 20, 30];
+
+function convertirFechaYHora(fechaISO) {
+  const fecha = new Date(fechaISO);
+
+  // Extraer los componentes de la fecha en hora local
+  const dia = String(fecha.getDate()).padStart(2, "0"); // Día del mes
+  const mes = String(fecha.getMonth() + 1).padStart(2, "0"); // Mes (de 0 a 11, por eso +1)
+  const anio = fecha.getFullYear(); // Año completo
+
+  // Extraer los componentes de la hora en hora local
+  let horas = fecha.getHours(); // Hora local
+  const minutos = String(fecha.getMinutes()).padStart(2, "0"); // Minutos
+  const periodo = horas >= 12 ? "PM" : "AM"; // Determinar AM o PM
+  horas = horas % 12 || 12; // Convertir a formato de 12 horas (0 -> 12)
+
+  // Formatear fecha y hora
+  const fechaFormateada = `${dia}/${mes}/${anio}`;
+  const horaFormateada = `${horas}:${minutos} ${periodo}`;
+
+  return `${fechaFormateada} ${horaFormateada}`;
+}
 
 const AgendaForm = () => {
+  const dispatch = useDispatch();
+  const { profile } = useSelector((state) => state.currentViews);
+  const [parent] = useAutoAnimate();
+  const [isOpenModalEvent, setIsOpenModalEvent] = useState(false);
+  const [isOpenModalList, setIsOpenModalList] = useState(false);
+  const openModalList = () => {
+    setIsOpenModalList(true);
+  };
+  const closeModalList = () => setIsOpenModalList(false);
+  const openModalEvent = () => {
+    setIsOpenModalEvent(true);
+  };
+  const closeModalEvent = () => setIsOpenModalEvent(false);
+  const [valueFormEdit, setValueFormEdit] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => setIsOpen(false);
   const [events, setEvents] = useState([]);
   const [dataEvents, setDataEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [template, setTemplate] = useState([]);
+  const [availableDates, setAvailableDates] = useState([]);
   const [showSection, setShowSection] = useState({
     manual: false,
     template: false,
@@ -51,6 +96,7 @@ const AgendaForm = () => {
   const [interviewFilter, setInterviewFilter] = useState({ interviewer: [] });
   const [eventsDataFilter, setEventsDataFilter] = useState([]);
   const [newEvent, setNewEvent] = useState({
+    asunto: "",
     title: "",
     startTime: "",
     endTime: "",
@@ -62,7 +108,84 @@ const AgendaForm = () => {
     mode: "",
     link: "",
   });
-  const [parent] = useAutoAnimate();
+
+  const loadResults = async () => {
+    try {
+      // Obtener los datos necesarios
+      const entrevistador = await getInterviewers();
+      const template = await getTemplate();
+      // const dates = await getDateInterviews();
+      const dates = await getCitas();
+      // console.log(dates);
+      let data = [];
+      let transformedData = [];
+      transformedData = dates.map((item) => ({
+        ...item,
+        start: item.start && item.start.toDate ? item.start.toDate() : null, // Convertir `start` a Date
+        end: item.end && item.end.toDate ? item.end.toDate() : null, // Convertir `end` a Date
+      }));
+
+      // Validar y transformar los datos recibidos
+      // if (dates && dates.data) {
+      //   data = JSON.parse(dates.data);
+      //   // Convertir fechas a objetos Date
+      //   transformedData = data.map((item) => ({
+      //     ...item,
+      //     start: new Date(item.start), // Convertir `start` a Date
+      //     end: new Date(item.end), // Convertir `end` a Date
+      //   }));
+      // }
+
+      // const availableDates = [
+      //   ...new Set(
+      //     transformedData
+      //       .filter((date) => date.status == "Pending")
+      //       .map((date) => {
+      //         const startDate = new Date(date.start); // Convertir a fecha
+      //         return formatDate(startDate.toISOString(), "dddd, mmmm dd yyyy"); // Formatear como mm-dd-yyyy
+      //       })
+      //   ),
+      // ];
+      const availableDates = Object.entries(
+        transformedData
+          .filter((date) => date.status === "Pending")
+          .reduce((acc, date) => {
+            const startDate = new Date(date.start); // Convertir a fecha
+            const formattedDate = formatDate(
+              startDate.toISOString(),
+              "dddd, mmmm dd yyyy"
+            ); // Formatear como mm-dd-yyyy
+
+            if (!acc[formattedDate]) {
+              acc[formattedDate] = 0;
+            }
+            acc[formattedDate] += 1; // Incrementar la cuenta para esta fecha
+            return acc;
+          }, {})
+      ).map(([date, count]) => ({ date, count }));
+
+      const availableDatesText = availableDates.join(", "); // Unir fechas con coma
+      console.log(availableDates);
+      setAvailableDates(availableDates);
+
+      // Actualizar los estados
+      setDataEvents(transformedData);
+      setFilteredEvents(
+        transformedData.filter((date) => date.status == "Appointed")
+      );
+      setData({
+        ...data, // Asegúrate de que esta estructura coincida con lo que necesitas
+        entrevistador,
+        template,
+      });
+    } catch (error) {
+      console.error("Error al cargar datos:", error);
+    }
+  };
+
+  // useEffect(() => {
+  //   console.log(eventsDataFilter);
+  // }, [eventsDataFilter]);
 
   const handleFilter = (e) => {
     if (e.target.name == "plantilla") {
@@ -234,39 +357,6 @@ const AgendaForm = () => {
     });
   };
 
-  const loadResults = async () => {
-    try {
-      // Obtener los datos necesarios
-      const entrevistador = await getInterviewers();
-      const template = await getTemplate();
-      const dates = await getDateInterviews();
-      let data = [];
-      let transformedData = [];
-
-      // Validar y transformar los datos recibidos
-      if (dates && dates.data) {
-        data = JSON.parse(dates.data);
-        // Convertir fechas a objetos Date
-        transformedData = data.map((item) => ({
-          ...item,
-          start: new Date(item.start), // Convertir `start` a Date
-          end: new Date(item.end), // Convertir `end` a Date
-        }));
-      }
-
-      // Actualizar los estados
-      setDataEvents(transformedData);
-      setFilteredEvents(transformedData);
-      setData({
-        ...data, // Asegúrate de que esta estructura coincida con lo que necesitas
-        entrevistador,
-        template,
-      });
-    } catch (error) {
-      console.error("Error al cargar datos:", error);
-    }
-  };
-
   const handleInputChange = (e) => {
     const { name, value, options } = e.target;
 
@@ -324,6 +414,7 @@ const AgendaForm = () => {
     }
 
     if (
+      // !newEvent.asunto ||
       !newEvent.startTime ||
       !newEvent.endTime ||
       !newEvent.duration ||
@@ -387,6 +478,12 @@ const AgendaForm = () => {
       // Creamos los bloques de tiempo
       const newTimeSlots = createTimeSlots();
       console.log("Nuevos bloques de tiempo creados:", newTimeSlots);
+
+      toast.promise(saveCitas(newTimeSlots), {
+        loading: "Saving...",
+        success: <b>Saved!</b>,
+        error: <b>Ups! Something went wrong. Try again</b>,
+      });
 
       // Actualizamos dataEvents y evitamos duplicados
       setDataEvents((prevData) => {
@@ -470,6 +567,33 @@ const AgendaForm = () => {
       console.error("Error al descargar el reporte:", error.message);
     }
   };
+
+  useEffect(() => {
+    console.log(newEvent);
+  }, [newEvent]);
+
+  const handleEdit = (indexToEdit) => {
+    const editDates = filteredEvents.filter((index) => index.id == indexToEdit);
+    if (editDates[0].interviewee) {
+      dispatch(getSeafarerData(editDates[0].interviewee));
+    }
+
+    console.log(editDates[0].interviewee);
+    setValueFormEdit({
+      id: editDates[0].id,
+      asunto: editDates[0].asunto,
+      link: editDates[0].link,
+      startTime: convertirFechaYHora(editDates[0].start),
+      endTime: convertirFechaYHora(editDates[0].end),
+      interviewer: editDates[0].interviewer,
+      interviewee: editDates[0].interviewee,
+      status: editDates[0].status,
+      mode: editDates[0].mode,
+    });
+
+    openModalEvent();
+  };
+
   return (
     <>
       <Drawer
@@ -485,23 +609,54 @@ const AgendaForm = () => {
         <Drawer.Items>
           <form onSubmit={handleSubmit} className=" text-center">
             <>
-              <fieldset className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-3 mb-6 ">
-                <legend className="text-center bg-teal-500 w-full p-1 text-gray-50 mb-2">
-                  TIME
-                </legend>
-                <input
-                  type="date"
-                  className="w-full border border-gray-400 h-10 rounded-md"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                />
+              <legend className="text-center bg-teal-500 w-full p-1 text-gray-50 mb-2">
+                Details
+              </legend>
+              <fieldset className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-3 mb-6 ">
+                <div className="">
+                  <label>Interview:</label>
+                  <select
+                    className=" w-full border border-gray-400 h-10 rounded-md"
+                    name="filtro"
+                    value={filter.valueFilterTemplate}
+                    onChange={handleFilter}
+                  >
+                    {asunto.map((title, index) => (
+                      <option key={index} value={title}>
+                        {title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="">
+                  <label>Interview Modality:</label>
+                  <select
+                    className="w-full border border-gray-400 h-10 rounded-md px-2"
+                    name="mode"
+                    value={filter.valueFilterMode}
+                    onChange={handleFilter}
+                    aria-label="Filter interview modality"
+                  >
+                    <option value="">Select the interview modality</option>
+                    <option value="Face To Face">Face To Face</option>
+                    <option value="Online">Online</option>
+                  </select>
+                </div>
+              </fieldset>
+              <legend className="text-center bg-teal-500 w-full p-1 text-gray-50 mb-2">
+                Time
+              </legend>
+              <fieldset className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-3 mb-6 ">
+                <div className="">
+                  <label>Fecha de programacion:</label>
+                  <input
+                    type="date"
+                    className="w-full border border-gray-400 h-10 rounded-md"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                  />
+                </div>
 
-                <label>Interview:</label>
-                <select
-                  className=" w-full border border-gray-400 h-10 rounded-md"
-                  name="filtro"
-                  value={filter.valueFilterTemplate}
-                ></select>
                 <div className="col-span-1">
                   <label>Duration of the Interview:</label>
                   <select
@@ -549,7 +704,7 @@ const AgendaForm = () => {
               </fieldset>
               <fieldset className="">
                 <legend className="text-center bg-teal-500 w-full p-1 text-gray-50 mt-2">
-                  STAFF
+                  Staff
                 </legend>
                 <label className="block pt-4">Interviewer:</label>
                 <div className="grid grid-cols-1 lg:grid-cols-3 border border-gray-500 gap-1 px-5 py-2 justify-center items-center">
@@ -593,29 +748,7 @@ const AgendaForm = () => {
         </Drawer.Items>
       </Drawer>
       {/* <button type="button" onClick={mostrar} className={` bg-[#1976d2]  rounded-md w-44 h-10  text-center text-gray-50`}>mostrar</button> */}
-      <p
-        className={`${
-          events.length > 0 ? "block" : "hidden"
-        } text-lg text-red-600 text-end`}
-      >
-        You have unsaved schedules
-      </p>
       <div className="flex justify-end items-center">
-        {/* <button
-          type="button"
-          onClick={() => toggleSection("manual")}
-          className={` bg-[#1976d2]  rounded-md w-44 h-10  text-center text-gray-50`}
-        >
-          {showSection.manual ? "Ocultar" : "Agregar"}
-        </button>
-        <button
-          type="button"
-          disabled={events.length >= 1 ? false : true}
-          onClick={createDateFirebase}
-          className={`ml-5 bg-[#1976d2] disabled:opacity-30  rounded-md w-48 h-10  text-center text-gray-50`}
-        >
-          Save Schedule
-        </button> */}
         <button
           className="whitespace-nowrap border border-[#010064] bg-[#010064] text-white w-10 md:w-28 h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-[#262550] disabled:opacity-30"
           onClick={() => setIsOpen(true)}
@@ -830,29 +963,152 @@ const AgendaForm = () => {
             </fieldset>
           </form>
         ) : null}
-        <div className="pt-10">
-          <Calendar
-            localizer={localizer}
-            events={eventsDataFilter}
-            startAccessor="start"
-            endAccessor="end"
-            className=""
-            style={{ height: "100vh" }}
-            messages={{
-              next: "Next",
-              previous: "Previous",
-              today: "Today",
-              month: "Month",
-              week: "Week",
-              day: "Day",
-            }}
-            onSelectEvent={(event) =>
-              alert(
-                `Entrevistador: ${event.interviewer}\nUsuario: ${event.interviewee}`
-              )
-            }
-          />
-        </div>
+        <section className="p-8">
+          <div className="pt-10">
+            <div className="mb-6 flex flex-row gap-4">
+              <span>Available Appointments:</span>
+              <div className="flex flex-row gap-3">
+                {availableDates.length > 0 &&
+                  availableDates.map(({ date, count }, index) => (
+                    <Badge
+                      key={index}
+                      className="hover:cursor-pointer"
+                    >{`${date} (${count})`}</Badge>
+                  ))}
+              </div>
+            </div>
+            <Calendar
+              localizer={localizer}
+              // events={eventsDataFilter}
+              events={filteredEvents}
+              startAccessor="start"
+              endAccessor="end"
+              className=""
+              style={{ height: "100vh" }}
+              messages={{
+                next: "Next",
+                previous: "Previous",
+                today: "Today",
+                month: "Month",
+                week: "Week",
+                day: "Day",
+              }}
+              onSelectEvent={(event) => handleEdit(event.id)}
+            />
+          </div>
+          <ModalYesNo
+            isOpen={isOpenModalEvent}
+            closeModal={closeModalEvent}
+            textyes="editar"
+            textno="cancelar"
+            // onConfirm={handleConfirm}
+            // onCancel={handleCancel}
+            classmodal=" md:pt-0"
+            size="4xl"
+            icon={<HiOutlineQuestionMarkCircle className="w-9 h-9 m-auto" />}
+          >
+            <form className=" pb-5 grid grid-cols-1 lg:grid-cols-2 gap-5">
+              {/* <InputText labelinput='Asunto' value={valueFormEdit.asunto} name="asunto" onChange={changeData}/> */}
+              <SelectComponents
+                name={"asunto"}
+                initialValue={valueFormEdit.asunto}
+                valueDefault={"Interview Stage:"}
+                Text="Interview Stage"
+                className={""}
+                data={[
+                  { id: 1, name: "First Interview" },
+                  { id: 2, name: "Second Interview" },
+                ]}
+                idKey="name"
+                valueKey="name"
+                // onChange={changeData}
+              />
+              <InputText
+                labelinput="Link"
+                value={valueFormEdit.link}
+                name="link"
+                // onChange={changeData}
+              />
+              <InputText
+                labelinput="Start Time"
+                value={valueFormEdit.startTime}
+                read={true}
+                name="startTime"
+                // onChange={changeData}
+              />
+              <InputText
+                labelinput="End Time"
+                value={valueFormEdit.endTime}
+                read={true}
+                name="endTime"
+                // onChange={changeData}
+              />
+              <SelectComponents
+                name={"interviewer"}
+                initialValue={valueFormEdit.interviewer}
+                valueDefault={"Interviewer"}
+                Text="Interviewer"
+                className={""}
+                // data={interviewer}
+                idKey="id"
+                valueKey="displayName"
+                // onChange={changeData}
+              />
+              <InputText
+                labelinput="Interviewee"
+                read={true}
+                value={
+                  profile?.seafarerData?.seafarerProfile?.profile?.firstName &&
+                  profile?.seafarerData?.seafarerProfile?.profile?.lastName
+                    ? `${profile.seafarerData.seafarerProfile.profile.firstName} ${profile.seafarerData.seafarerProfile.profile.lastName}`
+                    : "" // Si alguno de los dos valores está vacío, muestra una cadena vacía
+                }
+                // onChange={changeData}
+                name="interviewee"
+              />
+
+              <SelectComponents
+                name={"status"}
+                initialValue={valueFormEdit.status}
+                valueDefault={"Status:"}
+                Text="Status"
+                className={""}
+                data={[
+                  { id: 1, name: "Canceled" },
+                  { id: 2, name: "Pending" },
+                  { id: 3, name: "Completed" },
+                  { id: 4, name: "Appointed" },
+                ]}
+                idKey="name"
+                valueKey="name"
+                // onChange={changeData}
+              />
+              <SelectComponents
+                name={"mode"}
+                initialValue={valueFormEdit.mode}
+                valueDefault={"Interview Mode:"}
+                Text="Mode"
+                className={""}
+                data={[
+                  { id: 1, name: "Face To Face" },
+                  { id: 2, name: "Online" },
+                ]}
+                idKey="name"
+                valueKey="name"
+                // onChange={changeData}
+              />
+            </form>
+          </ModalYesNo>
+          <Modal
+            show={isOpenModalList}
+            size="md"
+            onClose={() => setIsOpenModalList(false)}
+            popup
+          >
+            <Modal.Header />
+            <Modal.Body></Modal.Body>
+          </Modal>
+        </section>
       </div>
     </>
   );
