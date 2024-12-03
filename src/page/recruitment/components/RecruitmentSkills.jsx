@@ -26,6 +26,7 @@ const RecruitmentSkills = ({
   disabled = false,
 }) => {
   const { profile, positions } = useSelector((state) => state.currentViews);
+  const { userData } = useSelector((state) => state.userData);
   const [position, setPosition] = useState();
   const dispatch = useDispatch();
 
@@ -129,7 +130,7 @@ const RecruitmentSkills = ({
           <TabPanels>
             {/* On Board Experience Panel */}
             <TabPanel className="items-center">
-              {profile.role !== 3 && (
+              {userData.role !== 3 && (
                 <section className="flex flex-col gap-3  justify-center text-xs mt-5 ml-5">
                   <span className="font-bold text-gray-500">
                     Experience on board details
@@ -230,7 +231,7 @@ const RecruitmentSkills = ({
 
             {/* On Land Experience Panel */}
             <TabPanel className="items-center">
-              {profile.role !== 3 && (
+              {userData.role !== 3 && (
                 <section className="flex flex-col gap-3  justify-center text-xs mt-5 ml-5">
                   <span className="font-bold text-gray-500">
                     Experience on land details

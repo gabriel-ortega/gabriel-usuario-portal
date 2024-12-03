@@ -136,28 +136,44 @@ const CustomRefinementList = ({
 // Componente principal con múltiples filtros
 export const InterviewsRefinements = ({ onFilters = () => {} }) => {
   const { canRefine, refine } = useClearRefinements();
-  const [selectedRefinements, setSelectedRefinements] = useState({
-    position: [],
-    department: [],
-    vesselType: [],
-    nationality: [],
-    residency: [],
-  });
+  const [selectedRefinements, setSelectedRefinements] = useState([]);
 
   const handleRefinementChange = (attribute, values) => {
-    setSelectedRefinements((prev) => ({
-      ...prev,
-      [attribute]: values,
-    }));
+    setSelectedRefinements((prev) => {
+      // Filtrar refinamientos actuales para eliminar el atributo específico
+      const updatedRefinements = prev.filter(
+        (ref) =>
+          !(Array.isArray(ref) && ref[0]?.startsWith(`${attribute}:`)) &&
+          !(typeof ref === "string" && ref.startsWith(`${attribute}:`))
+      );
+
+      // Determinar el formato del nuevo refinamiento
+      if (values.length > 1) {
+        // Atributo con múltiples valores (array)
+        const newRefinement = values.map((val) => `${attribute}:${val}`);
+        if (
+          !updatedRefinements.some(
+            (ref) => JSON.stringify(ref) === JSON.stringify(newRefinement)
+          )
+        ) {
+          updatedRefinements.push(newRefinement);
+        }
+      } else if (values.length === 1) {
+        // Atributo con un solo valor (string)
+        const newRefinement = `${attribute}:${values[0]}`;
+        if (!updatedRefinements.includes(newRefinement)) {
+          updatedRefinements.push(newRefinement);
+        }
+      }
+
+      return updatedRefinements;
+    });
   };
 
   useEffect(() => {
     onFilters(selectedRefinements);
+    // console.log(selectedRefinements);
   }, [selectedRefinements]);
-
-  const hasSelectedRefinements = Object.values(selectedRefinements).some(
-    (array) => array.length > 0
-  );
 
   return (
     <section>

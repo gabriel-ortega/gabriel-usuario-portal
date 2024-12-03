@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
-import { FloatingLabel } from "flowbite-react";
-import { HiOutlineDocumentText } from "react-icons/hi";
+import { Button, FloatingLabel, Modal } from "flowbite-react";
+import {
+  HiOutlineDocumentText,
+  HiOutlineTrash,
+  HiQuestionMarkCircle,
+} from "react-icons/hi";
 
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { GoPlusCircle } from "react-icons/go";
@@ -23,11 +27,11 @@ export function CardVaccines({
 }) {
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.userData);
-
+  const [openModalWarning, setOpenModalWarning] = useState(false);
   // Estado local para manejar las cards y el archivo adjunto
   const [cards, setCards] = useState(getInitialCards());
   const [attachedFile, setAttachedFile] = useState(null);
-
+  const [selectedDose, setSelectedDose] = useState("Booster Dose");
   const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
 
   // Función para obtener las cards iniciales dependiendo del tipo de vacuna
@@ -88,7 +92,7 @@ export function CardVaccines({
       setCards([
         ...cards,
         {
-          Doze: "Booster Dose",
+          Doze: selectedDose || "Booster Dose",
           VaccineBrand: "",
           IssueDate: "",
           CountryIssue: "",
@@ -108,6 +112,8 @@ export function CardVaccines({
         },
       ]);
     }
+    setOpenModalWarning(false);
+    setSelectedDose("Booster Dose");
   };
 
   const handleDataChange = (e, index) => {
@@ -133,6 +139,31 @@ export function CardVaccines({
     }
   };
 
+  const handleDelete = (index) => {
+    // Crear el nuevo array sin el elemento en el índice especificado
+    const updatedCards = [
+      ...cards.slice(0, index), // Elementos antes del índice
+      ...cards.slice(index + 1), // Elementos después del índice
+    ];
+
+    // Actualizar el estado
+    setCards(updatedCards);
+
+    // Invocar onDataChange si está definido y es una función
+    if (onDataChange && typeof onDataChange === "function") {
+      onDataChange(id, name, { cards: updatedCards, attachedFile });
+    }
+  };
+
+  const handleDoseChange = (e) => {
+    setSelectedDose(e[0].id);
+  };
+
+  const handleAddNewModal = (e) => {
+    e.preventDefault();
+    setOpenModalWarning(true);
+  };
+
   return (
     <section className="border border-gray-200 bg-gray-100 dark:border-gray-600 dark:bg-gray-700 mt-5 p-4 rounded-lg divide-y divide-[#A9ADB3]">
       <section className="flex items-center justify-between pb-4 border-b border-black border-b-3">
@@ -156,7 +187,8 @@ export function CardVaccines({
               icon={
                 <GoPlusCircle className="ml-0 h-5 w-10 justify-center items-center" />
               }
-              onClick={(e) => addNewCard(e)}
+              // onClick={(e) => addNewCard(e)}
+              onClick={(e) => handleAddNewModal(e)}
             />
             <ButtonIcon
               classnamebtn="md:hidden sm:hidden bg-[#1976d2] w-20 items-center justify-center sm:w-full md:w-full h-15"
@@ -165,7 +197,8 @@ export function CardVaccines({
               icon={
                 <GoPlusCircle className="ml-0 h-5 w-10 justify-center items-center" />
               }
-              onClick={(e) => addNewCard(e)}
+              // onClick={(e) => addNewCard(e)}
+              onClick={(e) => handleAddNewModal(e)}
             />
           </section>
         )}
@@ -191,11 +224,19 @@ export function CardVaccines({
             } bg-white w-80 md:w-full-screen dark:border-gray-600 dark:bg-gray-700 mt-auto p-2 rounded-lg`}
           >
             {vaccineType === "COVID BOOK" && (
-              <FloatingLabel
-                variant="outlined"
-                label={card.Doze}
-                disabled={true}
-              />
+              <div className="flex flex-row justify-between items-start gap-3">
+                <FloatingLabel
+                  variant="outlined"
+                  label={card.Doze}
+                  disabled={true}
+                />
+                <button
+                  className="size-10 border rounded-lg bg-red-600 flex items-center justify-center text-white hover:bg-red-700"
+                  onClick={() => handleDelete(index)}
+                >
+                  <HiOutlineTrash />
+                </button>
+              </div>
             )}
 
             {vaccineType === "YELLOW FEVER" && (
@@ -346,6 +387,56 @@ export function CardVaccines({
           name={"covidBook"}
         />
       </section> */}
+      <Modal
+        show={openModalWarning}
+        size="md"
+        onClose={() => setOpenModalWarning(false)}
+        popup
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            {/* <HiQuestionMarkCircle lassName="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" /> */}
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              {" Please select a Dose"}
+            </h3>
+            <div className="my-3">
+              <SelectComponents
+                id="dose"
+                valueDefault={"Recruitment Stage"}
+                data={[
+                  { value: "First Dose" },
+                  { value: "Second Dose" },
+                  { value: "Booster Dose" },
+                ]}
+                initialValue={"Booster Dose"}
+                name_valor={true}
+                idKey="value"
+                valueKey="value"
+                name="dose"
+                Text="Select Vaccine Dose"
+                classname="min-h-28"
+                onChange={(e) => handleDoseChange(e)}
+              />
+            </div>
+            <div className="flex justify-center gap-4">
+              <Button color="gray" onClick={() => setOpenModalWarning(false)}>
+                Cancel
+              </Button>
+              <Button
+                color="failure"
+                disabled={!selectedDose}
+                onClick={(e) => {
+                  addNewCard(e);
+                  // console.log(selectedDose);
+                }}
+              >
+                Continue
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </section>
   );
 }

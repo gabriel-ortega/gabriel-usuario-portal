@@ -374,15 +374,16 @@ export function SideNavbar({ toggleSidebar }) {
                 <Sidebar.Collapse
                   icon={HiOutlineFolderOpen}
                   className="text-sm md:text-base"
-                  label="Interview"
+                  label="Appointments"
                 >
-                  <Link to={"/interview"}>
+                  <Link to={"/interviewappointments"}>
                     <Sidebar.Item
-                      icon={HiOutlineClipboardCopy}
+                      // icon={HiOutlineClipboardCopy}
                       className="text-sm md:text-base"
                       as="div"
+                      title="Interview Appointments"
                     >
-                      Programacion
+                      {truncateText("Interview Appointments", 18)}
                     </Sidebar.Item>
                   </Link>
                   <Link to={"/interviewschedule"}>

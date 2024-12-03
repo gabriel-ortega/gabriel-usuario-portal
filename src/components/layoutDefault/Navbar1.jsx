@@ -44,14 +44,13 @@ export default function Navbar1({ toggleSidebar, setSearchValue = () => {} }) {
             className=" text-white w-8 h-8"
             onClick={toggleSidebar}
           />
-          {userData.role == 1 ||
-            (userData.role == 2 && (
-              <Link to={"/globalsearch"}>
-                <button className={` text-white cursor-pointer`}>
-                  <MdOutlineSearch className={`w-5 h-5 `} />
-                </button>
-              </Link>
-            ))}
+          {userData.role !== 3 && (
+            <Link to={"/globalsearch"}>
+              <button className={` text-white cursor-pointer`}>
+                <MdOutlineSearch className={`w-5 h-5 `} />
+              </button>
+            </Link>
+          )}
         </div>
         {userData.role == 1 || userData.role == 2 ? (
           <div className="hidden md:block">

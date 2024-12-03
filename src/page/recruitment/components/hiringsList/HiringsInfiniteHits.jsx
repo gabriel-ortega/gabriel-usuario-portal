@@ -100,7 +100,7 @@ function Hit({ hit, toggleHits }) {
         onClick={() => handleContractLink(hit.id)}
       >
         <section className="flex flex-row items-center gap-4">
-          <div className="">
+          <div className="min-w-36">
             {/* <img
               src={hit?.photoURL }
               className="hidden md:block size-32 rounded-lg object-cover"

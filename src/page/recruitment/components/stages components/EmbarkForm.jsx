@@ -768,7 +768,12 @@ export const EmbarkForm = ({
         vesselData[vessel?.id - 1]?.["Gross Tonage"] +
         "/" +
         vesselData[vessel?.id - 1]?.["HP"], // GT/HP
-      typeOfVessel: { name: vesselData[vessel?.id - 1]?.["Vessel Type"] }, // Tipo de buque
+      typeOfVessel: [
+        {
+          name: vesselData[vessel?.id - 1]?.["Vessel Type"],
+          id: vesselData[vessel?.id - 1]?.Id,
+        },
+      ], // Tipo de buque
       "rank/position": profile.seafarerData.position[0].name, // Rango/posición
       dateOn: signOnDate, // Fecha de inicio
       dateOff: signOffDate, // Fecha de finalización
@@ -990,7 +995,12 @@ export const EmbarkForm = ({
         vesselData[vessel?.id - 1]?.["Gross Tonage"] +
         "/" +
         vesselData[vessel?.id - 1]?.["HP"], // GT/HP
-      typeOfVessel: { name: vesselData[vessel?.id - 1]?.["Vessel Type"] }, // Tipo de buque
+      typeOfVessel: [
+        {
+          name: vesselData[vessel?.id - 1]?.["Vessel Type"],
+          id: vesselData[vessel?.id - 1]?.Id,
+        },
+      ], // Tipo de buque
       "rank/position":
         currentEmbark.position &&
         positions &&
@@ -1189,6 +1199,7 @@ export const EmbarkForm = ({
                 status == 2 ||
                 status == 3 ||
                 status == 4 ||
+                status == 7 ||
                 !preValid
                   ? ""
                   : "hidden"
@@ -1202,6 +1213,7 @@ export const EmbarkForm = ({
                   status == 2 ||
                   status == 3 ||
                   status == 4 ||
+                  status == 7 ||
                   !preValid
                 }
                 onClick={() => handleInception("pre-embark")}

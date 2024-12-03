@@ -384,6 +384,23 @@ export const updateApplicationSent = (uid, data, vesselTypeData) => {
   };
 };
 
+export const updateApplicationSentStatus = (uid, status) => {
+  return async (dispatch) => {
+    dispatch(setSaving(true));
+    try {
+      const data = { status: status };
+      const docRef = doc(FirebaseDB, `applications/${uid}`);
+      // await updateDoc(docRef, data);
+      await updateDoc(docRef, data);
+      dispatch(setSaving(false));
+    } catch (error) {
+      console.error("Error updating application:", error);
+      dispatch(setSaving(false)); // Ensure saving state is reset even if an error occurs
+      // Additional error handling, like dispatching an error action, can be added here
+    }
+  };
+};
+
 export const getUserData = (uid) => {
   return async (dispatch) => {
     dispatch(setLoading());

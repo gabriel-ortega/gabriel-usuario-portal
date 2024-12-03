@@ -15,7 +15,11 @@ import {
   HiOutlineUser,
 } from "react-icons/hi";
 import toast from "react-hot-toast";
-import { updateRetireRequest, updateUsersData } from "../../store/userData";
+import {
+  updateApplicationSentStatus,
+  updateRetireRequest,
+  updateUsersData,
+} from "../../store/userData";
 
 export const RetireRequest = () => {
   const dispatch = useDispatch();
@@ -108,7 +112,7 @@ export const RetireRequest = () => {
       ...additionalFields,
       SeguimientoDate: new Date().toISOString(),
       SeguimientoID: currentStage,
-      SeguimientoComment: selected.retireReason,
+      SeguimientoComment: selected.retirementReason,
       seguimientoReason: 39,
       retireRequest: false,
     };
@@ -118,6 +122,7 @@ export const RetireRequest = () => {
         dispatch(updateUsersData(selected.uid, updatedSeafarerData)),
 
         dispatch(updateRetireRequest(selected.id, 3)),
+        dispatch(updateApplicationSentStatus(selected.uid, 6)),
       ]),
       {
         loading: "Saving...",
@@ -125,8 +130,11 @@ export const RetireRequest = () => {
         error: <b>Ups! Something went wrong. Try again</b>,
       }
     );
+
     setOpenModalWarning(false);
+    loadResults();
   };
+
   const handleDeny = () => {
     // Dispatch the update with new recruitment stage and additional fields
     const updatedSeafarerData = {
@@ -174,9 +182,7 @@ export const RetireRequest = () => {
                   return (
                     <Table.Row
                       key={index}
-                      className={`${
-                        application.isRead ? "bg-white" : "bg-yellow-100"
-                      } dark:border-gray-700 dark:bg-gray-800`}
+                      className={` dark:border-gray-700 dark:bg-gray-800`}
                     >
                       <Table.Cell>
                         <div className="flex flex-row gap-2 items-center">
@@ -188,7 +194,7 @@ export const RetireRequest = () => {
                             <HiOutlineUser className="h-4 w-4" />
                           </button>
                           {application.status !== 4 &&
-                            application.status !== 5 && (
+                            application.status !== 3 && (
                               <button
                                 title="Options"
                                 className="border border-green-300 bg-white text-green-600 size-10 flex gap-1 justify-center items-center rounded-lg text-sm hover:bg-green-50"

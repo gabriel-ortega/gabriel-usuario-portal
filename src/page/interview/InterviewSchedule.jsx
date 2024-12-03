@@ -24,6 +24,8 @@ import iconMicrofono from "../../assets/Icon/iconMicrofono.png";
 import { doc, setDoc } from "firebase/firestore";
 import { FirebaseDB } from "../../config/firebase/config";
 import { LoadingState } from "../../components/skeleton/LoadingState";
+import { formatDate } from "../../util/helperFunctions";
+
 export default function InterviewSchedule({ type = 0 }) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
@@ -38,6 +40,7 @@ export default function InterviewSchedule({ type = 0 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [assigned, setAssigned] = useState();
   const [timeLeft, setTimeLeft] = useState("");
+  const [availableDates, setAvailableDates] = useState([]);
   const openModal = (value) => {
     console.log(value);
     setAssigned(value);
@@ -87,15 +90,24 @@ export default function InterviewSchedule({ type = 0 }) {
       );
 
       setLoanding(true);
+
       setDates(transformedData);
       if (type == 0) {
         setDatesCurrent(transformedData);
         console.log(transformedData);
       } else if (type == 1) {
         setDatesCurrent(filteredFirst);
-        console.log(filteredFirst);
+        const availableDays = filteredFirst.map((day) =>
+          normalizeDate(format(day.start, "yyyy-MM-dd")).setHours(0, 0, 0, 0)
+        );
+        setAvailableDates(availableDays || []);
+        console.log(availableDays);
       } else if (type == 2) {
         setDatesCurrent(filteredSecond);
+        const availableDays = filteredSecond.map((day) =>
+          normalizeDate(format(day.start, "yyyy-MM-dd")).setHours(0, 0, 0, 0)
+        );
+        setAvailableDates(availableDays || []);
         console.log(filteredSecond);
       }
     } catch (error) {
@@ -169,26 +181,42 @@ export default function InterviewSchedule({ type = 0 }) {
     const days = [];
     let day = startDate;
 
+    // Convertir availableDays a un conjunto de fechas normalizadas
+    const availableDays = new Set(
+      availableDates.map((timestamp) =>
+        format(new Date(timestamp), "yyyy-MM-dd")
+      )
+    );
+
     while (day <= endDate) {
       days.push(day);
       day = addDays(day, 1);
     }
 
-    return days.map((day, index) => (
-      <div
-        key={index}
-        className={`w-10 h-10 flex items-center justify-center cursor-pointer ${
-          !isSameMonth(day, currentMonth) ? "text-gray-400" : ""
-        } ${
-          isSameDay(day, selectedDate)
-            ? "bg-blue-500 text-white rounded-full"
-            : ""
-        }`}
-        onClick={() => handleDateClick(day)}
-      >
-        {format(day, "d")}
-      </div>
-    ));
+    return days.map((day, index) => {
+      const dayKey = format(day, "yyyy-MM-dd"); // Normalizar día a formato "yyyy-MM-dd"
+      const isAvailable = availableDays.has(dayKey);
+
+      return (
+        <div
+          key={index}
+          className={`w-10 h-10 flex items-center justify-center cursor-pointer 
+            ${!isSameMonth(day, currentMonth) ? "text-gray-400" : ""} 
+            ${
+              isSameDay(day, selectedDate)
+                ? "bg-blue-500 text-white rounded-full"
+                : ""
+            }
+            ${!isAvailable ? "opacity-25  pointer-events-none" : ""}`}
+          onClick={isAvailable ? () => handleDateClick(day) : undefined} // Solo permitir clic si está disponible
+        >
+          {format(day, "d")}
+          {isAvailable && (
+            <span className="relative -top-4 right-3 bg-white text-white text-xs w-2 h-2 flex items-center justify-center rounded-full"></span>
+          )}
+        </div>
+      );
+    });
   };
 
   const mostrar = () => {
@@ -357,7 +385,7 @@ export default function InterviewSchedule({ type = 0 }) {
 
   return (
     <>
-      {/* <button onClick={mostrar}>mostrar</button> */}
+      <button onClick={mostrar}>mostrar</button>
 
       <h1 className="text-center text-2xl font-semibold">
         Appointment calendar
@@ -400,7 +428,8 @@ export default function InterviewSchedule({ type = 0 }) {
               </div>
             </div>
             <p className="text-center font-semibold text-lg text-balance">
-              The following items are recommended for the day of the interview
+              The following resources are recommended for the day of the
+              interview
             </p>
             <div className="grid grid-cols-1 lg:grid-cols-3 items-center justify-center">
               <div className="text-center">
@@ -473,31 +502,41 @@ export default function InterviewSchedule({ type = 0 }) {
                 </div>
               </div>
               <div>
-                <p className="text-lg text-center font-semibold pb-5">
-                  Hours Available
-                </p>
-
-                {groupedEvents.length > 0 ? (
-                  <div className="grid grid-cols-2 gap-4">
-                    {groupedEvents.map((hourGroup, index) => (
-                      <div key={index} className="mb-2 text-center">
-                        <button
-                          onClick={() => openModal(hourGroup)}
-                          className={`px-4 py-2 rounded ${
-                            hourGroup.available ? "bg-green-500" : "bg-red-500"
-                          } text-white`}
-                        >
-                          {hourGroup.hour}
-                          {/* {hourGroup.hour} ({hourGroup.total}) -{" "}
-          {hourGroup.available
-            ? `${hourGroup.availableCount} disponibles`
-            : "Agotado"} */}
-                        </button>
+                {availableDates.length > 0 ? (
+                  <>
+                    <p className="text-lg text-center font-semibold pb-5">
+                      Hours Available
+                    </p>
+                    {groupedEvents.length > 0 ? (
+                      <div className="grid grid-cols-2 gap-4">
+                        {groupedEvents.map((hourGroup, index) => (
+                          <div key={index} className="mb-2 text-center">
+                            <button
+                              onClick={() => openModal(hourGroup)}
+                              disabled={!hourGroup.available}
+                              className={`px-4 py-2 rounded ${
+                                hourGroup.available
+                                  ? "bg-green-500 text-white"
+                                  : "text-zinc-400"
+                              }  `}
+                            >
+                              {hourGroup.hour}
+                            </button>
+                          </div>
+                        ))}
                       </div>
-                    ))}{" "}
-                  </div>
+                    ) : (
+                      <p className="text-center">
+                        Please select a day from the list of available days to
+                        check availability hours.
+                      </p>
+                    )}
+                  </>
                 ) : (
-                  <p>No hours were found available for this date</p>
+                  <p className="text-center">
+                    Sorry! It seems at this time there are no available dates to
+                    schedule an interview.
+                  </p>
                 )}
               </div>
             </div>
@@ -518,7 +557,7 @@ export default function InterviewSchedule({ type = 0 }) {
         icon={<HiOutlineQuestionMarkCircle className="w-9 h-9 m-auto" />}
       >
         <p className="text-center font-semibold text-lg text-balance">
-          The following items are recommended for the day of the interview
+          The following resources are recommended for the day of the interview
         </p>
         <div className="grid grid-cols-1 lg:grid-cols-3 items-center justify-center">
           <div className="text-center">

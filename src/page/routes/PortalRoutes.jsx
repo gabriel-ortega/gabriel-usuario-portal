@@ -65,7 +65,7 @@ export const PortalRoutes = () => {
 
             <Route path="/embarks" element={<EmbarksDashboard />} />
             <Route path="/embark/:id" element={<Embark />} />
-            <Route path="/interview" element={<Interview />} />
+            <Route path="/interviewappointments" element={<Interview />} />
             <Route path="/interviewschedule" element={<InterviewSchedule />} />
             <Route path="/profile/:id" element={<RecruitmentProfile />} />
             <Route

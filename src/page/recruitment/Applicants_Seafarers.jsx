@@ -65,10 +65,10 @@ export default function Applicants_Seafarers() {
     setIsLoading(true);
     try {
       await downloadExcel([], "gapoolseguimiento", "Reporte_de_Seguimiento");
-      dispatch(setLoading(false));
+      setIsLoading(false);
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
-      dispatch(setLoading(false));
+      setIsLoading(false);
     }
   };
 
@@ -80,10 +80,10 @@ export default function Applicants_Seafarers() {
         "gapoolcontract",
         "Reporte_de_AllAplicant&Seafarer"
       );
-      dispatch(setLoading(false));
+      setIsLoading(false);
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
-      dispatch(setLoading(false));
+      setIsLoading(false);
     }
   };
 
@@ -180,7 +180,7 @@ export default function Applicants_Seafarers() {
                     <Configure
                       hitsPerPage={50}
                       filters={
-                        "recruitmentStage:7 OR recruitmentStage:8 OR recruitmentStage:9 OR recruitmentStage:10 OR recruitmentStage:11 OR recruitmentStage:12 OR recruitmentStage:14 OR recruitmentStage:15 OR recruitmentStage:16 OR recruitmentStage:17 OR recruitmentStage:18"
+                        "recruitmentStage:7 OR recruitmentStage:8 OR recruitmentStage:9 OR recruitmentStage:10 OR recruitmentStage:11 OR recruitmentStage:12 OR recruitmentStage:14 OR recruitmentStage:15 OR recruitmentStage:16 OR recruitmentStage:17 OR recruitmentStage:18 OR recruitmentStage:22 OR recruitmentStage:23 OR recruitmentStage:24 OR recruitmentStage:25 OR recruitmentStage:26 OR recruitmentStage:27"
                       }
                     />
                     <GapoolInfiniteHits />

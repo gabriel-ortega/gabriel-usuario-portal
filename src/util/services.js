@@ -10,6 +10,8 @@ import {
   startAfter,
   getDoc,
   doc,
+  addDoc,
+  setDoc,
 } from "firebase/firestore";
 import { FirebaseDB } from "../config/firebase/config";
 
@@ -1358,6 +1360,85 @@ export const getTemplate = async () => {
     }
   } catch (error) {
     console.error("Error obteniendo los datos:", error);
+  }
+};
+
+export const saveCitas = async (documents) => {
+  try {
+    // Validar que documents sea un arreglo
+    if (!Array.isArray(documents) || documents.length === 0) {
+      throw new Error("La lista de documentos debe ser un arreglo no vacío.");
+    }
+
+    // Iterar sobre los documentos y agregar cada uno a la colección
+    const batchResults = await Promise.all(
+      documents.map(async (doc) => {
+        const docRef = await addDoc(collection(FirebaseDB, "citas"), doc);
+        return { ...doc, id: docRef.id }; // Añadir el campo 'id' al documento
+      })
+    );
+
+    console.log("Documentos guardados exitosamente:", batchResults);
+    return batchResults; // Devuelve los documentos con sus IDs
+  } catch (error) {
+    console.error(
+      "Error al guardar documentos en la colección 'citas':",
+      error
+    );
+    throw error;
+  }
+};
+
+export const getCitas = async () => {
+  try {
+    const citasCollection = collection(FirebaseDB, "citas");
+    const querySnapshot = await getDocs(citasCollection);
+
+    // Mapear los documentos obtenidos para devolverlos como un arreglo de objetos
+    const citas = querySnapshot.docs.map((doc) => ({
+      id: doc.id, // Incluye el ID del documento
+      ...doc.data(), // Incluye los datos del documento
+    }));
+
+    console.log("Documentos obtenidos de la colección 'citas':", citas);
+    return citas; // Devuelve los documentos como un arreglo
+  } catch (error) {
+    console.error(
+      "Error al obtener documentos de la colección 'citas':",
+      error
+    );
+    throw error;
+  }
+};
+
+export const getCitasByUid = async (uid) => {
+  try {
+    const citasCollection = collection(FirebaseDB, "citas");
+    const q = query(citasCollection, where("uid", "==", uid));
+    const querySnapshot = await getDocs(q);
+
+    // Mapear los documentos obtenidos
+    const citas = querySnapshot.docs.map((doc) => ({
+      id: doc.id, // Incluye el ID del documento
+      ...doc.data(), // Incluye los datos del documento
+    }));
+
+    console.log(`Citas obtenidas para uid ${uid}:`, citas);
+    return citas; // Devuelve los documentos filtrados
+  } catch (error) {
+    console.error(`Error al obtener citas para uid ${uid}:`, error);
+    throw error;
+  }
+};
+
+export const saveCita = async (id, data) => {
+  try {
+    const citaRef = doc(FirebaseDB, "citas", id);
+    await setDoc(citaRef, data, { merge: true }); // Usa merge para evitar sobreescritura completa
+    console.log(`Cita guardada exitosamente con ID ${id}`);
+  } catch (error) {
+    console.error(`Error al guardar la cita con ID ${id}:`, error);
+    throw error;
   }
 };
 

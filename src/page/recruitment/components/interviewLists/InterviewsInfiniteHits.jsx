@@ -84,11 +84,7 @@ function Hit({ hit, toggleHits, type }) {
         onClick={() => handleProfileLink(hit.uid)}
       >
         <section className="flex flex-row items-center gap-4">
-          <div className="">
-            {/* <img
-              src={hit?.photoURL }
-              className="hidden md:block size-32 rounded-lg object-cover"
-            /> */}
+          <div className="min-w-36">
             <Avatar
               img={hit?.photoURL}
               size={"xl"}

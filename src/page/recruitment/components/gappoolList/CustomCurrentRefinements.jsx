@@ -5,7 +5,7 @@ import { IoIosClose } from "react-icons/io";
 export function CustomCurrentRefinements(props) {
   const { items, refine } = useCurrentRefinements(props);
   useEffect(() => {
-    console.log(items);
+    // console.log(items);
   }, [items]);
 
   return (

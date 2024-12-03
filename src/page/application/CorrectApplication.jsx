@@ -12,6 +12,7 @@ import { FaFloppyDisk } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import {
   getApplication,
+  setApplication,
   updateApplicationFirestore,
   updateApplicationSent,
   updateApplicationStage,
@@ -28,7 +29,10 @@ import { ApplicationDocument } from "./ApplicationDocument";
 import ApplicationCertificates from "./ApplicationCertificates";
 import { ApplicationSkill } from "./applicationSkill/ApplicationSkill";
 import toast from "react-hot-toast";
-import { updateReviewVersion } from "../../store/currentViews/viewSlice";
+import {
+  setApplicationView,
+  updateReviewVersion,
+} from "../../store/currentViews/viewSlice";
 
 export const CorrectApplication = () => {
   const dispatch = useDispatch();
@@ -175,6 +179,9 @@ export const CorrectApplication = () => {
       success: <b>Saved & Sent Back</b>,
       error: <b>Ups! Something went wrong. Try again</b>,
     });
+    dispatch(setApplication(updatedApplication));
+    // dispatch(setApplicationView(docSnap.data()));
+    dispatch(updateApplicationStage(7));
   };
 
   return (

@@ -143,45 +143,47 @@ const CustomRefinementList = ({
 // Componente principal con múltiples filtros
 export const HiringsRefinements = ({ onFilters = () => {} }) => {
   const { canRefine, refine } = useClearRefinements();
-  const [selectedRefinements, setSelectedRefinements] = useState({
-    recruitmentStage: [],
-    position: [],
-    department: [],
-    vesselType: [],
-    nationality: [],
-    residency: [],
-    company: [],
-  });
+  const [selectedRefinements, setSelectedRefinements] = useState([]);
 
   const handleRefinementChange = (attribute, values) => {
-    setSelectedRefinements((prev) => ({
-      ...prev,
-      [attribute]: values,
-    }));
+    setSelectedRefinements((prev) => {
+      // Filtrar refinamientos actuales para eliminar el atributo específico
+      const updatedRefinements = prev.filter(
+        (ref) =>
+          !(Array.isArray(ref) && ref[0]?.startsWith(`${attribute}:`)) &&
+          !(typeof ref === "string" && ref.startsWith(`${attribute}:`))
+      );
+
+      // Determinar el formato del nuevo refinamiento
+      if (values.length > 1) {
+        // Atributo con múltiples valores (array)
+        const newRefinement = values.map((val) => `${attribute}:${val}`);
+        if (
+          !updatedRefinements.some(
+            (ref) => JSON.stringify(ref) === JSON.stringify(newRefinement)
+          )
+        ) {
+          updatedRefinements.push(newRefinement);
+        }
+      } else if (values.length === 1) {
+        // Atributo con un solo valor (string)
+        const newRefinement = `${attribute}:${values[0]}`;
+        if (!updatedRefinements.includes(newRefinement)) {
+          updatedRefinements.push(newRefinement);
+        }
+      }
+
+      return updatedRefinements;
+    });
   };
 
   useEffect(() => {
     onFilters(selectedRefinements);
+    // console.log(selectedRefinements);
   }, [selectedRefinements]);
-
-  const hasSelectedRefinements = Object.values(selectedRefinements).some(
-    (array) => array.length > 0
-  );
 
   return (
     <section>
-      {/* {hasSelectedRefinements && (
-        <div className="my-3">
-          <button
-            className={`border border-red-600 bg-red-600 text-white size-10 md:w-28 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-red-700`}
-            onClick={refine}
-          >
-            <HiXCircle className="h-4 w-4" />
-            <span className="hidden md:block ">Clear Filters</span>
-          </button>
-        </div>
-      )} */}
-
       <CustomRefinementList
         attribute="recruitmentStage"
         label="Recruitment Stage"

@@ -89,6 +89,7 @@ export const ApplicantProcessView = () => {
       success: <b>Submited!</b>,
       error: <b>Ups! Something went wrong. Try again</b>,
     });
+    setOpenModalWarning(false);
   };
 
   return (
@@ -102,7 +103,8 @@ export const ApplicantProcessView = () => {
             ) : (
               <span></span>
             )}
-            {seguimientoStages.includes(profile?.recruitmentStage) ? (
+            {seguimientoStages.includes(profile?.recruitmentStage) ||
+            profile.retireRequest ? (
               <></>
             ) : (
               <Button
@@ -263,7 +265,13 @@ export const ApplicantProcessView = () => {
                           questions or complete practical assessments.
                         </Timeline.Body>
                         {profile.secondInterview?.status == "Pending" && (
-                          <Button color="gray">
+                          <Button
+                            color="gray"
+                            onClick={() => {
+                              setSelectedInterview(2);
+                              setOpenModalInterview(true);
+                            }}
+                          >
                             Book an Interview
                             <HiArrowNarrowRight className="ml-2 h-3 w-3" />
                           </Button>
@@ -406,7 +414,7 @@ export const ApplicantProcessView = () => {
       </Modal>
       <Modal
         show={openModalInterview}
-        size="xl"
+        size="xxl"
         onClose={() => setOpenModalInterview(false)}
         popup
       >
