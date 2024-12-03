@@ -224,9 +224,8 @@ export default function RecruitmentProfile() {
         console.error("Error: currentPosition o CVFormatId no está definido");
         return;
       }
-
       const currentPositionId = currentPosition.CVFormatId;
-      const url = `https://cv-formater.onrender.com/pdf_render/seafarers?formatId=${currentPositionId}&id=${profile.uid}`;
+      const url = `https://cv-formater-main.onrender.com/pdf_render/seafarers?formatId=${currentPositionId}&id=${profile.uid}`;
 
       // Abre la URL en una nueva pestaña
       window.open(url, "_blank");

@@ -18,7 +18,7 @@ import {
   ModalYesNo,
   SelectComponents,
 } from "../../components/layoutComponents";
-import { Badge, Drawer, Modal } from "flowbite-react";
+import { Badge, Drawer, Modal, Table } from "flowbite-react";
 import { HiOutlineQuestionMarkCircle, HiPlus } from "react-icons/hi";
 import { MdFilterAlt, MdFilterAltOff } from "react-icons/md";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
@@ -73,6 +73,7 @@ const AgendaForm = () => {
   const [events, setEvents] = useState([]);
   const [dataEvents, setDataEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
+  const [datesFilter, setDatesFilter] = useState([]);
   const [template, setTemplate] = useState([]);
   const [availableDates, setAvailableDates] = useState([]);
   const [showSection, setShowSection] = useState({
@@ -157,12 +158,17 @@ const AgendaForm = () => {
             ); // Formatear como mm-dd-yyyy
 
             if (!acc[formattedDate]) {
-              acc[formattedDate] = 0;
+              acc[formattedDate] = { originalDates: [], count: 0 };
             }
-            acc[formattedDate] += 1; // Incrementar la cuenta para esta fecha
+            acc[formattedDate].originalDates.push(startDate); // Guardar la fecha original
+            acc[formattedDate].count += 1; // Incrementar la cuenta para esta fecha
             return acc;
           }, {})
-      ).map(([date, count]) => ({ date, count }));
+      ).map(([formattedDate, { originalDates, count }]) => ({
+        formattedDate,
+        originalDates,
+        count,
+      }));
 
       const availableDatesText = availableDates.join(", "); // Unir fechas con coma
       console.log(availableDates);
@@ -593,6 +599,15 @@ const AgendaForm = () => {
 
     openModalEvent();
   };
+  const handleList = (selectedDate) => {
+    const filteredEvents = dataEvents.filter((event) => {
+      const eventDate = new Date(event.start); // Convertir la fecha del evento
+      return eventDate.toDateString() === selectedDate.toDateString(); // Comparar solo el día
+    });
+    console.log(filteredEvents); // Opcional: ver los eventos filtrados
+    setDatesFilter(filteredEvents);
+    setIsOpenModalList(true);
+  };
 
   return (
     <>
@@ -969,12 +984,20 @@ const AgendaForm = () => {
               <span>Available Appointments:</span>
               <div className="flex flex-row gap-3">
                 {availableDates.length > 0 &&
-                  availableDates.map(({ date, count }, index) => (
-                    <Badge
-                      key={index}
-                      className="hover:cursor-pointer"
-                    >{`${date} (${count})`}</Badge>
-                  ))}
+                  availableDates.map(
+                    ({ formattedDate, originalDates, count }, index) => (
+                      <Badge
+                        key={index}
+                        className="hover:cursor-pointer"
+                        onClick={() => {
+                          const selectedDate = originalDates[0]; // Usar la primera fecha original
+                          const eventsForSelectedDate =
+                            handleList(selectedDate); // Obtener eventos filtrados
+                          console.log(eventsForSelectedDate); // Opcional: manejar eventos seleccionados
+                        }}
+                      >{`${formattedDate} (${count})`}</Badge>
+                    )
+                  )}
               </div>
             </div>
             <Calendar
@@ -999,8 +1022,8 @@ const AgendaForm = () => {
           <ModalYesNo
             isOpen={isOpenModalEvent}
             closeModal={closeModalEvent}
-            textyes="editar"
-            textno="cancelar"
+            textyes="Save"
+            textno="Close"
             // onConfirm={handleConfirm}
             // onCancel={handleCancel}
             classmodal=" md:pt-0"
@@ -1101,12 +1124,65 @@ const AgendaForm = () => {
           </ModalYesNo>
           <Modal
             show={isOpenModalList}
-            size="md"
+            size="xxl"
             onClose={() => setIsOpenModalList(false)}
             popup
           >
             <Modal.Header />
-            <Modal.Body></Modal.Body>
+            <Modal.Body>
+              <div className="overflow-x-auto pt-10">
+                {datesFilter.length > 0 ? (
+                  <Table striped>
+                    <Table.Head>
+                      <Table.HeadCell>Mode</Table.HeadCell>
+                      <Table.HeadCell>Duration Time</Table.HeadCell>
+                      <Table.HeadCell>Start Time</Table.HeadCell>
+                      <Table.HeadCell>End Time</Table.HeadCell>
+                      <Table.HeadCell>Interviewer</Table.HeadCell>
+                      <Table.HeadCell></Table.HeadCell>
+                    </Table.Head>
+                    <Table.Body className="divide-y">
+                      {datesFilter
+                        .sort((a, b) => new Date(b.start) - new Date(a.start)) // Ordenar de mayor a menor por `start`
+                        .map((event, index) => (
+                          <Table.Row
+                            key={index}
+                            className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                          >
+                            <Table.Cell>{event.asunto || ""}</Table.Cell>
+                            <Table.Cell>{event.duration || ""}</Table.Cell>
+                            <Table.Cell>
+                              {convertirFechaYHora(event.start)}
+                            </Table.Cell>
+                            <Table.Cell>
+                              {convertirFechaYHora(event.end)}
+                            </Table.Cell>
+                            <Table.Cell>
+                              {getNameInterviewer(event.interviewer)}
+                            </Table.Cell>
+                            <Table.Cell>
+                              <button
+                                className="text-green-700 hover:underline"
+                                // onClick={() => handleEdit(event.id)}
+                              >
+                                Edit
+                              </button>
+                            </Table.Cell>
+                            <Table.Cell>
+                              <button
+                                className="text-red-600 hover:underline"
+                                // onClick={() => handleDelete(event.id)}
+                              >
+                                Delete
+                              </button>
+                            </Table.Cell>
+                          </Table.Row>
+                        ))}
+                    </Table.Body>
+                  </Table>
+                ) : null}
+              </div>
+            </Modal.Body>
           </Modal>
         </section>
       </div>
