@@ -217,18 +217,18 @@ export const ApplicantProcessView = () => {
                           discuss your background, basic skills, and overall fit
                           for the role.
                         </Timeline.Body>
-                        {profile.firstInterview?.status == "Pending" && (
-                          // <Button
-                          //   color="gray"
-                          //   onClick={() => {
-                          //     setSelectedInterview(1);
-                          //     setOpenModalInterview(true);
-                          //   }}
-                          // >
-                          //   Book an Interview
-                          //   <HiArrowNarrowRight className="ml-2 h-3 w-3" />
-                          // </Button>
-                        )}
+                        {/* {profile.firstInterview?.status == "Pending" && (
+                          <Button
+                            color="gray"
+                            onClick={() => {
+                              setSelectedInterview(1);
+                              setOpenModalInterview(true);
+                            }}
+                          >
+                            Book an Interview
+                            <HiArrowNarrowRight className="ml-2 h-3 w-3" />
+                          </Button>
+                        )} */}
                       </Timeline.Content>
                     </Timeline.Item>
                     <Timeline.Item>
@@ -264,18 +264,18 @@ export const ApplicantProcessView = () => {
                           specific skills. You might answer job-specific
                           questions or complete practical assessments.
                         </Timeline.Body>
-                        {profile.secondInterview?.status == "Pending" && (
-                          // <Button
-                          //   color="gray"
-                          //   onClick={() => {
-                          //     setSelectedInterview(2);
-                          //     setOpenModalInterview(true);
-                          //   }}
-                          // >
-                          //   Book an Interview
-                          //   <HiArrowNarrowRight className="ml-2 h-3 w-3" />
-                          // </Button>
-                        )}
+                        {/* {profile.secondInterview?.status == "Pending" && (
+                          <Button
+                            color="gray"
+                            onClick={() => {
+                              setSelectedInterview(2);
+                              setOpenModalInterview(true);
+                            }}
+                          >
+                            Book an Interview
+                            <HiArrowNarrowRight className="ml-2 h-3 w-3" />
+                          </Button>
+                        )} */}
                       </Timeline.Content>
                     </Timeline.Item>
                     <Timeline.Item>
