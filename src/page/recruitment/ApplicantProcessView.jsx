@@ -218,16 +218,16 @@ export const ApplicantProcessView = () => {
                           for the role.
                         </Timeline.Body>
                         {profile.firstInterview?.status == "Pending" && (
-                          <Button
-                            color="gray"
-                            onClick={() => {
-                              setSelectedInterview(1);
-                              setOpenModalInterview(true);
-                            }}
-                          >
-                            Book an Interview
-                            <HiArrowNarrowRight className="ml-2 h-3 w-3" />
-                          </Button>
+                          // <Button
+                          //   color="gray"
+                          //   onClick={() => {
+                          //     setSelectedInterview(1);
+                          //     setOpenModalInterview(true);
+                          //   }}
+                          // >
+                          //   Book an Interview
+                          //   <HiArrowNarrowRight className="ml-2 h-3 w-3" />
+                          // </Button>
                         )}
                       </Timeline.Content>
                     </Timeline.Item>
@@ -265,16 +265,16 @@ export const ApplicantProcessView = () => {
                           questions or complete practical assessments.
                         </Timeline.Body>
                         {profile.secondInterview?.status == "Pending" && (
-                          <Button
-                            color="gray"
-                            onClick={() => {
-                              setSelectedInterview(2);
-                              setOpenModalInterview(true);
-                            }}
-                          >
-                            Book an Interview
-                            <HiArrowNarrowRight className="ml-2 h-3 w-3" />
-                          </Button>
+                          // <Button
+                          //   color="gray"
+                          //   onClick={() => {
+                          //     setSelectedInterview(2);
+                          //     setOpenModalInterview(true);
+                          //   }}
+                          // >
+                          //   Book an Interview
+                          //   <HiArrowNarrowRight className="ml-2 h-3 w-3" />
+                          // </Button>
                         )}
                       </Timeline.Content>
                     </Timeline.Item>

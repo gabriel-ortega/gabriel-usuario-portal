@@ -1373,20 +1373,17 @@ export const saveCitas = async (documents) => {
 
     // Iterar sobre los documentos y agregar cada uno a la colección
     const batchResults = await Promise.all(
-      documents.map(async (doc) => {
-        const docRef = await addDoc(
-          collection(FirebaseDB, "appointments"),
-          doc
-        );
-        return { ...doc, id: docRef.id }; // Añadir el campo 'id' al documento
+      documents.map(async (docData) => {
+        const docRef = doc(collection(FirebaseDB, "appointments")); // Genera la referencia con ID
+        await setDoc(docRef, { ...docData, id: docRef.id }); // Crea el documento con su propio ID
+        return { ...docData, id: docRef.id }; // Retorna el documento con su ID
       })
     );
 
-    // console.log("Documentos guardados exitosamente:", batchResults);
     return batchResults; // Devuelve los documentos con sus IDs
   } catch (error) {
     console.error(
-      "Error al guardar documentos en la colección 'citas':",
+      "Error al guardar documentos en la colección 'appointments':",
       error
     );
     throw error;

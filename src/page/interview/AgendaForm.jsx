@@ -3,11 +3,13 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import {
+  deleteCita,
   downloadExcel,
   getCitas,
   getDateInterviews,
   getInterviewers,
   getTemplate,
+  saveCita,
   saveCitas,
 } from "../../util/services";
 import { doc, setDoc } from "firebase/firestore";
@@ -56,6 +58,7 @@ function convertirFechaYHora(fechaISO) {
 const AgendaForm = () => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.currentViews);
+  const [interviewer, setInterviewer] = useState([]);
   const [parent] = useAutoAnimate();
   const [isOpenModalEvent, setIsOpenModalEvent] = useState(false);
   const [isOpenModalList, setIsOpenModalList] = useState(false);
@@ -126,7 +129,7 @@ const AgendaForm = () => {
         start: item.start && item.start.toDate ? item.start.toDate() : null, // Convertir `start` a Date
         end: item.end && item.end.toDate ? item.end.toDate() : null, // Convertir `end` a Date
       }));
-
+      setInterviewer(entrevistador);
       // Validar y transformar los datos recibidos
       // if (dates && dates.data) {
       //   data = JSON.parse(dates.data);
@@ -535,6 +538,14 @@ const AgendaForm = () => {
       );
     }
   };
+  const changeData = (e) => {
+    let updatedData = {
+      ...valueFormEdit,
+      [e.target.name]: e.target.value,
+    };
+
+    setValueFormEdit(updatedData);
+  };
 
   const mostrar = () => {
     console.log(events);
@@ -576,8 +587,8 @@ const AgendaForm = () => {
   };
 
   const handleEdit = (indexToEdit) => {
-    const editDates = filteredEvents.filter((index) => index.id == indexToEdit);
-    if (editDates[0].interviewee) {
+    const editDates = dataEvents.filter((index) => index.id == indexToEdit);
+    if (editDates?.[0]?.interviewee) {
       dispatch(getSeafarerData(editDates[0].interviewee));
     }
 
@@ -589,13 +600,14 @@ const AgendaForm = () => {
       startTime: convertirFechaYHora(editDates[0].start),
       endTime: convertirFechaYHora(editDates[0].end),
       interviewer: editDates[0].interviewer,
-      interviewee: editDates[0].interviewee,
+      interviewee: editDates[0].interviewee || "",
       status: editDates[0].status,
       mode: editDates[0].mode,
     });
 
     openModalEvent();
   };
+
   const handleList = (selectedDate) => {
     const filteredEvents = dataEvents.filter((event) => {
       const eventDate = new Date(event.start); // Convertir la fecha del evento
@@ -607,11 +619,54 @@ const AgendaForm = () => {
   };
 
   const handleSave = (id) => {
-    console.log(valueFormEdit);
+    if (id) {
+      const toSave = datesFilter.find((date) => date.id == id);
+      toast.promise(saveCita(id, toSave), {
+        loading: "Saving...",
+        success: <b>Saved!</b>,
+        error: <b>Ups! Something went wrong. Try again</b>,
+      });
+      setDatesFilter(datesFilter.filter((item) => item.id !== id));
+      loadResults();
+    } else {
+      toast.promise(saveCita(valueFormEdit.id, valueFormEdit), {
+        loading: "Saving...",
+        success: <b>Saved!</b>,
+        error: <b>Ups! Something went wrong. Try again</b>,
+      });
+      setDatesFilter(
+        datesFilter.filter((item) => item.id !== valueFormEdit.id)
+      );
+      loadResults();
+      // console.log(valueFormEdit);
+      setIsOpenModalEvent(false);
+    }
   };
+
   const handleDelete = (id) => {
-    console.log(valueFormEdit);
+    if (id) {
+      toast.promise(deleteCita(id), {
+        loading: "Deleting...",
+        success: <b>Deleted!</b>,
+        error: <b>Ups! Something went wrong. Try again</b>,
+      });
+      setDatesFilter(datesFilter.filter((item) => item.id !== id));
+      loadResults();
+    } else {
+      toast.promise(deleteCita(valueFormEdit.id), {
+        loading: "Deleting...",
+        success: <b>Deleted!</b>,
+        error: <b>Ups! Something went wrong. Try again</b>,
+      });
+      setDatesFilter(
+        datesFilter.filter((item) => item.id !== valueFormEdit.id)
+      );
+      loadResults();
+      // console.log(valueFormEdit);
+      setIsOpenModalEvent(false);
+    }
   };
+
   return (
     <>
       <Drawer
@@ -996,7 +1051,7 @@ const AgendaForm = () => {
                           const selectedDate = originalDates[0]; // Usar la primera fecha original
                           const eventsForSelectedDate =
                             handleList(selectedDate); // Obtener eventos filtrados
-                          console.log(eventsForSelectedDate); // Opcional: manejar eventos seleccionados
+                          // console.log(eventsForSelectedDate); // Opcional: manejar eventos seleccionados
                           setModalListText(formattedDate);
                         }}
                       >{`${formattedDate} (${count})`}</Badge>
@@ -1045,27 +1100,27 @@ const AgendaForm = () => {
                   ]}
                   idKey="name"
                   valueKey="name"
-                  // onChange={changeData}
+                  onChange={changeData}
                 />
                 <InputText
                   labelinput="Link"
                   value={valueFormEdit.link}
                   name="link"
-                  // onChange={changeData}
+                  onChange={changeData}
                 />
                 <InputText
                   labelinput="Start Time"
                   value={valueFormEdit.startTime}
                   read={true}
                   name="startTime"
-                  // onChange={changeData}
+                  onChange={changeData}
                 />
                 <InputText
                   labelinput="End Time"
                   value={valueFormEdit.endTime}
                   read={true}
                   name="endTime"
-                  // onChange={changeData}
+                  onChange={changeData}
                 />
                 <SelectComponents
                   name={"interviewer"}
@@ -1073,10 +1128,10 @@ const AgendaForm = () => {
                   valueDefault={"Interviewer"}
                   Text="Interviewer"
                   className={""}
-                  // data={interviewer}
+                  data={interviewer}
                   idKey="id"
                   valueKey="displayName"
-                  // onChange={changeData}
+                  onChange={changeData}
                 />
                 <InputText
                   labelinput="Interviewee"
@@ -1106,7 +1161,7 @@ const AgendaForm = () => {
                   ]}
                   idKey="name"
                   valueKey="name"
-                  // onChange={changeData}
+                  onChange={changeData}
                 />
                 <SelectComponents
                   name={"mode"}
@@ -1120,7 +1175,7 @@ const AgendaForm = () => {
                   ]}
                   idKey="name"
                   valueKey="name"
-                  // onChange={changeData}
+                  onChange={changeData}
                 />
               </form>
               <div className="flex justify-center gap-4">
@@ -1161,6 +1216,7 @@ const AgendaForm = () => {
                       <Table.HeadCell>End Time</Table.HeadCell>
                       <Table.HeadCell>Interviewer</Table.HeadCell>
                       <Table.HeadCell></Table.HeadCell>
+                      <Table.HeadCell></Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y">
                       {datesFilter
@@ -1184,7 +1240,8 @@ const AgendaForm = () => {
                             <Table.Cell>
                               <button
                                 className="text-green-700 hover:underline"
-                                // onClick={() => handleEdit(event.id)}
+                                onClick={() => handleEdit(event.id)}
+                                // onClick={() => console.log(event.id)}
                               >
                                 Edit
                               </button>
@@ -1192,7 +1249,7 @@ const AgendaForm = () => {
                             <Table.Cell>
                               <button
                                 className="text-red-600 hover:underline"
-                                // onClick={() => handleDelete(event.id)}
+                                onClick={() => handleDelete(event.id)}
                               >
                                 Delete
                               </button>
