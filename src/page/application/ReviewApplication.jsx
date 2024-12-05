@@ -296,32 +296,33 @@ export const ReviewApplication = () => {
     };
 
     // console.log(updatedApplication);
+    console.log(isReadChange);
 
     // Ejecutar el dispatch con el objeto application actualizado
-    dispatch(updateReviewVersion(currentVersionData));
-    if (state) {
-      console.log("actualizo");
-      dispatch(setIsRead(isReadChange));
-    }
-    dispatch(
-      updateApplication(state ? updatedApplicationIsRead : updatedApplication)
-    );
+    // dispatch(updateReviewVersion(currentVersionData));
+    // if (state) {
+    //   console.log("actualizo");
+    //   dispatch(setIsRead(isReadChange));
+    // }
+    // dispatch(
+    //   updateApplication(state ? updatedApplicationIsRead : updatedApplication)
+    // );
 
-    toast.promise(
-      dispatch(
-        updateApplicationSent(
-          application.uid,
-          state ? updatedApplicationIsRead : updatedApplication,
-          vesselTypeData
-        )
-      ),
-      {
-        loading: "Saving...",
-        success: <b>Saved!</b>,
-        error: <b>Ups! Something went wrong. Try again</b>,
-      }
-    );
-    setUnsavedChanges(false);
+    // toast.promise(
+    //   dispatch(
+    //     updateApplicationSent(
+    //       application.uid,
+    //       state ? updatedApplicationIsRead : updatedApplication,
+    //       vesselTypeData
+    //     )
+    //   ),
+    //   {
+    //     loading: "Saving...",
+    //     success: <b>Saved!</b>,
+    //     error: <b>Ups! Something went wrong. Try again</b>,
+    //   }
+    // );
+    // setUnsavedChanges(false);
   };
 
   const handleEvaluation = (e) => {

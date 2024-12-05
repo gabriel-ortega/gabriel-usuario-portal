@@ -23,9 +23,10 @@ export default function Dashboard() {
   const { dashboard } = useSelector((state) => state.currentViews);
   const dispatch = useDispatch();
   useEffect(() => {
-    // if (!dashboard) {
-    dispatch(getDashboardData());
-    // }
+    console.log(dashboard.length);
+    if (!dashboard) {
+      dispatch(getDashboardData());
+    }
   }, [dashboard]);
   return (
     <>
@@ -195,39 +196,26 @@ export default function Dashboard() {
           </div>
 
           <section className="grid lg:grid-cols-2  grid-cols-1   gap-4 mt-5 items-center justify-center text-center">
+            <Card>{/* <GraphicsMonth className="w-full" /> */}</Card>
             <Card>
-              {" "}
-              <GraphicsMonth className="w-full" />
+              {/* <GraphicsRecruitmentDep className="w-full" />{" "} */}
             </Card>
-            <Card>
-              {" "}
-              <GraphicsRecruitmentDep className="w-full" />{" "}
-            </Card>
-            <Card>
-              {" "}
-              <GraphicsSource className="w-full " />{" "}
-            </Card>
-            <Card>
-              {" "}
-              <GraphicsStage className="w-full " />{" "}
-            </Card>
+            <Card>{/* <GraphicsSource className="w-full " /> */}</Card>
+            <Card>{/* <GraphicsStage className="w-full " /> */}</Card>
           </section>
         </>
         <div className="grid lg:grid-cols-2  grid-cols-1 gap-4 mt-5 items-center justify-center text-center">
           <Card>
-            <PositionDashboard className=" " />{" "}
+            <PositionDashboard className=" " />
           </Card>
           <Card>
-            {" "}
-            <DepartmentDashboard className=" " />{" "}
+            <DepartmentDashboard className=" " />
           </Card>
           <Card>
-            {" "}
-            <HarvesterDashboard className=" " />{" "}
+            <HarvesterDashboard className=" " />
           </Card>
           <Card>
-            {" "}
-            <CountryDashboard className=" " />{" "}
+            <CountryDashboard className=" " />
           </Card>
         </div>
       </Card>

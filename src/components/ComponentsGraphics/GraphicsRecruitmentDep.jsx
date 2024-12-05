@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useSelector } from "react-redux";
 
 ChartJS.register(
   CategoryScale,
@@ -34,16 +35,19 @@ const options = {
 
 // Datos iniciales
 const depData = [
-  { dep: "Cruise Department", value: 700 },
-  { dep: "Merchant Department", value: 500 },
+  { name: "Cruise Department", count: 700 },
+  { name: "Merchant Department", count: 500 },
 ];
 
 export default function GraphicsRecruitmentDep() {
+  const { dashboard, vesselTypes } = useSelector((state) => state.currentViews);
   const [departmentData, setDepartmentData] = useState({
-    labels: depData.map((item) => item.dep),
+    labels: dashboard.recDepts?.map(
+      (item) => vesselTypes?.find((type) => type.Id == item.name)?.Name
+    ),
     datasets: [
       {
-        data: depData.map((item) => item.value),
+        data: dashboard.recDepts?.map((item) => item.count),
         backgroundColor: ["rgba(59, 130, 246, 0.8)", "#F58A07"],
       },
     ],
@@ -51,7 +55,7 @@ export default function GraphicsRecruitmentDep() {
 
   useEffect(() => {
     const updateData = () => {
-      const updatedValues = depData.map((item) => item.value);
+      const updatedValues = dashboard.recDepts?.map((item) => item.count);
 
       setDepartmentData((prevData) => ({
         ...prevData,
@@ -68,12 +72,11 @@ export default function GraphicsRecruitmentDep() {
 
     // Limpiar el intervalo al desmontar el componente
     return () => clearInterval(interval);
-  }, []);
+  }, [dashboard]);
 
   return (
     <section>
       <div className="w-full max-w-lg justify-center">
-        {" "}
         <h2 className="font-semibold text-lg ">
           Applications By Recruitment Department
         </h2>

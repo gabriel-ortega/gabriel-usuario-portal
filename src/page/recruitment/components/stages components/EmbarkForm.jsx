@@ -1732,7 +1732,7 @@ export const EmbarkForm = ({
                             <p>
                               {estimatedSignOffDate
                                 ? formatDate(estimatedSignOffDate, "mm-dd-yyyy")
-                                : "--"}
+                                : "---"}
                             </p>
                           </div>
                         </div>

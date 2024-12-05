@@ -60,6 +60,7 @@ export default function GraphicsMonth() {
   };
   useEffect(() => {
     const updateData = () => {
+      console.log("first");
       const updatedValues = dashboard.applicationsByMonth?.map(
         (item) => item.value
       );
