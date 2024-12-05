@@ -92,7 +92,7 @@ export const HiringForm = ({
     positions,
   } = useSelector((state) => state.currentViews);
   const [isOpen, setIsOpen] = useState(false);
-
+  const [sortedEmbarks, setSortedEmbarks] = useState([]);
   const [isNewVariable, setIsNewVariable] = useState(false);
 
   const [currentInterviewerData, setCurrentInterviewerData] =
@@ -104,9 +104,16 @@ export const HiringForm = ({
     e.preventDefault();
     setIsOpen(true);
   };
+  useEffect(() => {
+    const newEmbarks = [...embarks];
+    const sorted = newEmbarks.sort(
+      (a, b) => new Date(b.signOnDate) - new Date(a.signOnDate)
+    );
+    setSortedEmbarks(sorted);
+  }, [embarks]);
 
   const handleOpen = (index) => {
-    dispatch(setCurrentEmbark(embarks[index]));
+    dispatch(setCurrentEmbark(sortedEmbarks[index]));
     setIsNewVariable(false);
     setIsOpen(true);
   };
@@ -573,7 +580,7 @@ export const HiringForm = ({
                             </Table.Cell>
                           </Table.Row>
                         ) : (
-                          embarks.map((embark, index) => (
+                          sortedEmbarks.map((embark, index) => (
                             <Table.Row
                               key={index}
                               onClick={() => handleOpen(index)}
@@ -675,9 +682,9 @@ export const HiringForm = ({
             <div className="font-bold flex flex-row items-center justify-start gap-2">
               Embark Status:
               <Badge color={statusColor} size={"sm"}>
-                {isNewVariable
-                  ? ""
-                  : EmbarkStatus[currentEmbarkState?.status - 1]?.StatusName}
+                {currentEmbarkState?.status
+                  ? EmbarkStatus[currentEmbarkState?.status - 1]?.StatusName
+                  : ""}
               </Badge>
             </div>
             <div className="font-bold flex flex-row items-center justify-start gap-2">

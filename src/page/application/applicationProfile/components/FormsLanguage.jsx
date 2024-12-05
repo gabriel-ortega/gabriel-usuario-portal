@@ -4,7 +4,7 @@ import {
   ButtonIcon,
   SelectComponents,
 } from "../../../../components/layoutComponents";
-import { Label, Select } from "flowbite-react";
+import { Label, Select, TextInput } from "flowbite-react";
 import { LiaPercentSolid } from "react-icons/lia";
 import { FloatingLabel } from "flowbite-react";
 import { HiOutlineTrash } from "react-icons/hi";
@@ -101,6 +101,7 @@ export default function FormsLanguage({
           ...languageData,
           [name]: numericValue,
         };
+        console.log(name, numericValue);
         setLanguageData(updatedData);
         onDataChange(updatedData); // Llamar a onDataChange aquí
       }
@@ -197,6 +198,7 @@ export default function FormsLanguage({
               value={languageData.PercentageWrite || ""}
               isValid={languageData.PercentageWrite ? true : false}
               onChange={handleChange}
+              // onChange={handlePercentageChange}
             />
             {/* ICONO DE PORCENTAJE */}
             <LiaPercentSolid className="-translate-x-10 translate-y-4" />
@@ -219,6 +221,7 @@ export default function FormsLanguage({
               value={languageData.PercentageSpeak || ""}
               isValid={languageData.PercentageSpeak ? true : false}
               onChange={handleChange}
+              // onChange={handlePercentageChange}
             />
             {/* ICONO DEL PORCENTAJE */}
             <LiaPercentSolid className="-translate-x-10 translate-y-4" />

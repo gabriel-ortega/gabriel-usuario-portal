@@ -34,6 +34,7 @@ import { useDispatch } from "react-redux";
 import {
   createFirstInterviews,
   getApplication,
+  getApplicationByUid,
   setApplication,
   setApplicationData,
   updateApplicationReview,
@@ -160,9 +161,29 @@ export const ReviewApplication = () => {
       const reasons = await getReasons();
       setReasonsData(reasons);
       // setPositions(positions);
+      // if (application?.uid !== id) {
+      //   const existe = await dispatch(getApplication(id));
+      //   const existeconuid = await dispatch(getApplicationByUid(id));
+      //   setExiste(existe || existeconuid);
+      // }
       if (application?.uid !== id) {
-        const existe = await dispatch(getApplication(id));
-        setExiste(existe);
+        try {
+          // Intentar obtener la aplicación por ID
+          const existe = await dispatch(getApplication(id));
+
+          // Si no existe, intentar obtener la aplicación por UID
+          if (!existe) {
+            const existeconuid = await dispatch(getApplicationByUid(id));
+            setExiste(!!existeconuid); // Convertir a booleano
+          } else {
+            setExiste(true); // Si existe por ID, ya es true
+          }
+        } catch (error) {
+          console.error("Error fetching application:", error);
+          setExiste(false); // Manejar errores y establecer como falso si falla
+        }
+      } else {
+        setExiste(true); // Si `application?.uid === id`, ya existe
       }
       setIsLoading(false);
     };
@@ -863,15 +884,40 @@ export const ReviewApplication = () => {
                           <FaFloppyDisk className="h-4 w-4" />
                           <span className="hidden md:block ">Save</span>
                         </button>
-
-                        <button
-                          title="Print CV"
-                          className="border border-blue-300 bg-white text-blue-600 size-10 md:w-28 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50"
-                          onClick={() => getCV()}
+                        <Tooltip
+                          content={"Set a valid Position/Department"}
+                          style="light"
+                          className={
+                            applicationData.startApplication.position?.[0].id ==
+                              1 ||
+                            !applicationData.startApplication.position?.[0]
+                              .id ||
+                            applicationData.startApplication.department?.[0]
+                              .id == 1 ||
+                            !applicationData.startApplication.department?.[0].id
+                              ? ""
+                              : "hidden"
+                          }
                         >
-                          <HiDocumentDownload className="h-4 w-4" />
-                          <span className="hidden md:block ">Print CV</span>
-                        </button>
+                          <button
+                            title="Print CV"
+                            className="border border-blue-300 bg-white text-blue-600 size-10 md:w-28 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50 disabled:opacity-50 "
+                            onClick={() => getCV()}
+                            disabled={
+                              applicationData.startApplication.position?.[0]
+                                .id == 1 ||
+                              !applicationData.startApplication.position?.[0]
+                                .id ||
+                              applicationData.startApplication.department?.[0]
+                                .id == 1 ||
+                              !applicationData.startApplication.department?.[0]
+                                .id
+                            }
+                          >
+                            <HiDocumentDownload className="h-4 w-4" />
+                            <span className="hidden md:block ">Print CV</span>
+                          </button>
+                        </Tooltip>
                       </div>
                     </div>
                     <div className="flex flex-col gap-2 text-gray-500 sm:flex-row sm:space-x-4 text-sm justify-between">

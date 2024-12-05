@@ -25,6 +25,7 @@ import {
   HiOutlineMenuAlt1,
   HiOutlinePlusSm,
   HiOutlineShieldCheck,
+  HiOutlineShieldExclamation,
   HiOutlineXCircle,
   HiSave,
   HiUserCircle,
@@ -94,27 +95,54 @@ const formValidations = {
   signOffReason: [(value) => value?.id != 0, "This field is mandatory."],
 };
 
+// function calculateEstimatedSignOffDate(signOnDate, contractLength) {
+//   // Convertir el signOnDate a un objeto Date
+//   const signOn = new Date(signOnDate);
+
+//   // Obtener el día, mes y año del signOnDate
+//   const day = signOn.getDate();
+//   const month = signOn.getMonth() + 1; // Los meses en JS son 0 indexados, es decir, 0 = Enero
+//   const year = signOn.getFullYear();
+
+//   // Calcular el nuevo mes y año, añadiendo los meses del contractLength
+//   const newMonth = month + parseInt(contractLength);
+
+//   // Crear la nueva fecha de estimatedSignOffDate
+//   const estimatedSignOffDate = new Date(year, newMonth, day);
+
+//   // Retornar la fecha calculada en formato YYYY-MM-DD
+//   const estimatedSignOffDateFormatted = estimatedSignOffDate
+//     .toISOString()
+//     .split("T")[0];
+
+//   return estimatedSignOffDateFormatted;
+// }
+
 function calculateEstimatedSignOffDate(signOnDate, contractLength) {
   // Convertir el signOnDate a un objeto Date
   const signOn = new Date(signOnDate);
 
-  // Obtener el día, mes y año del signOnDate
-  const day = signOn.getDate();
-  const month = signOn.getMonth() + 1; // Los meses en JS son 0 indexados, es decir, 0 = Enero
-  const year = signOn.getFullYear();
+  // Obtener el mes y año del signOnDate
+  let year = signOn.getFullYear();
+  let month = signOn.getMonth() + 1; // Mes actual (1-indexado)
 
-  // Calcular el nuevo mes y año, añadiendo los meses del contractLength
-  const newMonth = month + parseInt(contractLength);
+  // Sumar la duración del contrato en meses
+  month += parseInt(contractLength);
+
+  // Ajustar año y mes si los meses se desbordan
+  while (month > 12) {
+    month -= 12;
+    year += 1;
+  }
+
+  // Asegurarse de que el día no exceda el último día del mes calculado
+  const day = Math.min(signOn.getDate(), new Date(year, month, 0).getDate());
 
   // Crear la nueva fecha de estimatedSignOffDate
-  const estimatedSignOffDate = new Date(year, newMonth, day);
+  const estimatedSignOffDate = new Date(year, month - 1, day);
 
   // Retornar la fecha calculada en formato YYYY-MM-DD
-  const estimatedSignOffDateFormatted = estimatedSignOffDate
-    .toISOString()
-    .split("T")[0];
-
-  return estimatedSignOffDateFormatted;
+  return estimatedSignOffDate.toISOString().split("T")[0];
 }
 
 export const EmbarkForm = ({
@@ -140,6 +168,7 @@ export const EmbarkForm = ({
   const [openModalWarning, setOpenModalWarning] = useState(false);
   const [openModalEndEmbark, setOpenModalEndEmbark] = useState(false);
   const [openModalPromote, setOpenModalPromote] = useState(false);
+  const [openModalDemote, setOpenModalDemote] = useState(false);
   const [openModalCancel, setOpenModalCancel] = useState(false);
   const embarkData = useMemo(() => data, []);
   const [isNewLocal, setIsNewLocal] = useState(isNew);
@@ -344,6 +373,7 @@ export const EmbarkForm = ({
         );
       }
     }
+    dispatch(setCurrentEmbark(toUpdate));
   };
 
   const [boardingStageValid, setBoardingStageValid] = useState(true);
@@ -492,6 +522,7 @@ export const EmbarkForm = ({
         signOnDate,
         contractLength
       );
+      console.log(estimatedSignOffDateCalc);
       onInputChange({
         target: {
           name: "estimatedSignOffDate",
@@ -574,13 +605,12 @@ export const EmbarkForm = ({
             error: <b>Ups! Something went wrong. Try again</b>,
           }
         );
-
-        // onInputChange({
-        //   target: { name: "status", value: 1 },
-        // });
-        dispatch(setCurrentEmbark(toUpdate));
       }
     }
+    onInputChange({
+      target: { name: "status", value: 1 },
+    });
+    dispatch(setCurrentEmbark(toUpdate));
   };
 
   const handleOnboard = () => {
@@ -656,12 +686,12 @@ export const EmbarkForm = ({
             error: <b>Ups! Something went wrong. Try again</b>,
           }
         );
-
-        onInputChange({
-          target: { name: "status", value: 2 },
-        });
       }
     }
+    onInputChange({
+      target: { name: "status", value: 2 },
+    });
+    dispatch(setCurrentEmbark(toUpdate));
   };
   const handleMedical = () => {
     const toUpdate = {
@@ -734,12 +764,12 @@ export const EmbarkForm = ({
             error: <b>Ups! Something went wrong. Try again</b>,
           }
         );
-
-        onInputChange({
-          target: { name: "status", value: 3 },
-        });
       }
     }
+    onInputChange({
+      target: { name: "status", value: 3 },
+    });
+    dispatch(setCurrentEmbark(toUpdate));
   };
 
   const [selectedStage, setselectedStage] = useState();
@@ -865,12 +895,12 @@ export const EmbarkForm = ({
             error: <b>Ups! Something went wrong. Try again</b>,
           }
         );
-
-        onInputChange({
-          target: { name: "status", value: selectedStage == 24 ? 5 : 4 },
-        });
       }
     }
+    onInputChange({
+      target: { name: "status", value: selectedStage == 24 ? 5 : 4 },
+    });
+    dispatch(setCurrentEmbark(toUpdate));
     setOpenModalEndEmbark(false);
   };
 
@@ -964,9 +994,12 @@ export const EmbarkForm = ({
             error: <b>Ups! Something went wrong. Try again</b>,
           }
         );
-        dispatch(setCurrentEmbark(toUpdate));
       }
     }
+    onInputChange({
+      target: { name: "status", value: 6 },
+    });
+    dispatch(setCurrentEmbark(toUpdate));
     setOpenModalEndEmbark(false);
   };
 
@@ -983,7 +1016,7 @@ export const EmbarkForm = ({
       contractCompany: currentHiring.company,
       elegibleToReturn: true,
       signOffReason: { id: "12", name: "Promotion" },
-      signOffDate: today,
+      // signOffDate: today,
     };
 
     // Crear el nuevo registro para agregar a `skills.onboard`
@@ -1030,6 +1063,7 @@ export const EmbarkForm = ({
         ...profile,
         recruitmentStage: 19,
         seafarerData: updatedProfileData,
+        promoted: new Date().toISOString(),
       };
 
       dispatch(setProfileView(updatedProfile));
@@ -1063,7 +1097,7 @@ export const EmbarkForm = ({
           contractCompany: currentHiring.company,
           elegibleToReturn: true,
           signOffReason: { id: "12", name: "Promotion" },
-          signOffDate: today,
+          // signOffDate: today,
         };
 
         dispatch(setEmbarks(updatedEmbarks));
@@ -1072,6 +1106,7 @@ export const EmbarkForm = ({
           ...profile,
           recruitmentStage: 19,
           seafarerData: updatedProfileData,
+          promoted: new Date().toISOString(),
         };
 
         dispatch(setProfileView(updatedProfile));
@@ -1086,7 +1121,7 @@ export const EmbarkForm = ({
                 contractCompany: currentHiring.company,
                 elegibleToReturn: true,
                 signOffReason: { id: "12", name: "Promotion" },
-                signOffDate: today,
+                // signOffDate: today,
               })
             ),
             dispatch(
@@ -1100,7 +1135,6 @@ export const EmbarkForm = ({
           }
         );
       }
-      dispatch(setCurrentEmbark(toUpdate));
       // onInputChange({
       //   target: { name: "status", value: 7 },
       // });
@@ -1108,6 +1142,147 @@ export const EmbarkForm = ({
       //   target: { name: "elegibleToReturn", value: true },
       // });
     }
+    dispatch(setCurrentEmbark(toUpdate));
+    setOpenModalEndEmbark(false);
+  };
+  const handleDemote = () => {
+    const today = formatDate(new Date().toISOString(), "yyyy-mm-dd");
+
+    const toUpdate = {
+      ...formState,
+      status: 7,
+      uid: profile.uid,
+      contractId: currentHiring.id,
+      contractCompany: currentHiring.company,
+      elegibleToReturn: true,
+      signOffReason: { id: "13", name: "Demotion" },
+      // signOffDate: today,
+    };
+
+    // Crear el nuevo registro para agregar a `skills.onboard`
+    const newOnboardSkill = {
+      companyName: currentHiring.company?.name, // Nombre de la compañía
+      vesselName: vessel?.name, // Nombre del buque
+      "imo#": String(vesselData[vessel?.id - 1]?.IMO), // IMO #
+      "gt/hp":
+        vesselData[vessel?.id - 1]?.["Gross Tonage"] +
+        "/" +
+        vesselData[vessel?.id - 1]?.["HP"], // GT/HP
+      typeOfVessel: [
+        {
+          name: vesselData[vessel?.id - 1]?.["Vessel Type"],
+          id: vesselData[vessel?.id - 1]?.Id,
+        },
+      ], // Tipo de buque
+      "rank/position":
+        currentEmbark.position &&
+        positions &&
+        positions.find((pos) => pos.Id == currentEmbark.position).PositionName, // Rango/posición
+      dateOn: signOnDate, // Fecha de inicio
+      dateOff: today, // Fecha de finalización
+    };
+
+    // Agregar el nuevo registro al arreglo `skills.onboard`
+    const updatedSkills = {
+      ...profile.seafarerData.skills,
+      onboard: [...profile.seafarerData.skills.onboard, newOnboardSkill],
+    };
+
+    const updatedProfileData = {
+      ...profile.seafarerData,
+      skills: updatedSkills,
+      position: positionSelected,
+    };
+
+    if (isNewLocal) {
+      const newEmbarksList = [...embarks, toUpdate];
+      dispatch(setEmbarks(newEmbarksList));
+      setIsNewLocal(false);
+
+      const updatedProfile = {
+        ...profile,
+        recruitmentStage: 19,
+        seafarerData: updatedProfileData,
+        demoted: new Date().toISOString(),
+      };
+
+      dispatch(setProfileView(updatedProfile));
+
+      toast.promise(
+        Promise.all([
+          dispatch(createSeafarerEmbark(toUpdate)),
+          dispatch(
+            updateSeafarerDataFirebase(profile.uid, updatedProfileData, 19)
+          ),
+        ]),
+        {
+          loading: "Saving...",
+          success: <b>Saved</b>,
+          error: <b>Ups! Something went wrong. Try again</b>,
+        }
+      );
+    } else {
+      const embarkIndex = embarks.findIndex(
+        (embark) => embark.id === currentEmbark.id
+      );
+
+      if (embarkIndex !== -1) {
+        const updatedEmbarks = [...embarks];
+        updatedEmbarks[embarkIndex] = {
+          ...updatedEmbarks[embarkIndex],
+          ...formState,
+          status: 7,
+          uid: profile.uid,
+          contractId: currentHiring.id,
+          contractCompany: currentHiring.company,
+          elegibleToReturn: true,
+          signOffReason: { id: "13", name: "Demotion" },
+          // signOffDate: today,
+        };
+
+        dispatch(setEmbarks(updatedEmbarks));
+
+        const updatedProfile = {
+          ...profile,
+          recruitmentStage: 19,
+          seafarerData: updatedProfileData,
+          demoted: new Date().toISOString(),
+        };
+
+        dispatch(setProfileView(updatedProfile));
+        toast.promise(
+          Promise.all([
+            dispatch(
+              updateSeafarerEmbark(currentEmbark.id, {
+                ...formState,
+                status: 7,
+                uid: profile.uid,
+                contractId: currentHiring.id,
+                contractCompany: currentHiring.company,
+                elegibleToReturn: true,
+                signOffReason: { id: "13", name: "Demotion" },
+                // signOffDate: today,
+              })
+            ),
+            dispatch(
+              updateSeafarerDataFirebase(profile.uid, updatedProfileData, 19)
+            ),
+          ]),
+          {
+            loading: "Saving...",
+            success: <b>Saved</b>,
+            error: <b>Ups! Something went wrong. Try again</b>,
+          }
+        );
+      }
+      // onInputChange({
+      //   target: { name: "status", value: 7 },
+      // });
+      // onInputChange({
+      //   target: { name: "elegibleToReturn", value: true },
+      // });
+    }
+    dispatch(setCurrentEmbark(toUpdate));
     setOpenModalEndEmbark(false);
   };
 
@@ -1147,6 +1322,10 @@ export const EmbarkForm = ({
       setModalText("Are you sure that you want to promote this seafarer?");
       setModalConfirm(() => handlePromote);
       setOpenModalPromote(true);
+    } else if (type === "demote") {
+      setModalText("Are you sure that you want to demote this seafarer?");
+      setModalConfirm(() => handleDemote);
+      setOpenModalDemote(true);
     }
   };
 
@@ -1163,7 +1342,9 @@ export const EmbarkForm = ({
             Embark Status:
             <Badge color={statusColor} size={"sm"}>
               {/* {status.name} */}
-              {status ? EmbarkStatus[status - 1].StatusName : "Undefined"}
+              {currentEmbark.status
+                ? EmbarkStatus[status - 1].StatusName
+                : "Undefined"}
             </Badge>
           </div>
 
@@ -1319,7 +1500,7 @@ export const EmbarkForm = ({
           </div>
         )}
         {status == 2 && (
-          <div className="flex justify-end">
+          <div className="flex justify-end gap-3">
             <button
               className={` border border-green-500 bg-green-500 text-white size-10 md:w-48 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-green-600`}
               // disabled={!unfit || status !== 2}
@@ -1329,6 +1510,16 @@ export const EmbarkForm = ({
               <HiOutlineShieldCheck className="h-4 w-4" />
 
               <span className="hidden md:block ">{"Promote Seafarer"}</span>
+            </button>
+            <button
+              className={` border border-orange-500 bg-orange-500 text-white size-10 md:w-48 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-orange-600`}
+              // disabled={!unfit || status !== 2}
+              onClick={() => handleInception("demote")}
+              title={"Demote Seafarer"}
+            >
+              <HiOutlineShieldExclamation className="h-4 w-4" />
+
+              <span className="hidden md:block ">{"Demote Seafarer"}</span>
             </button>
           </div>
         )}
@@ -1350,14 +1541,20 @@ export const EmbarkForm = ({
                 </span>
               </Tab>
               <Tab
-                disabled={status == 1 || !status ? true : false}
+                disabled={
+                  currentEmbark.status == 1 || !currentEmbark.status
+                    ? true
+                    : false
+                }
                 className={`${
-                  status == 1 || !status ? "opacity-20" : ""
+                  currentEmbark.status == 1 || !currentEmbark.status
+                    ? "opacity-20"
+                    : ""
                 } data-[selected]:border-b-2 border-blue-500 px-2 flex flex-col md:flex-row py-2 text-sm text-black items-center justify-center md:w-56 relative`}
               >
                 <div className="relative flex items-center">
                   <HiArrowSmDown className="w-7 h-7 inline-block mr-1" />
-                  {!endEmbarkValid && status > 1 && (
+                  {!endEmbarkValid && currentEmbark.status > 1 && (
                     <span className="absolute top-0 right-0 bg-red-600 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
                       !
                     </span>
@@ -1841,6 +2038,55 @@ export const EmbarkForm = ({
                 }}
               >
                 Promote Seafarer
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={openModalDemote}
+        size="md"
+        onClose={() => setOpenModalDemote(false)}
+        popup
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              {modalText}
+            </h3>
+            <div className="flex flex-col gap-5 my-6">
+              <span>Select the new position for this seafarer:</span>
+              <SelectComponents
+                id="position"
+                valueDefault={"Position"}
+                // data={positions}
+                data={filteredPositions}
+                name_valor={true}
+                idKey="Id"
+                valueKey="PositionName"
+                name="positionSelected"
+                Text="Select a Position"
+                initialValue={profile?.seafarerData.position[0]?.id}
+                onChange={(value) => setPositionSelected(value)}
+              />
+            </div>
+            <div className="flex justify-center gap-4">
+              <Button color="gray" onClick={() => setOpenModalDemote(false)}>
+                Cancel
+              </Button>
+              <Button
+                color="success"
+                disabled={
+                  positionSelected == profile?.seafarerData.position[0]?.id ||
+                  !positionSelected
+                }
+                onClick={() => {
+                  handleDemote();
+                }}
+              >
+                Demote Seafarer
               </Button>
             </div>
           </div>

@@ -367,8 +367,13 @@ export const SeafarerProfile = ({
     onInputChange({
       target: { name: "bmi", value: bmiCalc(weight.kg, height.m) },
     });
+    dispatch(
+      updateSeafarerProfileData({
+        ...profile.seafarerData.seafarerProfile,
+        profile: { ...formState, bmi: bmiCalc(weight.kg, height.m) },
+      })
+    );
   }, [weight, height]);
-
   // useEffect(() => {
   //   setIsLoaded(true);
   // }, []);

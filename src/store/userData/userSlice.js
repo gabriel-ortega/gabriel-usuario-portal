@@ -70,6 +70,9 @@ export const userSlice = createSlice({
     updateApplicationProfileProfile: (state, { payload }) => {
       state.userData.applicationData.applicationProfile.profile = payload;
     },
+    updateApplicationProfileProfileBMI: (state, { payload }) => {
+      state.userData.applicationData.applicationProfile.profile.bmi = payload;
+    },
     updateApplicationProfileContacts: (state, { payload }) => {
       state.userData.applicationData.applicationProfile.contacts = payload;
     },
@@ -131,6 +134,7 @@ export const {
   updateApplicationStage,
   updateApplicationStart,
   updateApplicationProfileProfile,
+  updateApplicationProfileProfileBMI,
   updateApplicationProfileContacts,
   updateApplicationProfileVaccines,
   updateApplicationProfileVaccinesAdditional,

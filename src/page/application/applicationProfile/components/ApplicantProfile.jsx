@@ -28,6 +28,7 @@ import { useDispatch } from "react-redux";
 import {
   deleteApplicationPhoto,
   updateApplicationProfileProfile,
+  updateApplicationProfileProfileBMI,
   uploadApplicationUserPhoto,
 } from "../../../../store/userData";
 import { ageCalc, ageCalcNumber } from "../../../../util/helperFunctions";
@@ -311,8 +312,30 @@ export const ApplicantProfile = ({
     onInputChange({
       target: { name: "bmi", value: bmiCalc(weight?.kg, height?.m) },
     });
+    dispatch(
+      updateApplicationProfileProfile({
+        ...formState,
+        bmi: bmiCalc(weight?.kg, height?.m),
+      })
+    );
+    // dispatch(
+    //   updateApplicationProfileProfileBMI(bmiCalc(weight?.kg, height?.m))
+    // );
     onUnsavedChange(false);
   }, [weight, height]);
+
+  // useEffect(() => {
+  //   if (bmi && !userData?.applicationData?.applicationProfile?.profile?.bmi) {
+  //     // setValueBMI(bmiCalc(weight?.kg, height?.m));
+  //     // onInputChange({
+  //     //   target: { name: "bmi", value: bmiCalc(weight?.kg, height?.m) },
+  //     // });
+  //     // onUnsavedChange(false);
+  //     dispatch(
+  //       updateApplicationProfileProfileBMI(bmiCalc(weight?.kg, height?.m))
+  //     );
+  //   }
+  // }, [formState]);
 
   /* VARIABLE PARA LA FUNCION DEL MODAL*/
   const [isOpen, setIsOpen] = useState(false);

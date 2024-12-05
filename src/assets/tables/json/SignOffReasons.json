@@ -46,5 +46,9 @@
   {
     "Id": "12",
     "Reason": "Promotion"
+  },
+  {
+    "Id": "13",
+    "Reason": "Demotion"
   }
 ]
