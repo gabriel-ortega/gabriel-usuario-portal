@@ -11,6 +11,7 @@ const initialState = {
   currentInterview: {},
   currentHiring: {},
   currentEmbark: {},
+  dashboard: {},
 };
 
 export const viewSlice = createSlice({
@@ -147,6 +148,9 @@ export const viewSlice = createSlice({
     setProfileUpdateData: (state, { payload }) => {
       state.profileUpdate = payload;
     },
+    setDashboardData: (state, { payload }) => {
+      state.dashboard = payload;
+    },
   },
 });
 
@@ -194,4 +198,5 @@ export const {
   setCompanies,
   setSignOffReasons,
   setProfileUpdateData,
+  setDashboardData,
 } = viewSlice.actions;

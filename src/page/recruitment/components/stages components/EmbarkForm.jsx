@@ -118,31 +118,47 @@ const formValidations = {
 //   return estimatedSignOffDateFormatted;
 // }
 
+// function calculateEstimatedSignOffDate(signOnDate, contractLength) {
+//   // Convertir el signOnDate a un objeto Date
+//   const signOn = new Date(signOnDate);
+
+//   // Obtener el mes y año del signOnDate
+//   let year = signOn.getFullYear();
+//   let month = signOn.getMonth() + 1; // Mes actual (1-indexado)
+
+//   // Sumar la duración del contrato en meses
+//   month += parseInt(contractLength);
+
+//   // Ajustar año y mes si los meses se desbordan
+//   while (month > 12) {
+//     month -= 12;
+//     year += 1;
+//   }
+
+//   // Asegurarse de que el día no exceda el último día del mes calculado
+//   const day = Math.min(signOn.getDate(), new Date(year, month, 0).getDate());
+
+//   // Crear la nueva fecha de estimatedSignOffDate
+//   const estimatedSignOffDate = new Date(year, month - 1, day);
+
+//   // Retornar la fecha calculada en formato YYYY-MM-DD
+//   return estimatedSignOffDate.toISOString().split("T")[0];
+// }
+
 function calculateEstimatedSignOffDate(signOnDate, contractLength) {
-  // Convertir el signOnDate a un objeto Date
-  const signOn = new Date(signOnDate);
+  // Asegurarse de que signOnDate esté en formato "yyyy-mm-dd"
+  const [year, month, day] = signOnDate.split("-").map(Number);
 
-  // Obtener el mes y año del signOnDate
-  let year = signOn.getFullYear();
-  let month = signOn.getMonth() + 1; // Mes actual (1-indexado)
+  // Crear la fecha manualmente, teniendo en cuenta que los meses son 0 indexados en JavaScript
+  const signOn = new Date(year, month - 1, day);
 
-  // Sumar la duración del contrato en meses
-  month += parseInt(contractLength);
+  // Sumar la duración del contrato (en meses)
+  signOn.setMonth(signOn.getMonth() + parseInt(contractLength, 10));
 
-  // Ajustar año y mes si los meses se desbordan
-  while (month > 12) {
-    month -= 12;
-    year += 1;
-  }
+  // Formatear la fecha resultante a "yyyy-mm-dd"
+  const estimatedSignOffDateFormatted = signOn.toISOString().split("T")[0];
 
-  // Asegurarse de que el día no exceda el último día del mes calculado
-  const day = Math.min(signOn.getDate(), new Date(year, month, 0).getDate());
-
-  // Crear la nueva fecha de estimatedSignOffDate
-  const estimatedSignOffDate = new Date(year, month - 1, day);
-
-  // Retornar la fecha calculada en formato YYYY-MM-DD
-  return estimatedSignOffDate.toISOString().split("T")[0];
+  return estimatedSignOffDateFormatted;
 }
 
 export const EmbarkForm = ({
@@ -1329,6 +1345,11 @@ export const EmbarkForm = ({
     }
   };
 
+  useEffect(() => {
+    // console.log(new Date(estimatedSignOffDate));
+    console.log(formatDate(estimatedSignOffDate, "dddd, mmmm dd yyyy"));
+  }, [estimatedSignOffDate]);
+
   return (
     <section>
       <section>
@@ -1710,7 +1731,7 @@ export const EmbarkForm = ({
                             </a>
                             <p>
                               {estimatedSignOffDate
-                                ? formatDate(estimatedSignOffDate, "dd-mm-yyyy")
+                                ? formatDate(estimatedSignOffDate, "mm-dd-yyyy")
                                 : "--"}
                             </p>
                           </div>

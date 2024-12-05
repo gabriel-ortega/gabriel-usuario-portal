@@ -185,6 +185,7 @@ export const StandByApplication = () => {
       success: <b>Submited!</b>,
       error: <b>Ups! Something went wrong. Try again</b>,
     });
+    setOpenModalWarning(false);
   };
 
   return (

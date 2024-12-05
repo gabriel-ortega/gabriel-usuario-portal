@@ -51,6 +51,7 @@ export const Contract = () => {
 
   useEffect(() => {
     if (profile?.uid !== currentHiring?.uid) {
+      console.log("buscando seafarerData");
       dispatch(getSeafarerData(currentHiring.uid));
     }
     if (hirings.length < 1 && currentHiring?.uid) {

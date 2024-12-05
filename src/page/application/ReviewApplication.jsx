@@ -249,7 +249,7 @@ export const ReviewApplication = () => {
 
   const [selectedVersion, setSelectedVersion] = useState(latestVersion);
 
-  const handleSave = (e, state, isReadChange) => {
+  const handleSave = (e, state, isReadChange = true) => {
     if (e) {
       e.preventDefault();
     }
@@ -295,6 +295,8 @@ export const ReviewApplication = () => {
       position: positionUpdate,
     };
 
+    // console.log(updatedApplication);
+
     // Ejecutar el dispatch con el objeto application actualizado
     dispatch(updateReviewVersion(currentVersionData));
     if (state) {
@@ -319,7 +321,7 @@ export const ReviewApplication = () => {
         error: <b>Ups! Something went wrong. Try again</b>,
       }
     );
-    // setUnsavedChanges(false);
+    setUnsavedChanges(false);
   };
 
   const handleEvaluation = (e) => {
@@ -879,7 +881,7 @@ export const ReviewApplication = () => {
                             // application?.status === 3 ? "hidden" : ""
                           } border border-[#010064] bg-[#010064] text-white size-10 md:w-28 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-[#262550] disabled:opacity-30`}
                           disabled={isSaving}
-                          onClick={(e) => handleSave(e)}
+                          onClick={(e) => handleSave(e, false)}
                         >
                           <FaFloppyDisk className="h-4 w-4" />
                           <span className="hidden md:block ">Save</span>

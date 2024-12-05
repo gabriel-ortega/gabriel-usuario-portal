@@ -9,6 +9,7 @@ import {
   Tooltip,
   Filler,
 } from "chart.js";
+import { useSelector } from "react-redux";
 
 ChartJS.register(
   LineElement,
@@ -31,11 +32,14 @@ const months = [
 ];
 
 export default function GraphicsMonth() {
+  const { dashboard } = useSelector((state) => state.currentViews);
   const [data, setData] = useState({
-    labels: months.map((item) => item.month),
+    labels: dashboard.applicationsByMonth?.map((item) =>
+      item.month.toUpperCase()
+    ),
     datasets: [
       {
-        data: months.map((item) => item.value),
+        data: dashboard.applicationsByMonth?.map((item) => item.value),
         fill: true,
         backgroundColor: "rgba(75, 192, 192, 0.2)",
         borderColor: "rgb(75, 192, 192)",
@@ -56,7 +60,9 @@ export default function GraphicsMonth() {
   };
   useEffect(() => {
     const updateData = () => {
-      const updatedValues = months.map((item) => item.value);
+      const updatedValues = dashboard.applicationsByMonth?.map(
+        (item) => item.value
+      );
 
       setData((prevData) => ({
         ...prevData,
@@ -76,9 +82,13 @@ export default function GraphicsMonth() {
   }, []);
 
   return (
-    <div className="w-full max-w-lg justify-center">
-      <h2 className="font-semibold text-lg">Applications By Month</h2>
-      <Line data={data} options={options} />
-    </div>
+    <>
+      {dashboard.applicationsByMonth && (
+        <div className="w-full max-w-lg justify-center">
+          <h2 className="font-semibold text-lg">Applications By Month</h2>
+          <Line data={data} options={options} />
+        </div>
+      )}
+    </>
   );
 }

@@ -374,7 +374,8 @@ export default function Applicants_Aplications() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading } = useSelector((state) => state.userData);
+  // const { isLoading } = useSelector((state) => state.userData);
+  const [isLoading, setIsLoading] = useState(false);
   const { applicationFilters } = useSelector((state) => state.filters);
   const [openForm, setOpenForm] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -467,7 +468,7 @@ export default function Applicants_Aplications() {
       const applicationsDataCount = await countApplicationsData();
       setApplicationsCount(applicationsDataCount);
     }
-    dispatch(setLoading(false));
+    // dispatch(setLoading(false));
   };
 
   // const loadMoreData = async (filters) => {
@@ -486,38 +487,38 @@ export default function Applicants_Aplications() {
   //   dispatch(setLoading(false));
   // };
 
-  const loadMoreData = async (pageNumber, noFilters = false) => {
-    if (isLoading) return; // Evitar carga adicional si ya está cargando
+  // const loadMoreData = async (pageNumber, noFilters = false) => {
+  //   if (isLoading) return; // Evitar carga adicional si ya está cargando
 
-    // Obtener el último documento visible de la página anterior
-    const startDoc = lastVisibleDocs[pageNumber - 2] || null;
+  //   // Obtener el último documento visible de la página anterior
+  //   const startDoc = lastVisibleDocs[pageNumber - 2] || null;
 
-    dispatch(setLoading(true));
+  //   dispatch(setLoading(true));
 
-    // Determinar los filtros a usar: vacío si `noFilters` es true, de lo contrario usa `applicationFilters`
-    const filtersData = noFilters ? {} : applicationFilters;
+  //   // Determinar los filtros a usar: vacío si `noFilters` es true, de lo contrario usa `applicationFilters`
+  //   const filtersData = noFilters ? {} : applicationFilters;
 
-    // Consultar la página siguiente
-    const result = await fetchApplicationsData(filtersData, 100, startDoc);
+  //   // Consultar la página siguiente
+  //   const result = await fetchApplicationsData(filtersData, 100, startDoc);
 
-    if (result?.error) {
-      setErrorMessage(
-        `Please send the following error to IT: ${result?.error?.message}` || ""
-      );
-    } else {
-      // Actualizar la lista de aplicaciones
-      setApplications(result.seafarersData);
+  //   if (result?.error) {
+  //     setErrorMessage(
+  //       `Please send the following error to IT: ${result?.error?.message}` || ""
+  //     );
+  //   } else {
+  //     // Actualizar la lista de aplicaciones
+  //     setApplications(result.seafarersData);
 
-      // Actualizar lastVisibleDocs con el último documento de la nueva página
-      setLastVisibleDocs((prevDocs) => {
-        const updatedDocs = [...prevDocs];
-        updatedDocs[pageNumber - 1] = result.lastVisible;
-        return updatedDocs;
-      });
-    }
+  //     // Actualizar lastVisibleDocs con el último documento de la nueva página
+  //     setLastVisibleDocs((prevDocs) => {
+  //       const updatedDocs = [...prevDocs];
+  //       updatedDocs[pageNumber - 1] = result.lastVisible;
+  //       return updatedDocs;
+  //     });
+  //   }
 
-    dispatch(setLoading(false));
-  };
+  //   dispatch(setLoading(false));
+  // };
 
   const loadResults = async () => {
     try {
@@ -644,10 +645,13 @@ export default function Applicants_Aplications() {
   const [filters, setFilters] = useState({});
 
   const handleDowloadExcel = async () => {
+    setIsLoading(true);
     try {
       await downloadExcel([], "application", "Reporte_de_Application");
+      setIsLoading(false);
     } catch (error) {
       console.error("Error al descargar el reporte:", error.message);
+      setIsLoading(false);
     }
   };
 
@@ -677,9 +681,9 @@ export default function Applicants_Aplications() {
           <TabPanel className="">
             <div className="px-8 flex items-end justify-end">
               <Button
-                // isProcessing={isLoading}
+                isProcessing={isLoading}
                 color={"success"}
-                // onClick={handleDowloadExcel}
+                onClick={handleDowloadExcel}
               >
                 Export to Excel
               </Button>

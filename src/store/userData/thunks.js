@@ -33,6 +33,7 @@ import {
   setApplicationView,
   setCurrentEmbark,
   setCurrentHiring,
+  setDashboardData,
   setEmbarks,
   setFirstInterview,
   setHirings,
@@ -44,6 +45,17 @@ import {
   updateSeafarerSignature,
 } from "../currentViews/viewSlice";
 import { createuserWithEmail } from "../../config/firebase/providers";
+
+export const getDashboardData = () => {
+  return async (dispatch) => {
+    const docRef = doc(FirebaseDB, `dashboard/data`);
+    const docSnap = await getDoc(docRef);
+    const data = docSnap.data();
+    const formatedDate = data.updatedAt.toDate().toISOString();
+    const updatedData = { ...data, updatedAt: formatedDate };
+    dispatch(setDashboardData(updatedData));
+  };
+};
 
 export const createApplication = (userData) => {
   return async (dispatch) => {

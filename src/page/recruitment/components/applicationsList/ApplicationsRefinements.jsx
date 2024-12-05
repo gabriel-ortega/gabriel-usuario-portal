@@ -4,6 +4,7 @@ import { LoadingState } from "../../../../components/skeleton/LoadingState";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useState } from "react";
 import countries from "../../../../assets/tables/json/Countries.json";
+import statusData from "../../../../assets/tables/json/ApplicationStatus-static.json";
 import { useEffect } from "react";
 import { useClearRefinements } from "react-instantsearch";
 import { useToggleRefinement } from "react-instantsearch";
@@ -48,6 +49,8 @@ const CustomRefinementList = ({
     currentArray = vesselTypes;
   } else if (tableName == "countries") {
     currentArray = countries;
+  } else if (tableName == "status") {
+    currentArray = statusData;
   }
 
   // Mapear IDs a nombres
@@ -62,6 +65,7 @@ const CustomRefinementList = ({
     const item = currentArray.find((entry) => entry.Id == id);
     return item
       ? item.PositionName ||
+          item.statusName ||
           item.Name ||
           item.DepartmentName ||
           item.CountryName ||
@@ -196,6 +200,16 @@ export const ApplicationsRefinements = ({ onFilters = () => {} }) => {
         tableValue={"Name"}
         onRefinementChange={(values) =>
           handleRefinementChange("isRead", values)
+        }
+      />
+      <CustomRefinementList
+        attribute="status"
+        label="Status"
+        selector={(state) => state.currentViews} // Ajusta según el store
+        tableName={"status"}
+        tableValue={"statusName"}
+        onRefinementChange={(values) =>
+          handleRefinementChange("status", values)
         }
       />
       <CustomRefinementList
