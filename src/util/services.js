@@ -1474,6 +1474,71 @@ export const getDateInterviews = async () => {
   }
 };
 
+export const getUserAccountByUid = async (uid) => {
+  try {
+    const response = await fetch(
+      `https://useraccountfunction-k3i75dd7qa-uc.a.run.app/getUser/${uid}`
+    );
+    if (!response.ok) {
+      throw new Error(`Error fetching user: ${response.statusText}`);
+    }
+    const data = await response.json();
+    // console.log("User data:", data);
+
+    return data;
+  } catch (error) {
+    // console.error("Error in getUserByUid:", error);
+
+    return false;
+  }
+};
+
+export const updateUserAccountEmail = async (uid, newEmail) => {
+  try {
+    const response = await fetch(
+      `https://useraccountfunction-k3i75dd7qa-uc.a.run.app/updateUserEmail`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ uid, email: newEmail }),
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`Error updating email: ${response.statusText}`);
+    }
+    const result = await response.json();
+    console.log("Email updated:", result);
+    return result;
+  } catch (error) {
+    console.error("Error in updateUserEmail:", error);
+  }
+};
+
+export const updateUserPassword = async (uid, newPassword) => {
+  try {
+    const response = await fetch(
+      `https://useraccountfunction-k3i75dd7qa-uc.a.run.app/updateUserPassword`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ uid, password: newPassword }),
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`Error updating password: ${response.statusText}`);
+    }
+    const result = await response.json();
+    console.log("Password updated:", result);
+    return result;
+  } catch (error) {
+    console.error("Error in updateUserPassword:", error);
+  }
+};
+
 /* -----------------------FETCH DE TABLAS AUXILIARES----------------------- */
 export const getVesselType = async () => {
   try {

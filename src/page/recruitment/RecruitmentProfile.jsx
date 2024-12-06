@@ -336,7 +336,13 @@ export default function RecruitmentProfile() {
                             </Badge>
                           </>
                         )}
-                      <span>{profile.email}</span>
+                      <Badge
+                        color={"info"}
+                        onClick={() => setCurrentTab("7")}
+                        className="hover:cursor-pointer"
+                      >
+                        {profile.email}
+                      </Badge>
                     </div>
                     <div className="flex flex-row justify-between items-center gap-2">
                       <h1 className="text-2xl md:text-3xl  font-bold tracking-tight w-[85%]">
