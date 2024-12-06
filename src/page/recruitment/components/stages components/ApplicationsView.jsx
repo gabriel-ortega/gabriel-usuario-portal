@@ -34,7 +34,7 @@ export const ApplicationsView = () => {
   }, []);
 
   const handleApplicationLink = (selectedData) => {
-    dispatch(setApplicationData(selectedData));
+    // dispatch(setApplicationData(selectedData));
     navigate("/reviewapplication/" + id);
   };
 

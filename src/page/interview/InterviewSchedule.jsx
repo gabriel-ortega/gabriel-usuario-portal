@@ -15,7 +15,7 @@ import {
   isSameMonth,
   isSameDay,
 } from "date-fns";
-import { getDateInterviews } from "../../util/services";
+import { getCitas, getDateInterviews,saveCita } from "../../util/services";
 import iconCamara from "../../assets/Icon/iconCamaraWeb.png";
 import iconTeams from "../../assets/Icon/iconTeams.png";
 import iconWifi from "../../assets/Icon/Wifi.png";
@@ -26,7 +26,7 @@ import { FirebaseDB } from "../../config/firebase/config";
 import { LoadingState } from "../../components/skeleton/LoadingState";
 import { formatDate } from "../../util/helperFunctions";
 
-export default function InterviewSchedule({ type = 0 }) {
+export default function InterviewSchedule({ type = 1 }) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
   const [dates, setDates] = useState([]);
@@ -51,65 +51,58 @@ export default function InterviewSchedule({ type = 0 }) {
   const { profile } = useSelector((state) => state.currentViews);
   const loadResults = async () => {
     try {
-      const dates = await getDateInterviews();
-      let data = [];
-      let transformedData = [];
-
+      setLoandingSchedule(false)
       // Validar y transformar los datos recibidos
-      if (dates && dates.data) {
-        data = JSON.parse(dates.data);
-        // Convertir fechas a objetos Date
-        transformedData = data.map((item) => ({
-          ...item,
-          start: new Date(item.start), // Convertir `start` a Date
-          end: new Date(item.end), // Convertir `end` a Date
-        }));
-      }
+      const dates = await getCitas(); 
+      // console.log(dates);
+      let transformedData = [];
+      transformedData = dates.map((item) => ({
+        ...item,
+        start: item.start && item.start.toDate ? item.start.toDate() : null, // Convertir `start` a Date
+        end: item.end && item.end.toDate ? item.end.toDate() : null, // Convertir `end` a Date
+      }));
+      /* console.log("tranformar");
+      console.log(transformedData) */
       const currentDate = new Date();
 
       const searchData = transformedData.filter((item) => {
-        // Convertir la fecha de 'start' al formato Date para comparación
-        const interviewStartDate = new Date(item.start);
-
-        // Compara la fecha de inicio con la fecha actual
+      const interviewStartDate = new Date(item.start);
         return (
           item.interviewee == userData.uid && interviewStartDate >= currentDate
         );
       });
       console.log("searchData");
-      console.log(searchData);
-      // Si se encuentra alguna entrevista válida, se asigna a la variable 'schedule'
-      if (searchData.length > 0) {
-        setSchedule(searchData);
+      console.log(searchData)
+      if(searchData.length){
+setSchedule(searchData);
+setLoandingSchedule(true)
       }
-      const filteredFirst = transformedData.filter(
-        (data) => data.asunto == "First Interview"
-      );
-      const filteredSecond = transformedData.filter(
-        (data) => data.asunto == "Second Interview"
-      );
-
+      
+      
       setLoanding(true);
-
-      setDates(transformedData);
-      if (type == 0) {
-        setDatesCurrent(transformedData);
-        console.log(transformedData);
-      } else if (type == 1) {
-        setDatesCurrent(filteredFirst);
-        const availableDays = filteredFirst.map((day) =>
+      /* setDatesCurrent(transformedData); */
+      
+ 
+        let filteredData = transformedData;
+      
+        if (type === 1) {
+          filteredData = transformedData.filter((data) => data.asunto === "First Interview");
+        } else if (type === 2) {
+          filteredData = transformedData.filter((data) => data.asunto === "Second Interview");
+        }
+      
+        setDatesCurrent(filteredData);
+        setDates(transformedData);
+        const availableDays = filteredData.map((day) =>
           normalizeDate(format(day.start, "yyyy-MM-dd")).setHours(0, 0, 0, 0)
         );
-        setAvailableDates(availableDays || []);
-        console.log(availableDays);
-      } else if (type == 2) {
-        setDatesCurrent(filteredSecond);
-        const availableDays = filteredSecond.map((day) =>
-          normalizeDate(format(day.start, "yyyy-MM-dd")).setHours(0, 0, 0, 0)
-        );
-        setAvailableDates(availableDays || []);
-        console.log(filteredSecond);
-      }
+        if (type !== 0) {
+          
+          setAvailableDates(availableDays || []);
+        } else{
+          
+          setAvailableDates(availableDays);
+        }
     } catch (error) {
       console.error("Error al cargar datos:", error);
     }
@@ -133,7 +126,7 @@ export default function InterviewSchedule({ type = 0 }) {
     loadResults();
   }, []);
 
-  const createDateFirebase = async (data) => {
+  /* const createDateFirebase = async (data) => {
     try {
       const docRef = doc(FirebaseDB, "citas/dates");
       const docId = docRef.id;
@@ -144,7 +137,7 @@ export default function InterviewSchedule({ type = 0 }) {
     } catch (error) {
       console.error("Error creando el dates:", error);
     }
-  };
+  }; */
 
   // Cambiar al mes anterior
   const handlePrevMonth = () => {
@@ -158,13 +151,16 @@ export default function InterviewSchedule({ type = 0 }) {
 
   // Seleccionar una fecha
   const handleDateClick = (day) => {
+    /* console.log("first")
+    console.log(dates) */
     setSelectedDate(day);
-    const filtered = dates.filter((event) => {
+    const filtered = datesCurrent.filter((event) => {
       const eventDate =
         new Date(event.start).setHours(0, 0, 0, 0) ==
         normalizeDate(format(day, "yyyy-MM-dd")).setHours(0, 0, 0, 0); // Convertir el campo start a objeto Date
       return eventDate; // Comparar si es el mismo día
     });
+    /* console.log(filtered) */
     setEvents(filtered);
     groupEventsByHour(filtered);
   };
@@ -260,47 +256,54 @@ export default function InterviewSchedule({ type = 0 }) {
     setGroupedEvents(result); // Guardar en el estado
   };
 
-  const assignRandomInterviewee = (hourGroup) => {
+  const assignRandomInterviewee  = async (hourGroup) => {
     // Verificar si hay eventos disponibles en esta hora
     if (!hourGroup.available) {
       console.warn("No hay eventos disponibles en esta hora.");
       return;
     }
-
+  
     // Filtrar los eventos disponibles (donde interviewee esté vacío)
     const availableEvents = hourGroup.data.filter((e) => !e.interviewee);
-
+  
     // Si no hay eventos disponibles, salir
     if (availableEvents.length === 0) {
       console.warn("No hay eventos disponibles.");
       return;
     }
-
+  
     // Seleccionar un evento aleatorio de los disponibles
     const randomIndex = Math.floor(Math.random() * availableEvents.length);
     const selectedEvent = availableEvents[randomIndex];
-
+  
     // Asignar un valor al campo interviewee
-    selectedEvent.interviewee = userData.uid || ""; // Aquí puedes poner el valor que necesites
-    /*  console.log(selectedEvent) */
-
+    selectedEvent.interviewee = userData.uid || "";
+    selectedEvent.status = "Appointed"; // Aquí puedes poner el valor que necesites
+    /* console.log("selectedEvent")
+    console.log([selectedEvent])  */
+    await saveCita(selectedEvent.id,selectedEvent)
+    setSchedule([selectedEvent])
+    setLoandingSchedule(true)
+    // Agregar la validación de solapamiento de fechas
+    const singleDate = selectedEvent; // El evento seleccionado
+    const overlappingEvents = validateTimeOverlap(hourGroup.data, singleDate); // Llamar a la validación
+  
+    // Si hay eventos que se solapan, actualiza su estado
+    overlappingEvents.forEach((event) => {
+      event.status = "Expired"; // Cambiar el estado de los eventos solapados
+    });
+  
+    // Actualizar el estado de los eventos con la nueva información
     setDatesCurrent((prevDates) => {
       const updatedDates = prevDates.map((event) =>
         event.id === selectedEvent.id
-          ? { ...event, interviewee: selectedEvent.interviewee }
+          ? { ...event, interviewee: selectedEvent.interviewee, status: selectedEvent.status }
           : event
       );
-
-      // Llamar a createDateFirebase con los datos actualizados
-
-      createDateFirebase(updatedDates);
-      setSchedule(selectedEvent);
-      setLoandingSchedule(true);
-      loadResults();
-      /* console.log(updatedDates) */
+  
       return updatedDates;
     });
-
+  
     // Actualizar el estado de groupedEvents para reflejar el cambio
     setGroupedEvents((prevGroupedEvents) =>
       prevGroupedEvents.map((group) => {
@@ -309,11 +312,11 @@ export default function InterviewSchedule({ type = 0 }) {
           const updatedData = group.data.map((event) =>
             event === selectedEvent ? selectedEvent : event
           );
-
+  
           const updatedAvailableCount = updatedData.filter(
             (e) => !e.interviewee
           ).length;
-
+  
           return {
             ...group,
             data: updatedData,
@@ -324,7 +327,7 @@ export default function InterviewSchedule({ type = 0 }) {
         return group;
       })
     );
-
+  
     // También actualizar el estado de eventos generales si es necesario
     setEvents((prevEvents) =>
       prevEvents.map((event) =>
@@ -332,21 +335,75 @@ export default function InterviewSchedule({ type = 0 }) {
       )
     );
   };
-
-  const handleCancelSchedule = () => {
-    setDatesCurrent((prevDates) => {
-      const updatedDates = prevDates.map((event) =>
-        event.id == schedule[0].id ? { ...event, interviewee: "" } : event
+  
+  // Función de validación de solapamiento de fechas
+  const validateTimeOverlap = (events, singleDate) => {
+    const singleStart = new Date(singleDate.start).getTime(); // Inicio del rango
+    const singleEnd = new Date(singleDate.end).getTime(); // Fin del rango
+  
+    // Función para verificar si dos fechas son del mismo día
+    const isSameDay = (date1, date2) => {
+      return (
+        date1.getFullYear() === date2.getFullYear() &&
+        date1.getMonth() === date2.getMonth() &&
+        date1.getDate() === date2.getDate()
       );
+    };
 
-      // Llamar a createDateFirebase con los datos actualizados
-      createDateFirebase(updatedDates);
-
-      setSchedule([]);
+    // Filtrar las coincidencias
+    const overlappingDates = dates.filter((date) => {
+      const dateStart = new Date(date.start).getTime(); // Inicio del intervalo
+      const dateEnd = new Date(date.end).getTime(); // Fin del intervalo
+  
+      return (
+        date.id !== singleDate.id && // Excluir el mismo objeto
+        date.interviewer === singleDate.interviewer && // Mismo entrevistador
+        isSameDay(new Date(date.start), new Date(singleDate.start)) && // Mismo día
+        (
+          (dateStart > singleStart && dateStart < singleEnd) || // El inicio está dentro del rango
+          (dateEnd > singleStart && dateEnd < singleEnd) || // El final está dentro del rango
+          (dateStart < singleStart && dateEnd > singleEnd) // El rango abarca el rango del singleDate
+        )
+      );
     });
-    setLoanding(false);
-    setLoandingSchedule(false);
-    loadResults();
+
+    overlappingDates.forEach(async (event) => {
+      event.status = "Expired"; // Asegúrate de asignar el estado aquí.
+      await saveCita(event.id, event); // Llama a saveCita con los valores actualizados.
+    });
+
+
+    
+    
+  
+    return overlappingDates;
+  };
+
+  const handleCancelSchedule = async () => {
+    // Indicar que el proceso de carga ha comenzado
+    setLoanding(false)
+  
+    // Actualizar el estado y guardar la cita
+    setDatesCurrent((prevDates) => {
+      const updatedDates = prevDates
+        .filter((event) => event.id == schedule[0].id)
+        .map((event) => ({ id: event.id, interviewee: "", status: "Pending" }));
+  
+      // Guardar la cita actualizada
+      saveCita(updatedDates[0].id, updatedDates[0]);
+  
+      // Limpiar el schedule
+      setSchedule([]);
+  
+      return prevDates;
+    });
+  
+    // Llamar a la función de carga y esperar a que termine
+    await loadResults();
+  
+    // Indicar que el proceso ha terminado
+    setLoanding(true)
+    setLoandingSchedule(false)
   };
 
   useEffect(() => {
