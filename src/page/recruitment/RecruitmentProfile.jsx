@@ -5,7 +5,7 @@ import {
   ButtonIcon,
   SelectComponents,
 } from "../../components/layoutComponents";
-import { Badge, Button, Card, Drawer, Dropdown } from "flowbite-react";
+import { Badge, Button, Card, Drawer, Dropdown, Tooltip } from "flowbite-react";
 import {
   HiArrowLeft,
   HiDocumentDownload,
@@ -87,17 +87,40 @@ export default function RecruitmentProfile() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (positions && profile?.seafarerData?.position?.[0]?.id) {
-      const matchingPosition = positions.find(
-        (pos) => pos.Id == profile.seafarerData.position[0].id
-      );
+  // useEffect(() => {
+  //   if (positions && profile?.seafarerData?.position?.[0]?.id) {
+  //     const matchingPosition = positions.find(
+  //       (pos) => pos.Id == profile.seafarerData.position[0].id
+  //     );
 
-      if (matchingPosition) {
-        setCurrentPosition(matchingPosition);
+  //     if (matchingPosition) {
+  //       setCurrentPosition(matchingPosition);
+  //     }
+  //   }
+  // }, [positions, profile?.seafarerData?.position]);
+
+  useEffect(() => {
+    if (positions) {
+      // Intentar encontrar la posición en seafarerData
+      const seafarerPositionId = profile?.seafarerData?.position?.[0]?.id;
+      const applicationPositionId =
+        profile?.applicationData?.startApplication?.position?.[0]?.id;
+
+      const positionId = seafarerPositionId || applicationPositionId; // Tomar el primero disponible
+
+      if (positionId) {
+        const matchingPosition = positions.find((pos) => pos.Id == positionId);
+
+        if (matchingPosition) {
+          setCurrentPosition(matchingPosition);
+        }
       }
     }
-  }, [positions, profile?.seafarerData?.position]);
+  }, [
+    positions,
+    profile?.seafarerData?.position,
+    profile?.applicationData?.startApplication?.position,
+  ]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -373,13 +396,32 @@ export default function RecruitmentProfile() {
                           <FaFloppyDisk className="h-4 w-4" />
                           <span className="hidden md:block ">Save</span>
                         </button>
-                        <button
-                          className="border border-blue-300 bg-white text-blue-600 size-10 md:w-28 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50"
-                          onClick={() => getCV()}
+                        <Tooltip
+                          content="Set a valid Position/Department"
+                          style="light"
+                          className={
+                            profile?.seafarerData?.position?.[0]?.id == 1 ||
+                            (!profile?.seafarerData?.position?.[0]?.id &&
+                              profile?.applicationData?.startApplication
+                                ?.position?.[0]?.id == 1)
+                              ? ""
+                              : "hidden"
+                          }
                         >
-                          <HiDocumentDownload className="h-4 w-4" />
-                          <span className="hidden md:block ">Print CV</span>
-                        </button>
+                          <button
+                            disabled={
+                              profile?.seafarerData?.position?.[0]?.id == 1 ||
+                              (!profile?.seafarerData?.position?.[0]?.id &&
+                                profile?.applicationData?.startApplication
+                                  ?.position?.[0]?.id == 1)
+                            }
+                            className="border border-blue-300 bg-white text-blue-600 size-10 md:w-28 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50 disabled:opacity-30"
+                            onClick={() => getCV()}
+                          >
+                            <HiDocumentDownload className="h-4 w-4" />
+                            <span className="hidden md:block ">Print CV</span>
+                          </button>
+                        </Tooltip>
                         <button
                           className="border border-blue-300 bg-white text-blue-600 size-10 md:w-28 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50"
                           onClick={() => setIsOpen(true)}

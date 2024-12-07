@@ -53,17 +53,19 @@ export const RecruitmentSeafarerProfile = ({
   };
 
   const handleContacts = (e) => {
+    console.log("contacts changes");
     // e.preventDefault();
     // console.log(profileData);
     if (profileData?.contacts?.contact !== e) {
       setProfileData({
-        ...profile.seafarerData.seafarerProfile,
+        ...profile.seafarerData?.seafarerProfile,
         contacts: { contact: e },
       });
     }
   };
 
   const handleVaccineDataChange = (vaccineType, fieldName, value) => {
+    console.log("vaccine changes");
     setProfileData({
       ...profile.seafarerData?.seafarerProfile,
       vaccines: {
@@ -79,6 +81,7 @@ export const RecruitmentSeafarerProfile = ({
   };
 
   const onVaccineUpload = async (attach) => {
+    console.log("vaccine upload");
     if (attach) {
       setProfileData({
         // ...profileData,
@@ -92,6 +95,7 @@ export const RecruitmentSeafarerProfile = ({
   };
 
   const handleVaccineAdd = (e) => {
+    console.log("Vaccine add");
     if (profileData.vaccines?.additionalVaccines !== e && e) {
       setProfileData({
         // ...profileData,
@@ -108,6 +112,7 @@ export const RecruitmentSeafarerProfile = ({
 
   /*  Función para agregar un nuevo formulario de MarlinTest */
   const handleAddMarlinTestForm = (e) => {
+    console.log("marlin changes");
     e.preventDefault();
     setShowH2(false);
     const newForm = {
@@ -131,6 +136,7 @@ export const RecruitmentSeafarerProfile = ({
 
   /* Función para actualizar los datos guardados */
   const handleDataChange = (index, newData) => {
+    console.log("data changes");
     setMarlinTestForms((prevLanguageForms) => {
       const updatedForms = [...prevLanguageForms];
       updatedForms[index] = newData; // Actualizar el formulario de idioma en el índice especificado
@@ -157,6 +163,7 @@ export const RecruitmentSeafarerProfile = ({
   };
 
   const handleDeleteMarlinTestForm = (index, e) => {
+    console.log("marlin changes delete");
     setShowH2(true);
     const updatedForms = []; // Crear una copia del arreglo actual
     updatedForms.splice(index, 1); // Eliminar el elemento en la posición `index`
@@ -177,6 +184,7 @@ export const RecruitmentSeafarerProfile = ({
   const [languageForms, setLanguageForms] = useState([]);
 
   const handleAddLanguageForm = (e) => {
+    console.log("languages changes form");
     e.preventDefault();
     const newForm = {
       // id: new Date().getTime(),
@@ -196,6 +204,7 @@ export const RecruitmentSeafarerProfile = ({
   };
 
   const handleDeleteLanguageForm = (index, e) => {
+    console.log("languages delete");
     const updatedForms = [...languageForms]; // Crear una copia del arreglo actual
     updatedForms.splice(index, 1); // Eliminar el elemento en la posición `index`
     setLanguageForms(updatedForms); // Actualizar el estado con el nuevo arreglo
@@ -212,6 +221,7 @@ export const RecruitmentSeafarerProfile = ({
 
   // Función para guardar los datos del formulario de idiomas adicionales
   const saveLanguageData = (index, newData) => {
+    console.log("languages changes");
     setLanguageForms((prevLanguageForms) => {
       const updatedForms = [...prevLanguageForms];
       updatedForms[index] = newData; // Actualizar el formulario de idioma en el índice especificado
@@ -238,7 +248,7 @@ export const RecruitmentSeafarerProfile = ({
 
   // Función para guardar los datos del formulario de ingles y español
   const saveLanguageDataDefault = (index, newData) => {
-    // console.log(newData);
+    console.log("languages changes default");
     setProfileData({
       // ...profileData,
       ...profile.seafarerData?.seafarerProfile,

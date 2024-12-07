@@ -268,7 +268,7 @@ export function ApplicationSkill({ disabled = false }) {
       (item) => item.position === getPosition(positions)
     );
     if (Skills.length > 0) {
-      if (formData.skill.some((skill) => skill.check === true)) {
+      if (formData?.skill?.some((skill) => skill.check === true)) {
         setIsSkillsValid(true);
       } else {
         setIsSkillsValid(false);

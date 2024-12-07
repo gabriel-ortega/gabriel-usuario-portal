@@ -272,7 +272,9 @@ export function StartApplicantion() {
       <ButtonIcon
         onClick={openModal}
         classnamebtn="bg-[#1976d2]"
-        classname="flex justify-center pt-7 pb-7"
+        classname={`flex justify-center pt-7 pb-7 ${
+          userData.role !== 3 && "hidden"
+        }`}
         label="Start Process"
         icon={<HiOutlineArrowSmRight className=" ml-2 h-5 w-5" />}
       />

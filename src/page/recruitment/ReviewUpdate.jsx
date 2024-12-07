@@ -2,20 +2,36 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getProfileUpdate, getSeafarerData } from "../../store/userData";
+import {
+  approveProfileUpdate,
+  getProfileUpdate,
+  getSeafarerData,
+  readProfileUpdate,
+  setLoading,
+} from "../../store/userData";
 import { useDispatch } from "react-redux";
 import { compareData } from "../../util/helperFunctions/compareData";
 import { useState } from "react";
 import { LoadingState } from "../../components/skeleton/LoadingState";
 import { FormPrompt } from "../../hooks/FormPrompt";
-import { Button, Card, Drawer } from "flowbite-react";
-import { HiArrowLeft, HiCheckCircle, HiDotsVertical } from "react-icons/hi";
-import { formatDate } from "../../util/helperFunctions";
+import { Badge, Button, Card, Drawer, Label } from "flowbite-react";
+import {
+  HiArrowLeft,
+  HiCheckCircle,
+  HiDotsVertical,
+  HiOutlineUser,
+} from "react-icons/hi";
+import { formatDate, formatTitleCase } from "../../util/helperFunctions";
 import { SelectComponents } from "../../components/layoutComponents";
 import { Suspense } from "react";
 import { lazy } from "react";
 import { Navigate } from "react-big-calendar";
 import { useNavigate } from "react-router-dom";
+import {
+  setProfileView,
+  updateSeafarerData,
+} from "../../store/currentViews/viewSlice";
+import toast from "react-hot-toast";
 const RecruitmentSeafarerProfile = lazy(() =>
   import("../recruitment/components/RecruitmentSeafarerProfile")
 );
@@ -34,6 +50,7 @@ export const ReviewUpdate = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { profileUpdate, profile } = useSelector((state) => state.currentViews);
+  const [oldData, setOldData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -56,66 +73,76 @@ export const ReviewUpdate = () => {
     navigate("/updaterequests");
   };
 
+  const seeProfile = () => {
+    dispatch(setProfileView({}));
+    navigate("/profile/" + profile.uid);
+  };
+
   useEffect(() => {
     if (id !== profileUpdate?.id) {
       dispatch(getProfileUpdate(id)); // Cargar el perfil inicial.
     }
-  }, [id, profileUpdate?.id, dispatch]);
+  }, [id, profileUpdate?.id]);
 
   useEffect(() => {
     if (profileUpdate?.uid) {
       dispatch(getSeafarerData(profileUpdate.uid)); // Cargar datos del marinero cuando `profileUpdate` tenga `uid`.
+      if (!profileUpdate.isRead) {
+        dispatch(readProfileUpdate(profileUpdate.id, profileUpdate));
+      }
     }
-  }, [profileUpdate?.uid, dispatch]);
+  }, [profileUpdate?.uid]);
 
+  // Comparar datos y almacenar cambios
   useEffect(() => {
+    setIsLoading(true);
     if (profileUpdate?.seafarerData && profile?.seafarerData) {
       const old = profile?.seafarerData;
       const updated = profileUpdate.seafarerData;
-      const profileFields = compareData(
-        old.seafarerProfile.profile,
-        updated.seafarerProfile.profile
+
+      // Comparar y actualizar estados
+      setProfileChanges(
+        compareData(
+          old.seafarerProfile.profile,
+          updated.seafarerProfile.profile
+        )
       );
-      const contactsFields = compareData(
-        old.seafarerProfile.contacts.contact,
-        updated.seafarerProfile.contacts.contact
+      setContactsChanges(
+        compareData(
+          old.seafarerProfile.contacts.contact,
+          updated.seafarerProfile.contacts.contact
+        )
       );
-      const vaccineFields = compareData(
-        old.seafarerProfile.vaccines,
-        updated.seafarerProfile.vaccines
+      setVaccinesChanges(
+        compareData(
+          old.seafarerProfile.vaccines,
+          updated.seafarerProfile.vaccines
+        )
       );
-      const languageFields = compareData(
-        old.seafarerProfile.lang,
-        updated.seafarerProfile.lang
+      setLanguagesChanges(
+        compareData(old.seafarerProfile.lang, updated.seafarerProfile.lang)
       );
-      const documentsFields = compareData(
-        old.seafarerDocument,
-        updated.seafarerDocument
+      setDocumentsChanges(
+        compareData(old.seafarerDocument, updated.seafarerDocument)
       );
-      const certificatesFields = compareData(
-        old.seafarerCertificates,
-        updated.seafarerCertificates
+      setCertificatesChanges(
+        compareData(old.seafarerCertificates, updated.seafarerCertificates)
       );
-      const onboardFields = compareData(
-        old.skills.onboard,
-        updated.skills.onboard
+      setOnboardChanges(
+        compareData(old.skills.onboard, updated.skills.onboard)
       );
-      const onlandFields = compareData(
-        old.skills.onland,
-        updated.skills.onland
-      );
-      const skillFields = compareData(old.skills.skill, updated.skills.skill);
-      console.log(profileFields);
-      console.log(contactsFields);
-      console.log(vaccineFields);
-      console.log(languageFields);
-      console.log(documentsFields);
-      console.log(certificatesFields);
-      console.log(onboardFields);
-      console.log(onlandFields);
-      console.log(skillFields);
+      setOnlandChanges(compareData(old.skills.onland, updated.skills.onland));
+      setSkillsChanges(compareData(old.skills.skill, updated.skills.skill));
+      if (!oldData) {
+        console.log("reemplazando");
+        // Actualizar datos globales con los nuevos
+        dispatch(updateSeafarerData(updated));
+        setOldData(old);
+      }
+      setIsLoading(false);
     }
-  }, [profileUpdate, profile]);
+  }, [profileUpdate, profile, dispatch]);
+
   const [tabs, setTabs] = useState([
     {
       Id: 1,
@@ -142,11 +169,34 @@ export const ReviewUpdate = () => {
     setCurrentTab(tabselect);
   };
 
+  const approve = () => {
+    setLoading(true);
+    toast.promise(
+      dispatch(
+        approveProfileUpdate(
+          profile.uid,
+          profileUpdate.id,
+          profile.seafarerData,
+          profileUpdate
+        )
+      ),
+      {
+        loading: "Saving...",
+        success: <b>Saved!</b>,
+        error: <b>Ups! Something went wrong. Try again</b>,
+      }
+    );
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    console.log(profileChanges);
+  }, [profileChanges]);
+
   return (
     <section>
-      {" "}
       <>
-        {isLoading ? (
+        {!oldData ? (
           <LoadingState />
         ) : (
           <>
@@ -161,7 +211,51 @@ export const ReviewUpdate = () => {
                 title="Update Details"
                 titleIcon={() => <HiDotsVertical className="h-4 w-4 mr-2" />}
               />
-              <Drawer.Items></Drawer.Items>
+              <Drawer.Items>
+                <div>
+                  <Label className="text-gray-400 ">Profile Changes</Label>
+                  <div className="mt-3">
+                    <ul className="space-y-3">
+                      {Object.entries(profileChanges).map(([key, change]) => {
+                        // Verificar si el valor es un objeto
+                        const value1 =
+                          typeof change.value1 === "object"
+                            ? change.value1.value
+                            : change.value1;
+                        const value2 =
+                          typeof change.value2 === "object"
+                            ? change.value2.value
+                            : change.value2;
+
+                        // Convertir booleanos a texto "true" o "false"
+                        const formattedValue1 =
+                          typeof value1 === "boolean"
+                            ? value1.toString()
+                            : value1;
+                        const formattedValue2 =
+                          typeof value2 === "boolean"
+                            ? value2.toString()
+                            : value2;
+
+                        return (
+                          <li key={key} className="flex flex-row gap-3">
+                            <span className="text-sm">
+                              {formatTitleCase(key)}:
+                            </span>
+                            <span>{formattedValue1}</span>
+                            {formattedValue2 === "" ? (
+                              <Badge color={"red"}>deleted</Badge>
+                            ) : (
+                              <Badge color={"green"}>changed</Badge>
+                            )}
+                            <span>{formattedValue2}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </div>
+              </Drawer.Items>
             </Drawer>
             <button
               className="flex flex-auto items-center text-[#1976d2] text-sm font-style: italic hover:bg-blue-50"
@@ -187,20 +281,36 @@ export const ReviewUpdate = () => {
                     {/* {userData.profileUpdate ? null : ( */}
                     <div className="flex flex-col md:flex-row gap-2">
                       <button
-                        className="border border-green-500 bg-green-500 text-white size-10 md:w-44 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-green-600 disabled:opacity-30"
-                        // disabled={isSaving}
-                        // onClick={save}
+                        title="View Profile"
+                        className="border border-blue-300 bg-white text-blue-600 size-10 md:w-28 md:h-10 flex gap-1 justify-center items-center rounded-lg text-sm hover:bg-blue-50"
+                        onClick={() => seeProfile()}
                       >
-                        <HiCheckCircle className="h-4 w-4" />
-                        <span className="hidden md:block ">Approve Update</span>
+                        <HiOutlineUser className="h-4 w-4" />
+                        <span className="hidden md:block ">View Profile</span>
                       </button>
-                      <button
-                        className="border border-blue-300 bg-white text-blue-600 size-10 md:w-28 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50"
-                        onClick={() => setIsOpen(true)}
-                      >
-                        <HiDotsVertical className="h-4 w-4" />
-                        <span className="hidden md:block ">Details</span>
-                      </button>
+                      {profile.profileUpdate ? (
+                        <>
+                          <button
+                            className="border border-green-500 bg-green-500 text-white size-10 md:w-44 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-green-600 disabled:opacity-30"
+                            disabled={isLoading}
+                            onClick={() => approve()}
+                          >
+                            <HiCheckCircle className="h-4 w-4" />
+                            <span className="hidden md:block ">
+                              Approve Update
+                            </span>
+                          </button>
+                          <button
+                            className="border border-blue-300 bg-white text-blue-600 size-10 md:w-28 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50"
+                            onClick={() => setIsOpen(true)}
+                          >
+                            <HiDotsVertical className="h-4 w-4" />
+                            <span className="hidden md:block ">Details</span>
+                          </button>
+                        </>
+                      ) : (
+                        <Badge color={"info"}>Update Approved</Badge>
+                      )}
                     </div>
                     {/* )} */}
                   </div>

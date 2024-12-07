@@ -57,9 +57,18 @@ export const ProfileOptions = () => {
     Position: [],
   });
   const [selectedValues, setSelectedValues] = useState({
-    vesselType: profile?.seafarerData?.vesselTypessel || [],
-    department: profile?.seafarerData?.department || [],
-    position: profile?.seafarerData?.position || [],
+    vesselType:
+      profile?.seafarerData?.vesselType ||
+      profile?.applicationData?.startApplication?.vesselType ||
+      [],
+    department:
+      profile?.seafarerData?.department ||
+      profile?.applicationData?.startApplication?.department ||
+      [],
+    position:
+      profile?.seafarerData?.position ||
+      profile?.applicationData?.startApplication?.position ||
+      [],
   });
   const [disableSelect, setDisableSelect] = useState({
     Vessel: false,
@@ -152,11 +161,20 @@ export const ProfileOptions = () => {
   };
 
   useEffect(() => {
-    if (profile?.seafarerData) {
+    if (profile?.seafarerData && profile?.applicationData) {
       setSelectedValues({
-        vesselType: profile?.seafarerData?.vesselType,
-        department: profile?.seafarerData?.department,
-        position: profile?.seafarerData?.position,
+        vesselType:
+          profile?.seafarerData?.vesselType ||
+          profile?.applicationData?.startApplication?.vesselType ||
+          [],
+        department:
+          profile?.seafarerData?.department ||
+          profile?.applicationData?.startApplication?.department ||
+          [],
+        position:
+          profile?.seafarerData?.position ||
+          profile?.applicationData?.startApplication?.position ||
+          [],
       });
     }
     if (!data.Departament || !data.Position) {
@@ -963,13 +981,19 @@ export const ProfileOptions = () => {
               <div className="text-center">
                 <span className="text-gray-500">Current Department: </span>
                 <span className="font-semibold text-gray-700">
-                  {profile?.seafarerData?.department[0].name || "None"}
+                  {profile?.seafarerData?.department?.[0]?.name ||
+                    profile?.applicationData?.startApplication?.department?.[0]
+                      ?.name ||
+                    "None"}
                 </span>
               </div>
               <div className="text-center">
                 <span className="text-gray-500">Current Position: </span>
                 <span className="font-semibold text-gray-700">
-                  {profile?.seafarerData?.position[0].name || "None"}
+                  {profile?.seafarerData?.position?.[0].name ||
+                    profile?.applicationData?.startApplication?.position?.[0]
+                      ?.name ||
+                    "None"}
                 </span>
               </div>
             </div>
@@ -982,7 +1006,7 @@ export const ProfileOptions = () => {
               valueKey="DepartmentName"
               name="department"
               Text="Select a Department"
-              initialValue={selectedValues?.department[0]?.id}
+              initialValue={selectedValues?.department?.[0]?.id}
               onChange={(value) => handleSelectChange(value, "department")}
             />
             <SelectComponents
@@ -994,7 +1018,7 @@ export const ProfileOptions = () => {
               valueKey="PositionName"
               name="position"
               Text="Select a Position"
-              initialValue={selectedValues?.position[0]?.id}
+              initialValue={selectedValues?.position?.[0]?.id}
               onChange={(value) => handleSelectChange(value, "position")}
             />
             <div className="flex flex-row justify-center items-center gap-3">
@@ -1025,7 +1049,10 @@ export const ProfileOptions = () => {
               <div className="text-center">
                 <span className="text-gray-500">Current Department: </span>
                 <span className="font-semibold text-gray-700">
-                  {profile?.seafarerData?.vesselType[0].name || "None"}
+                  {profile?.seafarerData?.vesselType?.[0].name ||
+                    profile?.applicationData?.startApplication?.vesselType?.[0]
+                      ?.name ||
+                    "None"}
                 </span>
               </div>
             </div>

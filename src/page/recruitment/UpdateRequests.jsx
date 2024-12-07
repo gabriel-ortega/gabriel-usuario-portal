@@ -9,7 +9,10 @@ import { LoadingState } from "../../components/skeleton/LoadingState";
 import { fetchProfileUpdatesBatch } from "../../util/services";
 import { useEffect } from "react";
 import applicationStatusData from "../../assets/tables/json/ApplicationStatus-static.json";
-import { setProfileUpdateData } from "../../store/currentViews/viewSlice";
+import {
+  setProfileUpdateData,
+  setProfileView,
+} from "../../store/currentViews/viewSlice";
 import { getSeafarerData } from "../../store/userData";
 
 export const UpdateRequests = () => {
@@ -26,8 +29,8 @@ export const UpdateRequests = () => {
   const [dataPagination, setDataPagination] = useState();
 
   const handleProfileLink = (updateData, id) => {
-    dispatch(setProfileUpdateData(updateData));
-    dispatch(getSeafarerData(updateData.uid));
+    dispatch(setProfileUpdateData({}));
+    dispatch(setProfileView({}));
     navigate("/reviewupdate/" + id);
   };
 

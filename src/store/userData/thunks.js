@@ -146,6 +146,66 @@ export const submitProfileUpdate = (uid, userData) => {
   };
 };
 
+export const readProfileUpdate = (id, updateData) => {
+  return async (dispatch) => {
+    try {
+      const newData = {
+        ...updateData,
+        isRead: true,
+      };
+      // Referencia a la colección
+      const collectionRef = doc(FirebaseDB, `profileUpdates/${id}`);
+
+      // Crear un nuevo documento con ID automático
+      await updateDoc(collectionRef, newData);
+    } catch (error) {
+      console.error("Error submitting profile update:", error);
+    }
+  };
+};
+
+export const approveProfileUpdate = (uid, id, seafarerData, updateData) => {
+  return async (dispatch) => {
+    try {
+      const toSave = seafarerData;
+      const date = new Date().toISOString();
+      const newData = {
+        ...updateData,
+        status: 3,
+        approvedOn: date,
+        isRead: true,
+      };
+
+      const data = {
+        status: 3,
+        approvedOn: date,
+        isRead: true,
+      };
+
+      const profileUpdate = {
+        profileUpdate: false,
+        seafarerData: toSave,
+      };
+
+      // Referencia a la colección
+      const collectionRef = doc(FirebaseDB, `profileUpdates/${id}`);
+
+      // Crear un nuevo documento con ID automático
+      await updateDoc(collectionRef, data);
+
+      // Actualizar el documento del usuario en 'usersData'
+      const profileRef = doc(FirebaseDB, `usersData/${uid}`);
+      await updateDoc(profileRef, profileUpdate);
+
+      dispatch(setProfileUpdateData(newData));
+
+      console.log(`Profile update submitted successfully for UID: ${uid}`);
+    } catch (error) {
+      console.error("Error submitting profile update:", error);
+    }
+  };
+};
+
 export const setLogisticId = (uid) => {
   return async (dispatch) => {
     const date = new Date().toISOString();
@@ -250,12 +310,14 @@ export const getApplicationByUid = (uid, skip) => {
       if (!querySnapshot.empty) {
         const docSnap = querySnapshot.docs[0]; // Toma el primer documento encontrado
         const docData = docSnap.data();
+        const dataId = { ...docData, id: docSnap.id };
         const latestVersion = docData.versions.length - 1;
         const latest = docData.versions[latestVersion];
+        console.log(dataId);
 
         // Despachar las acciones con los datos obtenidos
-        dispatch(setApplication(docData));
-        dispatch(setApplicationView(docData));
+        dispatch(setApplication(dataId));
+        dispatch(setApplicationView(dataId));
         if (!skip) {
           dispatch(setApplicationData(latest));
         }
@@ -386,7 +448,7 @@ export const updateApplicationSent = (uid, data, vesselTypeData) => {
       };
       const docRef = doc(FirebaseDB, `applications/${uid}`);
       // await updateDoc(docRef, data);
-      await setDoc(docRef, newData);
+      await updateDoc(docRef, newData);
       dispatch(setSaving(false));
     } catch (error) {
       console.error("Error updating application:", error);

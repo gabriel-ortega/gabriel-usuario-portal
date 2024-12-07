@@ -295,7 +295,7 @@ export const ReviewApplication = () => {
       position: positionUpdate,
     };
 
-    // console.log(updatedApplication);
+    console.log(updatedVersions[selectedVersion.id]);
     // console.log(isReadChange);
 
     // Ejecutar el dispatch con el objeto application actualizado
@@ -311,8 +311,10 @@ export const ReviewApplication = () => {
     toast.promise(
       dispatch(
         updateApplicationSent(
-          application.uid,
+          // application.uid,
+          id,
           state ? updatedApplicationIsRead : updatedApplication,
+          // updatedApplication,
           vesselTypeData
         )
       ),
@@ -384,7 +386,8 @@ export const ReviewApplication = () => {
       Promise.all([
         dispatch(
           updateApplicationSent(
-            application.uid,
+            id,
+            // application.uid,
             updatedApplication,
             vesselTypeData
           )
@@ -457,7 +460,9 @@ export const ReviewApplication = () => {
       Promise.all([
         dispatch(
           updateApplicationSent(
-            application.uid,
+            // application.uid,
+            id,
+
             updatedApplication,
             vesselTypeData
           )
@@ -529,7 +534,8 @@ export const ReviewApplication = () => {
       Promise.all([
         dispatch(
           updateApplicationSent(
-            application.uid,
+            // application.uid,
+            id,
             updatedApplication,
             vesselTypeData
           )
@@ -591,7 +597,8 @@ export const ReviewApplication = () => {
     toast.promise(
       dispatch(
         updateApplicationSent(
-          application.uid,
+          // application.uid,
+          id,
           updatedApplication,
           vesselTypeData
         )
