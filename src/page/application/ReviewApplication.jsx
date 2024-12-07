@@ -295,7 +295,8 @@ export const ReviewApplication = () => {
       position: positionUpdate,
     };
 
-    console.log(updatedVersions[selectedVersion.id]);
+    // console.log(userData.applicationData.applicationProfile);
+    // console.log(vesselTypeData);
     // console.log(isReadChange);
 
     // Ejecutar el dispatch con el objeto application actualizado

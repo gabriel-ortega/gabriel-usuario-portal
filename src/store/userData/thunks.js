@@ -448,7 +448,7 @@ export const updateApplicationSent = (uid, data, vesselTypeData) => {
       };
       const docRef = doc(FirebaseDB, `applications/${uid}`);
       // await updateDoc(docRef, data);
-      await updateDoc(docRef, newData);
+      await setDoc(docRef, newData, { merge: true });
       dispatch(setSaving(false));
     } catch (error) {
       console.error("Error updating application:", error);

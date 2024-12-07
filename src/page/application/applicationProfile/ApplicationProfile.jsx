@@ -127,7 +127,7 @@ export function ApplicationProfile({ disabled = false }) {
 
   /*  Estado para formularios MarlinTest */
   const [marlinTestForms, setMarlinTestForms] = useState(
-    userData.applicationData.applicationProfile.lang.marlins
+    userData.applicationData.applicationProfile.lang.marlins || []
   );
 
   /* Función para actualizar los datos guardados */
