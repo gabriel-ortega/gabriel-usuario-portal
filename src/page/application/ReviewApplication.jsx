@@ -313,8 +313,8 @@ export const ReviewApplication = () => {
         updateApplicationSent(
           // application.uid,
           id,
-          state ? updatedApplicationIsRead : updatedApplication,
-          // updatedApplication,
+          // state ? updatedApplicationIsRead : updatedApplication,
+          updatedApplication,
           vesselTypeData
         )
       ),
