@@ -1431,6 +1431,25 @@ export const getCitasByUid = async (uid) => {
     throw error;
   }
 };
+export const getCitasByInterviewId = async (id) => {
+  try {
+    const citasCollection = collection(FirebaseDB, "appointments");
+    const q = query(citasCollection, where("interviewId", "==", id));
+    const querySnapshot = await getDocs(q);
+
+    // Mapear los documentos obtenidos
+    const citas = querySnapshot.docs.map((doc) => ({
+      id: doc.id, // Incluye el ID del documento
+      ...doc.data(), // Incluye los datos del documento
+    }));
+
+    // console.log(`Citas obtenidas para uid ${uid}:`, citas);
+    return citas; // Devuelve los documentos filtrados
+  } catch (error) {
+    console.error(`Error al obtener citas para uid ${id}:`, error);
+    return null;
+  }
+};
 
 export const saveCita = async (id, data) => {
   try {

@@ -46,11 +46,12 @@ export const ApplicantProcessView = () => {
     7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 22, 23, 24, 25, 26, 27,
   ];
 
+  const fetchData = async () => {
+    const reasons = await getReasons();
+    setReasonsData(reasons);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const reasons = await getReasons();
-      setReasonsData(reasons);
-    };
     fetchData();
     dispatch(getSeafarerData(userData.uid));
     setIsLoading(false);
@@ -217,7 +218,7 @@ export const ApplicantProcessView = () => {
                           discuss your background, basic skills, and overall fit
                           for the role.
                         </Timeline.Body>
-                        {/* {profile.firstInterview?.status == "Pending" && (
+                        {profile.firstInterview?.status == "Pending" && (
                           <Button
                             color="gray"
                             onClick={() => {
@@ -228,7 +229,7 @@ export const ApplicantProcessView = () => {
                             Book an Interview
                             <HiArrowNarrowRight className="ml-2 h-3 w-3" />
                           </Button>
-                        )} */}
+                        )}
                       </Timeline.Content>
                     </Timeline.Item>
                     <Timeline.Item>
@@ -264,7 +265,7 @@ export const ApplicantProcessView = () => {
                           specific skills. You might answer job-specific
                           questions or complete practical assessments.
                         </Timeline.Body>
-                        {/* {profile.secondInterview?.status == "Pending" && (
+                        {profile.secondInterview?.status == "Pending" && (
                           <Button
                             color="gray"
                             onClick={() => {
@@ -275,7 +276,7 @@ export const ApplicantProcessView = () => {
                             Book an Interview
                             <HiArrowNarrowRight className="ml-2 h-3 w-3" />
                           </Button>
-                        )} */}
+                        )}
                       </Timeline.Content>
                     </Timeline.Item>
                     <Timeline.Item>
@@ -421,7 +422,15 @@ export const ApplicantProcessView = () => {
         <Modal.Header />
         <Modal.Body>
           <div className="text-center">
-            <InterviewSchedule type={selectedInterview} />
+            <InterviewSchedule
+              type={selectedInterview}
+              uid={userData.uid}
+              interviewId={
+                selectedInterview == 1
+                  ? userData.firstInterview.currentInterview
+                  : userData.secondInterview.currentInterview
+              }
+            />
           </div>
         </Modal.Body>
       </Modal>

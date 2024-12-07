@@ -1,4 +1,4 @@
-import { Badge, Rating, Textarea } from "flowbite-react";
+import { Badge, Modal, Rating, Textarea } from "flowbite-react";
 import {
   DatepickerComponent,
   ModalYesNo,
@@ -40,6 +40,9 @@ import FormF_PMSSA20 from "../../recruitment/components/stages components/FormF_
 import FormF_PMSSA7_V5 from "../../recruitment/components/stages components/FormF_PMSSA7_V5";
 import { useMemo } from "react";
 import FormatsFirstInterview from "../../recruitment/components/stages components/FormatsFirstInterview";
+import { getCitasByInterviewId } from "../../../util/services";
+import InterviewSchedule from "../../interview/InterviewSchedule";
+import { convertirFechaYHora } from "../../../util/helperFunctions/convertirFechayHora";
 
 // Componente de evaluación reutilizable
 const Evaluation = ({ label, rating, onRatingChange }) => {
@@ -73,9 +76,10 @@ export const FirstInterviewForm = ({
   const { profile, firstInterview, currentInterview } = useSelector(
     (state) => state.currentViews
   );
+  const [openModalInterview, setOpenModalInterview] = useState(false);
   const [currentInterviewerData, setCurrentInterviewerData] =
     useState(currentInterviewer);
-
+  const [currentAppointment, setCurrentAppointment] = useState([]);
   const [currentData, setCurrentData] = useState({});
   const [isOpenModal, setIsOpenModal] = useState(false);
   const openModal = () => {
@@ -84,6 +88,18 @@ export const FirstInterviewForm = ({
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
   const closeModal = () => setIsOpenModal(false);
+
+  const loadAppointment = async () => {
+    const cita = await getCitasByInterviewId(currentInterview.id);
+    console.log(cita);
+    setCurrentAppointment(cita);
+  };
+
+  useEffect(() => {
+    if (currentInterview.id) {
+      loadAppointment();
+    }
+  }, [currentInterview]);
 
   // Estado centralizado para las evaluaciones
   const [evaluations, setEvaluations] = useState({});
@@ -652,13 +668,32 @@ export const FirstInterviewForm = ({
                       }
                       onChange={(e) => onSelectChange(e, "interviewer")}
                     />
-                    <DatepickerComponent
+                    <div className="flex flex-col gap-2">
+                      <span className="text-sm text-zinc-400">Appointment</span>
+                      <button
+                        className="border text-sm border-zinc-300 h-10 bg-white rounded-lg hover:bg-zinc-100 text-zinc-500"
+                        onClick={() => setOpenModalInterview(true)}
+                      >
+                        {currentAppointment.lenght < 1
+                          ? "No Appointment"
+                          : `${
+                              currentAppointment &&
+                              currentAppointment[0] &&
+                              currentAppointment[0].start
+                                ? convertirFechaYHora(
+                                    currentAppointment[0].start.toDate()
+                                  )
+                                : ""
+                            }`}
+                      </button>
+                    </div>
+                    {/* <DatepickerComponent
                       name="appointment"
                       label="Appointment Date"
                       datevalue={appointment || ""}
                       onChange={onInputChange}
                       classnamedate="px-0 ps-0.5 md:ps-1 w-full h-full"
-                    />
+                    /> */}
                     <DatepickerComponent
                       name="interviewDate"
                       label="Interview Date"
@@ -749,6 +784,24 @@ export const FirstInterviewForm = ({
         onCancel={closeModal}
         classmodal="pt-[50%] md:pt-0"
       />
+      <Modal
+        show={openModalInterview}
+        size="xxl"
+        onClose={() => setOpenModalInterview(false)}
+        popup
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <InterviewSchedule
+              type={1}
+              uid={currentInterview.uid}
+              onAppointmentChange={() => loadAppointment()}
+              interviewId={currentInterview.id}
+            />
+          </div>
+        </Modal.Body>
+      </Modal>
     </section>
   );
 };

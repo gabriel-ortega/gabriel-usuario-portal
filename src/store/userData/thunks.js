@@ -674,7 +674,7 @@ export const createFirstInterviews = (uid) => {
 
     await setDoc(docRef, { status: "Pending", uid: uid, id: docId });
     const statusUpdate = {
-      firstInterview: { status: "Pending" },
+      firstInterview: { status: "Pending", currentInterview: docId },
       firstInterviewGoDate: new Date().toISOString(),
     };
     const statusRef = doc(FirebaseDB, `usersData/${uid}`);
@@ -705,7 +705,11 @@ export const updateFirstInterviewDoc = (uid, id, data, status) => {
       const docRef = doc(FirebaseDB, `firstInterviews/${id}`);
       await updateDoc(docRef, data);
       const statusUpdate = {
-        firstInterview: { status: status, date: data.interviewDate || "" },
+        firstInterview: {
+          status: status,
+          date: data.interviewDate || "",
+          currentInterview: id,
+        },
       };
       const statusRef = doc(FirebaseDB, `usersData/${uid}`);
       await updateDoc(statusRef, statusUpdate);
@@ -731,7 +735,7 @@ export const createSecondInterviews = (uid) => {
 
     await setDoc(docRef, { status: "Pending", uid: uid, id: docId });
     const statusUpdate = {
-      secondInterview: { status: "Pending" },
+      secondInterview: { status: "Pending", currentInterview: docId },
       secondInterviewGoDate: new Date().toISOString(),
     };
     const statusRef = doc(FirebaseDB, `usersData/${uid}`);
@@ -762,7 +766,11 @@ export const updateSecondInterviewDoc = (uid, id, data, status) => {
       const docRef = doc(FirebaseDB, `secondInterviews/${id}`);
       await updateDoc(docRef, data);
       const statusUpdate = {
-        secondInterview: { status: status, date: data.interviewDate || "" },
+        secondInterview: {
+          status: status,
+          date: data.interviewDate || "",
+          currentInterview: id,
+        },
       };
       const statusRef = doc(FirebaseDB, `usersData/${uid}`);
       await updateDoc(statusRef, statusUpdate);

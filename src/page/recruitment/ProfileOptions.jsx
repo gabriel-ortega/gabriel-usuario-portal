@@ -689,6 +689,8 @@ export const ProfileOptions = () => {
     const seafarerData = getSeafarerDataObject(profile.applicationData);
     // console.log(seafarerData);
     dispatch(updateSeafarerData(seafarerData));
+    setIsOpen(false);
+    toast.success("Data Applied successfully");
   };
 
   const handleAvailable = (e) => {

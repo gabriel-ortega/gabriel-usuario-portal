@@ -569,14 +569,20 @@ export default function RecruitmentProfile() {
                   ) : !currentTab ? (
                     <LoadingState />
                   ) : currentTab === "1" ? (
-                    <Suspense fallback={<LoadingState />}>
-                      <RecruitmentSeafarerProfile
-                        data={profile.seafarerData?.seafarerProfile}
-                        uid={profile.uid}
-                        onChange={(e) => handleProfileChange(e)}
-                        // onChange={(e) => console.log(e)}
-                      />
-                    </Suspense>
+                    <>
+                      {/* {!profile.seafarerData?.seafarerProfile ? (
+                        <LoadingState />
+                      ) : ( */}
+                      <Suspense fallback={<LoadingState />}>
+                        <RecruitmentSeafarerProfile
+                          data={profile.seafarerData?.seafarerProfile}
+                          uid={profile.uid}
+                          onChange={(e) => handleProfileChange(e)}
+                          // onChange={(e) => console.log(e)}
+                        />
+                      </Suspense>
+                      {/* )} */}
+                    </>
                   ) : currentTab === "2" ? (
                     <Suspense fallback={<LoadingState />}>
                       <RecruitmentDocuments

@@ -15,7 +15,7 @@ import {
   isSameMonth,
   isSameDay,
 } from "date-fns";
-import { getCitas, getDateInterviews,saveCita } from "../../util/services";
+import { getCitas, getDateInterviews, saveCita } from "../../util/services";
 import iconCamara from "../../assets/Icon/iconCamaraWeb.png";
 import iconTeams from "../../assets/Icon/iconTeams.png";
 import iconWifi from "../../assets/Icon/Wifi.png";
@@ -26,7 +26,12 @@ import { FirebaseDB } from "../../config/firebase/config";
 import { LoadingState } from "../../components/skeleton/LoadingState";
 import { formatDate } from "../../util/helperFunctions";
 
-export default function InterviewSchedule({ type = 1 }) {
+export default function InterviewSchedule({
+  type = 1,
+  uid = "",
+  onAppointmentChange = () => {},
+  interviewId = "",
+}) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
   const [dates, setDates] = useState([]);
@@ -51,9 +56,9 @@ export default function InterviewSchedule({ type = 1 }) {
   const { profile } = useSelector((state) => state.currentViews);
   const loadResults = async () => {
     try {
-      setLoandingSchedule(false)
+      setLoandingSchedule(false);
       // Validar y transformar los datos recibidos
-      const dates = await getCitas(); 
+      const dates = await getCitas();
       // console.log(dates);
       let transformedData = [];
       transformedData = dates.map((item) => ({
@@ -66,43 +71,44 @@ export default function InterviewSchedule({ type = 1 }) {
       const currentDate = new Date();
 
       const searchData = transformedData.filter((item) => {
-      const interviewStartDate = new Date(item.start);
-        return (
-          item.interviewee == userData.uid && interviewStartDate >= currentDate
-        );
+        const interviewStartDate = new Date(item.start);
+        // return (
+        //   item.interviewee == userData.uid && interviewStartDate >= currentDate
+        // );
+        return item.interviewee == uid && item.interviewId == interviewId;
       });
       console.log("searchData");
-      console.log(searchData)
-      if(searchData.length){
-setSchedule(searchData);
-setLoandingSchedule(true)
+      console.log(searchData);
+      if (searchData.length) {
+        setSchedule(searchData);
+        setLoandingSchedule(true);
       }
-      
-      
+
       setLoanding(true);
       /* setDatesCurrent(transformedData); */
-      
- 
-        let filteredData = transformedData;
-      
-        if (type === 1) {
-          filteredData = transformedData.filter((data) => data.asunto === "First Interview");
-        } else if (type === 2) {
-          filteredData = transformedData.filter((data) => data.asunto === "Second Interview");
-        }
-      
-        setDatesCurrent(filteredData);
-        setDates(transformedData);
-        const availableDays = filteredData.map((day) =>
-          normalizeDate(format(day.start, "yyyy-MM-dd")).setHours(0, 0, 0, 0)
+
+      let filteredData = transformedData;
+
+      if (type === 1) {
+        filteredData = transformedData.filter(
+          (data) => data.asunto === "First Interview"
         );
-        if (type !== 0) {
-          
-          setAvailableDates(availableDays || []);
-        } else{
-          
-          setAvailableDates(availableDays);
-        }
+      } else if (type === 2) {
+        filteredData = transformedData.filter(
+          (data) => data.asunto === "Second Interview"
+        );
+      }
+
+      setDatesCurrent(filteredData);
+      setDates(transformedData);
+      const availableDays = filteredData.map((day) =>
+        normalizeDate(format(day.start, "yyyy-MM-dd")).setHours(0, 0, 0, 0)
+      );
+      if (type !== 0) {
+        setAvailableDates(availableDays || []);
+      } else {
+        setAvailableDates(availableDays);
+      }
     } catch (error) {
       console.error("Error al cargar datos:", error);
     }
@@ -256,54 +262,64 @@ setLoandingSchedule(true)
     setGroupedEvents(result); // Guardar en el estado
   };
 
-  const assignRandomInterviewee  = async (hourGroup) => {
+  const assignRandomInterviewee = async (hourGroup) => {
+    // const interviewId =
+    //   type == 1
+    //     ? userData.firstInterview.currentInterview
+    //     : userData.secondInterview.currentInterview;
+
     // Verificar si hay eventos disponibles en esta hora
     if (!hourGroup.available) {
       console.warn("No hay eventos disponibles en esta hora.");
       return;
     }
-  
+
     // Filtrar los eventos disponibles (donde interviewee esté vacío)
     const availableEvents = hourGroup.data.filter((e) => !e.interviewee);
-  
+
     // Si no hay eventos disponibles, salir
     if (availableEvents.length === 0) {
       console.warn("No hay eventos disponibles.");
       return;
     }
-  
+
     // Seleccionar un evento aleatorio de los disponibles
     const randomIndex = Math.floor(Math.random() * availableEvents.length);
     const selectedEvent = availableEvents[randomIndex];
-  
+
     // Asignar un valor al campo interviewee
-    selectedEvent.interviewee = userData.uid || "";
+    selectedEvent.interviewee = uid || "";
     selectedEvent.status = "Appointed"; // Aquí puedes poner el valor que necesites
+    selectedEvent.interviewId = interviewId;
     /* console.log("selectedEvent")
     console.log([selectedEvent])  */
-    await saveCita(selectedEvent.id,selectedEvent)
-    setSchedule([selectedEvent])
-    setLoandingSchedule(true)
+    await saveCita(selectedEvent.id, selectedEvent);
+    setSchedule([selectedEvent]);
+    setLoandingSchedule(true);
     // Agregar la validación de solapamiento de fechas
     const singleDate = selectedEvent; // El evento seleccionado
     const overlappingEvents = validateTimeOverlap(hourGroup.data, singleDate); // Llamar a la validación
-  
+
     // Si hay eventos que se solapan, actualiza su estado
     overlappingEvents.forEach((event) => {
       event.status = "Expired"; // Cambiar el estado de los eventos solapados
     });
-  
+
     // Actualizar el estado de los eventos con la nueva información
     setDatesCurrent((prevDates) => {
       const updatedDates = prevDates.map((event) =>
         event.id === selectedEvent.id
-          ? { ...event, interviewee: selectedEvent.interviewee, status: selectedEvent.status }
+          ? {
+              ...event,
+              interviewee: selectedEvent.interviewee,
+              status: selectedEvent.status,
+            }
           : event
       );
-  
+
       return updatedDates;
     });
-  
+
     // Actualizar el estado de groupedEvents para reflejar el cambio
     setGroupedEvents((prevGroupedEvents) =>
       prevGroupedEvents.map((group) => {
@@ -312,11 +328,11 @@ setLoandingSchedule(true)
           const updatedData = group.data.map((event) =>
             event === selectedEvent ? selectedEvent : event
           );
-  
+
           const updatedAvailableCount = updatedData.filter(
             (e) => !e.interviewee
           ).length;
-  
+
           return {
             ...group,
             data: updatedData,
@@ -327,20 +343,21 @@ setLoandingSchedule(true)
         return group;
       })
     );
-  
+
     // También actualizar el estado de eventos generales si es necesario
     setEvents((prevEvents) =>
       prevEvents.map((event) =>
         event === selectedEvent ? selectedEvent : event
       )
     );
+    onAppointmentChange(true);
   };
-  
+
   // Función de validación de solapamiento de fechas
   const validateTimeOverlap = (events, singleDate) => {
     const singleStart = new Date(singleDate.start).getTime(); // Inicio del rango
     const singleEnd = new Date(singleDate.end).getTime(); // Fin del rango
-  
+
     // Función para verificar si dos fechas son del mismo día
     const isSameDay = (date1, date2) => {
       return (
@@ -354,16 +371,14 @@ setLoandingSchedule(true)
     const overlappingDates = dates.filter((date) => {
       const dateStart = new Date(date.start).getTime(); // Inicio del intervalo
       const dateEnd = new Date(date.end).getTime(); // Fin del intervalo
-  
+
       return (
         date.id !== singleDate.id && // Excluir el mismo objeto
         date.interviewer === singleDate.interviewer && // Mismo entrevistador
         isSameDay(new Date(date.start), new Date(singleDate.start)) && // Mismo día
-        (
-          (dateStart > singleStart && dateStart < singleEnd) || // El inicio está dentro del rango
+        ((dateStart > singleStart && dateStart < singleEnd) || // El inicio está dentro del rango
           (dateEnd > singleStart && dateEnd < singleEnd) || // El final está dentro del rango
-          (dateStart < singleStart && dateEnd > singleEnd) // El rango abarca el rango del singleDate
-        )
+          (dateStart < singleStart && dateEnd > singleEnd)) // El rango abarca el rango del singleDate
       );
     });
 
@@ -372,38 +387,41 @@ setLoandingSchedule(true)
       await saveCita(event.id, event); // Llama a saveCita con los valores actualizados.
     });
 
-
-    
-    
-  
     return overlappingDates;
   };
 
   const handleCancelSchedule = async () => {
     // Indicar que el proceso de carga ha comenzado
-    setLoanding(false)
-  
+    setLoanding(false);
+
     // Actualizar el estado y guardar la cita
     setDatesCurrent((prevDates) => {
       const updatedDates = prevDates
         .filter((event) => event.id == schedule[0].id)
-        .map((event) => ({ id: event.id, interviewee: "", status: "Pending" }));
-  
+        .map((event) => ({
+          id: event.id,
+          interviewee: "",
+          status: "Pending",
+          interviewId: "",
+          interviewer: "",
+        }));
+
       // Guardar la cita actualizada
       saveCita(updatedDates[0].id, updatedDates[0]);
-  
+
       // Limpiar el schedule
       setSchedule([]);
-  
+      onAppointmentChange(true);
+
       return prevDates;
     });
-  
+
     // Llamar a la función de carga y esperar a que termine
     await loadResults();
-  
+
     // Indicar que el proceso ha terminado
-    setLoanding(true)
-    setLoandingSchedule(false)
+    setLoanding(true);
+    setLoandingSchedule(false);
   };
 
   useEffect(() => {
@@ -417,7 +435,7 @@ setLoandingSchedule(true)
         const diff = targetDate - currentDate;
 
         if (diff <= 0) {
-          setTimeLeft("El evento ha comenzado o ya ha pasado");
+          setTimeLeft("The event is in progress or already expired");
           clearInterval(interval); // Detener el contador si la fecha ya ha pasado
         } else {
           // Cálculo de días, horas, minutos y segundos restantes
@@ -429,20 +447,20 @@ setLoandingSchedule(true)
           const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
           setTimeLeft(
-            `${days} días, ${hours} horas, ${minutes} minutos y ${seconds} segundos`
+            `${days} days, ${hours} hours, ${minutes} minutes y ${seconds} seconds`
           );
         }
       }, 1000); // Actualiza el contador cada segundo
 
       return () => clearInterval(interval); // Limpiar el intervalo al desmontarse el componente
     } else {
-      setTimeLeft("No hay evento programado"); // Si no hay eventos, muestra un mensaje
+      setTimeLeft("There's no programmed appointment"); // Si no hay eventos, muestra un mensaje
     }
   }, [schedule]);
 
   return (
     <>
-      <button onClick={mostrar}>mostrar</button>
+      {/* <button onClick={mostrar}>mostrar</button> */}
 
       <h1 className="text-center text-2xl font-semibold">
         Appointment calendar
