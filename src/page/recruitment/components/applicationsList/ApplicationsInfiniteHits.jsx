@@ -20,6 +20,8 @@ import {
   HiOutlineUser,
 } from "react-icons/hi";
 import { formatDate } from "../../../../util/helperFunctions";
+import { useDispatch } from "react-redux";
+import { setApplicationView } from "../../../../store/currentViews/viewSlice";
 
 function unixToYyyyMmDd(unixTimestamp) {
   // Crear un objeto Date desde el Unix timestamp
@@ -32,6 +34,7 @@ function unixToYyyyMmDd(unixTimestamp) {
 }
 
 function Hit({ hit, toggleHits }) {
+  const dispatch = useDispatch();
   const { positions, departments, vesselTypes } = useSelector(
     (state) => state.currentViews
   );
@@ -40,6 +43,7 @@ function Hit({ hit, toggleHits }) {
   const handleProfileLink = (uid) => {
     const cleanUid = uid.replace("applicationsIndex/", "");
     // const cleanUid = uid;
+    dispatch(setApplicationView({}));
     navigate("/reviewapplication/" + cleanUid);
   };
 

@@ -101,7 +101,7 @@ export const SecondInterviewView = () => {
         </span>
         <span className="flex flex-row justify-end">
           <button
-            disabled
+            // disabled
             className="border border-[#010064] bg-[#010064] text-white size-10 md:w-48 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-[#262550] disabled:opacity-30 disabled:cursor-not-allowed"
             //   disabled={isSaving}
             onClick={handleNew}

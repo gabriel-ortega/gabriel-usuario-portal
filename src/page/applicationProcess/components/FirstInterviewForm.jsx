@@ -1,4 +1,4 @@
-import { Badge, Modal, Rating, Textarea } from "flowbite-react";
+import { Badge, Button, Modal, Rating, Textarea } from "flowbite-react";
 import {
   DatepickerComponent,
   ModalYesNo,
@@ -12,6 +12,7 @@ import {
   HiOutlineClipboardList,
   HiOutlineClock,
   HiOutlineDocument,
+  HiOutlineExclamationCircle,
   HiOutlineMenuAlt1,
   HiOutlineQuestionMarkCircle,
   HiXCircle,
@@ -24,10 +25,12 @@ import {
   setCurrentInterview,
   setProfileView,
   updateFirstInterview,
+  updateSeafarerStage,
 } from "../../../store/currentViews/viewSlice";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import {
+  createFirstInterviews,
   createNewFirstInterviews,
   createSecondInterviews,
   updateFirstInterviewDoc,
@@ -87,12 +90,12 @@ export const FirstInterviewForm = ({
     setIsOpenModal(true);
   };
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
-
+  const [openModalWarning, setOpenModalWarning] = useState(false);
   const closeModal = () => setIsOpenModal(false);
 
   const loadAppointment = async () => {
     const cita = await getCitasByInterviewId(currentInterview.id);
-    console.log(cita);
+    // console.log(cita);
     setCurrentAppointment(cita);
   };
 
@@ -187,8 +190,7 @@ export const FirstInterviewForm = ({
 
   const statusColor = getStatusColor(data?.status);
 
-  const saveNew = (e) => {
-    e.preventDefault();
+  const createNewNoStage = () => {
     // Clone the firstInterview array to avoid mutating the original array
     const updatedArray = [...firstInterview, currentData];
 
@@ -196,9 +198,51 @@ export const FirstInterviewForm = ({
     dispatch(updateFirstInterview(updatedArray));
 
     toast.promise(
+      Promise.all([dispatch(createFirstInterviews(profile.uid, currentData))]),
+      {
+        loading: "Saving...",
+        success: <b>Saved</b>,
+        error: <b>Ups! Something went wrong. Try again</b>,
+      }
+    );
+    setOpenModalWarning(false);
+  };
+
+  const createNewStage = () => {
+    // Clone the firstInterview array to avoid mutating the original array
+    const updatedArray = [...firstInterview, currentData];
+
+    // Dispatch the entire updated array
+    dispatch(updateFirstInterview(updatedArray));
+    dispatch(updateSeafarerStage(2));
+
+    toast.promise(
       Promise.all([
-        dispatch(createNewFirstInterviews(profile.uid, currentData)),
+        dispatch(createFirstInterviews(profile.uid, currentData)),
+        dispatch(
+          updateSeafarerDataFirebase(profile.uid, profile.seafarerData, 2)
+        ),
       ]),
+      {
+        loading: "Saving...",
+        success: <b>Saved</b>,
+        error: <b>Ups! Something went wrong. Try again</b>,
+      }
+    );
+    setOpenModalWarning(false);
+  };
+
+  const saveNew = (e) => {
+    e.preventDefault();
+    // Clone the firstInterview array to avoid mutating the original array
+    const updatedArray = [...firstInterview, currentData];
+
+    // Dispatch the entire updated array
+    dispatch(updateFirstInterview(updatedArray));
+    dispatch(updateSeafarerStage(5));
+    dispatch(updateSeafarerDataFirebase(profile.uid, profile.seafarerData, 2));
+    toast.promise(
+      Promise.all([dispatch(createFirstInterviews(profile.uid, currentData))]),
       {
         loading: "Saving...",
         success: <b>Saved</b>,
@@ -637,7 +681,7 @@ export const FirstInterviewForm = ({
             // disabled={
             //   isSaving || statusValid || !status || !company || companyValid
             // }
-            onClick={isNew ? saveNew : save}
+            onClick={() => (isNew ? setOpenModalWarning(true) : save())}
             title={isNew ? "Save New" : "Save"}
           >
             <FaFloppyDisk className="h-4 w-4" />
@@ -830,6 +874,31 @@ export const FirstInterviewForm = ({
                 profile.seafarerData?.seafarerProfile?.profile?.lastName || ""
               }`}
             />
+          </div>
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={openModalWarning}
+        size="md"
+        onClose={() => setOpenModalWarning(false)}
+        popup
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Adding a new first interview will set this seafarer's stage as
+              "First Interview". Do you want to continue?
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button color="gray" onClick={() => createNewNoStage()}>
+                Dont set the new stage
+              </Button>
+              <Button color="failure" onClick={() => createNewStage()}>
+                Set new stage
+              </Button>
+            </div>
           </div>
         </Modal.Body>
       </Modal>

@@ -298,7 +298,7 @@ export const RecruitmentSeafarerProfile = ({
   return (
     <>
       {/* {!profileData && !isNew ? ( */}
-      {!profile.uid ? (
+      {!profile.uid && !isNew ? (
         <LoadingState />
       ) : (
         <TabGroup className="pt-5 md:pt-8">

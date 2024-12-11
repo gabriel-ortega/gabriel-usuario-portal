@@ -719,7 +719,7 @@ export const deleteApplicantFile = (
   };
 };
 
-export const createFirstInterviews = (uid) => {
+export const createFirstInterviews = (uid, data) => {
   return async (dispatch) => {
     // const subcolletion = collection(
     //   FirebaseDB,
@@ -730,7 +730,7 @@ export const createFirstInterviews = (uid) => {
 
     const docId = docRef.id;
 
-    await setDoc(docRef, { status: "Pending", uid: uid, id: docId });
+    await setDoc(docRef, { status: "Pending", uid: uid, id: docId, ...data });
     const statusUpdate = {
       firstInterview: { status: "Pending", currentInterview: docId },
       firstInterviewGoDate: new Date().toISOString(),

@@ -1,4 +1,4 @@
-import { Badge, Modal, Rating, Textarea } from "flowbite-react";
+import { Badge, Button, Modal, Rating, Textarea } from "flowbite-react";
 import {
   DatepickerComponent,
   ModalYesNo,
@@ -12,6 +12,7 @@ import {
   HiOutlineClipboardList,
   HiOutlineClock,
   HiOutlineDocument,
+  HiOutlineExclamationCircle,
   HiOutlineMenuAlt1,
   HiOutlineQuestionMarkCircle,
   HiXCircle,
@@ -30,6 +31,7 @@ import {
 import toast from "react-hot-toast";
 import {
   createNewSecondInterviews,
+  createSecondInterviews,
   setLogisticId,
   updateSeafarerDataFirebase,
   updateSecondInterviewDoc,
@@ -86,7 +88,7 @@ export const SecondInterviewForm = ({
   const [currentInterviewerData, setCurrentInterviewerData] =
     useState(currentInterviewer);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
-
+  const [openModalWarning, setOpenModalWarning] = useState(false);
   // Estado centralizado para las evaluaciones
   const [evaluations, setEvaluations] = useState({});
 
@@ -183,6 +185,48 @@ export const SecondInterviewForm = ({
   };
 
   const statusColor = getStatusColor(data?.status);
+
+  const createNewNoStage = () => {
+    // Clone the firstInterview array to avoid mutating the original array
+    const updatedArray = [...secondInterview, currentData];
+
+    // Dispatch the entire updated array
+    dispatch(updateSecondInterview(updatedArray));
+
+    toast.promise(
+      Promise.all([dispatch(createSecondInterviews(profile.uid, currentData))]),
+      {
+        loading: "Saving...",
+        success: <b>Saved</b>,
+        error: <b>Ups! Something went wrong. Try again</b>,
+      }
+    );
+    setOpenModalWarning(false);
+  };
+
+  const createNewStage = () => {
+    // Clone the firstInterview array to avoid mutating the original array
+    const updatedArray = [...firstInterview, currentData];
+
+    // Dispatch the entire updated array
+    dispatch(updateFirstInterview(updatedArray));
+    dispatch(updateSeafarerStage(2));
+
+    toast.promise(
+      Promise.all([
+        dispatch(createFirstInterviews(profile.uid, currentData)),
+        dispatch(
+          updateSeafarerDataFirebase(profile.uid, profile.seafarerData, 2)
+        ),
+      ]),
+      {
+        loading: "Saving...",
+        success: <b>Saved</b>,
+        error: <b>Ups! Something went wrong. Try again</b>,
+      }
+    );
+    setOpenModalWarning(false);
+  };
 
   const saveNew = (e) => {
     e.preventDefault();
@@ -635,7 +679,7 @@ export const SecondInterviewForm = ({
             // disabled={
             //   isSaving || statusValid || !status || !company || companyValid
             // }
-            onClick={isNew ? saveNew : save}
+            onClick={() => (isNew ? setOpenModalWarning(true) : save())}
             title={isNew ? "Save New" : "Save"}
           >
             <FaFloppyDisk className="h-4 w-4" />
@@ -841,6 +885,31 @@ export const SecondInterviewForm = ({
                 profile.seafarerData?.seafarerProfile?.profile?.lastName || ""
               }`}
             />
+          </div>
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={openModalWarning}
+        size="md"
+        onClose={() => setOpenModalWarning(false)}
+        popup
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Adding a new first interview will set this seafarer's stage as
+              "Second Interview". Do you want to continue?
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button color="gray" onClick={() => createNewNoStage()}>
+                Dont set the new stage
+              </Button>
+              <Button color="failure" onClick={() => createNewStage()}>
+                Set new stage
+              </Button>
+            </div>
           </div>
         </Modal.Body>
       </Modal>
