@@ -19,12 +19,13 @@ export default function FormsContact({ onDataChange, editData, validate }) {
   const { phone, onSelectPhoneChange, formState } = useForm(data);
 
   useEffect(() => {
+    console.log(data.phone);
     if (
       data.firstNames &&
       data.lastNames &&
       data.address &&
       data.relationship &&
-      phone.value
+      data.phone
     ) {
       setIsFormValid(true);
     } else {
@@ -47,6 +48,7 @@ export default function FormsContact({ onDataChange, editData, validate }) {
 
   const changeData = (e) => {
     const { name, value } = e.target;
+    console.log(value);
     setData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -89,10 +91,13 @@ export default function FormsContact({ onDataChange, editData, validate }) {
       <SelectComponenteCountryCode
         classNamePhone="mb-2 w-full block inset-0 z-40"
         name="phone"
-        isValid={validate && phone.value ? true : false}
-        value={data.phone.value}
+        initialCountry=""
+        isValid={validate && data.phone.value ? true : false}
+        value={data.phone}
         data={data.phone.value}
-        onChange={onSelectPhoneChange}
+        // onChange={onSelectPhoneChange}
+        onChange={(e) => changeData({ target: { name: "phone", value: e } })}
+        // onChange={(e) => console.log(e)}
       />
       <Button
         className="bg-[#1976d2] m-auto w-[50%] md:w-[20%] mt-5"

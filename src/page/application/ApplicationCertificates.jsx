@@ -261,7 +261,7 @@ export default function ApplicationCertificates({ disabled = false }) {
   const handleAddDocument = (e) => {
     e.preventDefault();
     const documentToAdd = valueDocument.find(
-      (doc) => doc.Id === selectedDocument
+      (doc) => doc.Id == selectedDocument
     );
     if (
       documentToAdd &&
@@ -403,7 +403,19 @@ export default function ApplicationCertificates({ disabled = false }) {
               "Certificate Country",
               "Certificate Attach",
             ]}
-            childrenForm={<AdditionalCertificatesForm userData={userData} />}
+            childrenForm={
+              <AdditionalCertificatesForm
+                userData={{
+                  uid: userData.uid,
+                  firstName:
+                    userData.applicationData?.applicationProfile?.profile
+                      ?.firstName,
+                  lastName:
+                    userData.applicationData?.applicationProfile?.profile
+                      ?.lastName,
+                }}
+              />
+            }
             onDataChange={handleAdditionalCertificates}
           />
         </section>

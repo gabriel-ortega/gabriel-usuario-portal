@@ -49,19 +49,12 @@ export const AdditionalDocumentsForm = ({
   } = useForm(initialForm);
 
   const changeDocument = async (file) => {
-    const firstName =
-      userData.seafarerData?.seafarerProfile?.profile?.firstName ||
-      userData.applicationData?.applicationProfile?.profile?.firstName ||
-      userData.applicationData?.applicantProfile?.profile?.firstName;
-    const lastName =
-      userData.seafarerData?.seafarerProfile?.profile?.lastName ||
-      userData.applicationData?.applicationProfile?.profile?.lastName ||
-      userData.applicationData?.applicantProfile?.profile?.lastName;
+    console.log(userData);
     if (!documentName) {
       toast.error(
         "Please set a valid Document Name before uploading an attachment."
       );
-    } else if (!firstName || !lastName) {
+    } else if (!userData.firstName || !userData.lastName) {
       toast.error(
         "This seafarer's name is undefined. Make sure to set a first and last name before uploading a file."
       );
@@ -109,7 +102,7 @@ export const AdditionalDocumentsForm = ({
             .split(".")
             .pop()
             .toLowerCase();
-          // const { firstName, lastName } = userData;
+          const { firstName, lastName } = userData;
           const displayName = `${firstName} ${lastName}`;
           const fileNameToDelete = `${displayName}-${tituloalt}.${fileExtension}`;
 

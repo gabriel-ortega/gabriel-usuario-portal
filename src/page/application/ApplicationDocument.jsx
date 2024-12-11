@@ -54,10 +54,10 @@ export function ApplicationDocument({ disabled = false }) {
     setIsOpen(true);
   };
 
-  useEffect(() => {
-    console.log(formData);
-    console.log(visibleDocuments);
-  }, [formData, visibleDocuments]);
+  // useEffect(() => {
+  //   console.log(formData);
+  //   console.log(visibleDocuments);
+  // }, [formData, visibleDocuments]);
 
   const closeModal = () => setIsOpen(false);
   const parentRef = useRef(null);
@@ -228,7 +228,7 @@ export function ApplicationDocument({ disabled = false }) {
               country: "",
               issueDate: "",
               expirationDate: "",
-              // documentAttach: null,
+              documentAttach: null,
             },
           }))
         );
@@ -285,8 +285,9 @@ export function ApplicationDocument({ disabled = false }) {
   const handleAddDocument = (e) => {
     e.preventDefault();
     const documentToAdd = valueDocument.find(
-      (doc) => doc.Id === selectedDocument
+      (doc) => doc.Id == selectedDocument
     );
+
     if (
       documentToAdd &&
       !visibleDocuments.some((doc) => doc.Id === documentToAdd.Id)
@@ -426,7 +427,19 @@ export function ApplicationDocument({ disabled = false }) {
               "Document Country",
               "Document Attach",
             ]}
-            childrenForm={<AdditionalDocumentsForm userData={userData} />}
+            childrenForm={
+              <AdditionalDocumentsForm
+                userData={{
+                  uid: userData.uid,
+                  firstName:
+                    userData.applicationData?.applicationProfile?.profile
+                      ?.firstName,
+                  lastName:
+                    userData.applicationData?.applicationProfile?.profile
+                      ?.lastName,
+                }}
+              />
+            }
             onDataChange={handleAdditionalDocuments}
           />
         </section>

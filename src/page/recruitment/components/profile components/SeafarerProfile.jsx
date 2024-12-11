@@ -402,9 +402,9 @@ export const SeafarerProfile = ({
               />
               {/* MODAL PARA CAMBIAR LA FOTO DE PERFIL DEL MARINO */}
               <ModalYesNo
-                text="¿Quieres actualizar tu foto de perfil?"
-                textyes="Actualizar"
-                textno="Eliminar"
+                text="Do you want to update your profile picture?"
+                textyes="Update"
+                textno="Delete"
                 icon={<Avatar img={imagePreviewUrl} size="xl" rounded />}
                 isOpen={isOpen}
                 closeModal={closeModal}

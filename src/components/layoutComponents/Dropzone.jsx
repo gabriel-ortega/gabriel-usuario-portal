@@ -76,8 +76,8 @@ export function Dropzone({
       setValidation({
         isValid: true,
         message: verifyTypeDocument(file.name)
-          ? "El archivo excede los 5 MB."
-          : "Solo se admite PDF,DOC,DOCX",
+          ? "The file is over 5 MB."
+          : "Ony permitted extensions are PDF,DOC,DOCX",
       });
     }
   };

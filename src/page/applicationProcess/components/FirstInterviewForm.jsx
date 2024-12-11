@@ -681,7 +681,7 @@ export const FirstInterviewForm = ({
             // disabled={
             //   isSaving || statusValid || !status || !company || companyValid
             // }
-            onClick={() => (isNew ? setOpenModalWarning(true) : save())}
+            onClick={(e) => (isNew ? setOpenModalWarning(true) : save(e))}
             title={isNew ? "Save New" : "Save"}
           >
             <FaFloppyDisk className="h-4 w-4" />

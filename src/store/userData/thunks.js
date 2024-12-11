@@ -125,7 +125,7 @@ export const createSeafarer = (data, createAccount = false) => {
   return async (dispatch) => {
     const logisticIdStages = [4, 5, 6, 19, 20, 21];
     const { email, password, displayName, seafarerData } = data;
-
+    console.log(logisticIdStages.includes(seafarerData.recruitmentStage));
     try {
       if (createAccount) {
         try {
@@ -136,7 +136,17 @@ export const createSeafarer = (data, createAccount = false) => {
           await setDoc(docRef, seafarerData);
 
           if (logisticIdStages.includes(seafarerData.recruitmentStage)) {
-            setLogisticId(uid);
+            console.log("entro a poner el logistic Id");
+            const date = new Date().toISOString();
+            const data = {
+              uid: uid,
+              createdOn: date,
+            };
+            // Usa addDoc para agregar el documento con un ID generado automáticamente
+            const docRef = await addDoc(
+              collection(FirebaseDB, `gappool`),
+              data
+            );
           }
 
           return uid;
@@ -150,7 +160,17 @@ export const createSeafarer = (data, createAccount = false) => {
           await setDoc(docRef, { ...seafarerData, uid: docRef.id });
 
           if (logisticIdStages.includes(seafarerData.recruitmentStage)) {
-            setLogisticId(docRef.id);
+            console.log("entro a poner el logistic Id");
+            const date = new Date().toISOString();
+            const data = {
+              uid: docRef.id,
+              createdOn: date,
+            };
+            // Usa addDoc para agregar el documento con un ID generado automáticamente
+            const docRef = await addDoc(
+              collection(FirebaseDB, `gappool`),
+              data
+            );
           }
 
           return docRef.id; // Devuelve el ID generado
