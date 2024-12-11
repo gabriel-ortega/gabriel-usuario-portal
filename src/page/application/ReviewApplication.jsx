@@ -9,6 +9,7 @@ import {
   HiOutlineQuestionMarkCircle,
   HiOutlineReply,
   HiOutlineTag,
+  HiOutlineUser,
   HiSave,
   HiUser,
   HiUserCircle,
@@ -84,6 +85,10 @@ export const ReviewApplication = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const openModal = () => {
     setIsOpenModal(true);
+  };
+
+  const seeProfile = () => {
+    navigate("/profile/" + application.uid);
   };
 
   const filterReasons = (all = true) => {
@@ -624,8 +629,6 @@ export const ReviewApplication = () => {
       setModalText(
         <div className="flex flex-col gap-2">
           <span>Are you sure you want to deny this application?</span>
-          <span>Please provide a reason for rejecting this application.</span>
-          <Textarea />
         </div>
       );
       setModalConfirm(() => handleDeny);
@@ -667,6 +670,7 @@ export const ReviewApplication = () => {
 
   const handleApplicationData = (field, value) => {
     const newData = { ...application, [field]: value };
+    // console.log(field, value);
     dispatch(setApplicationView(newData));
   };
 
@@ -724,13 +728,16 @@ export const ReviewApplication = () => {
                         content="Select a Reject Reason before rejecting this application."
                         style="light"
                         className={
-                          application?.rejectReason?.id == "" ? "" : "hidden"
+                          !application?.seguimientoReason ? "" : "hidden"
                         }
                       >
                         <button
                           className={`border border-red-600 bg-red-600 text-white size-10 md:w-28 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-red-700 disabled:opacity-30 disabled:cursor-not-allowed`}
                           onClick={() => handleOpenModal("deny")}
-                          disabled={application.status === 4}
+                          disabled={
+                            application.status === 4 ||
+                            !application?.seguimientoReason
+                          }
                         >
                           <HiXCircle className="h-4 w-4" />
                           <span className="hidden md:block ">Reject</span>
@@ -778,10 +785,9 @@ export const ReviewApplication = () => {
                       name="seguimientoReason"
                       initialValue={application?.seguimientoReason}
                       onChange={(e) => {
-                        const selectedValue = e[0];
                         handleApplicationData(
                           "seguimientoReason",
-                          selectedValue
+                          e.target.value
                         );
                       }}
                     />
@@ -929,6 +935,14 @@ export const ReviewApplication = () => {
                             <span className="hidden md:block ">Print CV</span>
                           </button>
                         </Tooltip>
+                        <button
+                          title="View Profile"
+                          className="border border-blue-300 bg-white text-blue-600 size-10 md:w-28 md:h-10 flex gap-1 justify-center items-center rounded-lg text-sm hover:bg-blue-50"
+                          onClick={() => seeProfile()}
+                        >
+                          <HiOutlineUser className="h-4 w-4" />
+                          <span className="hidden md:block ">View Profile</span>
+                        </button>
                       </div>
                     </div>
                     <div className="flex flex-col gap-2 text-gray-500 sm:flex-row sm:space-x-4 text-sm justify-between">

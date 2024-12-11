@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { useSelector } from "react-redux";
+import { LoadingState } from "../skeleton/LoadingState";
 
 ChartJS.register(
   CategoryScale,
@@ -80,7 +81,11 @@ export default function GraphicsRecruitmentDep() {
         <h2 className="font-semibold text-lg ">
           Applications By Recruitment Department
         </h2>
-        <Bar options={options} data={departmentData} />
+        {!vesselTypes ? (
+          <LoadingState />
+        ) : (
+          <Bar options={options} data={departmentData} />
+        )}
       </div>
     </section>
   );

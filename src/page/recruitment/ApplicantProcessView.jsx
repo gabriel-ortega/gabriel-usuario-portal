@@ -430,6 +430,11 @@ export const ApplicantProcessView = () => {
                   ? userData.firstInterview.currentInterview
                   : userData.secondInterview.currentInterview
               }
+              userName={`${
+                profile.seafarerData?.seafarerProfile?.profile?.firstName || ""
+              } ${
+                profile.seafarerData?.seafarerProfile?.profile?.lastName || ""
+              }`}
             />
           </div>
         </Modal.Body>

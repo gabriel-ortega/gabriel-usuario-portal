@@ -41,6 +41,7 @@ import FormatsSecondInterview from "../../recruitment/components/stages componen
 import { getCitasByInterviewId } from "../../../util/services";
 import { convertirFechaYHora } from "../../../util/helperFunctions/convertirFechayHora";
 import InterviewSchedule from "../../interview/InterviewSchedule";
+import { formatDate } from "../../../util/helperFunctions";
 
 // Componente de evaluación reutilizable
 const Evaluation = ({ label, rating, onRatingChange }) => {
@@ -517,6 +518,32 @@ export const SecondInterviewForm = ({
     }
     openModal();
   };
+
+  const handleFolder = (value) => {
+    const today = formatDate(new Date().toISOString(), "yyyy-mm-dd");
+    if (value) {
+      // dispatch(
+      //   setCurrentInterview({
+      //     ...currentInterview,
+      //     firstInterviewFolder: { date: today },
+      //   })
+      // );
+      onInputChange({
+        target: { name: "secondInterviewFolder", value: { date: today } },
+      });
+    } else {
+      // dispatch(
+      //   setCurrentInterview({
+      //     ...currentInterview,
+      //     firstInterviewFolder: { date: "" },
+      //   })
+      // );
+      onInputChange({
+        target: { name: "secondInterviewFolder", value: { date: "" } },
+      });
+    }
+  };
+
   return (
     <section>
       <section>
@@ -718,13 +745,13 @@ export const SecondInterviewForm = ({
                       // isValid={dateBirthValid ? false : true}
                     />
                     <YesNoInput
-                      text="First Interview Folder Done"
+                      text="Second Interview Folder Done"
                       classname="justify-left"
                       defaultChecked={
                         secondInterviewFolder?.date ? true : false
                       }
-                      // onChange={changeData}
-                      name="newquestion4"
+                      onChange={(e) => handleFolder(e.target.value)}
+                      // name="newquestion4"
                     />
                   </div>
 
@@ -808,6 +835,11 @@ export const SecondInterviewForm = ({
               uid={currentInterview.uid}
               onAppointmentChange={() => loadAppointment()}
               interviewId={currentInterview.id}
+              userName={`${
+                profile.seafarerData?.seafarerProfile?.profile?.firstName || ""
+              } ${
+                profile.seafarerData?.seafarerProfile?.profile?.lastName || ""
+              }`}
             />
           </div>
         </Modal.Body>

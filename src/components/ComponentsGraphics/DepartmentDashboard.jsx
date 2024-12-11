@@ -2,19 +2,34 @@ import React from "react";
 import TableDashboard from "./TableDashboard";
 import { useEffect } from "react";
 import { useState } from "react";
+import { LoadingState } from "../skeleton/LoadingState";
+import { useSelector } from "react-redux";
 
 export default function DepartmentDashboard() {
-  const [data, setData] = useState([
-    {
-      name: "Inventory Department Inventory Department Inventory Department Department Department  ",
-      count: 10,
-    },
-    { name: "3nd purser payroll", count: 20 },
-    { name: "Able Seaman", count: 30 },
-    { name: "2nd Purser Administrator", count: 10 },
-    { name: "3nd purser payroll", count: 20 },
-    { name: "Able Seaman", count: 30 },
-  ]);
+  const { dashboard, departments } = useSelector((state) => state.currentViews);
+  const [data, setData] = useState(
+    dashboard?.departments
+      ?.map((item) => ({
+        name:
+          departments?.find((pos) => pos.Id == item.name)?.DepartmentName ||
+          "N/A",
+        count: item.count,
+      }))
+      .sort((a, b) => b.count - a.count)
+  );
+
+  useEffect(() => {
+    setData(
+      dashboard?.departments
+        ?.map((item) => ({
+          name:
+            departments?.find((pos) => pos.Id == item.name)?.DepartmentName ||
+            "N/A",
+          count: item.count,
+        }))
+        .sort((a, b) => b.count - a.count)
+    );
+  }, [departments]);
 
   /*   // Función para actualizar cualquier campo de un proceso
   const updateProcessData = (processName, field, newValue) => {
@@ -29,11 +44,15 @@ export default function DepartmentDashboard() {
     <div className="w-full ">
       <h1 className="text-lg font-medium mb-4">Applicants By Department</h1>
       <div className="overflow-y-auto h-52">
-        <TableDashboard
-          data={data}
-          encabezado1="Department"
-          encabezado2="Applicant Count"
-        />
+        {!departments ? (
+          <LoadingState />
+        ) : (
+          <TableDashboard
+            data={data}
+            encabezado1="Department"
+            encabezado2="Applicant Count"
+          />
+        )}
       </div>
     </div>
   );

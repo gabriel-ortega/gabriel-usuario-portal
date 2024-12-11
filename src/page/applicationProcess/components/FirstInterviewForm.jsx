@@ -43,6 +43,7 @@ import FormatsFirstInterview from "../../recruitment/components/stages component
 import { getCitasByInterviewId } from "../../../util/services";
 import InterviewSchedule from "../../interview/InterviewSchedule";
 import { convertirFechaYHora } from "../../../util/helperFunctions/convertirFechayHora";
+import { formatDate } from "../../../util/helperFunctions";
 
 // Componente de evaluación reutilizable
 const Evaluation = ({ label, rating, onRatingChange }) => {
@@ -525,6 +526,31 @@ export const FirstInterviewForm = ({
     openModal();
   };
 
+  const handleFolder = (value) => {
+    const today = formatDate(new Date().toISOString(), "yyyy-mm-dd");
+    if (value) {
+      // dispatch(
+      //   setCurrentInterview({
+      //     ...currentInterview,
+      //     firstInterviewFolder: { date: today },
+      //   })
+      // );
+      onInputChange({
+        target: { name: "firstInterviewFolder", value: { date: today } },
+      });
+    } else {
+      // dispatch(
+      //   setCurrentInterview({
+      //     ...currentInterview,
+      //     firstInterviewFolder: { date: "" },
+      //   })
+      // );
+      onInputChange({
+        target: { name: "firstInterviewFolder", value: { date: "" } },
+      });
+    }
+  };
+
   return (
     <section>
       <section>
@@ -705,8 +731,8 @@ export const FirstInterviewForm = ({
                       text="First Interview Folder Done"
                       classname="justify-left"
                       defaultChecked={firstInterviewFolder?.date ? true : false}
-                      // onChange={changeData}
-                      name="newquestion4"
+                      onChange={(e) => handleFolder(e.target.value)}
+                      // name="newquestion4"
                     />
                   </div>
 
@@ -798,6 +824,11 @@ export const FirstInterviewForm = ({
               uid={currentInterview.uid}
               onAppointmentChange={() => loadAppointment()}
               interviewId={currentInterview.id}
+              userName={`${
+                profile.seafarerData?.seafarerProfile?.profile?.firstName || ""
+              } ${
+                profile.seafarerData?.seafarerProfile?.profile?.lastName || ""
+              }`}
             />
           </div>
         </Modal.Body>

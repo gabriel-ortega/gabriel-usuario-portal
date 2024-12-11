@@ -10,7 +10,11 @@ import {
   where,
   query,
 } from "firebase/firestore";
-import { FirebaseDB, FirebaseStorage } from "../../config/firebase/config";
+import {
+  FirebaseAuth,
+  FirebaseDB,
+  FirebaseStorage,
+} from "../../config/firebase/config";
 import {
   setSaving,
   setLoading,
@@ -45,6 +49,8 @@ import {
   updateSeafarerSignature,
 } from "../currentViews/viewSlice";
 import { createuserWithEmail } from "../../config/firebase/providers";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserAccount } from "../../util/services";
 
 export const getDashboardData = () => {
   return async (dispatch) => {
@@ -84,26 +90,78 @@ export const createApplication = (userData) => {
   };
 };
 
+// export const createSeafarer = (data, createAccount = false) => {
+//   return async (dispatch) => {
+//     const logisticIdStages = [4, 5, 6, 19, 20, 21];
+//     const { email, password, displayName, seafarerData } = data;
+
+//     if (createAccount) {
+//       // const { ok, uid } = await createuserWithEmail({
+//       //   email,
+//       //   password,
+//       //   displayName,
+//       // });
+//       const resp = await createUserWithEmailAndPassword(FirebaseAuth, email, password);
+//       const {uid} = resp.user;
+
+//       const docRef = doc(FirebaseDB, `usersData/${uid}`);
+//       await setDoc(docRef, seafarerData);
+//       if (logisticIdStages.includes(seafarerData.recruitmentStage)) {
+//         setLogisticId(uid);
+//       }
+//       return uid;
+//     } else {
+//       const docRef = doc(collection(FirebaseDB, "usersData")); // ID generado automáticamente
+//       await setDoc(docRef, { ...seafarerData, uid: docRef.id });
+//       if (logisticIdStages.includes(seafarerData.recruitmentStage)) {
+//         setLogisticId(docRef.id);
+//       }
+//       return docRef.id; // Devuelve el ID generado
+//     }
+//   };
+// };
+
 export const createSeafarer = (data, createAccount = false) => {
   return async (dispatch) => {
+    const logisticIdStages = [4, 5, 6, 19, 20, 21];
     const { email, password, displayName, seafarerData } = data;
 
-    if (createAccount) {
-      const { ok, uid } = await createuserWithEmail({
-        email,
-        password,
-        displayName,
-      });
-      if (!ok) {
-        return false;
+    try {
+      if (createAccount) {
+        try {
+          const resp = await createUserAccount(email, password, displayName);
+          const { uid } = resp;
+
+          const docRef = doc(FirebaseDB, `usersData/${uid}`);
+          await setDoc(docRef, seafarerData);
+
+          if (logisticIdStages.includes(seafarerData.recruitmentStage)) {
+            setLogisticId(uid);
+          }
+
+          return uid;
+        } catch (error) {
+          console.error("Error creating user account:", error.message);
+          return false;
+        }
+      } else {
+        try {
+          const docRef = doc(collection(FirebaseDB, "usersData")); // ID generado automáticamente
+          await setDoc(docRef, { ...seafarerData, uid: docRef.id });
+
+          if (logisticIdStages.includes(seafarerData.recruitmentStage)) {
+            setLogisticId(docRef.id);
+          }
+
+          return docRef.id; // Devuelve el ID generado
+        } catch (error) {
+          console.error("Error creating user document:", error.message);
+          return false;
+        }
       }
-      const docRef = doc(FirebaseDB, `usersData/${uid}`);
-      await setDoc(docRef, seafarerData);
-      return uid;
-    } else {
-      const docRef = doc(collection(FirebaseDB, "usersData")); // ID generado automáticamente
-      await setDoc(docRef, { ...seafarerData, uid: docRef.id });
-      return docRef.id; // Devuelve el ID generado
+    } catch (error) {
+      console.error("An unexpected error occurred:", error.message);
+      throw new Error("An unexpected error occurred while creating seafarer.");
     }
   };
 };

@@ -26,9 +26,34 @@ import { FirebaseDB } from "../../config/firebase/config";
 import { LoadingState } from "../../components/skeleton/LoadingState";
 import { formatDate } from "../../util/helperFunctions";
 
+function updateUserName(text, userName) {
+  // Encuentra la posición del último paréntesis y quítalo
+  const lastParenthesisIndex = text.lastIndexOf(")");
+  if (lastParenthesisIndex === -1) return text; // Retorna el texto sin cambios si no encuentra un paréntesis
+
+  // Inserta el nombre del usuario antes del paréntesis de cierre
+  const updatedText = `${text.slice(0, lastParenthesisIndex)}${userName})`;
+  return updatedText;
+}
+
+function removeUserName(text) {
+  // Busca el inicio del texto "Usuario: " y corta hasta el paréntesis final
+  const userStartIndex = text.indexOf("Usuario: ");
+  if (userStartIndex === -1) return text; // Retorna el texto sin cambios si no encuentra "Usuario: "
+
+  // Encuentra el paréntesis de cierre después de "Usuario: "
+  const startOfName = userStartIndex + "Usuario: ".length;
+  const endOfName = text.indexOf(")", startOfName);
+
+  // Reconstruye el texto sin el nombre del usuario
+  const updatedText = `${text.slice(0, startOfName)}${text.slice(endOfName)}`;
+  return updatedText;
+}
+
 export default function InterviewSchedule({
   type = 1,
   uid = "",
+  userName = "",
   onAppointmentChange = () => {},
   interviewId = "",
 }) {
@@ -47,7 +72,6 @@ export default function InterviewSchedule({
   const [timeLeft, setTimeLeft] = useState("");
   const [availableDates, setAvailableDates] = useState([]);
   const openModal = (value) => {
-    console.log(value);
     setAssigned(value);
     setIsOpen(true);
   };
@@ -59,15 +83,14 @@ export default function InterviewSchedule({
       setLoandingSchedule(false);
       // Validar y transformar los datos recibidos
       const dates = await getCitas();
-      // console.log(dates);
+
       let transformedData = [];
       transformedData = dates.map((item) => ({
         ...item,
         start: item.start && item.start.toDate ? item.start.toDate() : null, // Convertir `start` a Date
         end: item.end && item.end.toDate ? item.end.toDate() : null, // Convertir `end` a Date
       }));
-      /* console.log("tranformar");
-      console.log(transformedData) */
+
       const currentDate = new Date();
 
       const searchData = transformedData.filter((item) => {
@@ -77,8 +100,7 @@ export default function InterviewSchedule({
         // );
         return item.interviewee == uid && item.interviewId == interviewId;
       });
-      console.log("searchData");
-      console.log(searchData);
+
       if (searchData.length) {
         setSchedule(searchData);
         setLoandingSchedule(true);
@@ -157,8 +179,6 @@ export default function InterviewSchedule({
 
   // Seleccionar una fecha
   const handleDateClick = (day) => {
-    /* console.log("first")
-    console.log(dates) */
     setSelectedDate(day);
     const filtered = datesCurrent.filter((event) => {
       const eventDate =
@@ -166,7 +186,7 @@ export default function InterviewSchedule({
         normalizeDate(format(day, "yyyy-MM-dd")).setHours(0, 0, 0, 0); // Convertir el campo start a objeto Date
       return eventDate; // Comparar si es el mismo día
     });
-    /* console.log(filtered) */
+
     setEvents(filtered);
     groupEventsByHour(filtered);
   };
@@ -227,6 +247,41 @@ export default function InterviewSchedule({
   };
 
   // Función para agrupar eventos por hora exacta
+  // const groupEventsByHour = (data) => {
+  //   const grouped = {};
+
+  //   data.forEach((event) => {
+  //     const dateObject = new Date(event.start);
+  //     const hour = dateObject.toLocaleTimeString("en-US", {
+  //       hour: "2-digit",
+  //       minute: "2-digit",
+  //     });
+
+  //     if (grouped[hour]) {
+  //       grouped[hour].push(event);
+  //     } else {
+  //       grouped[hour] = [event];
+  //     }
+  //   });
+
+  //   // Convertir el objeto agrupado en un array con información adicional
+  //   const result = Object.entries(grouped).map(([hour, data]) => {
+  //     const total = data.length;
+  //     const availableCount = data.filter((e) => !e.interviewee).length;
+  //     const available = availableCount > 0; // Estado de disponibilidad
+
+  //     return {
+  //       hour,
+  //       total, // Total de eventos en esa hora
+  //       availableCount, // Total disponibles
+  //       available, // Estado de disponibilidad (true o false)
+  //       data, // Lista de eventos de esa hora
+  //     };
+  //   });
+
+  //   setGroupedEvents(result); // Guardar en el estado
+  // };
+
   const groupEventsByHour = (data) => {
     const grouped = {};
 
@@ -245,19 +300,27 @@ export default function InterviewSchedule({
     });
 
     // Convertir el objeto agrupado en un array con información adicional
-    const result = Object.entries(grouped).map(([hour, data]) => {
-      const total = data.length;
-      const availableCount = data.filter((e) => !e.interviewee).length;
-      const available = availableCount > 0; // Estado de disponibilidad
+    const result = Object.entries(grouped)
+      .map(([hour, data]) => {
+        const total = data.length;
+        const availableCount = data.filter((e) => !e.interviewee).length;
+        const available = availableCount > 0; // Estado de disponibilidad
 
-      return {
-        hour,
-        total, // Total de eventos en esa hora
-        availableCount, // Total disponibles
-        available, // Estado de disponibilidad (true o false)
-        data, // Lista de eventos de esa hora
-      };
-    });
+        return {
+          hour,
+          total, // Total de eventos en esa hora
+          availableCount, // Total disponibles
+          available, // Estado de disponibilidad (true o false)
+          data, // Lista de eventos de esa hora
+        };
+      })
+      .sort((a, b) => {
+        // Ordenar el arreglo por hora
+        const timeA = new Date(`1970-01-01T${a.hour}`).getTime();
+        const timeB = new Date(`1970-01-01T${b.hour}`).getTime();
+        return timeA - timeB;
+      });
+    console.log(result);
 
     setGroupedEvents(result); // Guardar en el estado
   };
@@ -288,11 +351,11 @@ export default function InterviewSchedule({
     const selectedEvent = availableEvents[randomIndex];
 
     // Asignar un valor al campo interviewee
+    selectedEvent.title = updateUserName(selectedEvent.title, userName);
     selectedEvent.interviewee = uid || "";
     selectedEvent.status = "Appointed"; // Aquí puedes poner el valor que necesites
     selectedEvent.interviewId = interviewId;
-    /* console.log("selectedEvent")
-    console.log([selectedEvent])  */
+
     await saveCita(selectedEvent.id, selectedEvent);
     setSchedule([selectedEvent]);
     setLoandingSchedule(true);
@@ -404,6 +467,7 @@ export default function InterviewSchedule({
           status: "Pending",
           interviewId: "",
           interviewer: "",
+          title: removeUserName(schedule[0].title),
         }));
 
       // Guardar la cita actualizada
@@ -427,7 +491,6 @@ export default function InterviewSchedule({
   useEffect(() => {
     // Verificar si schedule.data tiene datos antes de ejecutar el contador
     if (schedule && schedule.length > 0) {
-      console.log(schedule[0].start);
       const interval = setInterval(() => {
         const currentDate = new Date();
         const targetDate = new Date(schedule[0].start); // Usando el primer evento de schedule.data
@@ -495,9 +558,25 @@ export default function InterviewSchedule({
                         ? new Date(schedule[0].start).toLocaleTimeString()
                         : "00:00:00"}
                     </span>
-                    <span className="text-lg text-gray-500">
-                      Date and time of interview
-                    </span>
+                    <div className="my-5 flex flex-col gap-4">
+                      <span className="text-lg text-gray-500">
+                        Interview Meeting Link
+                      </span>
+                      {!schedule[0].link ? (
+                        <span className="text-md text-gray-500">
+                          {"Link not available yet."}
+                        </span>
+                      ) : (
+                        <a
+                          className="text-md underline text-blue-700"
+                          href={`https://${schedule[0].link}`}
+                          target="_blank"
+                          // rel="noopener noreferrer"
+                        >
+                          {schedule[0].link}
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

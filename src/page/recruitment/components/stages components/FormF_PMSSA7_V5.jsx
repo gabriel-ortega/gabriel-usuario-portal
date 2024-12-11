@@ -36,12 +36,11 @@ export default function FormF_PMSSA7_V5({ formData, onDataChange = () => {} }) {
     onDataChange(updatedData);
   };
 
- /*  const mostrar=()=>{
+  /*  const mostrar=()=>{
     console.log(formData)
     console.log(valueForm)
     console.log(valueForm.detail)
   } */
-  
 
   return (
     <div className="">
@@ -530,14 +529,14 @@ export default function FormF_PMSSA7_V5({ formData, onDataChange = () => {} }) {
               name="previous"
               value={valueForm.previous || ""}
             />
-            <TextArea
-              title="Comments"
-              id="comments"
-              value={valueForm.comments || ""}
-              onChange={changeData}
-              name="comments"
-            />
           </div>
+          <TextArea
+            title="Comments"
+            id="comments"
+            value={valueForm.comments || ""}
+            onChange={changeData}
+            name="comments"
+          />
         </fieldset>
         <p className="border-b-2 border-black text-lg pt-2">
           Conditions of Employment

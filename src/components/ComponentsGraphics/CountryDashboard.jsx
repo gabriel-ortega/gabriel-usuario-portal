@@ -2,70 +2,32 @@ import React from "react";
 import TableDashboard from "./TableDashboard";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { getCountry } from "../../util/services";
 
 export default function CountryDashboard() {
-  const [data, setData] = useState([
-    { name: "Panama", count: 950 },
-    { name: "Peru", count: 20 },
-    { name: "Argentina", count: 30 },
-    { name: "China", count: 80 },
-    { name: "Guyana", count: 20 },
-    { name: "Haiti", count: 70 },
-    { name: "Panama", count: 950 },
-    { name: "Peru", count: 20 },
-    { name: "Argentina", count: 30 },
-    { name: "China", count: 80 },
-    { name: "Guyana", count: 20 },
-    { name: "Haiti", count: 70 },
-    { name: "Panama", count: 950 },
-    { name: "Peru", count: 20 },
-    { name: "Argentina", count: 30 },
-    { name: "China", count: 80 },
-    { name: "Guyana", count: 20 },
-    { name: "Haiti", count: 70 },
-    { name: "Panama", count: 950 },
-    { name: "Peru", count: 20 },
-    { name: "Argentina", count: 30 },
-    { name: "China", count: 80 },
-    { name: "Guyana", count: 20 },
-    { name: "Haiti", count: 70 },
-    { name: "Panama", count: 950 },
-    { name: "Peru", count: 20 },
-    { name: "Argentina", count: 30 },
-    { name: "China", count: 80 },
-    { name: "Guyana", count: 20 },
-    { name: "Haiti", count: 70 },
-    { name: "Panama", count: 950 },
-    { name: "Peru", count: 20 },
-    { name: "Argentina", count: 30 },
-    { name: "China", count: 80 },
-    { name: "Guyana", count: 20 },
-    { name: "Haiti", count: 70 },
-    { name: "Panama", count: 950 },
-    { name: "Peru", count: 20 },
-    { name: "Argentina", count: 30 },
-    { name: "China", count: 80 },
-    { name: "Guyana", count: 20 },
-    { name: "Haiti", count: 70 },
-    { name: "Panama", count: 950 },
-    { name: "Peru", count: 20 },
-    { name: "Argentina", count: 30 },
-    { name: "China", count: 80 },
-    { name: "Guyana", count: 20 },
-    { name: "Haiti", count: 70 },
-    { name: "Panama", count: 950 },
-    { name: "Peru", count: 20 },
-    { name: "Argentina", count: 30 },
-    { name: "China", count: 80 },
-    { name: "Guyana", count: 20 },
-    { name: "Haiti", count: 70 },
-    { name: "Panama", count: 950 },
-    { name: "Peru", count: 20 },
-    { name: "Argentina", count: 30 },
-    { name: "China", count: 80 },
-    { name: "Guyana", count: 20 },
-    { name: "Haiti", count: 70 },
-  ]);
+  const loadCountries = async () => {
+    setCountries(await getCountry());
+  };
+  const { dashboard } = useSelector((state) => state.currentViews);
+  const [countries, setCountries] = useState([]);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setData(
+      dashboard?.nationalities
+        ?.map((item) => ({
+          name:
+            countries?.find((pos) => pos.Id == item.name)?.CountryName || "N/A",
+          count: item.count,
+        }))
+        .sort((a, b) => b.count - a.count)
+    );
+  }, [countries]);
+
+  useEffect(() => {
+    loadCountries();
+  }, []);
 
   /*   // Función para actualizar cualquier campo de un proceso
   const updateProcessData = (processName, field, newValue) => {

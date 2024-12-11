@@ -20,6 +20,23 @@ const bd_server = import.meta.env.VITE_BD_SERVER;
 const firebaseServer = import.meta.env.VITE_FIREBASE_FUNCTIONS;
 const localServer = "192.168.1.41:4000";
 
+export async function getSingleSeafarer(uid) {
+  const docRef = doc(FirebaseDB, `usersData/${uid}`);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    const data = docSnap.data();
+    const newData = {
+      ...data,
+      uid: docSnap.id,
+    };
+
+    return newData;
+  } else {
+    console.log("No such document!");
+    return [];
+  }
+}
+
 export async function isEmailAvailable(email) {
   if (!email) return false; // Validación inicial
   const usersRef = collection(FirebaseDB, "usersData");
@@ -131,6 +148,50 @@ export async function fetchExpiredDocumentsReport(months) {
   const url = `${firebaseServer}/expireddocuments?months=${
     months ? months : 1
   }`;
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json", // Agrega si es necesario
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json(); // Procesar la respuesta
+    return data;
+  } catch (error) {
+    console.error("Error fetching documents report:", error);
+  }
+}
+
+export async function deleteAppointmentsByDate(date) {
+  const url = `${firebaseServer}/deleteBySpecificStartDate?startDate=${date}`;
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json", // Agrega si es necesario
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json(); // Procesar la respuesta
+    return data;
+  } catch (error) {
+    console.error("Error fetching documents report:", error);
+  }
+}
+
+export async function deleteAllAppointments() {
+  const url = `${firebaseServer}/deleteAllAppointments`;
 
   try {
     const response = await fetch(url, {
@@ -1532,6 +1593,29 @@ export const updateUserAccountEmail = async (uid, newEmail) => {
     return result;
   } catch (error) {
     console.error("Error in updateUserEmail:", error);
+  }
+};
+
+export const createUserAccount = async (email, password, displayName) => {
+  const formatedName = encodeURIComponent(displayName);
+  try {
+    const response = await fetch(
+      `https://useraccountfunction-k3i75dd7qa-uc.a.run.app/createUser?email=${email}&password=${password}&displayName=${formatedName}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const result = await response.json();
+    console.log("User created:", result);
+    if (!result.success) {
+      throw new Error(`Error creating user: ${response.message}`);
+    }
+    return result;
+  } catch (error) {
+    console.error("Error in creating user:", error);
   }
 };
 

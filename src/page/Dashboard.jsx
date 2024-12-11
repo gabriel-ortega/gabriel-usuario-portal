@@ -18,22 +18,36 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getDashboardData } from "../store/userData/thunks";
+import { LoadingState } from "../components/skeleton/LoadingState";
+import { formatDate } from "../util/helperFunctions";
 
 export default function Dashboard() {
   const { dashboard } = useSelector((state) => state.currentViews);
   const dispatch = useDispatch();
+
   useEffect(() => {
     console.log(dashboard.length);
-    if (!dashboard) {
+    if (!dashboard.updatedAt) {
       dispatch(getDashboardData());
     }
   }, [dashboard]);
+
   return (
     <>
       <Card className="w-auto overflow-hidden">
-        <h1 className="text-lg md:text-lg text-black font-bold mb-4">
-          Recruitment Dashboard
-        </h1>
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <h1 className="text-lg md:text-lg text-black font-bold mb-4">
+            Recruitment Dashboard
+          </h1>
+          <div>
+            <span className="text-xs text-zinc-400">
+              {`Last updated on: ${formatDate(
+                dashboard.updatedAt,
+                "dddd, mmmm dd yyyy"
+              )}`}
+            </span>
+          </div>
+        </div>
         <>
           <div className="flex flex-wrap flex-auto gap-3 items-center justify-center">
             <Card className="flex flex-col gap-2 items-center justify-center text-xs w-40 h-44 relative">
@@ -196,26 +210,56 @@ export default function Dashboard() {
           </div>
 
           <section className="grid lg:grid-cols-2  grid-cols-1   gap-4 mt-5 items-center justify-center text-center">
-            <Card>{/* <GraphicsMonth className="w-full" /> */}</Card>
             <Card>
-              {/* <GraphicsRecruitmentDep className="w-full" />{" "} */}
+              {!dashboard.updatedAt ? (
+                <LoadingState />
+              ) : (
+                <GraphicsMonth className="w-full" />
+              )}
             </Card>
-            <Card>{/* <GraphicsSource className="w-full " /> */}</Card>
-            <Card>{/* <GraphicsStage className="w-full " /> */}</Card>
+            <Card>
+              {!dashboard.updatedAt ? (
+                <LoadingState />
+              ) : (
+                <GraphicsRecruitmentDep className="w-full" />
+              )}
+            </Card>
+            {/* <Card>
+              <GraphicsSource className="w-full " />
+            </Card> */}
+            {/* <Card>
+              <GraphicsStage className="w-full " />{" "}
+            </Card> */}
           </section>
         </>
         <div className="grid lg:grid-cols-2  grid-cols-1 gap-4 mt-5 items-center justify-center text-center">
           <Card>
-            <PositionDashboard className=" " />
+            {!dashboard.updatedAt ? (
+              <LoadingState />
+            ) : (
+              <PositionDashboard className=" " />
+            )}
           </Card>
           <Card>
-            <DepartmentDashboard className=" " />
+            {!dashboard.updatedAt ? (
+              <LoadingState />
+            ) : (
+              <DepartmentDashboard className=" " />
+            )}
           </Card>
+          {/* <Card>
+            {!dashboard.updatedAt ? (
+              <LoadingState />
+            ) : (
+              <HarvesterDashboard className=" " />
+            )}
+          </Card> */}
           <Card>
-            <HarvesterDashboard className=" " />
-          </Card>
-          <Card>
-            <CountryDashboard className=" " />
+            {!dashboard.updatedAt ? (
+              <LoadingState />
+            ) : (
+              <CountryDashboard className=" " />
+            )}
           </Card>
         </div>
       </Card>

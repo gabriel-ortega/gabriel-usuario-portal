@@ -370,12 +370,6 @@ export function SideNavbar({ toggleSidebar }) {
                       {truncateText("Retirement Request", 18)}
                     </Sidebar.Item>
                   </Link>
-                </Sidebar.Collapse>
-                <Sidebar.Collapse
-                  icon={HiOutlineFolderOpen}
-                  className="text-sm md:text-base"
-                  label="Appointments"
-                >
                   <Link to={"/interviewappointments"}>
                     <Sidebar.Item
                       // icon={HiOutlineClipboardCopy}
@@ -386,6 +380,13 @@ export function SideNavbar({ toggleSidebar }) {
                       {truncateText("Interview Appointments", 18)}
                     </Sidebar.Item>
                   </Link>
+                </Sidebar.Collapse>
+                {/* <Sidebar.Collapse
+                  icon={HiOutlineFolderOpen}
+                  className="text-sm md:text-base"
+                  label="Appointments"
+                >
+                  
                   <Link to={"/interviewschedule"}>
                     <Sidebar.Item
                       icon={HiOutlineClipboardCopy}
@@ -395,21 +396,30 @@ export function SideNavbar({ toggleSidebar }) {
                       Interview Schedule
                     </Sidebar.Item>
                   </Link>
-                </Sidebar.Collapse>
+                </Sidebar.Collapse> */}
                 <Sidebar.Collapse
                   icon={HiOutlineCog}
                   className="text-sm md:text-base"
                   label="Settings"
                 >
-                  <Link to={"/test"}>
+                  <Link to={"/tables"}>
                     <Sidebar.Item
-                      icon={HiOutlineClipboardCopy}
+                      // icon={HiOutlineClipboardCopy}
                       className="text-sm md:text-base"
                       as="div"
                     >
-                      Test
+                      Tables
                     </Sidebar.Item>
                   </Link>
+                  {/* <Link to={"/test"}>
+                    <Sidebar.Item
+                      // icon={HiOutlineClipboardCopy}
+                      className="text-sm md:text-base"
+                      as="div"
+                    >
+                      Users
+                    </Sidebar.Item>
+                  </Link> */}
                 </Sidebar.Collapse>
               </>
             )}

@@ -343,7 +343,7 @@ export const NewApplicant = ({ ...props }) => {
     try {
       // Usar toast.promise para manejar los estados
       const result = await toast.promise(
-        dispatch(createSeafarer(data, false)), // Aquí se ejecuta createSeafarer
+        dispatch(createSeafarer(data, createAccount)), // Aquí se ejecuta createSeafarer
         {
           loading: "Creating Seafarer...",
           success: <b>Created!</b>,
@@ -353,6 +353,9 @@ export const NewApplicant = ({ ...props }) => {
 
       // Aquí `result` será el valor retornado por createSeafarer
       // console.log("Seafarer created with ID:", result); // O manejarlo según necesites
+      if (!result) {
+        return;
+      }
       navigate("/profile/" + result);
     } catch (error) {
       toast.error("Error creating seafarer:", error);
@@ -544,13 +547,13 @@ export const NewApplicant = ({ ...props }) => {
               helpertext={!emailValid ? emailValidations : ""}
               required
             />
-            {/* <YesNoInput
+            <YesNoInput
               disabled={!email || !emailValid ? true : false}
               text="Create Account"
               name="createAccount"
               onChange={(e) => setCreateAccount(e.target.value)}
               // onChange={(e) => console.log(e.target.value)}
-            /> */}
+            />
           </div>
           {createAccount && (
             <div className="grid grid-cols-1 lg:grid-cols-2 justify-center items-start mt-3 transition-all duration-75">

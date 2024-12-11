@@ -3,11 +3,14 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import {
+  deleteAllAppointments,
+  deleteAppointmentsByDate,
   deleteCita,
   downloadExcel,
   getCitas,
   getDateInterviews,
   getInterviewers,
+  getSingleSeafarer,
   getTemplate,
   saveCita,
   saveCitas,
@@ -21,7 +24,13 @@ import {
   SelectComponents,
 } from "../../components/layoutComponents";
 import { Badge, Button, Drawer, Modal, Table } from "flowbite-react";
-import { HiOutlineQuestionMarkCircle, HiPlus } from "react-icons/hi";
+import {
+  HiOutlineExclamationCircle,
+  HiOutlineQuestionMarkCircle,
+  HiOutlineTrash,
+  HiOutlineUser,
+  HiPlus,
+} from "react-icons/hi";
 import { MdFilterAlt, MdFilterAltOff } from "react-icons/md";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import toast from "react-hot-toast";
@@ -29,6 +38,7 @@ import { formatDate } from "../../util/helperFunctions";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getSeafarerData } from "../../store/userData";
+import { useNavigate } from "react-router-dom";
 const localizer = momentLocalizer(moment);
 
 const asunto = ["", "First Interview", "Second Interview"];
@@ -56,11 +66,18 @@ function convertirFechaYHora(fechaISO) {
 }
 
 const AgendaForm = () => {
+  const navigate = useNavigate();
+  const seeProfile = () => {
+    navigate("/profile/" + profile.uid);
+  };
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const { profile } = useSelector((state) => state.currentViews);
   const [interviewer, setInterviewer] = useState([]);
   const [parent] = useAutoAnimate();
   const [isOpenModalEvent, setIsOpenModalEvent] = useState(false);
+  const [openModalDeleteAll, setOpenModalDeleteAll] = useState(false);
+  const [openModalDelete, setOpenModalDelete] = useState(false);
   const [isOpenModalList, setIsOpenModalList] = useState(false);
   const [modalListText, setModalListText] = useState("");
   const openModalList = () => {
@@ -77,6 +94,7 @@ const AgendaForm = () => {
   const [events, setEvents] = useState([]);
   const [dataEvents, setDataEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
+  const [dateToDelete, setDateToDelete] = useState("");
   const [datesFilter, setDatesFilter] = useState([]);
   const [template, setTemplate] = useState([]);
   const [availableDates, setAvailableDates] = useState([]);
@@ -537,7 +555,9 @@ const AgendaForm = () => {
         "Ocurrió un error al crear los eventos. Por favor, verifica los datos ingresados."
       );
     }
+    loadResults();
   };
+
   const changeData = (e) => {
     let updatedData = {
       ...valueFormEdit,
@@ -556,35 +576,35 @@ const AgendaForm = () => {
     console.log(eventsDataFilter);
   };
 
-  const handleDowloadExcelSchedule = async () => {
-    try {
-      const transformedData = eventsDataFilter.map((item) => {
-        const startDate = new Date(item.start); // Convertir a objeto Date
-        const endDate = new Date(item.end);
+  // const handleDowloadExcelSchedule = async () => {
+  //   try {
+  //     const transformedData = eventsDataFilter.map((item) => {
+  //       const startDate = new Date(item.start); // Convertir a objeto Date
+  //       const endDate = new Date(item.end);
 
-        // Formatear la fecha como MM/DD/YYYY
-        const formattedDate = `${
-          startDate.getMonth() + 1
-        }/${startDate.getDate()}/${startDate.getFullYear()}`;
+  //       // Formatear la fecha como MM/DD/YYYY
+  //       const formattedDate = `${
+  //         startDate.getMonth() + 1
+  //       }/${startDate.getDate()}/${startDate.getFullYear()}`;
 
-        return {
-          stage: item.asunto,
-          duration: item.duration[0], // Usamos el primer valor del array
-          Date: formattedDate, // Fecha formateada como MM/DD/YYYY
-          startTime: startDate.toLocaleTimeString(), // Hora inicial
-          endTime: endDate.toLocaleTimeString(), // Hora final
-          interview: getNameInterviewer(item.interviewer),
-          Mode: item.mode,
-          Status: item.status,
-        };
-      });
+  //       return {
+  //         stage: item.asunto,
+  //         duration: item.duration[0], // Usamos el primer valor del array
+  //         Date: formattedDate, // Fecha formateada como MM/DD/YYYY
+  //         startTime: startDate.toLocaleTimeString(), // Hora inicial
+  //         endTime: endDate.toLocaleTimeString(), // Hora final
+  //         interview: getNameInterviewer(item.interviewer),
+  //         Mode: item.mode,
+  //         Status: item.status,
+  //       };
+  //     });
 
-      // Llamar a la función de descarga con los datos transformados
-      await downloadExcel(transformedData, "schedule", "Schedule");
-    } catch (error) {
-      console.error("Error al descargar el reporte:", error.message);
-    }
-  };
+  //     // Llamar a la función de descarga con los datos transformados
+  //     await downloadExcel(transformedData, "schedule", "Schedule");
+  //   } catch (error) {
+  //     console.error("Error al descargar el reporte:", error.message);
+  //   }
+  // };
 
   const handleEdit = (indexToEdit) => {
     const editDates = dataEvents.filter((index) => index.id == indexToEdit);
@@ -608,7 +628,119 @@ const AgendaForm = () => {
     openModalEvent();
   };
 
+  // const handleDowloadExcelSchedule = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     // const transformedData = datesFilter.map((item) => {
+  //     const transformedData = filteredEvents.map(async (item) => {
+  //       const profileData = await getSingleSeafarer(item.interviewee);
+  //       const startDate = new Date(item.start); // Convertir a objeto Date
+  //       const endDate = new Date(item.end);
+
+  //       // Formatear la fecha como MM/DD/YYYY
+  //       const formattedDate = `${
+  //         startDate.getMonth() + 1
+  //       }/${startDate.getDate()}/${startDate.getFullYear()}`;
+
+  //       return {
+  //         stage: item.asunto,
+  //         duration: item.duration[0], // Usamos el primer valor del array
+  //         Date: formattedDate, // Fecha formateada como MM/DD/YYYY
+  //         startTime: startDate.toLocaleTimeString(), // Hora inicial
+  //         endTime: endDate.toLocaleTimeString(), // Hora final
+  //         interview: getNameInterviewer(item.interviewer),
+  //         Mode: item.mode,
+  //         Status: item.status,
+  //         interviewee: `${
+  //           profileData.seafarerData?.seafarerProfile?.profile?.firstName || ""
+  //         } ${
+  //           profileData.seafarerData?.seafarerProfile?.profile?.lastName || ""
+  //         }`?.firstName,
+  //         vessel: "",
+  //         position: "",
+  //         department: "",
+  //         identification: "",
+  //         nationality: "",
+  //         residency: "",
+  //       };
+  //     });
+
+  //     // Llamar a la función de descarga con los datos transformados
+  //     await downloadExcel(
+  //       transformedData,
+  //       "schedulecompleted",
+  //       "Schedule Completed"
+  //     );
+  //     setIsLoading(false);
+  //   } catch (error) {
+  //     setIsLoading(false);
+  //     console.error("Error al descargar el reporte:", error.message);
+  //   }
+  // };
+
+  const handleDowloadExcelSchedule = async () => {
+    setIsLoading(true);
+    try {
+      // Usar Promise.all para esperar a todas las promesas
+      const transformedData = await Promise.all(
+        filteredEvents.map(async (item) => {
+          const profileData = await getSingleSeafarer(item.interviewee);
+          const startDate = new Date(item.start); // Convertir a objeto Date
+          const endDate = new Date(item.end);
+
+          // Formatear la fecha como MM/DD/YYYY
+          const formattedDate = `${
+            startDate.getMonth() + 1
+          }/${startDate.getDate()}/${startDate.getFullYear()}`;
+
+          return {
+            stage: item.asunto,
+            duration: item.duration[0], // Usamos el primer valor del array
+            Date: formattedDate, // Fecha formateada como MM/DD/YYYY
+            startTime: startDate.toLocaleTimeString(), // Hora inicial
+            endTime: endDate.toLocaleTimeString(), // Hora final
+            interview: getNameInterviewer(item.interviewer),
+            Mode: item.mode,
+            Status: item.status,
+            interviewee: `${
+              profileData.seafarerData?.seafarerProfile?.profile?.firstName ||
+              ""
+            } ${
+              profileData.seafarerData?.seafarerProfile?.profile?.lastName || ""
+            }`,
+            recruitmentDepartment:
+              profileData.seafarerData?.vesselType?.[0].name || "",
+            position: profileData.seafarerData?.position?.[0].name || "",
+            department: profileData.seafarerData?.position?.[0].name || "",
+            identification: profileData.identification?.toUpperCase() || "",
+            nationality:
+              profileData.seafarerData?.seafarerProfile?.profile?.countryBirth
+                .value || "",
+            residency:
+              profileData.seafarerData?.seafarerProfile?.profile
+                ?.countryResidency.value || "",
+          };
+        })
+      );
+
+      // Llamar a la función de descarga con los datos transformados
+      await downloadExcel(
+        transformedData,
+        "schedulecompleted",
+        "Schedule Completed"
+      );
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.error("Error al descargar el reporte:", error.message);
+    }
+  };
+
   const handleList = (selectedDate) => {
+    setDateToDelete({
+      formated: formatDate(selectedDate.toISOString(), "yyyy-mm-dd"),
+      text: selectedDate.toDateString(),
+    });
     const filteredEvents = dataEvents.filter((event) => {
       const eventDate = new Date(event.start); // Convertir la fecha del evento
       return eventDate.toDateString() === selectedDate.toDateString(); // Comparar solo el día
@@ -667,6 +799,27 @@ const AgendaForm = () => {
     }
   };
 
+  const deleteByDate = async () => {
+    await toast.promise(deleteAppointmentsByDate(dateToDelete.formated), {
+      loading: "Deleting...",
+      success: <b>Dates Deleted</b>,
+      error: <b>Ups! Something went wrong. Try again</b>,
+    });
+    await loadResults();
+    setOpenModalDelete(false);
+    setIsOpenModalList(false);
+  };
+
+  const deleteAll = async () => {
+    await toast.promise(deleteAllAppointments(), {
+      loading: "Deleting...",
+      success: <b>Dates Deleted</b>,
+      error: <b>Ups! Something went wrong. Try again</b>,
+    });
+    await loadResults();
+    setOpenModalDeleteAll(false);
+  };
+
   return (
     <>
       <Drawer
@@ -721,7 +874,7 @@ const AgendaForm = () => {
               </legend>
               <fieldset className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-3 mb-6 ">
                 <div className="">
-                  <label>Fecha de programacion:</label>
+                  <label>Schedule Day:</label>
                   <input
                     type="date"
                     className="w-full border border-gray-400 h-10 rounded-md"
@@ -815,7 +968,7 @@ const AgendaForm = () => {
               type="submit"
               className="bg-[#1976d2]  rounded-md w-44 h-10 mt-4 text-center text-gray-50"
             >
-              Agregar Entrevista
+              Add new dates
             </button>
           </form>
         </Drawer.Items>
@@ -838,7 +991,7 @@ const AgendaForm = () => {
         {showSection.template || showSection.manual ? (
           <>
             <div className="">
-              <label>Fecha de programacion:</label>
+              <label>Schedule Day:</label>
               <input
                 type="date"
                 className="w-full border border-gray-400 h-10 rounded-md"
@@ -923,12 +1076,19 @@ const AgendaForm = () => {
           )}
           <span className="hidden md:block ">Filters</span>
         </button>
-        <button
+        {/* <button
           onClick={handleDowloadExcelSchedule}
           className="md:w-32 md:h-10 bg-green-600 text-center text-sm rounded-md text-white"
         >
           Export to Excel
-        </button>
+        </button> */}
+        <Button
+          isProcessing={isLoading}
+          color={"success"}
+          onClick={handleDowloadExcelSchedule}
+        >
+          Export to Excel
+        </Button>
       </div>
       <div ref={parent}>
         {showSection.filter ? (
@@ -1077,6 +1237,17 @@ const AgendaForm = () => {
               }}
               onSelectEvent={(event) => handleEdit(event.id)}
             />
+            <div className="flex justify-end my-6">
+              <button
+                className="whitespace-nowrap border border-red-600 bg-red-600 text-white w-10 md:w-52 h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-red-700 disabled:opacity-30"
+                onClick={() => setOpenModalDeleteAll(true)}
+              >
+                <HiOutlineTrash className="h-4 w-4" />
+                <span className="hidden md:block ">
+                  Delete All Appointments
+                </span>
+              </button>
+            </div>
           </div>
           <Modal
             show={isOpenModalEvent}
@@ -1133,20 +1304,28 @@ const AgendaForm = () => {
                   valueKey="displayName"
                   onChange={changeData}
                 />
-                <InputText
-                  labelinput="Interviewee"
-                  read={true}
-                  value={
-                    profile?.seafarerData?.seafarerProfile?.profile
-                      ?.firstName &&
-                    profile?.seafarerData?.seafarerProfile?.profile?.lastName
-                      ? `${profile.seafarerData.seafarerProfile.profile.firstName} ${profile.seafarerData.seafarerProfile.profile.lastName}`
-                      : "" // Si alguno de los dos valores está vacío, muestra una cadena vacía
-                  }
-                  // onChange={changeData}
-                  name="interviewee"
-                />
-
+                <div className="flex flex-row justify-between items-end gap-3">
+                  <InputText
+                    labelinput="Interviewee"
+                    read={true}
+                    value={
+                      profile?.seafarerData?.seafarerProfile?.profile
+                        ?.firstName &&
+                      profile?.seafarerData?.seafarerProfile?.profile?.lastName
+                        ? `${profile.seafarerData.seafarerProfile.profile.firstName} ${profile.seafarerData.seafarerProfile.profile.lastName}`
+                        : "" // Si alguno de los dos valores está vacío, muestra una cadena vacía
+                    }
+                    // onChange={changeData}
+                    name="interviewee"
+                  />
+                  <button
+                    title="View Profile"
+                    className="border border-blue-300 bg-white text-blue-600 size-10 flex gap-1 justify-center items-center rounded-lg text-sm hover:bg-blue-50"
+                    onClick={() => seeProfile()}
+                  >
+                    <HiOutlineUser className="h-4 w-4" />
+                  </button>
+                </div>
                 <SelectComponents
                   name={"status"}
                   initialValue={valueFormEdit.status}
@@ -1208,57 +1387,122 @@ const AgendaForm = () => {
             <Modal.Body>
               <div className="overflow-x-auto pt-10">
                 {datesFilter.length > 0 ? (
-                  <Table striped>
-                    <Table.Head>
-                      <Table.HeadCell>Mode</Table.HeadCell>
-                      <Table.HeadCell>Duration Time</Table.HeadCell>
-                      <Table.HeadCell>Start Time</Table.HeadCell>
-                      <Table.HeadCell>End Time</Table.HeadCell>
-                      <Table.HeadCell>Interviewer</Table.HeadCell>
-                      <Table.HeadCell></Table.HeadCell>
-                      <Table.HeadCell></Table.HeadCell>
-                    </Table.Head>
-                    <Table.Body className="divide-y">
-                      {datesFilter
-                        .sort((a, b) => new Date(b.start) - new Date(a.start)) // Ordenar de mayor a menor por `start`
-                        .map((event, index) => (
-                          <Table.Row
-                            key={index}
-                            className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                          >
-                            <Table.Cell>{event.asunto || ""}</Table.Cell>
-                            <Table.Cell>{event.duration || ""}</Table.Cell>
-                            <Table.Cell>
-                              {convertirFechaYHora(event.start)}
-                            </Table.Cell>
-                            <Table.Cell>
-                              {convertirFechaYHora(event.end)}
-                            </Table.Cell>
-                            <Table.Cell>
-                              {getNameInterviewer(event.interviewer)}
-                            </Table.Cell>
-                            <Table.Cell>
-                              <button
-                                className="text-green-700 hover:underline"
-                                onClick={() => handleEdit(event.id)}
-                                // onClick={() => console.log(event.id)}
-                              >
-                                Edit
-                              </button>
-                            </Table.Cell>
-                            <Table.Cell>
-                              <button
-                                className="text-red-600 hover:underline"
-                                onClick={() => handleDelete(event.id)}
-                              >
-                                Delete
-                              </button>
-                            </Table.Cell>
-                          </Table.Row>
-                        ))}
-                    </Table.Body>
-                  </Table>
+                  <>
+                    <div className="flex justify-end mb-6">
+                      <button
+                        className="whitespace-nowrap border border-red-600 bg-red-600 text-white w-10 md:w-32 h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-red-700 disabled:opacity-30"
+                        onClick={() => setOpenModalDelete(true)}
+                      >
+                        <HiOutlineTrash className="h-4 w-4" />
+                        <span className="hidden md:block ">Delete all</span>
+                      </button>
+                    </div>
+                    <Table striped>
+                      <Table.Head>
+                        <Table.HeadCell>Mode</Table.HeadCell>
+                        <Table.HeadCell>Duration Time</Table.HeadCell>
+                        <Table.HeadCell>Start Time</Table.HeadCell>
+                        <Table.HeadCell>End Time</Table.HeadCell>
+                        <Table.HeadCell>Interviewer</Table.HeadCell>
+                        <Table.HeadCell></Table.HeadCell>
+                        <Table.HeadCell></Table.HeadCell>
+                      </Table.Head>
+                      <Table.Body className="divide-y">
+                        {datesFilter
+                          .sort((a, b) => new Date(b.start) - new Date(a.start)) // Ordenar de mayor a menor por `start`
+                          .map((event, index) => (
+                            <Table.Row
+                              key={index}
+                              className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                            >
+                              <Table.Cell>{event.asunto || ""}</Table.Cell>
+                              <Table.Cell>{event.duration || ""}</Table.Cell>
+                              <Table.Cell>
+                                {convertirFechaYHora(event.start)}
+                              </Table.Cell>
+                              <Table.Cell>
+                                {convertirFechaYHora(event.end)}
+                              </Table.Cell>
+                              <Table.Cell>
+                                {getNameInterviewer(event.interviewer)}
+                              </Table.Cell>
+                              <Table.Cell>
+                                <button
+                                  className="text-green-700 hover:underline"
+                                  onClick={() => handleEdit(event.id)}
+                                  // onClick={() => console.log(event.id)}
+                                >
+                                  Edit
+                                </button>
+                              </Table.Cell>
+                              <Table.Cell>
+                                <button
+                                  className="text-red-600 hover:underline"
+                                  onClick={() => handleDelete(event.id)}
+                                >
+                                  Delete
+                                </button>
+                              </Table.Cell>
+                            </Table.Row>
+                          ))}
+                      </Table.Body>
+                    </Table>
+                  </>
                 ) : null}
+              </div>
+            </Modal.Body>
+          </Modal>
+          <Modal
+            show={openModalDeleteAll}
+            size="md"
+            onClose={() => setOpenModalDeleteAll(false)}
+            popup
+          >
+            <Modal.Header />
+            <Modal.Body>
+              <div className="text-center">
+                <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+                <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                  Are you sure you want to delete all existing appointments?
+                </h3>
+                <div className="flex justify-center gap-4">
+                  <Button color="failure" onClick={() => deleteAll()}>
+                    {"Continue"}
+                  </Button>
+                  <Button
+                    color="gray"
+                    onClick={() => setOpenModalDeleteAll(false)}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            </Modal.Body>
+          </Modal>
+          <Modal
+            show={openModalDelete}
+            size="md"
+            onClose={() => setOpenModalDelete(false)}
+            popup
+          >
+            <Modal.Header />
+            <Modal.Body>
+              <div className="text-center">
+                <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+                <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                  {`Are you sure you want to delete appointments for ${dateToDelete.text} ?`}
+                </h3>
+                <div className="flex justify-center gap-4">
+                  <Button color="failure" onClick={() => deleteByDate()}>
+                    {"Continue"}
+                  </Button>
+                  <Button
+                    color="gray"
+                    onClick={() => setOpenModalDeleteAll(false)}
+                  >
+                    Cancel
+                  </Button>
+                </div>
               </div>
             </Modal.Body>
           </Modal>

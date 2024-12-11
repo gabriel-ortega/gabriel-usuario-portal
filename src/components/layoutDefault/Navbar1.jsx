@@ -1,4 +1,4 @@
-import { Avatar, Popover } from "flowbite-react";
+import { Avatar, Modal, Popover } from "flowbite-react";
 import { HiOutlineLogout, HiOutlineMenu } from "react-icons/hi";
 import avatarimg from "./avatar.jpg";
 import logoblanco from "../../assets/imagenes/LOGO-LOGISTIC-MOBILE.webp";
@@ -12,8 +12,10 @@ import { CustomSearchBox } from "../searchBar/CustomSearchBox";
 import { useState } from "react";
 import { CustomHits } from "../searchBar/CustomHits";
 import { MdOutlineSearch } from "react-icons/md";
+import { OwnAccount } from "../../page/accountSettings/OwnAccount";
 
 export default function Navbar1({ toggleSidebar, setSearchValue = () => {} }) {
+  const [openModal, setOpenModal] = useState(false);
   const handleInputChange = (value) => {
     setSearchValue(value); // Actualiza el valor en el padre
   };
@@ -99,7 +101,7 @@ export default function Navbar1({ toggleSidebar, setSearchValue = () => {} }) {
                   </p>
                   <button
                     className="text-xs bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition-all"
-                    // onClick={handleEdit}
+                    onClick={() => setOpenModal(true)}
                   >
                     Edit
                   </button>
@@ -127,6 +129,17 @@ export default function Navbar1({ toggleSidebar, setSearchValue = () => {} }) {
           </div>
         </Popover>
       </nav>
+      <Modal
+        show={openModal}
+        size="xl"
+        onClose={() => setOpenModal(false)}
+        popup
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <OwnAccount />
+        </Modal.Body>
+      </Modal>
       {/* </InstantSearch> */}
     </>
   );

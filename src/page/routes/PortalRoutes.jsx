@@ -45,6 +45,7 @@ const ExpiredDocumentsView = lazy(() =>
 const UpdateRequests = lazy(() => import("../recruitment/UpdateRequests"));
 const SearchTest = lazy(() => import("../../components/searchBar/SearchTest"));
 const RetireRequest = lazy(() => import("../recruitment/RetireRequest"));
+const AuxTables = lazy(() => import("../settings/AuxTables"));
 
 export const PortalRoutes = () => {
   const { userData } = useSelector((state) => state.userData);
@@ -80,6 +81,7 @@ export const PortalRoutes = () => {
             <Route path="/expired" element={<ExpiredDocumentsView />} />
             <Route path="/updaterequests" element={<UpdateRequests />} />
             <Route path="/retirerequests" element={<RetireRequest />} />
+            <Route path="/tables" element={<AuxTables />} />
             <Route path="/*" element={<Navigate to="/dashboard" />} />
           </Routes>
         </Suspense>

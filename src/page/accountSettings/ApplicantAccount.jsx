@@ -13,6 +13,7 @@ import { InputText } from "../../components/layoutComponents";
 import { useDispatch } from "react-redux";
 import { updateSeafarerEmail } from "../../store/currentViews/viewSlice";
 import toast from "react-hot-toast";
+import { generatePassword } from "../../util/helperFunctions/generatePassword";
 
 export const ApplicantAccount = () => {
   const dispatch = useDispatch();
@@ -119,6 +120,12 @@ export const ApplicantAccount = () => {
     }
   }, [profile]);
 
+  const handleGeneratePassword = () => {
+    const generated = generatePassword(10);
+    setNewPassword(generated);
+    setConfirmPassword(generated);
+  };
+
   return (
     <section className="flex flex-col justify-center ">
       {!searched ? (
@@ -138,8 +145,8 @@ export const ApplicantAccount = () => {
             </div>
           ) : (
             <section>
-              <div className="flex flex-row gap-7">
-                <div className="flex flex-col gap-2 mb-9">
+              <div className="flex flex-col md:flex-row gap-7">
+                <div className="flex flex-col  gap-2 mb-9">
                   <Label>Account ID</Label>
                   <div className="text-lg font-medium">
                     {accountData?.uid || "--"}
@@ -173,7 +180,7 @@ export const ApplicantAccount = () => {
                     </Button>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between md:justify-start md:gap-3">
                     <div className="text-lg">{accountData?.email || "--"}</div>
                     <button
                       className="border border-blue-300 bg-white text-blue-600 size-10 md:w-28 md:h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50"
@@ -187,7 +194,17 @@ export const ApplicantAccount = () => {
               </div>
               <div className="space-y-2">
                 {accountData.providerData[0].providerId !== "google.com" && (
-                  <Label htmlFor="password">Password</Label>
+                  <>
+                    <Label htmlFor="password">Password</Label>
+                    {isEditingPassword && (
+                      <button
+                        className="border border-blue-300 bg-white text-blue-600 w-28 h-10 flex gap-2 justify-center items-center rounded-lg text-sm hover:bg-blue-50"
+                        onClick={() => handleGeneratePassword()}
+                      >
+                        Generate
+                      </button>
+                    )}
+                  </>
                 )}
                 {isEditingPassword ? (
                   <div className="space-y-2">

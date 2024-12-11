@@ -20,6 +20,7 @@ export const AddSomethingTable = ({
   profileComponent,
   disabled = false,
   sorting = false,
+  enumaration = true,
 }) => {
   /* VARIABLE PARA LA FUNCION DEL MODAL*/
   const [isLoaded, setIsLoaded] = useState(false);
@@ -163,6 +164,7 @@ export const AddSomethingTable = ({
               disabled={disabled}
               sorting={sorting}
               setSortedData={(e) => setFormData(e)}
+              enumaration={enumaration}
             />
           </div>
         </section>
