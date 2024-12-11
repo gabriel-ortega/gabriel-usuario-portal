@@ -197,7 +197,7 @@ export const submitProfileUpdate = (uid, userData) => {
       const profileRef = doc(FirebaseDB, `usersData/${uid}`);
       await updateDoc(profileRef, profileUpdate);
 
-      console.log(`Profile update submitted successfully for UID: ${uid}`);
+      // console.log(`Profile update submitted successfully for UID: ${uid}`);
     } catch (error) {
       console.error("Error submitting profile update:", error);
     }
@@ -257,7 +257,7 @@ export const approveProfileUpdate = (uid, id, seafarerData, updateData) => {
 
       dispatch(setProfileUpdateData(newData));
 
-      console.log(`Profile update submitted successfully for UID: ${uid}`);
+      // console.log(`Profile update submitted successfully for UID: ${uid}`);
     } catch (error) {
       console.error("Error submitting profile update:", error);
     }
@@ -349,7 +349,7 @@ export const getApplication = (uid, skip) => {
       // dispatch(setLoading(false));
     } else {
       // docSnap.data() will be undefined in this case
-      console.log("No such document!");
+      // console.log("No such document!");
       return false;
       // dispatch(setLoading(false));
     }

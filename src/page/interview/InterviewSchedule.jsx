@@ -320,7 +320,7 @@ export default function InterviewSchedule({
         const timeB = new Date(`1970-01-01T${b.hour}`).getTime();
         return timeA - timeB;
       });
-    console.log(result);
+    // console.log(result);
 
     setGroupedEvents(result); // Guardar en el estado
   };
@@ -568,8 +568,8 @@ export default function InterviewSchedule({
                         </span>
                       ) : (
                         <a
-                          className="text-md underline text-blue-700"
-                          href={`https://${schedule[0].link}`}
+                          className="text-md underline text-blue-700 break-all"
+                          href={`${schedule[0].link}`}
                           target="_blank"
                           // rel="noopener noreferrer"
                         >

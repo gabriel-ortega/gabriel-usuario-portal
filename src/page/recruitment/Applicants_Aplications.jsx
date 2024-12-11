@@ -34,6 +34,7 @@ import { GapoolSearchBox } from "./components/gappoolList/GapoolSearchBox";
 import { ApplicationsInfiniteHits } from "./components/applicationsList/ApplicationsInfiniteHits";
 import { ApplicationsRefinements } from "./components/applicationsList/ApplicationsRefinements";
 import { Configure } from "react-instantsearch";
+import { ApplicationsFollowUp } from "./ApplicationsFollowUp";
 
 const searchClient = algoliasearch(
   import.meta.env.VITE_ALGOLIA_ID,
@@ -459,10 +460,10 @@ export default function Applicants_Aplications() {
 
   const loadInitialData = async () => {
     // dispatch(setLoading(true));
-    const result = await fetchApplicationsData(applicationFilters);
-    console.log(result);
-    setApplications(result.seafarersData);
-    setLastVisible(result.lastVisible);
+    // const result = await fetchApplicationsData(applicationFilters);
+    // console.log(result);
+    // setApplications(result.seafarersData);
+    // setLastVisible(result.lastVisible);
     await loadReportData();
     if (applicationsCount < 1) {
       const applicationsDataCount = await countApplicationsData();
@@ -674,7 +675,7 @@ export default function Applicants_Aplications() {
             Report
           </Tab>
           <Tab className="data-[selected]:border-b-2 border-blue-500 px-2 md:translate-y-0 h-15 py-2 text-sm text-black flex flex-col md:flex-row items-center justify-center md:w-56 relative">
-            WhatsApp Report
+            Applications Follow Up
           </Tab>
         </TabList>
         <TabPanels>
@@ -978,6 +979,9 @@ export default function Applicants_Aplications() {
                 />
               </PdfView>
             ) : null}
+          </TabPanel>
+          <TabPanel>
+            <ApplicationsFollowUp />
           </TabPanel>
         </TabPanels>
       </TabGroup>

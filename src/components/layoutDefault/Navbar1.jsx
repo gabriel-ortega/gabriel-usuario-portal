@@ -99,12 +99,12 @@ export default function Navbar1({ toggleSidebar, setSearchValue = () => {} }) {
                       ? formatDate(userData?.createdOn, "dd-mm-yyyy")
                       : "N/A"}
                   </p>
-                  <button
+                  {/* <button
                     className="text-xs bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 transition-all"
                     onClick={() => setOpenModal(true)}
                   >
                     Edit
-                  </button>
+                  </button> */}
                   <button
                     className={`m-auto bg-transparent rounded-md text-red-700 size-10 w-full flex gap-2 justify-center items-center text-xs hover:bg-zinc-100 disabled:opacity-30`}
                     onClick={onLogout}

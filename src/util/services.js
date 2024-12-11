@@ -20,6 +20,36 @@ const bd_server = import.meta.env.VITE_BD_SERVER;
 const firebaseServer = import.meta.env.VITE_FIREBASE_FUNCTIONS;
 const localServer = "192.168.1.41:4000";
 
+export async function applicationsFollowUp() {
+  try {
+    // Referencia a la colección 'usersData'
+    const usersDataRef = collection(FirebaseDB, "usersData");
+
+    // Crear consulta para buscar documentos que cumplan con las condiciones
+    const q = query(
+      usersDataRef,
+      where("recruitmentStage", "==", 1),
+      where("applicationStage", "!=", "") // Verifica que applicationStage sea 0 o 1
+    );
+
+    // Ejecutar la consulta
+    const querySnapshot = await getDocs(q);
+
+    // Recorrer los documentos encontrados y procesarlos
+    const results = [];
+    querySnapshot.forEach((doc) => {
+      results.push({ id: doc.id, ...doc.data() });
+    });
+
+    // console.log("Matching Documents:", results);
+
+    return results; // Devuelve los resultados si es necesario
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // Manejo de errores
+  }
+}
+
 export async function getSingleSeafarer(uid) {
   const docRef = doc(FirebaseDB, `usersData/${uid}`);
   const docSnap = await getDoc(docRef);
